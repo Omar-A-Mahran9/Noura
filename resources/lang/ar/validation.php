@@ -235,7 +235,8 @@ return [
         'engine_system' => 'نظام المحرك',
         'steering_wheel' => 'المقود',
         'category_ids' => 'الفئات',
- 
+        'discount_duration_days_counts' => 'مدة التخفيض للكورس (بالأيام)',
+
         'name' => 'الأسم',
         'address' => 'العنوان',
         'title' => 'العنوان',

@@ -91,7 +91,7 @@
                     <!-- end   :: Add Button -->
 
                     <!-- begin :: Add Button -->
-                    <a href="{{ route('dashboard.courses.attachment.create') }}" class="btn btn-primary"
+                    {{-- <a href="{{ route('dashboard.courses.attachment.create') }}" class="btn btn-primary"
                         data-bs-toggle="tooltip" title="">
 
                         <span class="svg-icon svg-icon-2">
@@ -100,7 +100,7 @@
 
                         {{ __('Add new attachment') }}
 
-                    </a>
+                    </a> --}}
                     <!-- end   :: Add Button -->
 
                 </div>

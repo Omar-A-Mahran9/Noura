@@ -74,7 +74,7 @@
 
                     </div>
                     <!-- end   :: Row -->
-                    <div class="row mb-10">
+                    {{-- <div class="row mb-10">
                         <div class="col-md-4 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Courses') }}</label>
@@ -90,7 +90,7 @@
                             </select>
                             <p class="invalid-feedback" id="courses_ids"></p>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- begin :: Row -->
                     <div class="row mb-8">
 
