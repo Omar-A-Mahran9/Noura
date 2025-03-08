@@ -88,7 +88,7 @@ class ChatController extends Controller
     //----------------------------------------------------------------------------------------------------
     public function sendMessage(Request $request)
     {
-        $request->validate([
+         $request->validate([
             'chat_group_id' => 'required|exists:chat_groups,id',
             'message' => 'required|string',
             'file' => 'nullable|file|max:2048'
@@ -112,9 +112,8 @@ class ChatController extends Controller
             'message' => $request->message,
             'file' => $filePath
         ]);
-        broadcast(new MessageSent($message))->toOthers();
-
-        // Get all vendors in the group except sender
+        broadcast(new MessageSent($message)) ;
+         // Get all vendors in the group except sender
         $receivers = $chatGroup->vendors()->where('vendors.id', '!=', $sender->id)->pluck('vendors.id');
 
         // Attach receivers

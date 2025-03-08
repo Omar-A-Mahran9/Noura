@@ -18,9 +18,8 @@ class ConsultationResources extends JsonResource
             'consultaion_type_id' => $this->consultaion_type_id,
             'title' => $this->title, // Assuming title is a field
             'description' => $this->description, // Assuming description is a field
-            'quizzes' => QuizResource::collection($this->quizzes),
-
             'image' =>  getImagePathFromDirectory($this->main_image, 'Consultation'),
+            'quizzes' => QuizResource::collection($this->quizzes),
 
         ];
     }

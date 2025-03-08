@@ -20,8 +20,7 @@ Route::group(['namespace' => 'Auth' , 'middleware' => 'set_locale'] , function (
     // user login routes
     Route::get('employee/login','EmployeeAuthController@showLoginForm')->name('employee.login-form');
 
-    WebSocketsRouter::webSocket('/websocket', WebSocketHandler::class);
-
+ 
 
 });
 

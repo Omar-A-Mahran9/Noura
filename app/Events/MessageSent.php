@@ -11,7 +11,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class MessageSent
+class MessageSent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -20,6 +20,12 @@ class MessageSent
     public function __construct(Message $message)
     {
         $this->message = $message;
+    }
+    public function broadcastwith()
+    {
+        return [
+            'message' =>'welcome',
+        ];
     }
 
     public function broadcastOn()
