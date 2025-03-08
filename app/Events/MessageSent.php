@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Http\Resources\Api\MessageResource;
 use App\Models\Message;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -21,15 +22,16 @@ class MessageSent implements ShouldBroadcast
     {
         $this->message = $message;
     }
-    public function broadcastwith()
-    {
-        return [
-            'message' =>'welcome',
-        ];
-    }
 
     public function broadcastOn()
     {
         return new Channel('chat');
+    }
+
+    public function broadcastwith()
+    {
+        return [
+            'message' => new MessageResource($this->message), // Send message data
+        ];
     }
 }

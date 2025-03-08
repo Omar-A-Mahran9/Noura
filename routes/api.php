@@ -54,16 +54,14 @@ Route::group(['middleware' => ['json.response']], function () {
         Route::middleware(['auth:sanctum', 'update.last_seen'])->get('/group_details/{id}', 'Api\ChatController@group');
         Route::post('/logout', 'Api\Auth\AuthController@logout');
         Route::get('/profile', 'Api\UserController@profile');
-        Route::get('/profile_image', 'Api\UserController@updateProfileImage');
 
-        //----
         Route::post('/group/{group_id}/send-message', 'Api\ChatController@sendMessage');
         Route::get('/group/{group_id}/messages', 'Api\ChatController@getMessages');
         Route::post('/message/{message_id}/mark-read', 'Api\ChatController@markAsRead');
 
         Route::post('/update-profile', 'Api\UserController@updateProfile');
         Route::post('/change-password', 'Api\UserController@changPassword');
-
+        Route::post('/profile_image', 'Api\UserController@updateProfileImage');
     });
 
     Route::get('/available_groups', 'Api\ChatController@groups');

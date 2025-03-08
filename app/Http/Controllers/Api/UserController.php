@@ -77,6 +77,34 @@ class UserController extends Controller
         return $this->success(data: $vendor);
     }
 
+    public function updateProfileImage(Request $request)
+    {
+        $vendor = Auth::user();
+
+        // Validate the uploaded image
+        $request->validate([
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Max 2MB
+        ]);
+
+        if ($request->hasFile('image')) {
+            // Delete the old image if it exists (excluding the default image)
+            deleteImage($vendor->image,'ProfileImages');
+
+            // Upload and save the new image
+            $imageName = uploadImage($request->file('image'), 'ProfileImages');
+
+            // Update the user's profile with the new image
+            $vendor->update(['image' => $imageName]);
+        }
+
+        return $this->success([
+            'image_url' => getImagePathFromDirectory($vendor->image, 'ProfileImages'),
+            'user' => $vendor,
+        ]);
+    }
+
+
+
 
 
 
@@ -104,5 +132,5 @@ class UserController extends Controller
 
         return $this->success(data:$usser, message: __('Password updated successfully'));
     }
- 
+
 }

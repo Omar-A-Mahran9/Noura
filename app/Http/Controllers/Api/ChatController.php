@@ -112,7 +112,7 @@ class ChatController extends Controller
             'message' => $request->message,
             'file' => $filePath
         ]);
-        broadcast(new MessageSent($message)) ;
+        broadcast(new MessageSent($message))  ;
          // Get all vendors in the group except sender
         $receivers = $chatGroup->vendors()->where('vendors.id', '!=', $sender->id)->pluck('vendors.id');
 

@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
- 
+
 if ( !function_exists('isRtl') ) {
 
     function isArabic() : bool
@@ -118,7 +118,7 @@ if(!function_exists('getImagePathFromDirectory')){
 
     function getImagePathFromDirectory( $imageName , $directory = null , $defaultImage = 'default.jpg'  ): string
     {
- 
+
         $imagePath = public_path('/storage/Images/'.'/' . $directory . '/' . $imageName);
 
         if ( $imageName && $directory && file_exists( $imagePath ) ) // check if the directory is null or the image doesn't exist
@@ -197,15 +197,7 @@ if(!function_exists('currency')){
 
 }
 
-if(!function_exists('getStatusObject')){
-
-    function getStatusObject($nameEn)
-    {
-        return array_values( array_filter( settings()->get('orders_statuses') ?? [] , fn( $status ) => $status['name_en'] == $nameEn ) )[0] ?? [ "name_ar" => $nameEn , "name_en" => $nameEn, "color" => "#219ed4"];
-    }
-
-}
-
+ 
 
 if(!function_exists('getCoordinates')){ // takes google map url and return the coordinates , formatting must be https://www.google.com/maps/?q="lat""lng"
 
@@ -364,4 +356,3 @@ if(!function_exists('removeFromFavourite')){
 
 }
 
- 
