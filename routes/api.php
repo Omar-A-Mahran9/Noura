@@ -63,7 +63,8 @@ Route::group(['middleware' => ['json.response']], function () {
         Route::post('/update-profile', 'Api\UserController@updateProfile');
         Route::post('/change-password', 'Api\UserController@changPassword');
         Route::post('/profile_image', 'Api\UserController@updateProfileImage');
-        Route::post('/my-order', 'Api\UserController@myOrder');
+        Route::get('/my-order', 'Api\UserController@myOrder');
+        Route::get('/my-course', 'Api\UserController@myCourse');
 
         Route::post('/make-order', [OrderController::class, 'store']);
 

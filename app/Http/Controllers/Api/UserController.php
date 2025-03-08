@@ -11,9 +11,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Site\UpdateUserController;
+use App\Http\Resources\OrderResource;
 use App\Models\CarImage;
 use App\Models\CarModel;
 use App\Models\Favorite;
+use App\Models\Order;
 use App\Models\OrderNotification;
 use App\Models\SettingOrderStatus;
 use App\Models\Vendor;
@@ -133,6 +135,7 @@ class UserController extends Controller
         return $this->success(data:$usser, message: __('Password updated successfully'));
     }
 
+
     public function myOrder(Request $request)
     {
         $vendorId = Auth::id(); // Get the logged-in vendor's ID
@@ -144,9 +147,38 @@ class UserController extends Controller
 
         return response()->json([
             'success' => true,
-            'orders' => $orders
+            'orders' => OrderResource::collection($orders)
         ], 200);
     }
+
+    public function myCourse(Request $request)
+{
+    $vendorId = Auth::id(); // Get the logged-in vendor's ID
+
+    // Fetch only orders that contain a course
+    $orders = Order::where('vendor_id', $vendorId)
+        ->whereNotNull('course_id') // Only include orders that have a course
+        ->with('course') // Eager load the course data
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    return response()->json([
+        'success' => true,
+        'courses' => $orders->map(fn($order) => [
+            'id' => $order->course->id,
+            'name' => $order->course->name,
+            'image' => $order->course->name,
+
+            'description' => $order->course->description,
+            'price' => $order->course->price,
+            'order_id' => $order->id,
+            'payment_status' => $order->payment_status,
+            'payment_method' => $order->payment_method,
+            'created_at' => $order->created_at->toDateTimeString(),
+        ])
+    ], 200);
+}
+
 
 
 }
