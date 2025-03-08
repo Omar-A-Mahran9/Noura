@@ -86,4 +86,126 @@ class DataController extends Controller
             ]
         ], 200);
     }
+
+    public function home_page()
+    {
+        return response()->json([
+            'success' => true,
+            'message' => 'Home page details fetched successfully!',
+            'data' => [
+                // Section 1: Main Introduction
+                'section1' => [
+                    'title' => 'Welcome to Our Platform',
+                    'description' => 'Discover a new way to enhance your mindset and personal growth.',
+                    'image' => asset('images/home_intro.jpg') // Change the path
+                ],
+
+                // Section 2: Events per Day
+                'section2' => [
+                    'events' => [
+                        'Friday 13' => [
+                            [
+                                'image' => asset('images/event_friday.jpg'),
+                                'title' => 'Special Workshop on Mindset',
+                                'time' => '10:00 AM - 12:00 PM'
+                            ],
+                            [
+                                'image' => asset('images/event_friday2.jpg'),
+                                'title' => 'Networking Session',
+                                'time' => '1:00 PM - 3:00 PM'
+                            ]
+                        ],
+                        // Add more days and events if needed
+                    ]
+                ],
+
+                // Section 3: Why Mindset is Important
+                'section3' => [
+                    'title' => 'Why Mindset is Important?',
+                    'description' => 'Your mindset determines your success. Learn how to shift your perspective for a better future.',
+                    'details' => [
+                        [
+                            'image' => asset('images/mindset1.jpg'),
+                            'title' => 'Growth Mindset',
+                            'description' => 'Develop a growth-oriented approach to challenges and opportunities.'
+                        ],
+                        [
+                            'image' => asset('images/mindset2.jpg'),
+                            'title' => 'Positive Thinking',
+                            'description' => 'Learn how to stay optimistic and motivated in difficult times.'
+                        ]
+                    ]
+                ],
+
+                // Section 4: General Content Section
+                'section4' => [
+                    [
+                        'image' => asset('images/section4_1.jpg'),
+                        'title' => 'Self-Improvement Tips',
+                        'description' => 'Daily habits to enhance personal growth.'
+                    ],
+                    [
+                        'image' => asset('images/section4_2.jpg'),
+                        'title' => 'Building Resilience',
+                        'description' => 'How to handle failures and keep moving forward.'
+                    ]
+                ],
+
+                // Section 5: Another General Section
+                'section5' => [
+                    [
+                        'image' => asset('images/section5_1.jpg'),
+                        'title' => 'Meditation & Focus',
+                        'description' => 'The role of meditation in improving mental clarity.'
+                    ],
+                    [
+                        'image' => asset('images/section5_2.jpg'),
+                        'title' => 'Time Management',
+                        'description' => 'Master the art of managing time effectively.'
+                    ]
+                ],
+
+                // Section 6: Special Topic
+                'section6' => [
+                    'title' => 'Achieve Your Goals with the Right Mindset',
+                    'description' => 'Follow a structured approach to set and achieve goals successfully.',
+                    'details' => [
+                        [
+                            'image' => asset('images/goal1.jpg'),
+                            'title' => 'Set SMART Goals',
+                            'description' => 'Learn how to create Specific, Measurable, Achievable, Relevant, and Time-bound goals.'
+                        ],
+                        [
+                            'image' => asset('images/goal2.jpg'),
+                            'title' => 'Stay Consistent',
+                            'description' => 'Success comes with consistency and perseverance.'
+                        ]
+                    ]
+                ],
+
+                // Books Section
+                'books' => [
+                    [
+                        'title' => 'The Power of Mindset',
+                        'image' => asset('images/book1.jpg'),
+                        'description' => 'A comprehensive guide to shifting your mindset for success.'
+                    ],
+                    [
+                        'title' => 'Think and Grow Rich',
+                        'image' => asset('images/book2.jpg'),
+                        'description' => 'A classic book on the psychology of success.'
+                    ]
+                ],
+
+                // Section 7: Final Content
+                'section7' => [
+                    'image' => asset('images/section7.jpg'),
+                    'title' => 'Your Journey Starts Here',
+                    'description' => 'Embrace a new way of thinking and transform your life today.'
+                ]
+            ]
+        ], 200);
+    }
+
+
 }

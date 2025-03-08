@@ -21,6 +21,8 @@ Route::group(['middleware' => ['json.response']], function () {
     });
     // Public routes
     Route::get('/about_noura', 'Api\DataController@about_nura');
+    Route::get('/home_page', 'Api\DataController@home_page');
+
 
     Route::post('/register', 'Api\Auth\AuthController@register');
     Route::post('/login', 'Api\Auth\AuthController@login');
