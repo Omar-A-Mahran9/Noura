@@ -133,4 +133,20 @@ class UserController extends Controller
         return $this->success(data:$usser, message: __('Password updated successfully'));
     }
 
+    public function myOrder(Request $request)
+    {
+        $vendorId = Auth::id(); // Get the logged-in vendor's ID
+
+        $orders = Order::where('vendor_id', $vendorId)
+            ->with(['book', 'course', 'consultation']) // Eager load related models
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'orders' => $orders
+        ], 200);
+    }
+
+
 }
