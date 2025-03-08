@@ -102,8 +102,8 @@ class DataController extends Controller
 
                 // Section 2: Events per Day
                 'section2' => [
-                    'events' => [
-                        'Friday 13' => [
+
+                        '2025-03-08' => [
                             [
                                 'image' => asset('images/event_friday.jpg'),
                                 'title' => 'Special Workshop on Mindset',
@@ -116,7 +116,7 @@ class DataController extends Controller
                             ]
                         ],
                         // Add more days and events if needed
-                    ]
+
                 ],
 
                 // Section 3: Why Mindset is Important
