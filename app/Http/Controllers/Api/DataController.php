@@ -101,23 +101,33 @@ class DataController extends Controller
                 ],
 
                 // Section 2: Events per Day
-                'section2' => [
+       'section2' => [
+    '2025-03-08' => [
+        [
+            'image' => asset('images/event_friday.jpg'),
+            'title' => 'Special Workshop on Mindset',
+            'time' => '10:00 AM - 12:00 PM'
+        ],
+        [
+            'image' => asset('images/event_friday2.jpg'),
+            'title' => 'Networking Session',
+            'time' => '1:00 PM - 3:00 PM'
+        ]
+    ],
+    '2025-03-09' => [
+        [
+            'image' => asset('images/event_friday.jpg'),
+            'title' => 'Special Workshop on Mindset',
+            'time' => '10:00 AM - 12:00 PM'
+        ],
+        [
+            'image' => asset('images/event_friday2.jpg'),
+            'title' => 'Networking Session',
+            'time' => '1:00 PM - 3:00 PM'
+        ]
+    ]
+],
 
-                        '2025-03-08' => [
-                            [
-                                'image' => asset('images/event_friday.jpg'),
-                                'title' => 'Special Workshop on Mindset',
-                                'time' => '10:00 AM - 12:00 PM'
-                            ],
-                            [
-                                'image' => asset('images/event_friday2.jpg'),
-                                'title' => 'Networking Session',
-                                'time' => '1:00 PM - 3:00 PM'
-                            ]
-                        ],
-                        // Add more days and events if needed
-
-                ],
 
                 // Section 3: Why Mindset is Important
                 'section3' => [
