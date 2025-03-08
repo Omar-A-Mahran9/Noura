@@ -54,6 +54,7 @@ Route::group(['middleware' => ['json.response']], function () {
         Route::middleware(['auth:sanctum', 'update.last_seen'])->get('/group_details/{id}', 'Api\ChatController@group');
         Route::post('/logout', 'Api\Auth\AuthController@logout');
         Route::get('/profile', 'Api\UserController@profile');
+        Route::get('/profile_image', 'Api\UserController@updateProfileImage');
 
         //----
         Route::post('/group/{group_id}/send-message', 'Api\ChatController@sendMessage');
