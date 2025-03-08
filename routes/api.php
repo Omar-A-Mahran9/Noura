@@ -20,6 +20,7 @@ Route::group(['middleware' => ['json.response']], function () {
         return $request->user();
     });
     // Public routes
+    Route::get('/about_noura', 'Api\DataController@about_nura');
 
     Route::post('/register', 'Api\Auth\AuthController@register');
     Route::post('/login', 'Api\Auth\AuthController@login');
