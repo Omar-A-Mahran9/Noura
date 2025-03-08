@@ -27,8 +27,7 @@ Route::group(['middleware' => ['json.response']], function () {
     Route::post('/verify-otp', 'Api\Auth\VerificationController@verifyOtp');
     Route::post('/resend-otp', 'Api\Auth\VerificationController@resendOtp');
     Route::get('/act_mod', 'Api\UserController@act_mod');
-    Route::post('/update-profile', 'Api\UserController@updateProfile');
-    Route::post('/change-password', 'Api\UserController@changPassword');
+
     // Blog Routes
     Route::get('/blogs', 'Api\ArticlesController@index');
     Route::get('/blogs/{id}', 'Api\ArticlesController@single');
@@ -60,7 +59,8 @@ Route::group(['middleware' => ['json.response']], function () {
         Route::get('/group/{group_id}/messages', 'Api\ChatController@getMessages');
         Route::post('/message/{message_id}/mark-read', 'Api\ChatController@markAsRead');
 
-
+        Route::post('/update-profile', 'Api\UserController@updateProfile');
+        Route::post('/change-password', 'Api\UserController@changPassword');
 
     });
 

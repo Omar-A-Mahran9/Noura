@@ -218,6 +218,7 @@ return [
         'section_id' => 'القسم',
         'course_id' => 'الكورس',
         'file_path' => 'رابط الملف',
+        'old password' => 'كلمة المرور القديمة',
 
         'determination' => 'العزم',
         'engine_measurement' => 'قياس المحرّك',
