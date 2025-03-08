@@ -29,10 +29,11 @@ use function PHPUnit\Framework\isEmpty;
 
 class UserController extends Controller
 {
- 
+
+
     public function profile()
     {
-        return $this->success(data: auth()->user()->load('city'));
+        return $this->success(data: auth()->user());
     }
 
 

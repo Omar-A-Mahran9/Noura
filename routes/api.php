@@ -53,6 +53,7 @@ Route::group(['middleware' => ['json.response']], function () {
         Route::post('/join_to_group/{id}', 'Api\ChatController@joinToGroup');
         Route::middleware(['auth:sanctum', 'update.last_seen'])->get('/group_details/{id}', 'Api\ChatController@group');
         Route::post('/logout', 'Api\Auth\AuthController@logout');
+        Route::get('/profile', 'Api\UserController@profile');
 
         //----
         Route::post('/group/{group_id}/send-message', 'Api\ChatController@sendMessage');

@@ -20,6 +20,7 @@ class Vendor extends Authenticatable
         'created_at' => 'date:Y-m-d',
         'updated_at' => 'date:Y-m-d'
     ];
+    protected $hidden = ['password'];
 
     public function setPasswordAttribute($value)
     {
