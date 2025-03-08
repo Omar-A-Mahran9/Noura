@@ -14,6 +14,7 @@ use App\Http\Requests\Site\UpdateUserController;
 use App\Http\Resources\OrderResource;
 use App\Models\CarImage;
 use App\Models\CarModel;
+use App\Models\ChatGroup;
 use App\Models\Favorite;
 use App\Models\Order;
 use App\Models\OrderNotification;
@@ -21,6 +22,7 @@ use App\Models\SettingOrderStatus;
 use App\Models\Vendor;
 use App\Rules\NotNumbersOnly;
 use App\Rules\PasswordValidate;
+use Carbon\Carbon;
 use DB;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Validation\Rule;
@@ -178,6 +180,68 @@ class UserController extends Controller
         ])
     ], 200);
 }
+public function myBooks(Request $request)
+{
+    $vendorId = Auth::id(); // Get the logged-in vendor's ID
+
+    // Fetch only orders that contain a book
+    $orders = Order::where('vendor_id', $vendorId)
+        ->whereNotNull('book_id') // Only include orders that have a book
+        ->with('book') // Eager load the book data
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    return response()->json([
+        'success' => true,
+        'books' => $orders->map(fn($order) => [
+            'id' => $order->book->id,
+            'title' => $order->book->title,
+            'image' => $order->book->image, // Assuming there is an image column
+            'description' => $order->book->description,
+            'price' => $order->book->price,
+            'order_id' => $order->id,
+            'payment_status' => $order->payment_status,
+            'payment_method' => $order->payment_method,
+            'created_at' => $order->created_at->toDateTimeString(),
+        ])
+    ], 200);
+}
+
+
+public function myGroups()
+{
+    $vendorId = auth()->id(); // Get the authenticated vendor's ID
+
+    $groups = ChatGroup::whereHas('vendors', function ($query) use ($vendorId) {
+        $query->where('vendors.id', $vendorId);
+    })
+    ->with(['vendors' => function ($query) {
+        $query->select('id', 'name', 'image', 'last_seen');
+    }])
+    ->orderBy('created_at', 'desc')
+    ->get();
+
+    return response()->json([
+        'success' => true,
+        'groups' => $groups->map(function ($group) {
+            return [
+                'id' => $group->id,
+                'title' => $group->name_en,
+                'created_at' => $group->created_at->toDateTimeString(),
+                'vendors' => $group->vendors->map(function ($vendor) {
+                    return [
+                        'id' => $vendor->id,
+                        'name' => $vendor->name,
+                        'image' => getImagePathFromDirectory($vendor->image, 'Vendors'),
+                        'last_seen' => $vendor->last_seen,
+                        'status' => Carbon::parse($vendor->last_seen)->diffInMinutes(now()) < 5 ? 'online' : 'offline',
+                    ];
+                }),
+            ];
+        })
+    ], 200);
+}
+
 
 
 
