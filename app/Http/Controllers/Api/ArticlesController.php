@@ -112,7 +112,7 @@ public function index(Request $request)
     public function comments($article_id)
     {
         // Fetch paginated comments for the given article ID
-        $comments = ArticalComment::where('article_id', $article_id)->paginate(10);
+        $comments = ArticalComment::where('article_id', $article_id)->paginate(3);
 
         // Transform the data to include only required fields
         $transformedComments = $comments->through(function ($comment) {
