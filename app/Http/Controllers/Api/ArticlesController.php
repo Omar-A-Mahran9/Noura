@@ -26,29 +26,7 @@ public function authors(){
         );
 }
 
-public function getComments(Request $request, $articleId)
-{
-    $comments = Comment::where('article_id', $articleId)
-        ->with('vendor')
-        ->orderBy('created_at', 'desc')
-        ->paginate(5); // Paginate comments (5 per page)
 
-    return response()->json([
-        'success' => true,
-        'data' => CommentResource::collection($comments),
-        'links' => [
-            'prev' => $comments->previousPageUrl(),
-            'next' => $comments->nextPageUrl(),
-        ],
-        'meta' => [
-            'total' => $comments->total(),
-            'per_page' => $comments->perPage(),
-            'current_page' => $comments->currentPage(),
-            'last_page' => $comments->lastPage(),
-        ],
-        'message' => "Paginated comments for article ID: $articleId",
-    ]);
-}
 
 public function index(Request $request)
 {
@@ -130,6 +108,15 @@ public function index(Request $request)
             data: $data
         );
     }
+
+    public function comments($article_id)
+    {
+        // Fetch paginated comments for the given article ID
+        $comments = ArticalComment::where('article_id', $article_id)->paginate(10);
+
+        return $this->successWithPagination('Comments retrieved successfully', $comments);
+    }
+
 
 
 
