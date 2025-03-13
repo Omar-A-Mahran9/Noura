@@ -19,9 +19,10 @@ class ArticleResources extends JsonResource
     {
         return [
              'id' => $this->id,
-             'image' =>  getImagePathFromDirectory($this->main_image, 'articles'), 
+             'image' =>  getImagePathFromDirectory($this->main_image, 'articles'),
+             'author_id' =>  $this->assign_to,
 
-            'title' =>  $this->title, 
+            'title' =>  $this->title,
             'short_description' => Str::limit($this->description, 35),
             'fully_description' =>$this->description,
             'created_at' => $this->created_at->format('Y-m-d'), // Manually format the date
@@ -35,12 +36,12 @@ class ArticleResources extends JsonResource
                     'vendor' => [
                         'id' => $comment->vendor->id, // Ensure the vendor has 'id' property
                         'name' => $comment->vendor->name, // Assuming you have a 'name' field in the vendor
-                        'image' =>  getImagePathFromDirectory($comment->vendor->image, 'Vendors'), 
+                        'image' =>  getImagePathFromDirectory($comment->vendor->image, 'Vendors'),
 
                     ],
                     'created_at' => $comment->created_at->format('Y-m-d'),
                 ];
             }),
-            ];  
+            ];
           }
 }

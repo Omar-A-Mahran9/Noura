@@ -43,7 +43,7 @@ public function index(Request $request)
 
     // Apply author filter if provided
     if ($authorFilter) {
-        $query->where('author_id', $authorFilter);
+        $query->where('assign_to', $authorFilter);
     }
 
     // Paginate the filtered results
