@@ -35,6 +35,8 @@ Route::group(['middleware' => ['json.response']], function () {
 
     // Blog Routes
     Route::get('/blogs', 'Api\ArticlesController@index');
+    Route::get('/authors', 'Api\ArticlesController@authors');
+
     Route::get('/blogs/{id}', 'Api\ArticlesController@single');
 
     Route::get('/courses', 'Api\CourseController@index');

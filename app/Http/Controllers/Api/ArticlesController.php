@@ -6,57 +6,83 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\StoreArticlesRequest;
 use App\Http\Requests\Dashboard\UpdateArticlesRequest;
 use App\Http\Resources\Api\ArticleResources;
+use App\Http\Resources\Api\VendorResources;
 use App\Models\ArticalComment;
 use App\Models\Articles;
 use App\Models\Category;
+use App\Models\Employee;
+use App\Models\Vendor;
 use Auth;
 use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        // Paginate articles with related comments and vendors
-         $articles = Articles::with('comments', 'comments.vendor')->paginate(10);
+public function authors(){
+    $employee=Employee::where('type','author')->get();
+        // Return the transformed article data
+        return $this->success(
+            message: "Authors",
+            data: VendorResources::collection($employee)
+        );
+}
 
-        // Fetch the latest 5 blogs
-        $latestBlogs = Articles::with('comments', 'comments.vendor')
-            ->latest()
-            ->take(4)
-            ->get();
 
-        // Transform the latest blogs
-        $transformedLatestBlogs = ArticleResources::collection($latestBlogs)->resolve();
-        $Blogs = ArticleResources::collection($articles)->resolve();
+public function index(Request $request)
+{
+    // Get filter parameters from request
+    $dateFilter = $request->query('date'); // Expected format: YYYY-MM-DD
+    $authorFilter = $request->query('author_id'); // Filter by author ID
 
-        // Prepare the paginated response
-        return response()->json([
-            'success' => true,
-            'data' => $articles->items(), // Current page's items
-            'latest_blogs' => $transformedLatestBlogs, // Latest blogs transformed
-            'links' => [
-                'prev' => $articles->previousPageUrl(), // Previous page URL
-                'next' => $articles->nextPageUrl(),     // Next page URL
-            ],
-            'meta' => [
-                'total' => $articles->total(),                 // Total items
-                'per_page' => $articles->perPage(),            // Items per page
-                'current_page' => $articles->currentPage(),    // Current page
-                'last_page' => $articles->lastPage(),          // Last page
-                'number_of_new_data_on_page' => $articles->count(), // Current page item count
-                'current_data_on_this_page' => min(
-                    $articles->total(),
-                    $articles->perPage() * $articles->currentPage()
-                ), // Total items displayed so far
-            ],
-            'message' => "All Pagination articles",
-        ]);
+    // Query articles with comments and vendors
+    $query = Articles::with('comments', 'comments.vendor');
+
+    // Apply date filter if provided
+    if ($dateFilter) {
+        $query->whereDate('created_at', $dateFilter);
     }
+
+    // Apply author filter if provided
+    if ($authorFilter) {
+        $query->where('author_id', $authorFilter);
+    }
+
+    // Paginate the filtered results
+    $articles = $query->paginate(10);
+
+    // Fetch the latest 5 blogs
+    $latestBlogs = Articles::with('comments', 'comments.vendor')
+        ->latest()
+        ->take(4)
+        ->get();
+
+    // Transform the latest blogs
+    $transformedLatestBlogs = ArticleResources::collection($latestBlogs)->resolve();
+    $Blogs = ArticleResources::collection($articles)->resolve();
+
+    // Prepare the paginated response
+    return response()->json([
+        'success' => true,
+        'data' => $articles->items(), // Current page's items
+        'latest_blogs' => $transformedLatestBlogs, // Latest blogs transformed
+        'links' => [
+            'prev' => $articles->previousPageUrl(), // Previous page URL
+            'next' => $articles->nextPageUrl(),     // Next page URL
+        ],
+        'meta' => [
+            'total' => $articles->total(),                 // Total items
+            'per_page' => $articles->perPage(),            // Items per page
+            'current_page' => $articles->currentPage(),    // Current page
+            'last_page' => $articles->lastPage(),          // Last page
+            'number_of_new_data_on_page' => $articles->count(), // Current page item count
+            'current_data_on_this_page' => min(
+                $articles->total(),
+                $articles->perPage() * $articles->currentPage()
+            ), // Total items displayed so far
+        ],
+        'message' => "Filtered Pagination articles",
+    ]);
+}
+
 
 
     public function single($id)
