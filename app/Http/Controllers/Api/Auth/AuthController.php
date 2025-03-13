@@ -165,6 +165,8 @@ class AuthController extends Controller
                 'image'=>$user->getAvatar(),
                 'password' => bcrypt(Str::random(12)),
                 'status' => 2,
+                'created_by_social' => 1,
+
             ]
         );
 

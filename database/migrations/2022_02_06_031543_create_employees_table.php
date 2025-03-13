@@ -21,6 +21,7 @@ class CreateEmployeesTable extends Migration
             $table->enum('type', ['admin','author','content_creators','specialist'])->default('admin');
             $table->longText('description_ar')->nullable();
             $table->longText('description_en')->nullable();
+            $table->boolean('created_by_social')->default(0);
 
             $table->string('password');
             $table->string('image')->default('default.png');
