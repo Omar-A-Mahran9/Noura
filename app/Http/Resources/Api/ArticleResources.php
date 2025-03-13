@@ -17,6 +17,8 @@ class ArticleResources extends JsonResource
      */
     public function toArray($request)
     {
+        $paginatedComments = $this->comments()->paginate(3); // Set per-page limit
+
         return [
              'id' => $this->id,
              'image' =>  getImagePathFromDirectory($this->main_image, 'articles'),
@@ -27,21 +29,32 @@ class ArticleResources extends JsonResource
             'fully_description' =>$this->description,
             'created_at' => $this->created_at->format('Y-m-d'), // Manually format the date
             'comments_counts' => $this->comments->count(), // Total count of comments
-            'comments' => $this->comments->map(function ($comment) {
+          'comments' => [
+            'data' => $paginatedComments->map(function ($comment) {
                 return [
                     'id' => $comment->id,
                     'article_id' => $comment->article_id,
                     'vendor_id' => $comment->vendor_id,
                     'description' => $comment->description,
                     'vendor' => [
-                        'id' => $comment->vendor->id, // Ensure the vendor has 'id' property
-                        'name' => $comment->vendor->name, // Assuming you have a 'name' field in the vendor
-                        'image' =>  getImagePathFromDirectory($comment->vendor->image, 'Vendors'),
-
+                        'id' => $comment->vendor->id ?? null,
+                        'name' => $comment->vendor->name ?? null,
+                        'image' => getImagePathFromDirectory($comment->vendor->image ?? null, 'Vendors'),
                     ],
                     'created_at' => $comment->created_at->format('Y-m-d'),
                 ];
             }),
+            'links' => [
+                'prev' => $paginatedComments->previousPageUrl(),
+                'next' => $paginatedComments->nextPageUrl(),
+            ],
+            'meta' => [
+                'total' => $paginatedComments->total(),
+                'per_page' => $paginatedComments->perPage(),
+                'current_page' => $paginatedComments->currentPage(),
+                'last_page' => $paginatedComments->lastPage(),
+            ],
+        ],
             ];
           }
 }
