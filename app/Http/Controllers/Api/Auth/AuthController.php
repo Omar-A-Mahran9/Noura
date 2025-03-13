@@ -10,10 +10,12 @@ use App\Http\Controllers\Controller;
  use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Site\LoginUserRequest;
 use App\Http\Requests\Site\StoreUserRequest;
-
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule as ValidationRule;
+use Laravel\Socialite\Facades\Socialite;
+use Str;
 
 class AuthController extends Controller
 {
@@ -118,5 +120,74 @@ class AuthController extends Controller
 
         return $this->success( __('You have to log in') );
 
+    }
+
+
+    public function redirectToProvider($provider)
+    {
+        $validated = $this->validateProvider($provider);
+        if (!is_null($validated)) {
+            return $validated;
+        }
+        // dd(Socialite::driver($provider));
+
+        return Socialite::driver($provider)->stateless()->redirect();
+
+    }
+
+    public function handleProviderCallback($provider)
+    {
+        $validated = $this->validateProvider($provider);
+        if (!is_null($validated)) {
+            return $validated;
+        }
+
+        try {
+            $user = Socialite::driver($provider)->stateless()->user();
+        } catch (\Exception $exception) {
+            return response()->json(['error' => 'Invalid credentials provided.'], 422);
+        }
+
+        if (!$user->getEmail()) {
+            return response()->json(['error' => 'Unable to retrieve email from provider.'], 422);
+        }
+
+        $userCreated = Vendor::firstOrCreate(
+            ['email' => $user->getEmail()],
+            [
+                'verified_at' => now(),
+                'phone' => '9665' . rand(10000000, 99999999),
+                'name' => $user->getName(),
+                'image'=>$user->getAvatar(),
+                'password' => bcrypt(Str::random(12)),
+                'status' => 2,
+            ]
+        );
+
+        $userCreated->providers()->updateOrCreate(
+            [
+                'provider' => $provider,
+                'provider_id' => $user->getId(),
+            ],
+            [
+                'avatar' => $user->getAvatar()
+            ]
+        );
+
+        $token = $userCreated->createToken('token-name')->plainTextToken;
+
+        return $this->success(data: [
+            'token' => $token,
+            'message' => __('Thank You for verified'),
+            'user' => $userCreated,
+        ]);
+     }
+
+
+    protected function validateProvider($provider)
+    {
+        if (!in_array($provider, ['facebook', 'github', 'google'])) {
+            return response()->json(['error' => 'Please login using facebook, github or google'], 422);
+        }
     }
 }

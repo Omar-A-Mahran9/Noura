@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -76,6 +77,12 @@ Route::group(['middleware' => ['json.response']], function () {
     });
 
     Route::get('/available_groups', 'Api\ChatController@groups');
+
+
+    Route::get('/login/{provider}', [AuthController::class,'redirectToProvider']);
+    Route::get('/login/{provider}/callback', [AuthController::class,'handleProviderCallback']);
+
+
 
 });
 

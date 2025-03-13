@@ -86,4 +86,10 @@ public function receivedMessages()
 }
 
 
+public function providers()
+{
+    return $this->hasMany(SocialAccount::class);
+}
+
+
 }
