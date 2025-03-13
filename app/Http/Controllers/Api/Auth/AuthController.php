@@ -201,7 +201,7 @@ class AuthController extends Controller
     ]));
 
     // Redirect with encoded data
-    $redirectUrl = env('APP_URL', 'http://localhost:8080') . "/auth/callback?data={$data}";
+    $redirectUrl = env('APP_URL', 'http://localhost:8080') . "?data={$data}";
 
     return redirect()->to($redirectUrl);
 
