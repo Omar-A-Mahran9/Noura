@@ -182,15 +182,36 @@ class AuthController extends Controller
 
         $token = $userCreated->createToken('token-name')->plainTextToken;
 
-        return $this->success(data: [
-            'token' => $token,
-            'message' => __('Thank You for verified'),
-            'user' => $userCreated,
-        ]);
+        // return $this->success(data: [
+        //     'token' => $token,
+        //     'message' => __('Thank You for verified'),
+        //     'user' => $userCreated,
+        // ]);
+
+            // Encode data in Base64 to avoid URL length issues
+    $data = base64_encode(json_encode([
+        'token' => $token,
+        'message' => __('Thank You for verified'),
+        'user' => [
+            'id' => $userCreated->id,
+            'name' => $userCreated->name,
+            'email' => $userCreated->email,
+            'image' => $userCreated->image
+        ],
+    ]));
+
+    // Redirect with encoded data
+    $redirectUrl = env('APP_URL', 'http://localhost:8080') . "/auth/callback?data={$data}";
+
+    return redirect()->to($redirectUrl);
+
+
      }
 
 
-    protected function validateProvider($provider)
+
+
+     protected function validateProvider($provider)
     {
         if (!in_array($provider, ['facebook', 'github', 'google'])) {
             return response()->json(['error' => 'Please login using facebook, github or google'], 422);
