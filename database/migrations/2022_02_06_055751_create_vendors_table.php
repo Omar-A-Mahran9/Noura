@@ -32,6 +32,7 @@ class CreateVendorsTable extends Migration
             $table->string('rejection_reason')->nullable();
             $table->foreignId('created_by')->nullable()->references('id')->on('employees');
             $table->boolean('Terms_and_conditions')->default(false);
+            $table->boolean('created_by_social')->default(0);
 
             $table->string('verification_code')->nullable();
             $table->timestamp('verified_at')->nullable();
