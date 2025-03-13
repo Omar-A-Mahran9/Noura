@@ -17,7 +17,7 @@ class ArticleResources extends JsonResource
      */
     public function toArray($request)
     {
-        $paginatedComments = $this->comments()->paginate(3); // Set per-page limit
+        $paginatedComments = $this->comments()->paginate(5); // Set per-page limit
 
         return [
              'id' => $this->id,
@@ -29,7 +29,7 @@ class ArticleResources extends JsonResource
             'fully_description' =>$this->description,
             'created_at' => $this->created_at->format('Y-m-d'), // Manually format the date
             'comments_counts' => $this->comments->count(), // Total count of comments
-          'comments' => [
+            'comments' => [
             'data' => $paginatedComments->map(function ($comment) {
                 return [
                     'id' => $comment->id,
