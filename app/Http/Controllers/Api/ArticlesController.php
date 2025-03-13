@@ -114,8 +114,18 @@ public function index(Request $request)
         // Fetch paginated comments for the given article ID
         $comments = ArticalComment::where('article_id', $article_id)->paginate(10);
 
-        return $this->successWithPagination('Comments retrieved successfully', $comments);
+        // Transform the data to include only required fields
+        $transformedComments = $comments->through(function ($comment) {
+            return [
+                'id' => $comment->id,
+                'description' => $comment->description,
+                'created_at' => $comment->created_at->format('Y-m-d H:i:s'), // Optional formatting
+            ];
+        });
+
+        return $this->successWithPagination('Comments retrieved successfully', $transformedComments);
     }
+
 
 
 
