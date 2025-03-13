@@ -80,12 +80,16 @@ class AuthController extends Controller
             $vendor->sendOTP();
             $otp = $vendor->verification_code;
 
-            return $this->validationFailure(errors: [
-                'message' => $message,
-                'phone' => str_replace('966', ' ', $vendor->phone),
-                'otp' => $otp,
-                'verified' => $otp ? false : true,
+            return $this->validationFailure([
+                'errors' => [
+                    'message' => $message,
+                    'phone' => str_replace('966', ' ', $vendor->phone),
+                    'otp' => $otp,
+                ],
+                'verified' => $otp ? false : true
             ]);
+
+
         }
 
         // Handle account status checks
