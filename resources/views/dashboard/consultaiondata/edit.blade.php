@@ -11,8 +11,8 @@
 
                 <!-- begin :: Title -->
                 <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1"><a
-                        href="{{ route('dashboard.books.index') }}"
-                        class="text-muted text-hover-primary">{{ __('books') }}</a></h1>
+                        href="{{ route('dashboard.consultation_time.index') }}"
+                        class="text-muted text-hover-primary">{{ __('Consultations') }}</a></h1>
                 <!-- end   :: Title -->
 
                 <!-- begin :: Separator -->
@@ -23,7 +23,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                     <!-- begin :: Item -->
                     <li class="breadcrumb-item text-muted">
-                        {{ __('Edit an book') }}
+                        {{ __('Edit an consultation') }}
                     </li>
                     <!-- end   :: Item -->
                 </ul>
@@ -40,13 +40,13 @@
         <!-- begin :: Card body -->
         <div class="card-body p-0">
             <!-- begin :: Form -->
-            <form action="{{ route('dashboard.books.update', $book->id) }}" class="form" method="post"
-                id="submitted-form" data-redirection-url="{{ route('dashboard.books.index') }}">
+            <form action="{{ route('dashboard.consultation_time.update', $consultaion->id) }}" class="form" method="post"
+                id="submitted-form" data-redirection-url="{{ route('dashboard.consultation_time.index') }}">
                 @csrf
                 @method('PUT')
                 <!-- begin :: Card header -->
                 <div class="card-header d-flex align-items-center">
-                    <h3 class="fw-bolder text-dark">{{ __('Edit an book') . ' : ' . $book->title }}</h3>
+                    <h3 class="fw-bolder text-dark">{{ __('Edit an consultaion') . ' : ' . $consultaion->title }}</h3>
                 </div>
                 <!-- end   :: Card header -->
                 <!-- begin :: Inputs wrapper -->

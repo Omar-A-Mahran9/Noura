@@ -20,7 +20,7 @@ class BookController extends Controller
         if ($request->ajax())
         {
             $data = getModelData(model: new Book());
-      
+
              return response()->json($data);
         }
 
@@ -52,7 +52,7 @@ class BookController extends Controller
 
         // Authorize the user to create books
         $this->authorize('create_books');
-        
+
         // Get the validated data
         $data = $request->validated();
         unset($data['images']);
@@ -65,7 +65,7 @@ class BookController extends Controller
         if ($request->file('pdf_path')) {
             $data['pdf_path'] = uploadImage($request->file('pdf_path'), "books/pdf/");
         }
-        
+
         // Create the book record
         $book = Book::create($data);
         if ($book) {
@@ -78,7 +78,7 @@ class BookController extends Controller
             foreach ($request->file('images') as $file) {
                 // Upload each image
                 $imagePath = uploadImage($file, "books/images");
-    
+
                 // Create a BookImage record
                 BookImage::create([
                     'book_id' => $book->id,  // Associate image with the created book
@@ -86,13 +86,13 @@ class BookController extends Controller
                 ]);
             }
         }
-    
-        
+
+
     }
-    
+
     public function removeImage($id)
     {
- 
+
          $image = BookImage::findOrFail($id);
 
         // Delete the image file
@@ -101,19 +101,14 @@ class BookController extends Controller
         // Delete the image record from the database
         $image->delete();
      }
-  
+
      public function show(Book $book)
      {
          $this->authorize('show_books');
          return view('dashboard.books.show',compact('book'));
      }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Book  $book
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function edit(Book $book)
     {
         $this->authorize('update_books');
@@ -131,9 +126,9 @@ class BookController extends Controller
      */
     public function update(UpdateBooksRequest $request, Book $book)
     {
- 
+
         $this->authorize('update_books');
-        
+
         $data=$request->validated();
         unset($data['images']);
         // Handle the main image upload
@@ -154,7 +149,7 @@ class BookController extends Controller
                     foreach ($request->file('images') as $file) {
                         // Upload each image
                         $imagePath = uploadImage($file, "books/images");
-            
+
                         // Create a BookImage record
                         BookImage::create([
                             'book_id' => $book->id,  // Associate image with the created book
@@ -172,7 +167,7 @@ class BookController extends Controller
      */
     public function destroy(Request $request,Book $book)
     {
- 
+
         $this->authorize('delete_books');
 
         if($request->ajax())

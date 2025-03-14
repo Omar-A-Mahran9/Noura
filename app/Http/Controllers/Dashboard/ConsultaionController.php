@@ -27,11 +27,7 @@ class ConsultaionController extends Controller
         return view('dashboard.consultaiondata.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         $this->authorize('create_consultation_time');
@@ -44,7 +40,7 @@ class ConsultaionController extends Controller
         return view('dashboard.consultaiondata.create', compact('types'));
     }
 
- 
+
     public function store(StoreConsultationRequest $request)
     {
          // Get the validated data
@@ -92,29 +88,16 @@ class ConsultaionController extends Controller
     }
 
 
-    public function show(Consultaion $consultaion)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Consultaion  $consultaion
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Consultaion $consultaion)
     {
-        //
+        $this->authorize('update_consultation_time');
+
+        return view('dashboard.consultaiondata.edit',compact('consultaion'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Consultaion  $consultaion
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Consultaion $consultaion)
     {
         //
