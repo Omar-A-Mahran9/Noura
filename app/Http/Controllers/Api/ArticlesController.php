@@ -119,6 +119,9 @@ public function index(Request $request)
             return [
                 'id' => $comment->id,
                 'description' => $comment->description,
+                'client' => $comment->vendor->name,
+                'client_image' => $comment->vendor->image,
+
                 'created_at' => $comment->created_at->format('Y-m-d'),
             ];
         });
