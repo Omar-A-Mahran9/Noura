@@ -119,7 +119,7 @@ public function index(Request $request)
             return [
                 'id' => $comment->id,
                 'description' => $comment->description,
-                'created_at' => $comment->created_at->format('Y-m-d H:i:s'), // Optional formatting
+                'created_at' => $comment->created_at->format('Y-m-d'),
             ];
         });
 

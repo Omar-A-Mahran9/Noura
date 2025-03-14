@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api;
 
+use App\Models\Articles;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Str;
 
@@ -29,6 +30,8 @@ class ArticleResources extends JsonResource
             'fully_description' =>$this->description,
             'created_at' => $this->created_at->format('Y-m-d'), // Manually format the date
             'comments_counts' => $this->comments->count(), // Total count of comments
+            'latest_articles' => $this->getLatestArticlesByCategory(), // Get latest articles
+
         //     'comments' => [
         //     'data' => $paginatedComments->map(function ($comment) {
         //         return [
@@ -57,4 +60,22 @@ class ArticleResources extends JsonResource
         // ],
             ];
           }
-}
+          private function getLatestArticlesByCategory()
+          {
+              return Articles::whereHas('categories', function ($query) {
+                      $query->whereIn('categories.id', $this->categories->pluck('id'));
+                  })
+                  ->where('id', '!=', $this->id) // Exclude current article
+                  ->latest() // Order by latest
+                  ->take(5) // Limit to 5 latest articles
+                  ->get()
+                  ->map(function ($article) {
+                      return [
+                          'id' => $article->id,
+                          'title' => $article->title,
+                          'image' => getImagePathFromDirectory($article->main_image, 'articles'),
+                          'created_at' => $article->created_at->format('Y-m-d'),
+                      ];
+                  });
+          }
+        }
