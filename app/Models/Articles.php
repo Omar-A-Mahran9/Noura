@@ -33,6 +33,10 @@ class Articles extends Model
     {
         return $this->hasMany(ArticalComment::class, 'article_id');
     }
-    
-    
+        public function vendor()
+    {
+        return $this->belongsTo(Vendor::class,'sender_id');
+    }
+
+
 }

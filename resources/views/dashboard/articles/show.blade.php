@@ -23,7 +23,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                     <!-- begin :: Item -->
                     <li class="breadcrumb-item text-muted">
-                        {{ __('Show an book') }}
+                        {{ __('Show an article') }}
                     </li>
                     <!-- end   :: Item -->
                 </ul>
@@ -43,7 +43,7 @@
             <form class="form">
                 <!-- begin :: Card header -->
                 <div class="card-header d-flex align-items-center">
-                    <h3 class="fw-bolder text-dark">{{ __('Book') . ' : ' . $article->title }}</h3>
+                    <h3 class="fw-bolder text-dark">{{ __('article') . ' : ' . $article->title }}</h3>
                 </div>
                 <!-- end   :: Card header -->
                 <!-- begin :: Inputs wrapper -->
@@ -81,7 +81,7 @@
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="title_ar_inp" name="title_ar"
                                     placeholder="example" value="{{ $article->title_ar }}" readonly />
-                                <label for="title_ar_inp">{{ __('Enter the Book title') }}</label>
+                                <label for="title_ar_inp">{{ __('Enter the Articles title') }}</label>
                             </div>
                             <p class="invalid-feedback" id="title_ar"></p>
                         </div>
@@ -92,7 +92,7 @@
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="title_en_inp" name="title_en"
                                     placeholder="example" value="{{ $article->title_en }}" readonly />
-                                <label for="title_en_inp">{{ __('Enter the Book title') }}</label>
+                                <label for="title_en_inp">{{ __('Enter the Articles title') }}</label>
                             </div>
                             <p class="invalid-feedback" id="title_en"></p>
 
@@ -149,4 +149,47 @@
         </div>
         <!-- end   :: Card body -->
     </div>
+
+    <!-- begin :: Datatable card -->
+    <div class="card mt-5">
+        <!-- begin :: Card header -->
+        <div class="card-header d-flex align-items-center">
+            <h3 class="fw-bolder text-dark">{{ __('comments') . ' : ' . $article->title }}</h3>
+        </div>
+        <!-- end   :: Card header -->
+        <!-- begin :: Card Body -->
+        <div class="card-body fs-6 py-15 px-10 py-lg-15 px-lg-15 text-gray-700">
+
+
+
+            <!-- begin :: Datatable -->
+            <table data-ordering="false" id="kt_datatable" class="table text-center table-row-dashed fs-6 gy-5">
+
+                <thead>
+                    <tr class="text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                        <th>#</th>
+                        <th>{{ __('image') }}</th>
+                        <th>{{ __('name') }}</th>
+                        <th>{{ __('description') }}</th>
+                        <th>{{ __('created date') }}</th>
+                        <th class="min-w-100px">{{ __('actions') }}</th>
+                    </tr>
+                </thead>
+
+                <tbody class="text-gray-600 fw-bold text-center">
+
+                </tbody>
+
+            </table>
+            <!-- end   :: Datatable -->
+
+
+        </div>
+        <!-- end   :: Card Body -->
+    </div>
+    <!-- end   :: Datatable card -->
 @endsection
+@push('scripts')
+    <script src="{{ asset('js/dashboard/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('js/dashboard/datatables/comments.js') }}"></script>
+@endpush
