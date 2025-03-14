@@ -44,12 +44,7 @@ class ConsultaionController extends Controller
         return view('dashboard.consultaiondata.create', compact('types'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function store(StoreConsultationRequest $request)
     {
          // Get the validated data
@@ -68,12 +63,12 @@ class ConsultaionController extends Controller
          'main_image' =>  $data['main_image'],
          'price' =>  $data['price'],
         'consultaion_type_id'=> $data['consultaion_type_id'],
-    ];
+       ];
 
-    $consultaion=Consultaion::create($consultaionData);
+      $consultaion=Consultaion::create($consultaionData);
 
-    $consultaiontimes = $request->time_list ?? []; // Retrieve the sections list from the request
-    if (is_array($consultaiontimes) && count($consultaiontimes) > 0) {
+     $consultaiontimes = $request->time_list ?? []; // Retrieve the sections list from the request
+      if (is_array($consultaiontimes) && count($consultaiontimes) > 0) {
         foreach ($consultaiontimes as $consultaiontime) {
              // Check if 'available' is set and valid
              $available = isset($consultaiontime['available']) &&
@@ -92,16 +87,11 @@ class ConsultaionController extends Controller
             // Create the section record
             $section = ConsultaionSchedual::create($sectionData);
         }
+      }
+
     }
 
-}
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Consultaion  $consultaion
-     * @return \Illuminate\Http\Response
-     */
     public function show(Consultaion $consultaion)
     {
         //
