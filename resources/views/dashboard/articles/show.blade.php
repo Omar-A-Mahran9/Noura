@@ -168,9 +168,8 @@
                 <thead>
                     <tr class="text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                         <th>#</th>
-                        <th>{{ __('image') }}</th>
                         <th>{{ __('name') }}</th>
-                        <th>{{ __('description') }}</th>
+                        <th>{{ __('comment') }}</th>
                         <th>{{ __('created date') }}</th>
                         <th class="min-w-100px">{{ __('actions') }}</th>
                     </tr>
@@ -190,6 +189,10 @@
     <!-- end   :: Datatable card -->
 @endsection
 @push('scripts')
+    <script>
+        let articleId = "{{ $article->id }}";
+    </script>
+
     <script src="{{ asset('js/dashboard/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/dashboard/datatables/comments.js') }}"></script>
 @endpush

@@ -45,6 +45,9 @@ let translations = {
         available: "متاح",
         Yes: "نعم",
         No: "لا",
+        "article": "المقالة",
+        "comment": "التعليق",
+
         "Processing...": "جاري التحميل ...",
         "Custom Range": "فترة محددة",
         "No data available in table": "لا يوجد بيانات",

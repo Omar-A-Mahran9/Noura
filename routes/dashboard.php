@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\ArticlesController;
 use App\Http\Controllers\Dashboard\BookController;
 use App\Http\Controllers\Dashboard\CourseController;
 use BeyondCode\LaravelWebSockets\Facades\WebSocketsRouter;
@@ -63,6 +64,8 @@ Route::group([ 'prefix' => 'dashboard' , 'namespace' => 'Dashboard', 'as' => 'da
     ->name('dashboard.courseImages.removeImage');
 
     Route::resource('articles', 'ArticlesController');
+    Route::resource('comments', 'CommentsController');
+
     Route::resource('quizzes','QuizzeController');
     Route::prefix('quizzes')->group(function () {
         Route::resource('questions', 'QuestionsController')->names([
@@ -83,7 +86,6 @@ Route::group([ 'prefix' => 'dashboard' , 'namespace' => 'Dashboard', 'as' => 'da
     Route::resource('contact-us','ContactUsController')->except(['store','create','destroy']);
     Route::resource('news-subscribers','NewsSubscriberController')->except(['store','create','show']);
     Route::resource('settings','SettingController')->only(['index','store']);
-
 
     /** ajax routes **/
     Route::get('role/{role}/employees','RoleController@employees');

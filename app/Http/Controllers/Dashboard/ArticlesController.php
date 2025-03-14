@@ -23,7 +23,7 @@ class ArticlesController extends Controller
 
         if ($request->ajax())
         {
-             $data = getModelData( model: new Articles()  , relations:[ 'comments' => ['id','description_ar' .getLocale(),'vendor']], searchingColumns:['name_' . getLocale(), 'address_' . getLocale(), 'phone', 'whatsapp']);
+            $data = getModelData(model: new Articles());
 
              return response()->json($data);
         }

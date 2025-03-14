@@ -1,5 +1,5 @@
 "use strict";
-
+console.log(articleId);
 // Class definition
 let KTDatatable = (function () {
     // Shared variables
@@ -28,31 +28,21 @@ let KTDatatable = (function () {
                     let r = datatable
                         .DataTable()
                         .ajax.url(
-                            `/dashboard/articles?page=${
+                            `/dashboard/comments?page=${
                                 info.page + 1
-                            }&per_page=${info.length}`
+                            }&per_page=${info.length}&article_id=${articleId}`
                         );
                     console.log(r);
                 },
             },
             columns: [
                 { data: "id" },
-                { data: "main_image" },
-                { data: "title" },
+                { data: "vendor.name" },
                 { data: "description" },
                 { data: "created_at" },
                 { data: null },
             ],
             columnDefs: [
-                {
-                    targets: 1,
-                    render: function (data, type, row) {
-                        return `<img style="height:50px;width:50px;border-radius:4px" src="${getImagePathFromDirectory(
-                            data,
-                            "articles"
-                        )}" class="me-3" >`;
-                    },
-                },
                 {
                     targets: -1,
                     data: null,
@@ -62,7 +52,7 @@ let KTDatatable = (function () {
                         deleteBtn = `<div class="menu-item px-3">
                                                 <a href="#" class="menu-link px-3 d-flex justify-content-between delete-row" data-row-id="${
                                                     row.id
-                                                }" data-type="${__("article")}">
+                                                }" data-type="${__("comment")}">
                                                     <span> ${__(
                                                         "Delete"
                                                     )} </span>
@@ -80,29 +70,9 @@ let KTDatatable = (function () {
                             <!--begin::Menu-->
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
 
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="/dashboard/articles/${
-                                        row.id
-                                    }/edit" class="menu-link px-3 d-flex justify-content-between edit-row" >
-                                       <span> ${__("Edit")} </span>
-                                       <span>  <i class="fa fa-edit"></i> </span>
-                                    </a>
 
-                                </div>
-                                <!--end::Menu item-->
 
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="/dashboard/articles/${
-                                        row.id
-                                    }" class="menu-link px-3 d-flex justify-content-between" >
-                                       <span> ${__("Show")} </span>
-                                       <span>  <i class="fa fa-eye text-black-50"></i> </span>
-                                    </a>
 
-                                </div>
-                                <!--end::Menu item-->
 
                                 <!--begin::Menu item-->
                                     ${deleteBtn}
@@ -124,24 +94,6 @@ let KTDatatable = (function () {
         });
     };
 
-    // general search in datatable
-    let handleSearchDatatable = () => {
-        $("#general-search-inp").keyup(function () {
-            datatable.search($(this).val()).draw();
-        });
-    };
-
-    // Filter Datatable
-    let handleFilterDatatable = () => {
-        $(".filter-datatable-inp").each((index, element) => {
-            $(element).change(function () {
-                let columnIndex = $(this).data("filter-index"); // index of the searching column
-
-                datatable.column(columnIndex).search($(this).val()).draw();
-            });
-        });
-    };
-
     // Delete record
     let handleDeleteRows = () => {
         $(".delete-row").click(function () {
@@ -159,7 +111,7 @@ let KTDatatable = (function () {
                                 "content"
                             ),
                         },
-                        url: "/dashboard/articles/" + rowId,
+                        url: "/dashboard/comments/" + rowId,
                         success: () => {
                             setTimeout(() => {
                                 successAlert(
@@ -196,8 +148,6 @@ let KTDatatable = (function () {
     return {
         init: function () {
             initDatatable();
-            handleSearchDatatable();
-            // handleFilterDatatable();
         },
     };
 })();
