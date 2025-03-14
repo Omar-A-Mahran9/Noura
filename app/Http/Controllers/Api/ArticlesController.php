@@ -120,8 +120,7 @@ public function index(Request $request)
                 'id' => $comment->id,
                 'description' => $comment->description,
                 'client' => $comment->vendor->name,
-                'client_image' => $comment->vendor->image,
-
+                'client_image' => getImagePathFromDirectory($comment->vendor->image, 'ProfileImages'),
                 'created_at' => $comment->created_at->format('Y-m-d'),
             ];
         });
