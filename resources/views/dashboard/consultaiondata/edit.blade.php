@@ -40,7 +40,7 @@
         <!-- begin :: Card body -->
         <div class="card-body p-0">
             <!-- begin :: Form -->
-            <form action="{{ route('dashboard.consultation_time.update', $consultaion->id) }}" class="form" method="post"
+            <form action="{{ route('dashboard.consultation_time.update', ['consultation_time' => $consultation->id]) }}" class="form" method="post"
                 id="submitted-form" data-redirection-url="{{ route('dashboard.consultation_time.index') }}">
                 @csrf
                 @method('PUT')
