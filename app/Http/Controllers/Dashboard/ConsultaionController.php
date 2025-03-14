@@ -11,8 +11,8 @@ use Illuminate\Http\Request;
 
 class ConsultaionController extends Controller
 {
- 
-   
+
+
      public function index(Request $request)
     {
          $this->authorize('view_consultation_time');
@@ -20,7 +20,7 @@ class ConsultaionController extends Controller
         if ($request->ajax())
         {
             $data = getModelData(new Consultaion());
-      
+
              return response()->json($data);
         }
 
@@ -35,11 +35,14 @@ class ConsultaionController extends Controller
     public function create()
     {
         $this->authorize('create_consultation_time');
-        $types=ConsultaionType::select('id','name_' . getLocale())->get();
 
-        return view('dashboard.consultaiondata.create',compact('types'));
+        // Get types that are NOT used in any consultation
+        $types = ConsultaionType::whereDoesntHave('consultaions')
+            ->select('id', 'name_' . getLocale())
+            ->get();
+
+        return view('dashboard.consultaiondata.create', compact('types'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -56,7 +59,7 @@ class ConsultaionController extends Controller
              $data['main_image'] = uploadImage($request->file('main_image'), "Consultation");
          }
 
-     
+
       $consultaionData = [
         'title_ar' => $data['title_ar'],
         'title_en' => $data['title_en'],
@@ -68,16 +71,16 @@ class ConsultaionController extends Controller
     ];
 
     $consultaion=Consultaion::create($consultaionData);
- 
+
     $consultaiontimes = $request->time_list ?? []; // Retrieve the sections list from the request
     if (is_array($consultaiontimes) && count($consultaiontimes) > 0) {
         foreach ($consultaiontimes as $consultaiontime) {
              // Check if 'available' is set and valid
-             $available = isset($consultaiontime['available']) && 
-             is_array($consultaiontime['available']) && 
-             count($consultaiontime['available']) > 0 && 
+             $available = isset($consultaiontime['available']) &&
+             is_array($consultaiontime['available']) &&
+             count($consultaiontime['available']) > 0 &&
              $consultaiontime['available'][0] === 'true' ? 1 : 0;
-    
+
             // Build the section data
             $sectionData = [
                 'consultaion_id' => $consultaion->id,
@@ -85,12 +88,12 @@ class ConsultaionController extends Controller
                 'time' => $consultaiontime['time'],
                 'available' => $available,
             ];
-    
+
             // Create the section record
             $section = ConsultaionSchedual::create($sectionData);
         }
     }
-    
+
 }
 
     /**

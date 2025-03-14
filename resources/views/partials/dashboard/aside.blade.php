@@ -202,7 +202,7 @@
                 @endcanany
 
 
-                @can(['view_consultation_type'])
+                {{-- @can(['view_consultation_type'])
                     <div class="menu-item">
                         <a class="menu-link {{ isTabActive('consultation_type') }}"
                             href="{{ route('dashboard.consultationtype.index') }}" data-bs-toggle="tooltip"
@@ -213,7 +213,7 @@
                             <span class="menu-title"> {{ __('consultatio type') }}</span>
                         </a>
                     </div>
-                @endcan
+                @endcan --}}
 
                 @can(['view_consultation_time'])
                     <div class="menu-item">
