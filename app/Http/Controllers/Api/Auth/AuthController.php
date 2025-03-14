@@ -86,7 +86,9 @@ class AuthController extends Controller
                     'phone' => str_replace('966', ' ', $vendor->phone),
                     'otp' => $otp,
                 ],
-                'verified' => $otp ? false : true
+                // 'verified' => $otp ? false : true
+                'verified' =>  true
+
             ], 422);
 
 
