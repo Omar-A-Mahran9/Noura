@@ -106,6 +106,11 @@ class ConsultaionController extends Controller
             'time_list.*.time' => 'required_with:time_list',
         ]);
 
+                 // Handle the main image upload
+                 if ($request->file('main_image')) {
+                    $data['main_image'] = uploadImage($request->file('main_image'), "Consultation");
+                }
+
         // Update consultation data
         $consultaion->update([
             'main_image'=>$data['main_image'],
