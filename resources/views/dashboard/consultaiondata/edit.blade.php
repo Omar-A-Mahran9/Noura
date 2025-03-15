@@ -62,7 +62,7 @@
                                 <label class="text-center fw-bold mb-4">{{ __('Image') }}</label>
                                 <div>
                                     <x-dashboard.upload-image-inp name="main_image" :image="$consultaion['main_image']"
-                                        directory="Consultation" placeholder="default.jpg"
+                                        directory="Consultations" placeholder="default.jpg"
                                         type="editable"></x-dashboard.upload-image-inp>
                                 </div>
                                 <p class="invalid-feedback" id="main_image"></p>
@@ -282,7 +282,17 @@
         <!-- end   :: Card body -->
     </div>
 @endsection
+
 @push('scripts')
+<script>
+    $("form").on("submit", function(e) {
+        e.preventDefault(); // Prevent the form submission for testing
+        console.log($(this).serializeArray()); // Check serialized data
+    });
+</script>
+<script src="{{ asset('dashboard-assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
+<script src="{{ asset('js/dashboard/components/form_repeater.js') }}"></script>
+
     <script>
         const fileInput = document.getElementById('image_path_inp');
         const imagePreview = document.getElementById('image_preview');
@@ -313,36 +323,6 @@
             }
         });
     </script>
-    <script>
-        $(document).ready(function() {
-            $('.delete-image-btn').click(function(e) {
-                e.preventDefault(); // Prevent the form submission
 
-                // Get the image ID from the data attribute
-                var imageId = $(this).data('image-id');
 
-                // Confirm before deletion
-                if (confirm('Do you want to remove this image?')) {
-                    // Send an AJAX request
-                    $.ajax({
-                        url: '/dashboard/bookImages/' + imageId, // URL to the route
-                        type: 'POST', // HTTP method
-                        data: {
-                            _token: '{{ csrf_token() }}', // CSRF Token for security
-                        },
-                        success: function(response) {
-                            // On success, remove the image from the UI
-                            $('#image_' + imageId).fadeOut(30, function() {
-                                $(this).remove();
-                            });
-                            window.location.reload();
-                        },
-                        error: function(xhr, status, error) {
-                            alert('An error occurred while deleting the image.');
-                        }
-                    });
-                }
-            });
-        });
-    </script>
 @endpush

@@ -152,15 +152,19 @@
 
     <!-- begin :: Datatable card -->
     <div class="card mt-5">
-        <!-- begin :: Card header -->
-        <div class="card-header d-flex align-items-center">
-            <h3 class="fw-bolder text-dark">{{ __('comments') . ' : ' . $article->title }}</h3>
-        </div>
-        <!-- end   :: Card header -->
         <!-- begin :: Card Body -->
         <div class="card-body fs-6 py-15 px-10 py-lg-15 px-lg-15 text-gray-700">
 
+            <!-- begin :: Filter -->
+            <div class="d-flex flex-stack flex-wrap mb-15">
 
+
+
+
+
+
+            </div>
+            <!-- end   :: Filter -->
 
             <!-- begin :: Datatable -->
             <table data-ordering="false" id="kt_datatable" class="table text-center table-row-dashed fs-6 gy-5">
@@ -168,7 +172,7 @@
                 <thead>
                     <tr class="text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                         <th>#</th>
-                        <th>{{ __('name') }}</th>
+                         <th>{{ __('name') }}</th>
                         <th>{{ __('comment') }}</th>
                         <th>{{ __('created date') }}</th>
                         <th class="min-w-100px">{{ __('actions') }}</th>
@@ -189,10 +193,9 @@
     <!-- end   :: Datatable card -->
 @endsection
 @push('scripts')
-    <script>
-        let articleId = "{{ $article->id }}";
-    </script>
-
+<script>
+    let articleId="{{ $article->id }}"
+</script>
     <script src="{{ asset('js/dashboard/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/dashboard/datatables/comments.js') }}"></script>
 @endpush

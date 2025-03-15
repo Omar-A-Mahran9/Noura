@@ -11,8 +11,8 @@
 
                 <!-- begin :: Title -->
                 <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1"><a
-                        href="{{ route('dashboard.books.index') }}"
-                        class="text-muted text-hover-primary">{{ __('Books') }}</a></h1>
+                        href="{{ route('dashboard.consultation_time.index') }}"
+                        class="text-muted text-hover-primary">{{ __('Consultations') }}</a></h1>
                 <!-- end   :: Title -->
 
                 <!-- begin :: Separator -->
@@ -23,7 +23,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                     <!-- begin :: Item -->
                     <li class="breadcrumb-item text-muted">
-                        {{ __('Show an book') }}
+                        {{ __('Edit an consultation') }}
                     </li>
                     <!-- end   :: Item -->
                 </ul>
@@ -40,10 +40,13 @@
         <!-- begin :: Card body -->
         <div class="card-body p-0">
             <!-- begin :: Form -->
-            <form class="form">
+            <form action="{{ route('dashboard.consultation_time.update', $consultaion->id) }}" class="form" method="post"
+                id="submitted-form" data-redirection-url="{{ route('dashboard.consultation_time.index') }}">
+                @csrf
+                @method('PUT')
                 <!-- begin :: Card header -->
                 <div class="card-header d-flex align-items-center">
-                    <h3 class="fw-bolder text-dark">{{ __('Book') . ' : ' . $book->title }}</h3>
+                    <h3 class="fw-bolder text-dark">{{ __('Edit an consultaion') . ' : ' . $consultaion->title }}</h3>
                 </div>
                 <!-- end   :: Card header -->
                 <!-- begin :: Inputs wrapper -->
@@ -58,8 +61,9 @@
                                 <!-- begin :: Upload image component -->
                                 <label class="text-center fw-bold mb-4">{{ __('Image') }}</label>
                                 <div>
-                                    <x-dashboard.upload-image-inp name="main_image" :image="$book['main_image']" directory="Books"
-                                        placeholder="default.jpg" type="show"></x-dashboard.upload-image-inp>
+                                    <x-dashboard.upload-image-inp name="main_image" :image="$consultaion['main_image']"
+                                        directory="Consultations" placeholder="default.jpg"
+                                        type="show"></x-dashboard.upload-image-inp>
                                 </div>
                                 <p class="invalid-feedback" id="main_image"></p>
                                 <!-- end   :: Upload image component -->
@@ -75,41 +79,61 @@
                     <div class="row mb-8">
 
                         <!-- begin :: Column -->
-                        <div class="col-md-4 fv-row">
+                        <div class="col-md-3 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Title in arabic') }}</label>
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="title_ar_inp" name="title_ar"
-                                    placeholder="example" value="{{ $book->title_ar }}" readonly />
-                                <label for="title_ar_inp">{{ __('Enter the Book title') }}</label>
+                                    placeholder="example" value="{{ $consultaion->title_ar }}" readonly />
+                                <label for="title_ar_inp">{{ __('Enter the book title') }}</label>
                             </div>
                             <p class="invalid-feedback" id="title_ar"></p>
                         </div>
                         <!-- begin :: Column -->
-                        <div class="col-md-4 fv-row">
+                        <div class="col-md-3 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Title in english') }}</label>
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="title_en_inp" name="title_en"
-                                    placeholder="example" value="{{ $book->title_en }}" readonly />
-                                <label for="title_en_inp">{{ __('Enter the Book title') }}</label>
+                                    placeholder="example" value="{{ $consultaion->title_en }}" readonly />
+                                <label for="title_en_inp">{{ __('Enter the book title') }}</label>
                             </div>
                             <p class="invalid-feedback" id="title_en"></p>
 
 
                         </div>
-                        <div class="col-md-4 fv-row">
+                        <div class="col-md-3 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Price') }}</label>
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="price_inp" name="price"
-                                    placeholder="example" value="{{ $book->price }}" readonly />
+                                    placeholder="example" value="{{ $consultaion->price }}" readonly />
                                 <label for="price_inp">{{ __('Enter the book price') }}</label>
                             </div>
                             <p class="invalid-feedback" id="price"></p>
 
 
                         </div>
+
+                        <div class="col-md-3 fv-row">
+
+                            <label class="fs-5 fw-bold mb-2">{{ __('consultatio type') }}</label>
+                            <select class="form-select" data-control="select2" name="consultaion_type_id"
+                                id="consultatio-type-sp" data-placeholder="{{ __('consultatio type') }}"
+                                data-dir="{{ isArabic() ? 'rtl' : 'ltr' }}" disabled>
+                                <option value=""></option>
+                                @if (isset($types))
+                                    @foreach ($types as $type)
+                                        <option value="{{ $type->id }}"
+                                            {{ $consultaion->consultaion_type_id == $type->id ? 'selected' : '' }}>
+                                            {{ $type->name }}
+                                        </option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            <p class="invalid-feedback" id="consultaion_type_id"></p>
+                        </div>
+
 
 
                     </div>
@@ -122,7 +146,7 @@
                         <div class="col-md-6 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Description in arabic') }}</label>
-                            <textarea class="form-control" rows="4" name="description_ar" id="meta_tag_description_ar_inp" disabled>{{ $book->description_ar }}</textarea>
+                            <textarea class="form-control" rows="4" name="description_ar" id="meta_tag_description_ar_inp" readonly>{{ $consultaion->description_ar }}</textarea>
                             <p class="text-danger invalid-feedback" id="description_ar"></p>
 
 
@@ -133,7 +157,7 @@
                         <div class="col-md-6 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Description in english') }}</label>
-                            <textarea class="form-control" rows="4" name="description_en" id="meta_tag_description_en_inp" disabled>{{ $book->description_en }}</textarea>
+                            <textarea class="form-control" rows="4" name="description_en" id="meta_tag_description_en_inp" readonly>{{ $consultaion->description_en }}</textarea>
                             <p class="text-danger invalid-feedback" id="description_en"></p>
 
                         </div>
@@ -141,59 +165,80 @@
 
                     </div>
 
-                    <div class="row mb-10">
-                        <!-- PDF File -->
-                        <div class="col-md-4 fv-row">
-                            <label class="form-label">{{ __('PDF File') }}</label>
-                            <input type="file" class="form-control" name="pdf_path" id="pdf_path_inp" readonly>
-                            <p class="invalid-feedback" id="pdf_path"></p>
-                            <!-- PDF Preview -->
-                            @if ($book->pdf_path)
-                                <div class="mt-2">
+                    <!-- Begin :: Input group -->
+                    <div class="fv-row row mb-5 mt-5">
 
-                                    <a href="{{ getImagePathFromDirectory($book->pdf_path, 'Books/pdf') }}" target="_blank"
-                                        class="btn btn-sm btn-primary">
-                                        {{ __('View PDF') }}
-                                    </a>
+                        <!-- Begin :: Col -->
+                        <div class="col-md-12">
+
+                            <h3 class="text-center font-bold">{{ __('consultation Date') }}
+                            </h3>
+                            <hr>
+                            <br>
+                            <div id="form_repeater">
+                                <!--begin::Form group-->
+                                <div class="form-group">
+                                    <div data-repeater-list="time_list">
+                                        @foreach ($consultaion->consultaionScheduals as $index => $schedule)
+                                            <div data-repeater-item>
+                                                <div class="form-group row mt-5 mb-10">
+                                                    <!-- Date Field -->
+                                                    <div class="col-md-4">
+                                                        <label class="form-label">{{ __('Date') }}</label>
+                                                        <input type="date" class="form-control mb-2 mb-md-0"
+                                                            name="time_list[{{ $index }}][date]"
+                                                            value="{{ $schedule->date }}" readonly />
+                                                        <p class="invalid-feedback"
+                                                            id="time_list_{{ $index }}_date"></p>
+                                                    </div>
+
+                                                    <!-- Time Field -->
+                                                    <div class="col-md-4">
+                                                        <label class="form-label">{{ __('Time') }}</label>
+                                                        <input type="time" class="form-control mb-2 mb-md-0"
+                                                            name="time_list[{{ $index }}][time]"
+                                                            value="{{ $schedule->time }}" readonly />
+                                                        <p class="invalid-feedback"
+                                                            id="time_list_{{ $index }}_time"></p>
+                                                    </div>
+
+                                                    <!-- Available Toggle -->
+                                                    <div class="col-md-2 mt-3 text-center pt-5">
+                                                        <label
+                                                            class="mt-1 form-check form-check-sm form-check-custom form-check-solid">
+                                                            <span class="form-label fs-3">{{ __('available') }}</span>
+                                                            <input type="hidden"
+                                                                name="time_list[{{ $index }}][available]"
+                                                                value="false" disabled>
+                                                            <input class="form-check-input ms-3" type="checkbox"
+                                                                name="time_list[{{ $index }}][available]"
+                                                                value="true" {{ $schedule->available ? 'checked' : '' }}
+                                                                disabled>
+                                                        </label>
+                                                        <p class="invalid-feedback"
+                                                            id="time_list_{{ $index }}_available"></p>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+
                                 </div>
-                            @endif
-                        </div>
+                                <!--end::Form group-->
 
-                        <!-- Stock -->
-                        <div class="col-md-4 fv-row">
-                            <label class="fs-5 fw-bold mb-2">{{ __('Stock') }}</label>
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="stock_inp" name="stock"
-                                    value="{{ $book->stock ?? '' }}" placeholder="example" readonly>
-                                <label for="stock_inp">{{ __('Enter the stock') }}</label>
+
                             </div>
-                            <p class="invalid-feedback" id="stock"></p>
-                        </div>
-
-                        <!-- More Images -->
-                        <div class="col-md-4 fv-row">
-                            <label class="form-label">{{ __('More Images') }}</label>
-                            <input multiple type="file" class="form-control" name="images[]" id="image_path_inp"
-                                readonly>
-                            <p class="invalid-feedback" id="images"></p>
-                            <div class="d-flex">
-                                <div style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
-                                    @foreach ($book->bookImages as $image)
-                                        <div style="position: relative; display: inline-block;">
-                                            <img src="{{ getImagePathFromDirectory($image->image, 'Books/images') }}"
-                                                style="width: 100px; height: 100px; object-fit: cover; border-radius: 10px;">
-
-                                        </div>
-                                    @endforeach
-                                </div>
-
-                                <div id="image_preview"
-                                    style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
-                                </div>
-                            </div>
+                            <!--end::Repeater-->
 
                         </div>
+                        <!-- End   :: Col -->
+
                     </div>
+                    <!-- End   :: Input group -->
+
+
 
 
 
@@ -204,7 +249,7 @@
                 <div class="form-footer">
 
                     <!-- begin :: Submit btn -->
-                    <a href="{{ route('dashboard.employees.index') }}" class="btn btn-primary">
+                    <a href="{{ route('dashboard.consultaiondata.index') }}" class="btn btn-primary">
                         <span class="indicator-label">{{ __('Back') }}</span>
                     </a>
                     <!-- end   :: Submit btn -->
@@ -217,3 +262,45 @@
         <!-- end   :: Card body -->
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $("form").on("submit", function(e) {
+            e.preventDefault(); // Prevent the form submission for testing
+            console.log($(this).serializeArray()); // Check serialized data
+        });
+    </script>
+    <script src="{{ asset('dashboard-assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
+    <script src="{{ asset('js/dashboard/components/form_repeater.js') }}"></script>
+
+    <script>
+        const fileInput = document.getElementById('image_path_inp');
+        const imagePreview = document.getElementById('image_preview');
+
+        fileInput.addEventListener('change', function() {
+            imagePreview.innerHTML = ''; // Clear previous previews
+            const files = fileInput.files;
+            if (files.length > 0) {
+                Array.from(files).forEach(file => {
+                    if (file.type.startsWith('image/')) { // Check if file is an image
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            // Create an image element
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.style.width = '100px';
+                            img.style.height = '100px';
+                            img.style.objectFit = 'cover'; // Maintain aspect ratio and fill the box
+                            img.style.border = '1px solid #ddd';
+                            img.style.borderRadius = '5px';
+
+                            // Append the image to the preview container
+                            imagePreview.appendChild(img);
+                        };
+                        reader.readAsDataURL(file); // Read the file as a data URL
+                    }
+                });
+            }
+        });
+    </script>
+@endpush

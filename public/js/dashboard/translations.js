@@ -47,6 +47,7 @@ let translations = {
         No: "لا",
         "article": "المقالة",
         "comment": "التعليق",
+        "Consultations": "الاستشارة",
 
         "Processing...": "جاري التحميل ...",
         "Custom Range": "فترة محددة",
