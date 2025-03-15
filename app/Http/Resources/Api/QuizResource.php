@@ -9,6 +9,7 @@ class QuizResource extends JsonResource
 
     public function toArray($request)
     {
+        dd($request);
         return [
             'id' => $this->id,
             'title' => $this->nem,
