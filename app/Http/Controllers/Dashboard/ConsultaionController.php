@@ -108,6 +108,7 @@ class ConsultaionController extends Controller
 
         // Update consultation data
         $consultaion->update([
+            'main_image'=>$data['main_image'],
             'title_ar' => $data['title_ar'],
             'title_en' => $data['title_en'],
             'description_ar' => $data['description_ar'],
