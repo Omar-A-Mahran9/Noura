@@ -10,9 +10,11 @@ class QuizResource extends JsonResource
     public function toArray($request)
     {
 
-            // Get the consultaion_type_id from the request
-            $consultaionTypeId = $request->input('consultaion_type_id');
-dd($consultaionTypeId);
+// Get the consultaion_type_id from the request and convert it to an integer
+$consultaionTypeId = (int) $request->input('consultaion_type_id');
+
+dd($consultaionTypeId); // Debugging: Check the output
+
             // Apply different logic if consultaion_type_id == 1
             if ($consultaionTypeId == 1) {
                 return [
