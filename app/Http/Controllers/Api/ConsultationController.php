@@ -10,7 +10,7 @@ use App\Models\ConsultaionSchedual;
 use App\Models\ConsultaionType;
 use Carbon\Carbon;
 use Illuminate\Http\Request  ;
- 
+
 class ConsultationController extends Controller
 {
 
@@ -45,7 +45,7 @@ public function getTime(Request $request)
 
         // Return the available times as a JSON response
           return $this->success(data: $availableTimes);
- 
+
  }
 
     public function consultation_page(Request $request)
@@ -55,7 +55,7 @@ public function getTime(Request $request)
             'consultaion_type_id' => 'required|integer', // Ensure 'consultaion_type_id' is required and an integer
         ]);
 
-    
+
         $consultaionTypeId = $request->input('consultaion_type_id');
 
         // Find the first consultaion of the specified consultaion_type_id
@@ -70,7 +70,7 @@ public function getTime(Request $request)
 
         // Return the transformed consultaion data as a JSON response
         return $this->success(data: $consultaiondata);
-        
+
     }
 
     public function getType()
@@ -79,6 +79,6 @@ public function getTime(Request $request)
          return $this->success(data: $consultaionTypes);
 
     }
-         
-        
+
+
 }

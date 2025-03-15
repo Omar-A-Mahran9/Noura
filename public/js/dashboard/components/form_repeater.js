@@ -57,10 +57,10 @@ $("#answer_repeater").repeater({
             .closest("#answer_repeater")
             .find("[data-repeater-item]");
 
-        if (repeaterList.length >= maxItems) {
-            alert("You can only add up to 5 answers.");
-            return; // Prevent adding a new item
-        }
+        // if (repeaterList.length >= maxItems) {
+        //     alert("You can only add up to 5 answers.");
+        //     return; // Prevent adding a new item
+        // }
 
         $(this).slideDown();
         $(this).find("input").prop("readonly", false);
