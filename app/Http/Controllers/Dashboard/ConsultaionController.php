@@ -93,6 +93,8 @@ class ConsultaionController extends Controller
         $consultaion = Consultaion::with('consultaionScheduals')->findOrFail($id);
         // Validate request data
         $data = $request->validate([
+            'main_image'      => ['nullable', 'mimes:jpeg,png,jpg,webp,svg', 'max:2048'],
+
             'title_ar' => 'required|string|max:255',
             'title_en' => 'required|string|max:255',
             'description_ar' => 'nullable|string',
