@@ -109,7 +109,7 @@
 
                     </div>
                     <div class="row mb-10 align-items-center">
-
+{{-- 
                         <div class="col-md-3 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Consultaion') }}</label>
@@ -124,7 +124,7 @@
                             <p class="invalid-feedback" id="consultaion_id"></p>
 
 
-                        </div>
+                        </div> --}}
 
                     </div>
                     <!-- begin :: Row -->

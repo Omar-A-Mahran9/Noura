@@ -31,7 +31,7 @@ class StoreQuizRequest extends FormRequest
             'description_ar' => ['required', 'string'],
             'description_en' => ['required', 'string'],
             'duration'       => 'required',
-            'consultaion_id' => 'required|numeric|exists:consultaion,id',
+            // 'consultaion_id' => 'required|numeric|exists:consultaion,id',
             'open'       => '',
 
         ];
