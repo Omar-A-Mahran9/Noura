@@ -90,27 +90,58 @@ class ConsultaionController extends Controller
 
 
 
-    public function edit(Consultaion $consultaion)
+    public function edit($id)
     {
+        $types = ConsultaionType::select('id', 'name_' . getLocale())->get();
+        $consultaion = Consultaion::with('consultaionScheduals')->findOrFail($id);
         $this->authorize('update_consultation_time');
 
-        return view('dashboard.consultaiondata.edit',compact('consultaion'));
+        return view('dashboard.consultaiondata.edit', compact('consultaion', 'types'));
     }
 
 
     public function update(Request $request, Consultaion $consultaion)
     {
-        //
+        $data = $request->validate([
+            'title_ar' => 'required|string|max:255',
+            'title_en' => 'required|string|max:255',
+            'description_ar' => 'nullable|string',
+            'description_en' => 'nullable|string',
+            'price' => 'required|numeric',
+            'consultaion_type_id' => 'required|exists:consultaion_types,id',
+            'time_list' => 'nullable|array',
+            'time_list.*.date' => 'required_with:time_list|date',
+            'time_list.*.time' => 'required_with:time_list|date_format:H:i',
+            'time_list.*.available' => 'nullable|boolean',
+        ]);
+
+        $consultaion->update($data);
+
+        // Handle time slots
+        $consultaion->sections()->delete(); // Remove old times before inserting new ones
+        if (!empty($request->time_list)) {
+            foreach ($request->time_list as $time) {
+                $consultaion->sections()->create([
+                    'date' => $time['date'],
+                    'time' => $time['time'],
+                    'available' => isset($time['available']) && $time['available'] ? 1 : 0,
+                ]);
+            }
+        }
+
+        return redirect()->route('consultaion.index')->with('success', 'Consultation updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Consultaion  $consultaion
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Consultaion $consultaion)
+
+
+    public function destroy(Request $request,Consultaion $consultaion)
     {
-        //
+        $this->authorize('delete_articles');
+
+        if($request->ajax())
+        {
+            $consultaion->delete();
+            deleteImage($consultaion->main_image , 'Consultation' );
+        }
     }
 }

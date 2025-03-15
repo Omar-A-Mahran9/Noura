@@ -172,6 +172,7 @@ return [
         'password' =>'كلمة المرور',
         'duration' =>'المدة',
         'consultation_id' =>'الاستشارات',
+        'consultaion_type_id' => 'أنواع الاستشارات',
 
         'password_confirmation' =>'تأكيد كلمة المرور',
         'phone_number' =>'رقم الهاتف',

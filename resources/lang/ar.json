@@ -2,6 +2,9 @@
     "Courses": "كورسات",
     "quizzes list": "قائمة الاختبارات",
     "quizzes": "الاختبارات",
+    "Edit an consultaion": "تعديل الاستشارة",
+    "Edit an consultation": "تعديل الاستشارة",
+
     "Enter the quiz title": "ادخل عنوان الاختبار",
     "Open Quiz": "فتح الاختبار",
     "duration (by minuts)": "المدة بالدقائق",
@@ -20,6 +23,7 @@
     "Chat Groups": "المحادثات الجماعية",
     "Groups": "المجموعات",
     "Invalid credentials": "البيانات المدخلة غير صحيحة",
+    "Consultations": "الاستشاراة",
 
     "Groups list": "قائمة المجموعات",
     "Add new group": "اضافة مجموعة جديدة",
