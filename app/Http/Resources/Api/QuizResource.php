@@ -12,7 +12,7 @@ class QuizResource extends JsonResource
 
             // Get the consultaion_type_id from the request
             $consultaionTypeId = $request->input('consultaion_type_id');
-
+dd($consultaionTypeId);
             // Apply different logic if consultaion_type_id == 1
             if ($consultaionTypeId == 1) {
                 return [
