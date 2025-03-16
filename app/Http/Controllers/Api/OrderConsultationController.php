@@ -44,7 +44,7 @@ class OrderConsultationController extends Controller
     {
          $request->validate([
             'date' => 'required|date_format:Y-m-d', // Validates YYYY-MM-DD format
-            'time' => 'required|date_format:H:i', // Validates HH:MM format (24-hour)
+            'time' => 'required|date_format:H:i:s', // Validates HH:MM:SS format
             'consultaion_type_id' => 'required|exists:consultaion_type,id',
             'consultaion_id' => 'required|exists:consultaion,id',
             'quiz_id' => [
