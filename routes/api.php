@@ -77,6 +77,7 @@ Route::group(['middleware' => ['json.response']], function () {
         Route::get('/my-chats', 'Api\UserController@myGroups');
 
         Route::post('/make-order', [OrderController::class, 'store']);
+        Route::post('/consultation-orders', [OrderConsultationController::class, 'store']);
 
     });
 
@@ -85,7 +86,6 @@ Route::group(['middleware' => ['json.response']], function () {
 
     Route::get('/login/{provider}', [AuthController::class,'redirectToProvider']);
     Route::get('/login/{provider}/callback', [AuthController::class,'handleProviderCallback']);
-    Route::post('/consultation-orders', [OrderConsultationController::class, 'store']);
 
 
 
