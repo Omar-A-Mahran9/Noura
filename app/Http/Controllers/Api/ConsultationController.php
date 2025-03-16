@@ -50,6 +50,8 @@ public function getTime(Request $request)
 
     public function consultation_page(Request $request)
     {
+        dd($consultaionTypeId);
+
         // Validate the incoming request for 'date' and 'consultaion_type_id'
         $request->validate([
             'consultaion_type_id' => 'required|integer', // Ensure 'consultaion_type_id' is required and an integer
