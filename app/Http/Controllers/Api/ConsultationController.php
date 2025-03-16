@@ -50,7 +50,7 @@ public function getTime(Request $request)
 
     public function consultation_page(Request $request)
     {
-        dd($consultaionTypeId);
+        dd($request);
 
         // Validate the incoming request for 'date' and 'consultaion_type_id'
         $request->validate([
