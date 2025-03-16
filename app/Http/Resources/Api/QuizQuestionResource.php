@@ -13,8 +13,7 @@ class QuizQuestionResource extends JsonResource
             'id' => $this->id,
             'type' => $this->type,
             'is_main' => $this->is_main,
-            'name_ar' => $this->name_ar,
-            'name_en' => $this->name_en,
-            'answers' => QuizAnswerResource::collection($this->answers),
+            'name' => $this->name,
+             'answers' => QuizAnswerResource::collection($this->answers),
         ];    }
 }
