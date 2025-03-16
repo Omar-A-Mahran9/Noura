@@ -8,6 +8,7 @@ use App\Models\OrderConsultation;
 use App\Models\QuizAnswer;
 use App\Models\QuizQuestion;
 use App\Models\VendorAnswers;
+use Auth;
 use DB;
 use Illuminate\Http\Request;
 
@@ -42,7 +43,6 @@ class OrderConsultationController extends Controller
     public function store(Request $request)
     {
          $request->validate([
-            'vendor_id' => 'required|exists:vendors,id',
             'date' => 'required|date_format:Y-m-d', // Validates YYYY-MM-DD format
             'time' => 'required|date_format:H:i', // Validates HH:MM format (24-hour)
             'consultaion_type_id' => 'required|exists:consultaion_type,id',
@@ -113,7 +113,7 @@ class OrderConsultationController extends Controller
 
                 if ($question->type == 'text') {
                     VendorAnswers::create([
-                        'vendor_id' => $request->vendor_id,
+                        'vendor_id' => Auth::user()->id,
                         'quiz_id' => $request->quiz_id,
                         'question_id' => $question->id,
                         'answer_id' => null,
