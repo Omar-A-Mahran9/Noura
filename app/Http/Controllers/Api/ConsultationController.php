@@ -50,7 +50,6 @@ public function getTime(Request $request)
 
     public function consultation_page(Request $request)
     {
-        dd($request);
 
         // Validate the incoming request for 'date' and 'consultaion_type_id'
         $request->validate([
@@ -59,6 +58,7 @@ public function getTime(Request $request)
 
 
         $consultaionTypeId = $request->input('consultaion_type_id');
+        dd($consultaionTypeId);
 
         // Find the first consultaion of the specified consultaion_type_id
         $consultaion = Consultaion::where('consultaion_type_id', $consultaionTypeId)->first();
