@@ -76,8 +76,18 @@ class OrderConsultationController extends Controller
                     }
                 }
             ],
-            'answers.*.answer_id' => 'nullable|exists:quezies_answers,id',
-            'answers.*.text' => 'nullable|string',
+            'answers.*.value' => [
+                    'nullable',
+                    function ($attribute, $value, $fail) {
+                        if (!is_numeric($value) && !is_string($value)) {
+                            $fail('The ' . $attribute . ' must be either a valid answer ID or a string.');
+                        }
+
+                        if (is_numeric($value) && !\DB::table('quezies_answers')->where('id', $value)->exists()) {
+                            $fail('The selected ' . $attribute . ' is invalid.');
+                        }
+                    },
+                ],
         ]);
 
          // **Get Consultation Schedule ID**
@@ -107,20 +117,20 @@ class OrderConsultationController extends Controller
                         'quiz_id' => $request->quiz_id,
                         'question_id' => $question->id,
                         'answer_id' => null,
-                        'text_answer' => $answerData['text'] ?? null,
+                        'text_answer' => $answerData['value'] ?? null,
                     ]);
                 } elseif ($question->type == 'single' || $question->type == 'true_false') {
-                    if (!in_array($answerData['answer_id'], $validAnswerIds)) {
+                    if (!in_array($answerData['value'], $validAnswerIds)) {
                         return $this->failure("Invalid answer_id at index $index for the given question_id");
                     }
                     VendorAnswers::create([
                         'vendor_id' => $request->vendor_id,
                         'quiz_id' => $request->quiz_id,
                         'question_id' => $question->id,
-                        'answer_id' => $answerData['answer_id'],
+                        'answer_id' => $answerData['value'],
                     ]);
                 } elseif ($question->type == 'multiple') {
-                    foreach ($answerData['answer_id'] as $answerId) {
+                    foreach ($answerData['value'] as $answerId) {
                          if (!in_array($answerId, $validAnswerIds)) {
                             return $this->failure("'One of the answer_id values is invalid for the given  $index for the given question_id");
 
