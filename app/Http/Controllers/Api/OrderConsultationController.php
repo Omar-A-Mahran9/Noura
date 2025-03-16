@@ -124,7 +124,7 @@ class OrderConsultationController extends Controller
                         return $this->failure("Invalid answer_id at index $index for the given question_id");
                     }
                     VendorAnswers::create([
-                        'vendor_id' => $request->vendor_id,
+                        'vendor_id' => Auth::user()->id,
                         'quiz_id' => $request->quiz_id,
                         'question_id' => $question->id,
                         'answer_id' => $answerData['value'],
@@ -136,7 +136,7 @@ class OrderConsultationController extends Controller
 
                          }
                         VendorAnswers::create([
-                            'vendor_id' => $request->vendor_id,
+                            'vendor_id' => Auth::user()->id,
                             'quiz_id' => $request->quiz_id,
                             'question_id' => $question->id,
                             'answer_id' => $answerId,
@@ -146,7 +146,7 @@ class OrderConsultationController extends Controller
             }
             // **Create an Order After Answering Questions**
             $order = Order::create([
-                'vendor_id' => $request->vendor_id,
+                'vendor_id' => Auth::user()->id,
                 'consultaion_id' => $request->consultaion_id,
                 'consultaion_type_id' => $request->consultaion_type_id,
                 'consultaion_schedual_id' => $schedule->id, // Assign schedule ID
