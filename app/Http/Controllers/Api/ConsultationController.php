@@ -68,8 +68,7 @@ public function getTime(Request $request)
         }
         // Use the ConsultationResources to transform the consultaion data
         $consultaiondata =  ConsultationResources::single($consultaion)->resolve();
-        dd($consultaiondata);
-
+ 
         // Return the transformed consultaion data as a JSON response
         return $this->success(data: $consultaiondata);
 
