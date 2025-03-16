@@ -228,7 +228,7 @@
                     </div>
                 @endcan
 
-                {{-- @can(['view_consultation'])
+           @can(['view_consultation'])
                     <div class="menu-item">
                         <a class="menu-link {{ isTabActive('consultation') }}"
                             href="{{ route('dashboard.consultation.index') }}" data-bs-toggle="tooltip"
@@ -239,9 +239,9 @@
                             <span class="menu-title"> {{ __('consultation') }}</span>
                         </a>
                     </div>
-                @endcan --}}
+                @endcan  
 
-                {{-- @can(['view_quizzes'])
+              @can(['view_quizzes'])
                     <div class="menu-item">
                         <a class="menu-link {{ isTabActive('quizzes') }}" href="{{ route('dashboard.quizzes.index') }}"
                             data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click"
@@ -252,7 +252,7 @@
                             <span class="menu-title"> {{ __('Quizzes') }}</span>
                         </a>
                     </div>
-                @endcan --}}
+                @endcan
 
                 <!-- start   :: orders section -->
 
