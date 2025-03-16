@@ -14,39 +14,40 @@ use Illuminate\Http\Request  ;
 class ConsultationController extends Controller
 {
 
-public function getTime(Request $request)
-{
-    // Validate the incoming request for 'date' and 'consultaion_type_id'
-    $request->validate([
-        'date' => 'required|date', // Ensure 'date' is required and a valid date
-        'consultaion_type_id' => 'required|integer', // Ensure 'consultaion_type_id' is required and an integer
-    ]);
+    public function getTime(Request $request)
+    {
+        // Validate the incoming request for 'date' and 'consultaion_type_id'
+        $request->validate([
+            'date' => 'required|date', // Ensure 'date' is required and a valid date
+            'consultaion_type_id' => 'required|integer', // Ensure 'consultaion_type_id' is required and an integer
+        ]);
 
-    // Retrieve the 'date' and 'consultaion_type_id' from the request
-    $date = $request->input('date');
-    $consultaionTypeId = $request->input('consultaion_type_id');
+        // Retrieve the 'date' and 'consultaion_type_id' from the request
+        $date = $request->input('date');
+        $consultaionTypeId = $request->input('consultaion_type_id');
 
-    // Find the first consultaion of the specified consultaion_type_id
-    $consultaion = Consultaion::where('consultaion_type_id', $consultaionTypeId)->first();
+        // Find the first consultaion of the specified consultaion_type_id
+        $consultaion = Consultaion::where('consultaion_type_id', $consultaionTypeId)->first();
 
-    // If no consultaion is found, return an empty response
-    if (!$consultaion) {
-        return $this->success(data:[]) ;
-    }
-    $availableTimes = $consultaion->consultaionScheduals()
-    ->where('date', $date) // Filter by date
-    ->where('available', 1) // Filter by date
+        // If no consultaion is found, return an empty response
+        if (!$consultaion) {
+            return $this->success(data: []);
+        }
 
-    ->pluck('time') // Extract only the 'time' field
-    ->map(function ($time) {
-        // Format each time to AM/PM format using Carbon
-        return Carbon::parse($time)->format('h:i A'); // Converts to 'hh:mm AM/PM' format
-    });
+        $availableTimes = $consultaion->consultaionScheduals()
+            ->where('date', $date) // Filter by date
+            ->where('available', 1) // Filter available times
+            ->pluck('time') // Extract only the 'time' field
+            ->map(function ($time) {
+                return [
+                    'name' => Carbon::parse($time)->format('h:i A'), // Converts to AM/PM format
+                    'value' => $time // Keeps original HH:MM:SS format
+                ];
+            });
 
         // Return the available times as a JSON response
-          return $this->success(data: $availableTimes);
-
- }
+        return $this->success(data: $availableTimes);
+    }
 
     public function consultation_page(Request $request)
     {
@@ -68,7 +69,7 @@ public function getTime(Request $request)
         }
         // Use the ConsultationResources to transform the consultaion data
         $consultaiondata =  ConsultationResources::single($consultaion)->resolve();
- 
+
         // Return the transformed consultaion data as a JSON response
         return $this->success(data: $consultaiondata);
 
