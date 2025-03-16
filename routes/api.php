@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\OrderConsultationController;
 use App\Http\Controllers\Api\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -84,6 +85,7 @@ Route::group(['middleware' => ['json.response']], function () {
 
     Route::get('/login/{provider}', [AuthController::class,'redirectToProvider']);
     Route::get('/login/{provider}/callback', [AuthController::class,'handleProviderCallback']);
+    Route::post('/consultation-orders', [OrderConsultationController::class, 'store']);
 
 
 

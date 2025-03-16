@@ -31,6 +31,24 @@ class CreateOrdersTable extends Migration
                 ->references('id')
                 ->on('consultaion')->onDelete('cascade');
 
+                $table->unsignedBigInteger('consultaion_type_id')->nullable();
+                $table->foreign('consultaion_type_id')
+                    ->references('id')
+                    ->on('consultaion_type')->onDelete('cascade');
+
+                $table->unsignedBigInteger('consultaion_schedual_id')->nullable();
+                $table->foreign('consultaion_schedual_id')
+                    ->references('id')
+                    ->on('consultaion_schedual')->onDelete('cascade');
+
+                $table->unsignedBigInteger('quiz_id')->nullable();
+                $table->foreign('quiz_id')
+                        ->references('id')
+                        ->on('quizzes')->onDelete('cascade');
+
+
+                $table->boolean('is_paid')->default(false);
+
             $table->foreignId('vendor_id')->constrained('vendors')->onDelete('cascade');
 
             $table->enum('type', ['book', 'course', 'consultation'])->nullable(); // New column for type

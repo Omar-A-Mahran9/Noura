@@ -25,12 +25,14 @@ class CreateConsultaionSchedualTable extends Migration
                 ->references('id')
                 ->on('consultaion')
                 ->onDelete('cascade');
-            
+
             $table->boolean('available');
-            
+
             $table->unique(['consultaion_id', 'date', 'time'], 'unique_consultaion_date_time');
 
 
+
+            
             $table->timestamps();
         });
     }
