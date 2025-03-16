@@ -33,7 +33,7 @@ $consultaionTypeId = (int) $request->input('consultaion_type_id');
                 ];
             }
 
-            if ($consultaionTypeId == 2) {
+            elseif ($consultaionTypeId == 2) {
                 return [
                     'id' => $this->id,
                     'title' => $this->name,
@@ -51,7 +51,7 @@ $consultaionTypeId = (int) $request->input('consultaion_type_id');
                 ];
             }
 
-            if ($consultaionTypeId == 3) {
+            elseif ($consultaionTypeId == 3) {
                 return [
                     'id' => $this->id,
                     'title' => $this->name,
@@ -62,13 +62,16 @@ $consultaionTypeId = (int) $request->input('consultaion_type_id');
                     ],
                 ];
             }
+            else{
+                return [
+                    'id' => $this->id,
+                    'title' => $this->name,
+                    'description' => $this->description,
+                    'questions' => QuizQuestionResource::collection($this->questions),
+                ];
+            }
 
-            return [
-                'id' => $this->id,
-                'title' => $this->name,
-                'description' => $this->description,
-                'questions' => QuizQuestionResource::collection($this->questions),
-            ];
+
             // Default response
 
 
