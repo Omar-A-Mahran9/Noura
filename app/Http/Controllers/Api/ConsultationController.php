@@ -58,7 +58,6 @@ public function getTime(Request $request)
 
 
         $consultaionTypeId = $request->input('consultaion_type_id');
-        dd($consultaionTypeId);
 
         // Find the first consultaion of the specified consultaion_type_id
         $consultaion = Consultaion::where('consultaion_type_id', $consultaionTypeId)->first();
@@ -69,6 +68,7 @@ public function getTime(Request $request)
         }
         // Use the ConsultationResources to transform the consultaion data
         $consultaiondata =  ConsultationResources::single($consultaion)->resolve();
+        dd($consultaiondata);
 
         // Return the transformed consultaion data as a JSON response
         return $this->success(data: $consultaiondata);
