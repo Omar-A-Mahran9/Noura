@@ -207,7 +207,7 @@ class AuthController extends Controller
     ]));
 
     // Redirect with encoded data
-    $redirectUrl = env('APP_URL', 'http://localhost:8080') . "?data={$data}";
+    $redirectUrl = env('APP_URL', 'https://noraa-consultations.netlify.app') . "?data={$data}";
 
     return redirect()->to($redirectUrl);
 
