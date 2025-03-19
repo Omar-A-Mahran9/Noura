@@ -132,7 +132,7 @@ class ChatController extends Controller
 
         $messages = Message::where('chat_group_id', $chatGroup->id)
             ->with(['vendor:id,name,image', 'receivers:id,name,image'])
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'asc')
             ->get();
 
         return $this->success(
