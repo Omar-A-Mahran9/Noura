@@ -26,14 +26,15 @@ class MessageResource extends JsonResource
 
             'sender' => [
                 'id' => $this->vendor->id,
-                 'image' => getImagePathFromDirectory( $this->vendor->image, 'Vendors'),
+
+                 'image' => getImagePathFromDirectory( $this->vendor->image, 'ProfileImages'),
                 'name' => $this->vendor->name
             ],
             'receivers' => $this->receivers->map(function ($receiver) {
                 return [
                     'id' => $receiver->id,
                     'name' => $receiver->name, // Assuming there is an image field
-                    'image' => getImagePathFromDirectory( $receiver->image, 'Vendors'),
+                    'image' => getImagePathFromDirectory( $receiver->image, 'ProfileImages'),
                     'read_at' => $receiver->pivot->read_at ? $receiver->pivot->read_at : null
 
                 ];
