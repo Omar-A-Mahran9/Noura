@@ -58,7 +58,7 @@ if(!function_exists('uploadImage')){
 
 if (!function_exists('uploadFile')) {
 
-    function uploadFile($request, $model = '', $folder = 'Files')
+    function uploadFile($request, $model = '', $folder = 'Images')
     {
         // Normalize model name
         $model = Str::plural($model);
@@ -83,7 +83,7 @@ if (!function_exists('uploadFile')) {
 }
 
 if (!function_exists('uploadFileFromOutside')) {
- 
+
     function uploadFileFromOutside($file, $model = '', $folder = 'Files')
     {
         // Normalize model name
@@ -109,6 +109,7 @@ if (!function_exists('uploadFileFromOutside')) {
             if ($response->successful()) {
                 $fileName = 'Nura_' . time() . '_' . Str::random(10) . '.jpg';
                 Storage::disk('public')->put($path . '/' . $fileName, $response->body());
+
                 return $fileName;
             }
         }
