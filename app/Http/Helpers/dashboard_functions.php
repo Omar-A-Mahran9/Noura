@@ -55,10 +55,41 @@ if(!function_exists('uploadImage')){
         return $imageName;
     }
 }
+if (!function_exists('uploadImage')) {
+    use Illuminate\Support\Facades\Storage;
+    use Illuminate\Support\Str;
+    use Illuminate\Support\Facades\Http;
 
-if (!function_exists('uploadFile')) {
+    function uploadImage($file, $model = '')
+    {
+        $model = Str::plural($model);
+        $model = Str::ucfirst($model);
+        $path = "/Images/" . $model;
 
-    function uploadFile($request, $model = '', $folder = 'Files')
+        if (is_string($file) && filter_var($file, FILTER_VALIDATE_URL)) {
+            // Handle external URL (Google Avatar)
+            $response = Http::get($file);
+
+            if ($response->successful()) {
+                $imageName = 'Nura_' . time() . '_' . Str::random(10) . '.jpg';
+                Storage::disk('public')->put($path . '/' . $imageName, $response->body());
+                return $imageName;
+            }
+        } elseif ($file instanceof \Illuminate\Http\UploadedFile) {
+            // Handle normal file upload
+            $originalName = $file->getClientOriginalName();
+            $imageName = str_replace(' ', '', 'Nura_' . time() . $originalName);
+            $file->storeAs($path, $imageName, 'public');
+            return $imageName;
+        }
+
+        return null; // Return null if upload fails
+    }
+}
+
+if (!function_exists('uploadFileFromOutside')) {
+
+    function uploadFileFromOutside($request, $model = '', $folder = 'Files')
     {
         // Normalize model name
         $model = Str::plural($model);
@@ -197,7 +228,7 @@ if(!function_exists('currency')){
 
 }
 
- 
+
 
 if(!function_exists('getCoordinates')){ // takes google map url and return the coordinates , formatting must be https://www.google.com/maps/?q="lat""lng"
 

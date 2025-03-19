@@ -137,7 +137,7 @@ class AuthController extends Controller
         }
         // dd(Socialite::driver($provider));
 
-  // Generate the provider's authentication URL
+        // Generate the provider's authentication URL
         $authUrl = Socialite::driver($provider)->stateless()->redirect()->getTargetUrl();
 
         return response()->json([
@@ -168,7 +168,7 @@ class AuthController extends Controller
                 'verified_at' => now(),
                 'phone' => '9665' . rand(10000000, 99999999),
                 'name' => $user->getName(),
-                'image'=>$user->getAvatar(),
+                'image'=>uploadImage($user->getAvatar(), "ProfileImages"),
                 'password' => bcrypt(Str::random(12)),
                 'status' => 2,
                 'created_by_social' => 1,
