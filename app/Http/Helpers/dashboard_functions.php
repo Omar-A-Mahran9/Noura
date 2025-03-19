@@ -55,35 +55,30 @@ if(!function_exists('uploadImage')){
         return $imageName;
     }
 }
-if (!function_exists('uploadImage')) {
-    use Illuminate\Support\Facades\Storage;
-    use Illuminate\Support\Str;
-    use Illuminate\Support\Facades\Http;
 
-    function uploadImage($file, $model = '')
+if (!function_exists('uploadFile')) {
+
+    function uploadFile($request, $model = '', $folder = 'Files')
     {
+        // Normalize model name
         $model = Str::plural($model);
         $model = Str::ucfirst($model);
-        $path = "/Images/" . $model;
 
-        if (is_string($file) && filter_var($file, FILTER_VALIDATE_URL)) {
-            // Handle external URL (Google Avatar)
-            $response = Http::get($file);
+        // Define storage path
+        $path = "/$folder/" . $model;
 
-            if ($response->successful()) {
-                $imageName = 'Nura_' . time() . '_' . Str::random(10) . '.jpg';
-                Storage::disk('public')->put($path . '/' . $imageName, $response->body());
-                return $imageName;
-            }
-        } elseif ($file instanceof \Illuminate\Http\UploadedFile) {
-            // Handle normal file upload
-            $originalName = $file->getClientOriginalName();
-            $imageName = str_replace(' ', '', 'Nura_' . time() . $originalName);
-            $file->storeAs($path, $imageName, 'public');
-            return $imageName;
-        }
+        // Get file original name and extension
+        $originalName = $request->getClientOriginalName();
+        $extension = $request->getClientOriginalExtension();
 
-        return null; // Return null if upload fails
+        // Generate unique file name
+        $fileName = str_replace(' ', '', 'Nura_' . time() . '.' . $extension);
+
+        // Store the file
+        $request->storeAs($path, $fileName, 'public');
+
+        // Return the file path or name as needed
+        return $fileName;
     }
 }
 
@@ -112,8 +107,6 @@ if (!function_exists('uploadFileFromOutside')) {
         return $fileName;
     }
 }
-
-
 
 if(!function_exists('deleteImage')){
 
