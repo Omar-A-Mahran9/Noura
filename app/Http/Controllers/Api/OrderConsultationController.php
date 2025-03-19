@@ -76,18 +76,33 @@ class OrderConsultationController extends Controller
                     }
                 }
             ],
-            'answers.*.value' => [
-                    'nullable',
-                    function ($attribute, $value, $fail) {
-                        if (!is_numeric($value) && !is_string($value)) {
-                            $fail('The ' . $attribute . ' must be either a valid answer ID or a string.');
+        'answers.*.value' => [
+            'nullable',
+            function ($attribute, $value, $fail) {
+                if (is_array($value)) {
+                    foreach ($value as $item) {
+                        if (!is_numeric($item)) {
+                            $fail("Each item in {$attribute} must be a valid answer ID.");
+                            return;
                         }
 
-                        if (is_numeric($value) && !\DB::table('quezies_answers')->where('id', $value)->exists()) {
-                            $fail('The selected ' . $attribute . ' is invalid.');
+                        if (!\DB::table('quezies_answers')->where('id', $item)->exists()) {
+                            $fail("The selected {$attribute} contains an invalid answer ID.");
+                            return;
                         }
-                    },
-                ],
+                    }
+                } else {
+                    if (!is_numeric($value) && !is_string($value)) {
+                        $fail("The {$attribute} must be either a valid answer ID or a string.");
+                    }
+
+                    if (is_numeric($value) && !\DB::table('quezies_answers')->where('id', $value)->exists()) {
+                        $fail("The selected {$attribute} is invalid.");
+                    }
+                }
+            },
+        ],
+
         ]);
 
          // **Get Consultation Schedule ID**
