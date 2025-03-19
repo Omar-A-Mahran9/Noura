@@ -7,12 +7,11 @@ use App\Http\Requests\Dashboard\StoreConsultationRequest;
 use App\Models\Consultaion;
 use App\Models\ConsultaionSchedual;
 use App\Models\ConsultaionType;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class ConsultaionController extends Controller
 {
-
-
      public function index(Request $request)
     {
          $this->authorize('view_consultation_time');
@@ -162,7 +161,19 @@ class ConsultaionController extends Controller
         return view('dashboard.consultaiondata.edit', compact('consultaion', 'types'));
     }
 
+    public function order(Request $request)
+    {
+           $this->authorize('view_orders');
 
+        if ($request->ajax())
+        {
+                $data = getModelData(model: new Order());
+
+            return response()->json($data);
+        }
+
+        return view('dashboard.orders.index');
+    }
 
 
 

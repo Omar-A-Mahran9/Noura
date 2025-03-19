@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\OrderConsultationController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Dashboard\ConsultaionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -55,6 +56,7 @@ Route::group(['middleware' => ['json.response']], function () {
 
      // Authenticated vendor routes
      Route::group(['middleware' => 'auth:vendor'], function () {
+      
         Route::post('/blogs/createComment', 'Api\ArticlesController@createCommentes');
         Route::post('/books/createComment', 'Api\BooksController@createCommentes');
         Route::get('/course/lectures/{id}', 'Api\CourseController@lectures');

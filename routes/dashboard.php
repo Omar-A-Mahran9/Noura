@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\ArticlesController;
 use App\Http\Controllers\Dashboard\BookController;
+use App\Http\Controllers\Dashboard\ConsultaionController;
 use App\Http\Controllers\Dashboard\CourseController;
 use BeyondCode\LaravelWebSockets\Facades\WebSocketsRouter;
 use BeyondCode\LaravelWebSockets\WebSockets\WebSocketHandler;
@@ -9,6 +10,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group([ 'prefix' => 'dashboard' , 'namespace' => 'Dashboard', 'as' => 'dashboard.' , 'middleware' => ['web', 'auth:employee', 'set_locale'] ] , function (){
+    Route::get('/consultation-orders', [ConsultaionController::class, 'order'])
+    ->name('consultation_order.index');
 
     /** set theme mode ( light , dark ) **/
     Route::get('/change-theme-mode/{mode}', 'SettingController@changeThemeMode');

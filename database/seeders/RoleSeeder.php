@@ -19,7 +19,7 @@ class RoleSeeder extends Seeder
     {
         $categories = [
             'employees',
-            'vendors',
+            'orders',
             'group_chat',
 
             'courses',
