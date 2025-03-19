@@ -19,8 +19,8 @@ class MessageResource extends JsonResource
             'chat_group_id' => $this->chat_group_id,
             'sender_id' => $this->sender_id,
             'message' => $this->message,
-            'file' => $this->file,
-            'file' => getImagePathFromDirectory( $this->file, 'Messages'),
+            // 'file' => $this->file,
+            'file' => $this->file ?getImagePathFromDirectory( $this->file, 'Messages'):null,
 
             'time' => $this->created_at ? $this->created_at->format('h:i A') : null,
 

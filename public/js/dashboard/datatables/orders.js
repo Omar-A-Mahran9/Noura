@@ -36,16 +36,15 @@ let KTDatatable = (function () {
             },
             columns: [
                 { data: "id" },
-                { data: "consultaion_id" },
-                { data: "consultaion_type_id" },
-                { data: "consultaion_schedual_id" },
-                { data: "quiz_id" },
-                { data: "is_paid" },
                 { data: "vendor_id" },
+                { data: "phone" },
+                { data: "price" },
                 { data: "type" },
-                { data: "total_price" },
-                { data: "payment_status" },
-                { data: "payment_method" },
+                { data: "status_id", name: "status_id" },
+                { data: "created_at", name: "created_at" },
+                { data: "employee.name" },
+                { data: "opened_at" },
+                // { data: "employee_id" },
                 { data: null },
             ],
             columnDefs: [
@@ -68,20 +67,20 @@ let KTDatatable = (function () {
                 //         return __(data.replace("_", " "));
                 //     },
                 // },
-                // {
-                //     targets: -2,
-                //     render: function (data, type, row) {
-                //         if (data) return data;
-                //         return "<h1>-</h1>";
-                //     },
-                // },
-                // {
-                //     targets: -3,
-                //     render: function (data, type, row) {
-                //         if (data) return data;
-                //         return "<h1>-</h1>";
-                //     },
-                // },
+                {
+                    targets: -2,
+                    render: function (data, type, row) {
+                        if (data) return data;
+                        return "<h1>-</h1>";
+                    },
+                },
+                {
+                    targets: -3,
+                    render: function (data, type, row) {
+                        if (data) return data;
+                        return "<h1>-</h1>";
+                    },
+                },
                 {
                     targets: -1,
                     data: null,
