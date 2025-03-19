@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Site\UpdateUserController;
+use App\Http\Resources\Api\UserResource;
 use App\Http\Resources\OrderResource;
 use App\Models\CarImage;
 use App\Models\CarModel;
@@ -35,10 +36,12 @@ class UserController extends Controller
 {
 
 
+
     public function profile()
     {
-        return $this->success(data: auth()->user());
+        return $this->success(data: new UserResource(auth()->user()));
     }
+
 
 
     public function updateProfile(Request $request)
