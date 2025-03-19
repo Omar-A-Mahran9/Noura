@@ -168,7 +168,7 @@ class AuthController extends Controller
                 'verified_at' => now(),
                 'phone' => '9665' . rand(10000000, 99999999),
                 'name' => $user->getName(),
-                'image'=>uploadFileFromOutside($user->getAvatar(), "ProfileImages"),
+                'image' => uploadFileFromOutside($user->getAvatar(), "ProfileImages"), // ✅ Correctly handles URLs
                 'password' => bcrypt(Str::random(12)),
                 'status' => 2,
                 'created_by_social' => 1,

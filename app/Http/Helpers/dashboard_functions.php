@@ -83,8 +83,11 @@ if (!function_exists('uploadFile')) {
 }
 
 if (!function_exists('uploadFileFromOutside')) {
+    use Illuminate\Support\Facades\Storage;
+    use Illuminate\Support\Str;
+    use Illuminate\Support\Facades\Http;
 
-    function uploadFileFromOutside($request, $model = '', $folder = 'Files')
+    function uploadFileFromOutside($file, $model = '', $folder = 'Files')
     {
         // Normalize model name
         $model = Str::plural($model);
@@ -93,20 +96,30 @@ if (!function_exists('uploadFileFromOutside')) {
         // Define storage path
         $path = "/$folder/" . $model;
 
-        // Get file original name and extension
-        $originalName = $request->getClientOriginalName();
-        $extension = $request->getClientOriginalExtension();
+        if ($file instanceof \Illuminate\Http\UploadedFile) {
+            // ✅ Handle normal file upload
+            $originalName = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $fileName = 'Nura_' . time() . '.' . $extension;
+            $file->storeAs($path, $fileName, 'public');
+            return $fileName;
+        }
 
-        // Generate unique file name
-        $fileName = str_replace(' ', '', 'Nura_' . time() . '.' . $extension);
+        elseif (is_string($file) && filter_var($file, FILTER_VALIDATE_URL)) {
+            // ✅ Handle external URL (Google Avatar)
+            $response = Http::get($file);
 
-        // Store the file
-        $request->storeAs($path, $fileName, 'public');
+            if ($response->successful()) {
+                $fileName = 'Nura_' . time() . '_' . Str::random(10) . '.jpg';
+                Storage::disk('public')->put($path . '/' . $fileName, $response->body());
+                return $fileName;
+            }
+        }
 
-        // Return the file path or name as needed
-        return $fileName;
+        return null; // Return null if neither file nor URL is valid
     }
 }
+
 
 if(!function_exists('deleteImage')){
 
