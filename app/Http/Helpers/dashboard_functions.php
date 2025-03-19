@@ -58,7 +58,7 @@ if(!function_exists('uploadImage')){
 
 if (!function_exists('uploadFile')) {
 
-    function uploadFile($request, $model = '', $folder = 'Images')
+    function uploadFile($request, $model = '', $folder = 'Files')
     {
         // Normalize model name
         $model = Str::plural($model);
@@ -84,7 +84,7 @@ if (!function_exists('uploadFile')) {
 
 if (!function_exists('uploadFileFromOutside')) {
 
-    function uploadFileFromOutside($file, $model = '', $folder = 'Files')
+    function uploadFileFromOutside($file, $model = '', $folder = 'Images')
     {
         // Normalize model name
         $model = Str::plural($model);
