@@ -83,10 +83,7 @@ if (!function_exists('uploadFile')) {
 }
 
 if (!function_exists('uploadFileFromOutside')) {
-    use Illuminate\Support\Facades\Storage;
-    use Illuminate\Support\Str;
-    use Illuminate\Support\Facades\Http;
-
+ 
     function uploadFileFromOutside($file, $model = '', $folder = 'Files')
     {
         // Normalize model name
