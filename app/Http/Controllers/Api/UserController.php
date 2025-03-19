@@ -104,9 +104,9 @@ class UserController extends Controller
             $vendor->update(['image' => $imageName]);
         }
 
-        return $this->success([
+        return $this->success(data:[
             'image_url' => getImagePathFromDirectory($vendor->image, 'ProfileImages'),
-            'user' => $this->success(data: new UserResource( $vendor))
+            'user' =>  new UserResource( $vendor)
 
         ]);
     }
