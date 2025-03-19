@@ -69,7 +69,7 @@ class ChatController extends Controller
                     return [
                         'id' => $vendor->id, // Ensure the vendor has 'id' property
                         'name' => $vendor->name, // Assuming you have a 'name' field in the vendor
-                        'image' =>  getImagePathFromDirectory($vendor->image, 'Vendors'),
+                        'image' =>  getImagePathFromDirectory($vendor->image, 'ProfileImages'),
                         'last_seen' => $vendor->last_seen,
                         'status' => $this->isOnline($vendor->last_seen) ? 'online' : 'offline',
                     ];
