@@ -145,7 +145,7 @@
                         </div>
                         <!-- end   :: Column -->
 
-                        <!-- begin :: Column -->
+                        {{-- <!-- begin :: Column -->
                         <div class="col-md-4 fv-row">
                             <label class="fs-5 fw-bold mb-2">{{ __("City") }}</label>
                             <div class="form-floating">
@@ -153,7 +153,7 @@
                                 <label>{{ __("Enter the city") }}</label>
                             </div>
                         </div>
-                        <!-- end   :: Column -->
+                        <!-- end   :: Column --> --}}
 
                     </div>
                     <!-- end   :: Row -->

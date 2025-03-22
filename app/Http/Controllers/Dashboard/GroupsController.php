@@ -9,6 +9,8 @@ use App\Http\Requests\Dashboard\UpdateCategoryRequest;
 use App\Http\Requests\Dashboard\UpdateGroupRequest;
 use App\Models\Category;
 use App\Models\ChatGroup;
+use App\Models\Message;
+use App\Models\Vendor;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 
@@ -44,12 +46,15 @@ class GroupsController extends Controller
     }
 
 
+
     public function show($id)
     {
-        $this->authorize('create_group_chat');
+        // Find the group and load related messages and vendors
+        $group = ChatGroup::with(['messages.vendor', 'vendors'])->findOrFail($id);
 
-        return view('dashboard.groups.create');
+        return view('dashboard.groups.show', compact('group'));
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -117,6 +122,10 @@ class GroupsController extends Controller
              'message' => __('Group deleted successfully.')
          ]);
      }
+
+
+
+
 
 
 }

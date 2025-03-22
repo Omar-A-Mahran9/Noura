@@ -21,6 +21,11 @@ class ChatGroup extends Model
         return $this->belongsToMany(Vendor::class, 'chat_group_vendor');
     }
 
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'chat_group_id');
+    }
+
     public function getNameAttribute()
     {
         return $this->attributes['name_'. getLocale()];

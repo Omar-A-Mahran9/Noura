@@ -61,6 +61,10 @@ Route::group([ 'prefix' => 'dashboard' , 'namespace' => 'Dashboard', 'as' => 'da
     Route::resource('books', 'BookController');
     Route::resource('books_orders', 'BookController');
     Route::resource('group_chat', 'GroupsController');
+    Route::get('/chat', 'ChatController@groups')->name('chat.groups');
+    Route::get('/chat/group/{id}', 'ChatController@group')->name('chat.group');
+    Route::post('/chat/join-group/{id}', 'ChatController@joinToGroup')->name('chat.joinGroup');
+    Route::post('/chat/send-message', 'ChatController@sendMessage')->name('chat.sendMessage');
 
     Route::resource('consultation', '');
 
