@@ -95,12 +95,13 @@ class GroupsController extends Controller
         $group->update($data);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function destroymessage($id)
+    {
+        $message = Message::findOrFail($id);
+        $message->delete();
+        return redirect()->back()->with('success', 'Message deleted successfully.');
+    }
+
 
      public function destroy($group)
      {

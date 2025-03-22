@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\ArticlesController;
 use App\Http\Controllers\Dashboard\BookController;
 use App\Http\Controllers\Dashboard\ConsultaionController;
 use App\Http\Controllers\Dashboard\CourseController;
+use App\Http\Controllers\Dashboard\GroupsController;
 use BeyondCode\LaravelWebSockets\Facades\WebSocketsRouter;
 use BeyondCode\LaravelWebSockets\WebSockets\WebSocketHandler;
 use Illuminate\Support\Facades\Route;
@@ -61,10 +62,8 @@ Route::group([ 'prefix' => 'dashboard' , 'namespace' => 'Dashboard', 'as' => 'da
     Route::resource('books', 'BookController');
     Route::resource('books_orders', 'BookController');
     Route::resource('group_chat', 'GroupsController');
-    Route::get('/chat', 'ChatController@groups')->name('chat.groups');
-    Route::get('/chat/group/{id}', 'ChatController@group')->name('chat.group');
-    Route::post('/chat/join-group/{id}', 'ChatController@joinToGroup')->name('chat.joinGroup');
-    Route::post('/chat/send-message', 'ChatController@sendMessage')->name('chat.sendMessage');
+    Route::delete('/messages/{id}', [GroupsController::class, 'destroymessage'])
+    ->name('destroymessage');
 
     Route::resource('consultation', '');
 
