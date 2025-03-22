@@ -43,6 +43,13 @@ class GroupsController extends Controller
         return view('dashboard.groups.create');
     }
 
+
+    public function show($id)
+    {
+        $this->authorize('create_group_chat');
+
+        return view('dashboard.groups.create');
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -90,11 +97,26 @@ class GroupsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // public function destroy(  $category)
-    // {
-    //     // $group = ChatGroup::findOrFail($group);
-    //     $this->authorize('delete_categories');
-    //         $category->delete();
-    //     }
+     public function destroy($group)
+     {
+         $group = ChatGroup::findOrFail($group);
+
+         // Check if the group has vendors
+         if ($group->vendors()->exists()) {
+             return response()->json([
+                 'status' => 'error',
+                 'message' => __('Cannot delete group as it has assigned vendors.')
+             ], 400);
+         }
+
+         $this->authorize('delete_categories');
+         $group->delete();
+
+         return response()->json([
+             'status' => 'success',
+             'message' => __('Group deleted successfully.')
+         ]);
+     }
+
 
 }

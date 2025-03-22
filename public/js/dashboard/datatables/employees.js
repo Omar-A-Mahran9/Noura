@@ -47,22 +47,6 @@ let KTDatatable = (function () {
                     targets: -1,
                     data: null,
                     render: function (data, type, row) {
-                        let deleteBtn = "";
-                        if (!(row.id == 1 || row.id == currentUserId)) {
-                            deleteBtn = `<div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3 d-flex justify-content-between delete-row" data-row-id="${
-                                                    row.id
-                                                }" data-type="${__(
-                                "employee"
-                            )}">
-                                                    <span> ${__(
-                                                        "Delete"
-                                                    )} </span>
-                                                    <span>  <i class="fa fa-trash text-danger"></i> </span>
-                                                </a>
-                                            </div>`;
-                        }
-
                         return `
                             <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
                                 ${__("Actions")}
@@ -96,9 +80,16 @@ let KTDatatable = (function () {
 
                                 </div>
                                 <!--end::Menu item-->
+           <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <a href="/dashboard/employees/${
+                                        row.id
+                                    }/edit" class="menu-link px-3 d-flex justify-content-between edit-row" >
+                                       <span> ${__("Delete")} </span>
+                                       <span>  <i class="fa fa-edit"></i> </span>
+                                    </a>
 
-                                <!--begin::Menu item-->
-                                    ${deleteBtn}
+                                </div>
                                 <!--end::Menu item-->
 
                             </div>

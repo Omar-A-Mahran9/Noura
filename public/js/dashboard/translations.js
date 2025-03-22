@@ -50,6 +50,7 @@ let translations = {
         "paid": "مدفوع",
         "not_paid": "غير مدفوع",
         "Consultations": "الاستشارة",
+        "group": "المجموعة",
 
         "Processing...": "جاري التحميل ...",
         "Custom Range": "فترة محددة",
