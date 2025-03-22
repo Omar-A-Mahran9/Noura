@@ -191,10 +191,16 @@
                                         <strong class="d-block text-secondary">{{ $message->vendor->name }}</strong>
                                         <p class="mb-1">{{ $message->message }}</p>
                                         @if ($message->file)
-                                            <a href="{{ asset($message->file) }}" target="_blank" class="text-primary">
-                                                📎 View Attachment
-                                            </a>
+                                            @if (Str::endsWith($message->file, ['.jpg', '.jpeg', '.png', '.gif']))
+                                                <img src="{{ asset($message->file) }}" alt="Attachment" width="100">
+                                            @else
+                                                <a href="{{ asset($message->file) }}" target="_blank"
+                                                    class="text-primary">
+                                                    📎 View Attachment
+                                                </a>
+                                            @endif
                                         @endif
+
                                     </div>
                                 </div>
 
