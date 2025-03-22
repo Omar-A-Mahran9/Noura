@@ -56,7 +56,7 @@ Route::group(['middleware' => ['json.response']], function () {
 
      // Authenticated vendor routes
      Route::group(['middleware' => 'auth:vendor'], function () {
-      
+
         Route::post('/blogs/createComment', 'Api\ArticlesController@createCommentes');
         Route::post('/books/createComment', 'Api\BooksController@createCommentes');
         Route::get('/course/lectures/{id}', 'Api\CourseController@lectures');
@@ -80,6 +80,7 @@ Route::group(['middleware' => ['json.response']], function () {
 
         Route::post('/make-order', [OrderController::class, 'store']);
         Route::post('/consultation-orders', [OrderConsultationController::class, 'store']);
+        Route::post('/Book-order', [OrderConsultationController::class, 'store']);
 
     });
 

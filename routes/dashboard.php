@@ -60,7 +60,7 @@ Route::group([ 'prefix' => 'dashboard' , 'namespace' => 'Dashboard', 'as' => 'da
         ]);
     });
     Route::resource('books', 'BookController');
-    Route::resource('books_orders', 'BookController');
+    Route::resource('books_orders', 'BookOrderController');
     Route::resource('group_chat', 'GroupsController');
     Route::delete('/messages/{id}', [GroupsController::class, 'destroymessage'])
     ->name('destroymessage');

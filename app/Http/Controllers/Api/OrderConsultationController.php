@@ -14,32 +14,7 @@ use Illuminate\Http\Request;
 
 class OrderConsultationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
          $request->validate([
@@ -106,15 +81,15 @@ class OrderConsultationController extends Controller
         ]);
 
          // **Get Consultation Schedule ID**
-    $schedule = DB::table('consultaion_schedual')
-    ->whereDate('date', $request->date)
-    ->whereTime('time', $request->time)
-    ->first();
-         if (!$schedule) {
-            return $this->failure("No consultation schedule found for the provided date and time.");
-        }
+        $schedule = DB::table('consultaion_schedual')
+        ->whereDate('date', $request->date)
+        ->whereTime('time', $request->time)
+        ->first();
+            if (!$schedule) {
+                return $this->failure("No consultation schedule found for the provided date and time.");
+            }
 
-        DB::beginTransaction();
+            DB::beginTransaction();
         try {
             foreach ($request->answers as $index => $answerData) { // Track index
                 $question = QuizQuestion::find($answerData['question_id']);
@@ -184,40 +159,7 @@ class OrderConsultationController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\OrderConsultation  $orderConsultation
-     * @return \Illuminate\Http\Response
-     */
-    public function show(OrderConsultation $orderConsultation)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\OrderConsultation  $orderConsultation
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(OrderConsultation $orderConsultation)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\OrderConsultation  $orderConsultation
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, OrderConsultation $orderConsultation)
-    {
-        //
-    }
-
+    
     /**
      * Remove the specified resource from storage.
      *
