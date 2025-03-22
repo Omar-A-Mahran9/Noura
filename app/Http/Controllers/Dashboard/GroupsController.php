@@ -103,12 +103,21 @@ class GroupsController extends Controller
     }
 
 
+
+
+     public function removeVendor($groupId, $vendorId)
+     {
+         $group = ChatGroup::findOrFail($groupId);
+         $group->vendors()->detach($vendorId); // Removes vendor from group
+
+         return redirect()->back()->with('success', 'Vendor removed successfully.');
+     }
+
      public function destroy($group)
      {
          $group = ChatGroup::findOrFail($group);
 
-         // Check if the group has vendors
-         if ($group->vendors()->exists()) {
+          if ($group->vendors()->exists()) {
              return response()->json([
                  'status' => 'error',
                  'message' => __('Cannot delete group as it has assigned vendors.')
@@ -123,8 +132,6 @@ class GroupsController extends Controller
              'message' => __('Group deleted successfully.')
          ]);
      }
-
-
 
 
 

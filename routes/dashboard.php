@@ -64,6 +64,9 @@ Route::group([ 'prefix' => 'dashboard' , 'namespace' => 'Dashboard', 'as' => 'da
     Route::resource('group_chat', 'GroupsController');
     Route::delete('/messages/{id}', [GroupsController::class, 'destroymessage'])
     ->name('destroymessage');
+    Route::delete('/groups/{group}/vendors/{vendor}', [GroupsController::class, 'removeVendor'])
+    ->name('removeVendor');
+
 
     Route::resource('consultation', '');
 

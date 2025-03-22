@@ -157,13 +157,26 @@
                                         height="40">
                                     <span>{{ $vendor->name }}</span>
                                 </div>
-                                <a href="{{ route('dashboard.vendors.show', $vendor->id) }}"
-                                    class="btn btn-sm btn-primary">
-                                    {{ __('View') }}
-                                </a>
+                                <div class="d-flex">
+                                    <a href="{{ route('dashboard.vendors.show', $vendor->id) }}"
+                                        class="btn btn-sm btn-primary me-2">
+                                        {{ __('View') }}
+                                    </a>
+                                    <!-- Delete Form -->
+                                    <form action="{{ route('dashboard.removeVendor', [$group->id, $vendor->id]) }}"
+                                        method="POST"
+                                        onsubmit="return confirm('Are you sure you want to remove this vendor from the group?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </li>
                         @endforeach
                     </ul>
+
                 </div>
 
             </div>
