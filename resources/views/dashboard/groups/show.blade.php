@@ -193,8 +193,12 @@
 
 
                                         @if ($message->file)
+                                            @php
+                                                $filePath = getImagePathFromDirectory($message->file, 'Messages');
+                                            @endphp
+
                                             @if (Str::endsWith($message->file, ['.jpg', '.jpeg', '.png', '.gif', '.webp']))
-                                                <img src="{{ asset($message->file) }}" alt="Attachment" width="100"
+                                                <img src="{{ $filePath }}" alt="Attachment" width="100"
                                                     class="img-thumbnail">
                                             @else
                                                 <a href="{{ asset($message->file) }}" target="_blank"
