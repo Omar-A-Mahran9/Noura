@@ -201,8 +201,7 @@
                                                 <img src="{{ $filePath }}" alt="Attachment" width="100"
                                                     class="img-thumbnail">
                                             @else
-                                                <a href="{{ asset($message->file) }}" target="_blank"
-                                                    class="text-primary">
+                                                <a href="{{ $filePath }}" target="_blank" class="text-primary">
                                                     📎 {{ __('View Attachment') }}
                                                 </a>
                                             @endif
