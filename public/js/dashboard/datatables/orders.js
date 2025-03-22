@@ -36,51 +36,30 @@ let KTDatatable = (function () {
             },
             columns: [
                 { data: "id" },
-                { data: "vendor_id" },
-                { data: "phone" },
-                { data: "price" },
+                { data: "vendor.name" },
+                { data: "vendor.phone" },
+                { data: "total_price" },
                 { data: "type" },
-                { data: "status_id", name: "status_id" },
+                {
+                    data: "is_paid",
+                    name: "is_paid",
+                },
                 { data: "created_at", name: "created_at" },
-                { data: "employee.name" },
-                { data: "opened_at" },
-                // { data: "employee_id" },
+
                 { data: null },
             ],
             columnDefs: [
-                // {
-                //     targets: 3,
-                //     render: function (data, type, row) {
-                //         if (data) return data + " " + __(currency);
-                //         return "<h1>-</h1>";
-                //     },
-                // },
-                // {
-                //     targets: 5,
-                //     render: function (data, type, row) {
-                //         return getStatusObject(data)["name_" + locale];
-                //     },
-                // },
-                // {
-                //     targets: 4,
-                //     render: function (data, type, row) {
-                //         return __(data.replace("_", " "));
-                //     },
-                // },
                 {
-                    targets: -2,
+                    targets: 5,
                     render: function (data, type, row) {
-                        if (data) return data;
-                        return "<h1>-</h1>";
+                        return data == 1
+                            ? `<span class='text-success'>${__("paid")}</span>`
+                            : `<span class='text-danger'>${__(
+                                  "not_paid"
+                              )}</span>`;
                     },
                 },
-                {
-                    targets: -3,
-                    render: function (data, type, row) {
-                        if (data) return data;
-                        return "<h1>-</h1>";
-                    },
-                },
+
                 {
                     targets: -1,
                     data: null,

@@ -13,6 +13,10 @@ Route::group([ 'prefix' => 'dashboard' , 'namespace' => 'Dashboard', 'as' => 'da
     Route::get('/consultation-orders', [ConsultaionController::class, 'order'])
     ->name('consultation_order.index');
 
+    Route::get('/consultation-orders/{id}', [ConsultaionController::class, 'order_show'])
+    ->name('consultation_order.show');
+
+
     /** set theme mode ( light , dark ) **/
     Route::get('/change-theme-mode/{mode}', 'SettingController@changeThemeMode');
 

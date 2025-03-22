@@ -99,8 +99,7 @@
                         <th>{{ __('type') }}</th>
                         <th>{{ __('status') }}</th>
                         <th>{{ __('created date') }}</th>
-                        <th>{{ __('opened by') }}</th>
-                        <th>{{ __('opened at') }}</th>
+                     
                         <th class="min-w-100px">{{ __('actions') }}</th>
                     </tr>
                 </thead>

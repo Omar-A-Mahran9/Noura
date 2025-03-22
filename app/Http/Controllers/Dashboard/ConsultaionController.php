@@ -167,7 +167,8 @@ class ConsultaionController extends Controller
 
         if ($request->ajax())
         {
-                $data = getModelData(model: new Order());
+                $data = getModelData(model: new Order(),relations: ['vendor' => ['id', 'name','phone']], andsFilters: [['type', '=', 'consultation']]);
+
 
             return response()->json($data);
         }
@@ -175,7 +176,14 @@ class ConsultaionController extends Controller
         return view('dashboard.orders.index');
     }
 
+    public function order_show($id)
+    {
+        $this->authorize('view_orders'); // Authorization check
 
+        $order = Order::with(['vendor:id,name,phone'])->findOrFail($id);
+
+        return view('dashboard.orders.show', compact('order'));
+    }
 
     public function destroy(Request $request, $id)
     {

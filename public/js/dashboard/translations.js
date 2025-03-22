@@ -47,6 +47,8 @@ let translations = {
         No: "لا",
         "article": "المقالة",
         "comment": "التعليق",
+        "paid": "مدفوع",
+        "not_paid": "غير مدفوع",
         "Consultations": "الاستشارة",
 
         "Processing...": "جاري التحميل ...",
