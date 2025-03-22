@@ -77,7 +77,7 @@ let KTDatatable = (function () {
 
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="/dashboard/orders/${
+                                    <a href="/dashboard/consultation-orders/${
                                         row.id
                                     }" class="menu-link px-3 d-flex justify-content-between" >
                                        <span> ${__("Show")} </span>

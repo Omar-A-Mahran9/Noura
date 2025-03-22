@@ -1,18 +1,17 @@
 @extends('partials.dashboard.master')
 @section('content')
-
     <!-- begin :: Subheader -->
     <div class="toolbar">
 
         <div class="container-fluid d-flex flex-stack">
 
             <div data-kt-swapper="true" data-kt-swapper-mode="prepend"
-                 data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
-                 class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+                data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
+                class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
 
                 <!-- begin :: Title -->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1"><a href="{{ route('dashboard.orders.index') }}"
-                    class="text-muted text-hover-primary">{{ __("Orders") }}</a></h1>
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1"><a href=""
+                        class="text-muted text-hover-primary">{{ __('Orders') }}</a></h1>
                 <!-- end   :: Title -->
 
                 <!-- begin :: Separator -->
@@ -23,7 +22,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                     <!-- begin :: Item -->
                     <li class="breadcrumb-item text-muted">
-                        {{ __("Order data") }}
+                        {{ __('Order data') }}
                     </li>
                     <!-- end   :: Item -->
                 </ul>
@@ -43,13 +42,15 @@
             <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-lg-n2 me-auto">
                 <!--begin:::Tab item-->
                 <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_sales_order_summary">{{ __('Order Summary') }}</a>
+                    <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab"
+                        href="#kt_ecommerce_sales_order_summary">{{ __('Order Summary') }}</a>
                 </li>
                 <!--end:::Tab item-->
                 <!--begin:::Tab item-->
-                <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_sales_order_history">{{ __('Order History') }}</a>
-                </li>
+                {{-- <li class="nav-item">
+                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab"
+                        href="#kt_ecommerce_sales_order_history">{{ __('Order History') }}</a>
+                </li> --}}
                 <!--end:::Tab item-->
             </ul>
             <!--end:::Tabs-->
@@ -57,11 +58,7 @@
 
             <div class="w-200px">
                 <!--begin::Select2-->
-                <select class="form-select" data-control="select2" data-hide-search="false" id="order-status-sp" data-dir="{{ isArabic() ? 'rtl' : 'ltr' }}" data-placeholder="{{ __("Status") }}" >
-                    @foreach( settings()->get('orders_statuses') as $status)
-                        <option value="{{ $status['name_en'] }}" {{ $status['name_en'] == $order['status'] ? 'selected' : '' }}>{{ $status['name_' . getLocale() ] }}</option>
-                    @endforeach
-                </select>
+
                 <!--end::Select2-->
             </div>
 
@@ -74,7 +71,7 @@
                 <!--begin::Card header-->
                 <div class="card-header">
                     <div class="card-title">
-                        <h2>{{ __('Order Details') }} ( #{{ $order['id'] }} )</h2>
+                        <h2>{{ __('Order Details') }} ( #{{ $order->id }} )</h2>
                     </div>
                 </div>
                 <!--end::Card header-->
@@ -83,34 +80,102 @@
                     <div class="table-responsive">
                         <!--begin::Table-->
                         <table class="table align-middle table-row-bordered mb-0 fs-6 gy-5 min-w-300px">
-                            <!--begin::Table body-->
                             <tbody class="fw-bold text-gray-600">
-                            <!--begin::Date-->
-                            <tr>
-                                <td class="text-muted">
-                                    <div class="d-flex align-items-center">
-                                        <span>
-                                            <i class="fa fa-calendar mx-2"></i>
-                                        </span> {{ __("Date") }}
-                                    </div>
-                                </td>
-                                <td class="fw-bolder text-end">{{ date('Y-m-d', strtotime($order['created_at'])) }}</td>
-                            </tr>
-                            <!--end::Date-->
-                            <!--begin::Time-->
-                            <tr>
-                                <td class="text-muted">
-                                    <div class="d-flex align-items-center">
-                                        <span>
-                                            <i class="fa fa-clock mx-2"></i>
-                                        </span> {{ __("Time") }}
-                                    </div>
-                                </td>
-                                <td class="fw-bolder text-end">{{ date('H:i a', strtotime($order['created_at'])) }}</td>
-                            </tr>
-                            <!--end::Time-->
+                                <!-- Date -->
+                                <tr>
+                                    <td class="text-muted">
+                                        <div class="d-flex align-items-center">
+                                            <span><i class="fa fa-calendar mx-2"></i></span> {{ __('Date') }}
+                                        </div>
+                                    </td>
+                                    <td class="fw-bolder text-end">{{ $order->created_at->format('Y-m-d') }}</td>
+                                </tr>
+                                <!-- Time -->
+                                <tr>
+                                    <td class="text-muted">
+                                        <div class="d-flex align-items-center">
+                                            <span><i class="fa fa-clock mx-2"></i></span> {{ __('Time') }}
+                                        </div>
+                                    </td>
+                                    <td class="fw-bolder text-end">{{ $order->created_at->format('H:i A') }}</td>
+                                </tr>
+                                <!-- Vendor -->
+                                <tr>
+                                    <td class="text-muted">
+                                        <div class="d-flex align-items-center">
+                                            <span><i class="fa fa-store mx-2"></i></span> {{ __('Vendor') }}
+                                        </div>
+                                    </td>
+                                    <td class="fw-bolder text-end">{{ $order->vendor->name ?? 'N/A' }}
+                                        ({{ $order->vendor->phone ?? 'N/A' }})</td>
+                                </tr>
+                                {{-- <!-- Book -->
+                                <tr>
+                                    <td class="text-muted">
+                                        <div class="d-flex align-items-center">
+                                            <span><i class="fa fa-book mx-2"></i></span> {{ __('Book') }}
+                                        </div>
+                                    </td>
+                                    <td class="fw-bolder text-end">{{ $order->book->title_ar ?? 'N/A' }} /
+                                        {{ $order->book->title_en ?? 'N/A' }}</td>
+                                </tr>
+                                <!-- Course -->
+                                <tr>
+                                    <td class="text-muted">
+                                        <div class="d-flex align-items-center">
+                                            <span><i class="fa fa-graduation-cap mx-2"></i></span> {{ __('Course') }}
+                                        </div>
+                                    </td>
+                                    <td class="fw-bolder text-end">{{ $order->course->name_ar ?? 'N/A' }} /
+                                        {{ $order->course->name_en ?? 'N/A' }}</td>
+                                </tr> --}}
+                                <!-- Consultation -->
+                                <tr>
+                                    <td class="text-muted">
+                                        <div class="d-flex align-items-center">
+                                            <span><i class="fa fa-comments mx-2"></i></span> {{ __('Consultation') }}
+                                        </div>
+                                    </td>
+                                    <td class="fw-bolder text-end">{{ $order->consultation->title ?? 'N/A' }}</td>
+                                </tr>
+                                <!-- Consultation Type -->
+                                <tr>
+                                    <td class="text-muted">
+                                        <div class="d-flex align-items-center">
+                                            <span><i class="fa fa-tag mx-2"></i></span> {{ __('Consultation Type') }}
+                                        </div>
+                                    </td>
+                                    <td class="fw-bolder text-end">{{ $order->consultaionType->name ?? 'N/A' }} </td>
+                                </tr>
+                                <!-- Consultation Schedule -->
+                                <tr>
+                                    <td class="text-muted">
+                                        <div class="d-flex align-items-center">
+                                            <span><i class="fa fa-calendar-alt mx-2"></i></span>
+                                            {{ __('Consultation Schedule') }}
+                                        </div>
+                                    </td>
+                                    <td class="fw-bolder text-end">
+                                        @if ($order->consultaionSchedual)
+                                            <div class="d-block">
+                                                <span class="d-block text-gray-700">
+                                                    {{ \Carbon\Carbon::parse($order->consultaionSchedual->date)->translatedFormat('l, d M Y') }}
+                                                </span>
+
+                                                <span class="d-block   fw-bold">
+                                                    {{ \Carbon\Carbon::createFromFormat('H:i:s', $order->consultaionSchedual->time)->format('h:i A') }}
+                                                </span>
+                                            </div>
+                                        @else
+                                            <span class="text-muted">N/A</span>
+                                        @endif
+                                    </td>
+
+
+
+                                </tr>
+
                             </tbody>
-                            <!--end::Table body-->
                         </table>
                         <!--end::Table-->
                     </div>
@@ -118,12 +183,13 @@
                 <!--end::Card body-->
             </div>
             <!--end::Order details-->
+
             <!--begin::Customer details-->
             <div class="card card-flush py-4 flex-row-fluid">
                 <!--begin::Card header-->
                 <div class="card-header">
                     <div class="card-title">
-                        <h2>{{ __("Customer Details") }}</h2>
+                        <h2>{{ __('Customer Details') }}</h2>
                     </div>
                 </div>
                 <!--end::Card header-->
@@ -132,46 +198,30 @@
                     <div class="table-responsive">
                         <!--begin::Table-->
                         <table class="table align-middle table-row-bordered mb-0 fs-6 gy-5 min-w-300px">
-                            <!--begin::Table body-->
                             <tbody class="fw-bold text-gray-600">
-                            <!--begin::Customer name-->
-                            <tr>
-                                <td class="text-muted">
-                                    <div class="d-flex align-items-center">
-                                        <span>
-                                            <i class="fa fa-user"></i> {{ __("Customer") }}
-                                        </span>
-                                    </div>
-                                </td>
-                                <td class="fw-bolder text-end">
-                                    <div class="d-flex align-items-center justify-content-end">
-                                        <!--begin::Name-->
-                                        <a href="" class="text-gray-600 text-hover-primary">{{ $order['name'] }}</a>
-                                        <!--end::Name-->
-                                    </div>
-                                </td>
-                            </tr>
-                            <!--end::Customer name-->
-                            <!--begin::Date-->
-                            <tr>
-                                <td class="text-muted">
-                                    <div class="d-flex align-items-center">
-                                        <!--begin::Svg Icon-->
-                                        <span class="svg-icon svg-icon-2 me-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M5 20H19V21C19 21.6 18.6 22 18 22H6C5.4 22 5 21.6 5 21V20ZM19 3C19 2.4 18.6 2 18 2H6C5.4 2 5 2.4 5 3V4H19V3Z" fill="black" />
-                                                <path opacity="0.3" d="M19 4H5V20H19V4Z" fill="black" />
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
-                                        {{ __("Phone") }}
-                                    </div>
-                                </td>
-                                <td class="fw-bolder text-end">{{ $order['phone'] }}</td>
-                            </tr>
-                            <!--end::Date-->
+                                <!-- Customer Name -->
+                                <tr>
+                                    <td class="text-muted">
+                                        <div class="d-flex align-items-center">
+                                            <span><i class="fa fa-user mx-2"></i></span> {{ __('Customer') }}
+                                        </div>
+                                    </td>
+                                    <td class="fw-bolder text-end">
+                                        <a href="#" class="text-gray-600 text-hover-primary">
+                                            {{ $order->vendor->name ?? 'N/A' }}
+                                        </a>
+                                    </td>
+                                </tr>
+                                <!-- Customer Phone -->
+                                <tr>
+                                    <td class="text-muted">
+                                        <div class="d-flex align-items-center">
+                                            <span><i class="fa fa-phone mx-2"></i></span> {{ __('Phone') }}
+                                        </div>
+                                    </td>
+                                    <td class="fw-bolder text-end">{{ $order->vendor->phone ?? 'N/A' }}</td>
+                                </tr>
                             </tbody>
-                            <!--end::Table body-->
                         </table>
                         <!--end::Table-->
                     </div>
@@ -181,247 +231,105 @@
             <!--end::Customer details-->
         </div>
         <!--end::Order summary-->
+
         <!--begin::Tab content-->
         <div class="tab-content">
             <!--begin::Tab pane-->
             <div class="tab-pane fade show active" id="kt_ecommerce_sales_order_summary" role="tab-panel">
-                <!--begin::Orders-->
-                @if( $order['type'] == "car" )
-                    @if( $order['orderDetailsCar']['type'] == "individual" )
-                        <div class="d-flex flex-column gap-7 gap-lg-10">
 
-                            <!--begin::Product List-->
-                            <div class="card card-flush py-4 flex-row-fluid overflow-hidden">
-                                <!--begin::Card header-->
-                                <div class="card-header">
-                                    <div class="card-title">
-                                        <h2>{{ __("Order") }} #{{ $order['id'] . ' ' }} </h2>
-                                    </div>
-                                    <div class="card-title">
-                                        <h2>{{ __("Order Type") . ' : ' }} {{ __( ucfirst( $order['orderDetailsCar']['type'] )) . ' ' }} </h2>
-                                    </div>
-                                </div>
-                                <!--end::Card header-->
-                                <!--begin::Card body-->
-                                <div class="card-body pt-0">
-                                    <div class="table-responsive">
-                                        <!--begin::Table-->
-                                        <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0">
-                                            <!--begin::Table body-->
-                                            <tbody class="fw-bold text-gray-600">
-                                            <tr>
-                                                <td class="text-start fw-boldest" colspan="4">{{ __('Car')}}</td>
-                                                <td>
-                                                    <div class="d-flex justify-content-end align-items-center">
-                                                        @if ( $order->car )
-                                                            <!--begin::Thumbnail-->
-                                                            <a href="/cars/{{ $order['car_id'] }}" class="symbol symbol-50px">
-                                                                <span class="symbol-label" style="background-image:url({{ getImagePathFromDirectory( $order->car->main_image , 'Cars') }});"></span>
-                                                            </a>
-                                                            <!--end::Thumbnail-->
-                                                            <!--begin::Title-->
-                                                            <div class="ms-5">
-                                                                <a href="/cars/{{ $order['car_id'] }}" target="_blank" class="fw-boldest text-gray-600 text-hover-primary">{{ $order['car_name'] }}</a>
-                                                            </div>
-                                                            <!--end::Title-->
-                                                        @else
-                                                            <!--begin::Title-->
-                                                            <div class="ms-5">
-                                                                <a href="#" class="fw-boldest text-gray-600 text-hover-primary">{{ $order['car_name'] }}</a>
-                                                            </div>
-                                                            <!--end::Title-->
-                                                        @endif
-
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="fw-boldest">{{ __('Price') }}</td>
-                                                <td class="text-end fw-boldest" colspan="4">{{ $order['price'] . ' ' . currency()}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="fw-boldest">{{ __('Payment Type') }}</td>
-                                                <td class="text-end fw-boldest" colspan="4">{{ __( ucfirst( $order['orderDetailsCar']['payment_type'] )) }}</td>
-                                            </tr>
-                                            @if ( $order['orderDetailsCar']['payment_type'] == "finance" )
-                                                <tr>
-                                                    <td class="fw-boldest" >{{ __("Work") }}</td>
-                                                    <td class="text-end fw-boldest" colspan="4">{{ $order['orderDetailsCar']['work'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="fw-boldest" >{{ __("Salary") }}</td>
-                                                    <td class="text-end fw-boldest" colspan="4">{{ $order['orderDetailsCar']['salary'] . ' ' . currency() }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="fw-boldest" >{{ __("Commitments") }}</td>
-                                                    <td class="text-end fw-boldest" colspan="4">{{ $order['orderDetailsCar']['commitments'] . ' ' . currency() }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="fw-boldest" >{{ __("Is there a mortgage loan") }}</td>
-                                                    <td class="text-end fw-boldest" colspan="4">{{ $order['orderDetailsCar']['having_loan'] ? __('Yes') : __('No') }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="fw-boldest" >{{ __("Driving License Status") }}</td>
-                                                    <td class="text-end fw-boldest" colspan="4">{{ __( str_replace('_',' ',$order['orderDetailsCar']['driving_license']) ) }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="fw-boldest" >{{ __("The last installment") }}</td>
-                                                    <td class="text-end fw-boldest" colspan="4">{{ $order['orderDetailsCar']['last_installment'] . ' % '  }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="fw-boldest" >{{ __("The first installment") }}</td>
-                                                    <td class="text-end fw-boldest" colspan="4">{{ $order['orderDetailsCar']['first_installment'] . ' % '  }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="fw-boldest">{{ __("The first installment value") }}</td>
-                                                    <td class="text-end fw-boldest" colspan="4">{{ $order['orderDetailsCar']['first_payment_value'] . ' ' . currency()  }}</td>
-                                                </tr>
-
-                                                @if($order['orderDetailsCar']['bank'])
-                                                    <tr>
-                                                        <td class="fw-boldest" >{{ __("Bank") }}</td>
-                                                        <td class="text-end fw-boldest" colspan="4">{{ $order['orderDetailsCar']['bank']['name'] }}</td>
-                                                    </tr>
-                                                @endif
-
-                                            @endif
-                                            </tbody>
-                                            <!--end::Table head-->
-                                        </table>
-                                        <!--end::Table-->
-                                    </div>
-                                </div>
-                                <!--end::Card body-->
+                <div class="d-flex flex-column gap-7 gap-lg-10">
+                    <!--begin::Product List-->
+                    <div class="card card-flush py-4 flex-row-fluid overflow-hidden">
+                        <!--begin::Card header-->
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h2>{{ __('Answer Question Order') }} #{{ $order['id'] . ' ' }} </h2>
                             </div>
-                            <!--end::Product List-->
+                            <div class="card-title">
+                                <h2>{{ __('Order Type') . ' : ' }} {{ __(str_replace('_', ' ', $order['type'])) . ' ' }}
+                                </h2>
+                            </div>
                         </div>
-                    @else
-                        <div class="d-flex flex-column gap-7 gap-lg-10">
-
-                            <!--begin::Product List-->
-                            <div class="card card-flush py-4 flex-row-fluid overflow-hidden">
-                                <!--begin::Card header-->
-                                <div class="card-header">
-                                    <div class="card-title">
-                                        <h2>{{ __("Order") }} #{{ $order['id'] }}</h2>
-                                    </div>
-                                </div>
-                                <!--end::Card header-->
-                                <!--begin::Card body-->
-                                <div class="card-body pt-0">
-                                    <div class="table-responsive">
-                                        <!--begin::Table-->
-                                        <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0">
-                                            <!--begin::Table head-->
-                                            <thead>
-                                            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                <th class="min-w-175px fw-boldest">{{ __('Car') }}</th>
-                                                <th class="min-w-70px text-end fw-boldest" colspan="4">{{ __("Quantity") }}</th>
-                                            </tr>
-                                            </thead>
-                                            <!--end::Table head-->
-                                            <!--begin::Table body-->
-                                            <tbody class="fw-bold text-gray-600">
-                                            <!--begin::Cars-->
-                                            @foreach( json_decode($order['orderDetailsCar']['cars'] , true) as $car)
+                        <!--end::Card header-->
+                        <!--begin::Card Body-->
+                        <div class="card-body pt-0">
+                            <div class="table-responsive">
+                                <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0">
+                                    <!-- Table Head -->
+                                    <thead>
+                                        <tr>
+                                            <th class="fw-bold">{{__("Questions")}}</th>
+                                            <th class="fw-bold">{{__("Answeres")}}</th>
+                                        </tr>
+                                    </thead>
+                                    <!-- Table Body -->
+                                    <tbody class="fw-bold text-gray-600">
+                                        @if ($order->quiz && $order->quiz->questions->count())
+                                            @foreach ($order->quiz->questions as $question)
                                                 <tr>
-                                                    <td class="text-start fw-boldest">{{ $car['car_name'] }}</td>
-                                                    <td class="text-end fw-boldest" colspan="4">{{ $car['count'] . ' ' . __('car')}}</td>
+                                                    <!-- Question Column -->
+                                                    <td>{{ $question->name }}</td>
+
+                                                    <!-- Answer Column -->
+                                                    <td>
+                                                        @php
+                                                            $answers = $vendorAnswers->where('question_id', $question->id);
+                                                        @endphp
+
+                                                        @if ($question->type === 'text')
+                                                            {{-- Display text answer --}}
+                                                            @if ($answers->isNotEmpty())
+                                                                <span class="text-info">{{ $answers->first()->text_answer }}</span>
+                                                            @else
+                                                                <span class="text-muted">No answer provided</span>
+                                                            @endif
+
+                                                        @elseif ($question->type === 'single' || $question->type === 'true_false')
+                                                            {{-- Display single selected answer --}}
+                                                            @php
+                                                                $selectedAnswer = $answers->first();
+                                                                $quizAnswer = $question->answers->where('id', $selectedAnswer->answer_id ?? null)->first();
+                                                            @endphp
+                                                            @if ($quizAnswer)
+                                                                <span class="badge bg-success">{{ $quizAnswer->name }}</span>
+                                                            @else
+                                                                <span class="text-muted">No answer selected</span>
+                                                            @endif
+
+                                                        @elseif ($question->type === 'multiple')
+                                                            {{-- Display multiple selected answers --}}
+                                                            @php
+                                                                $selectedAnswers = $question->answers->whereIn('id', $answers->pluck('answer_id'));
+                                                            @endphp
+                                                            @if ($selectedAnswers->isNotEmpty())
+                                                                @foreach ($selectedAnswers as $answer)
+                                                                    <span class="badge bg-primary">{{ $answer->name }}</span>
+                                                                @endforeach
+                                                            @else
+                                                                <span class="text-muted">No answers selected</span>
+                                                            @endif
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
-                                            <!--end::Cars-->
-                                                <tr>
-                                                    <td class="fw-boldest" >{{ __("Organization Name") }}</td>
-                                                    <td class="text-end fw-boldest" colspan="4">{{ $order['orderDetailsCar']['organization_name'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="fw-boldest" >{{ __("Organization Email") }}</td>
-                                                    <td class="text-end fw-boldest" colspan="4">{{ $order['orderDetailsCar']['organization_email']  }}</td>
-                                                </tr>
-                                            @if ( $order['orderDetailsCar']['payment_type'] == "finance" )
-                                                <tr>
-                                                    <td class="fw-boldest" >{{ __("The company's headquarter") }}</td>
-                                                    <td class="text-end fw-boldest" colspan="4">{{ $order['orderDetailsCar']['organization_location']  }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="fw-boldest" >{{ __("Organization Activity") }}</td>
-                                                    <td class="text-end fw-boldest" colspan="4">{{ $order['orderDetailsCar']['organization_activity']  }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="fw-boldest" >{{ __("Organization Age") }}</td>
-                                                    <td class="text-end fw-boldest" colspan="4">{{ $order['orderDetailsCar']['organization_age'] . ' ' . __('Years') }}</td>
-                                                </tr>
-                                                @if($order['orderDetailsCar']['bank'])
-                                                    <tr>
-                                                        <td class="fw-boldest" >{{ __("Bank") }}</td>
-                                                        <td class="text-end fw-boldest" colspan="4">{{ $order['orderDetailsCar']['bank']['name'] }}</td>
-                                                    </tr>
-                                                @endif
-
-                                            @endif
-                                            </tbody>
-                                            <!--end::Table head-->
-                                        </table>
-                                        <!--end::Table-->
-                                    </div>
-                                </div>
-                                <!--end::Card body-->
-                            </div>
-                            <!--end::Product List-->
-                        </div>
-                    @endif
-
-                @else
-                    <div class="d-flex flex-column gap-7 gap-lg-10">
-                            <!--begin::Product List-->
-                            <div class="card card-flush py-4 flex-row-fluid overflow-hidden">
-                                <!--begin::Card header-->
-                                <div class="card-header">
-                                    <div class="card-title">
-                                        <h2>{{ __("Order") }} #{{ $order['id'] . ' ' }} </h2>
-                                    </div>
-                                    <div class="card-title">
-                                        <h2>{{ __("Order Type") . ' : ' }} {{ __( str_replace('_',' ',$order['type']) ) . ' ' }} </h2>
-                                    </div>
-                                </div>
-                                <!--end::Card header-->
-                                <!--begin::Card body-->
-                                <div class="card-body pt-0">
-                                    <div class="table-responsive">
-                                        <!--begin::Table-->
-                                        <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0">
-                                            <!--begin::Table body-->
-                                            <tbody class="fw-bold text-gray-600">
+                                        @else
                                             <tr>
-                                                <td class="text-start fw-boldest" colspan="4">{{ __('Car name')}}</td>
-                                                <td>
-                                                    <div class="d-flex justify-content-end align-items-center">
-                                                        <!--be  gin::Title-->
-                                                        <div class="ms-5">
-                                                            <a href="#" class="fw-boldest text-gray-600 text-hover-primary">{{ $order['car_name'] }}</a>
-                                                        </div>
-                                                        <!--end::Title-->
-                                                    </div>
-                                                </td>
+                                                <td colspan="2" class="text-muted text-center">No questions available for this order.</td>
                                             </tr>
-                                            <tr>
-                                                <td class="fw-boldest">{{ __('City') }}</td>
-                                                <td class="text-end fw-boldest" colspan="4">{{ $order['city']['name']}}</td>
-                                            </tr>
-                                            </tbody>
-                                            <!--end::Table head-->
-                                        </table>
-                                        <!--end::Table-->
-                                    </div>
-                                </div>
-                                <!--end::Card body-->
+                                        @endif
+                                    </tbody>
+                                </table>
+
+
                             </div>
-                            <!--end::Product List-->
                         </div>
+                        <!--end::Card Body-->
+                    </div>
+                    <!--end::Product List-->
+                </div>
 
 
-                @endif
-                <!--end::Orders-->
+
             </div>
             <!--end::Tab pane-->
             <!--begin::Tab pane-->
@@ -444,35 +352,17 @@
                                 <table class="table align-middle text-center table-row-dashed fs-6 gy-5 mb-0">
                                     <!--begin::Table head-->
                                     <thead>
-                                    <tr class="text-center text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                        <th class="min-w-70px">{{ __('Order Status') }}</th>
-                                        <th class="min-w-175px">{{ __('Comment') }}</th>
-                                        <th class="min-w-100px">{{ __('Employee') }}</th>
-                                        <th class="min-w-100px">{{ __('Date') }}</th>
-                                    </tr>
+                                        <tr class="text-center text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                            <th class="min-w-70px">{{ __('Order Status') }}</th>
+                                            <th class="min-w-175px">{{ __('Comment') }}</th>
+                                            <th class="min-w-100px">{{ __('Employee') }}</th>
+                                            <th class="min-w-100px">{{ __('Date') }}</th>
+                                        </tr>
                                     </thead>
                                     <!--end::Table head-->
                                     <!--begin::Table body-->
                                     <tbody class="fw-bold text-gray-600">
-                                    @foreach( $order->statusHistory as $record)
 
-                                    @php( $statusObj = getStatusObject( $record['status'] ))
-
-                                        <tr>
-
-                                            <td>
-                                                <div class="badge" style="background-color:{{ $statusObj['color'] }}">{{ $statusObj['name_' . getLocale()] }}</div>
-                                            </td>
-
-                                            <td>{{ $record['comment'] ?? '-' }}</td>
-
-                                            <td>{{ $record['employee']['name'] }}</td>
-
-                                            <td>{{ date('Y-m-d', strtotime($record['created_at'])) . ' / ' . date('H:i a', strtotime($record['created_at'])) }}</td>
-
-                                        </tr>
-
-                                    @endforeach
                                     </tbody>
                                     <!--end::Table head-->
                                 </table>
@@ -490,30 +380,34 @@
         <!--end::Tab content-->
     </div>
     <!--end::Order details page-->
-
 @endsection
 @push('scripts')
     <script>
-        $('#order-status-sp').change( function () {
+        $('#order-status-sp').change(function() {
 
             let newStatus = $(this).val();
-            let comment   = '';
+            let comment = '';
 
             inputAlert().then((result) => {
 
                 comment = result.value[0] || '';
 
-                if ( result.isConfirmed )
-                {
+                if (result.isConfirmed) {
                     $.ajax({
-                        url:"/dashboard/change-status/" + "{{ $order['id'] }}",
-                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                        method:'POST',
-                        data:{ status : newStatus , comment },
-                        success: ( response ) => {
-                            successAlert('{{ __('status has been changed successfully') }}').then( () => window.location.reload() )
+                        url: "/dashboard/change-status/" + "{{ $order['id'] }}",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
-                        error: ( error ) => {
+                        method: 'POST',
+                        data: {
+                            status: newStatus,
+                            comment
+                        },
+                        success: (response) => {
+                            successAlert('{{ __('status has been changed successfully') }}')
+                                .then(() => window.location.reload())
+                        },
+                        error: (error) => {
                             console.log(error)
                         },
 

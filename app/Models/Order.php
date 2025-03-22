@@ -34,4 +34,20 @@ class Order extends Model
     {
         return $this->belongsTo(Vendor::class);
     }
+
+    public function consultaionType()
+    {
+        return $this->belongsTo(ConsultaionType::class, 'consultaion_type_id');
+    }
+
+    public function consultaionSchedual()
+    {
+        return $this->belongsTo(ConsultaionSchedual::class, 'consultaion_schedual_id');
+    }
+
+    public function quiz()
+    {
+        return $this->belongsTo(Quiz::class);
+    }
+ 
 }

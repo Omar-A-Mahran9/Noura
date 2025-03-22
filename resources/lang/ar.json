@@ -24,12 +24,17 @@
     "Groups": "المجموعات",
     "Invalid credentials": "البيانات المدخلة غير صحيحة",
     "Consultation Order": "طلبات الاستشارات",
+    "Consultation Schedule": "معاد الاستشارة",
+    "Answer Question Order": "اجابات أسئلة الطلب",
 
     "Groups list": "قائمة المجموعات",
     "Add new group": "اضافة مجموعة جديدة",
     "old password": "كلمة المرور القديمة",
     "comments": "تعليقات",
     "user": "المستخدم",
+    "Order Type": "نوع الطلب",
+    "Questions": "الأسئلة",
+    "Answeres": "الأجوبة",
 
     "correct answer": "الاجابة الصحيحة",
     "Add new Choose": "اضافة اختيار جديد",
@@ -605,6 +610,7 @@
     "Offer in english": "العرض بالانجليزية",
     "Update Role": "تعديل الدور",
     "OR": "أو",
+    "Edit group": "تعديل المجموعة",
 
     "Purchase order": "طلب شراء",
     "Edit a city": "تعديل مدينة",

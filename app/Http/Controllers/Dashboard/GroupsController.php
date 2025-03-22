@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\StoreCategoryRequest;
 use App\Http\Requests\Dashboard\StoreGroupRequest;
 use App\Http\Requests\Dashboard\UpdateCategoryRequest;
+use App\Http\Requests\Dashboard\UpdateGroupRequest;
 use App\Models\Category;
 use App\Models\ChatGroup;
 use Illuminate\Validation\ValidationException;
@@ -61,46 +62,25 @@ class GroupsController extends Controller
         ChatGroup::create($data);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
+
+
+    public function edit($group)
     {
-         $this->authorize('show_categories');
-
-        return view('dashboard.categories.show',compact('category' ));
-
+        $group = ChatGroup::findOrFail($group);
+        return view('dashboard.groups.edit', compact('group'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-
-    public function edit(Category $category)
+    public function update(UpdateGroupRequest $request, $group)
     {
-        $this->authorize('update_categories');
-
-        return view('dashboard.categories.edit',compact('category' ));
-    }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateCategoryRequest $request, Category $category)
-    {
-        $this->authorize('update_categories');
         $data = $request->validated();
-        $category->update($data);
+
+        $group = ChatGroup::findOrFail($group);
+        if ($request->file('image')) {
+            deleteImage($group->image,"groups");
+            $data['image'] = uploadImage($request->file('image'), "groups");
+        }
+         $this->authorize('update_categories');
+        $group->update($data);
     }
 
     /**
@@ -110,21 +90,11 @@ class GroupsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy(Request $request,Category $category)
-    {
-
-
-        $this->authorize('delete_categories');
-
-        if ($request->ajax())
-        {
-            if($category->articles()->count() > 0)
-                throw ValidationException::withMessages([
-                    'category' => __("This category is assigned to cars and can't be deleted")
-                ]);
-
-            $category->delete();
-        }
-        }
+    // public function destroy(  $category)
+    // {
+    //     // $group = ChatGroup::findOrFail($group);
+    //     $this->authorize('delete_categories');
+    //         $category->delete();
+    //     }
 
 }

@@ -13,4 +13,9 @@ class VendorAnswers extends Model
         'created_at' => 'date:Y-m-d',
         'updated_at' => 'date:Y-m-d'
     ];
+
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class);
+    }
 }
