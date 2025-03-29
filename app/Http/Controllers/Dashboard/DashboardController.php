@@ -32,20 +32,22 @@ class DashboardController extends Controller
 
 
          $bestSellingCourses = DB::table('orders')
-            ->select('course_id', DB::raw('SUM(quantity) as total_sold'), DB::raw('SUM(total_price) as total_revenue'))
-            ->whereNotNull('course_id')
-            ->groupBy('course_id')
-            ->orderByDesc('total_sold')
-            ->limit(3)
-            ->get();
+         ->select('course_id', DB::raw('COUNT(*) as total_sold'), DB::raw('SUM(total_price) as total_revenue'))
+         ->whereNotNull('course_id')
+         ->groupBy('course_id')
+         ->orderByDesc('total_sold')
+         ->limit(3)
+         ->get();
 
-        $bestSellingConsultations = DB::table('orders')
-            ->select('consultaion_id', DB::raw('SUM(quantity) as total_sold'), DB::raw('SUM(total_price) as total_revenue'))
-            ->whereNotNull('consultaion_id')
-            ->groupBy('consultaion_id')
-            ->orderByDesc('total_sold')
-            ->limit(3)
-            ->get();
+
+         $bestSellingConsultations = DB::table('orders')
+         ->select('consultaion_id', DB::raw('COUNT(*) as total_sold'), DB::raw('SUM(total_price) as total_revenue'))
+         ->whereNotNull('consultaion_id')
+         ->groupBy('consultaion_id')
+         ->orderByDesc('total_sold')
+         ->limit(3)
+         ->get();
+
 
 
 
