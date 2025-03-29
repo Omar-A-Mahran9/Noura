@@ -140,7 +140,7 @@ class DataController extends Controller
                     'description' => $sectiontwo->description ?? 'Default description',
                     'details' => $sectiontwo->items->map(function ($item) {
                         return [
-                            'image' => getImagePathFromDirectory($item->image ?? '', 'Sections'),
+                            'image' => getImagePathFromDirectory($item->image ?? '', 'Items'),
                             'title' => $item->title ?? 'Default Item Title',
                             'description' => $item->description ?? 'Default Item Description'
                         ];
