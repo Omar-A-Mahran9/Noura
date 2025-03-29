@@ -194,27 +194,15 @@ class DataController extends Controller
                     ]
                 ],
 
-                // Books Section
-                'books' => [
-                    [
-                        'title' => 'The Power of Mindset',
-                        'image' => asset('images/book1.jpg'),
-                        'description' => 'A comprehensive guide to shifting your mindset for success.'
-                    ],
-                    [
-                        'title' => 'Think and Grow Rich',
-                        'image' => asset('images/book2.jpg'),
-                        'description' => 'A classic book on the psychology of success.'
-                    ]
-                ],
+ 
 
-                // 'books' => $books->map(function ($book) {
-                //     return [
-                //         'title' => $book->title,
-                //         'image' => getImagePathFromDirectory($book->image, 'Books'), // Adjust function as needed
-                //         'description' => $book->description
-                //     ];
-                // }),
+                'books' => $books->map(function ($book) {
+                    return [
+                        'title' => $book->title,
+                        'image' => getImagePathFromDirectory($book->image, 'Books'), // Adjust function as needed
+                        'description' => $book->description
+                    ];
+                }),
 
                 // Section 7: Final Content
                 'section7' => [
