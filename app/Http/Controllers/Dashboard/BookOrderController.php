@@ -20,7 +20,7 @@ class BookOrderController extends Controller
             return response()->json($data);
         }
 
-        return view('dashboard.orders.index');
+        return view('dashboard.Bookorders.index');
     }
 
     public function order_show($id)
