@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Book;
 use App\Models\Page;
 use Illuminate\Http\Request;
 
@@ -91,6 +92,7 @@ class DataController extends Controller
     public function home_page()
     {
         $page = Page::where('title', 'home')->with('sections.items')->first();
+        $books = Book::latest()->take(3)->get();
         $sectionOne = $page->sections->first();
         $sectionthree = $page->sections->where('id',2)->first();
         $sectionfour = $page->sections->where('id',3)->first();
@@ -192,20 +194,13 @@ class DataController extends Controller
                     ]
                 ],
 
-                // Books Section
-                'books' => [
-                    [
-                        'title' => 'The Power of Mindset',
-                        'image' => asset('images/book1.jpg'),
-                        'description' => 'A comprehensive guide to shifting your mindset for success.'
-                    ],
-                    [
-                        'title' => 'Think and Grow Rich',
-                        'image' => asset('images/book2.jpg'),
-                        'description' => 'A classic book on the psychology of success.'
-                    ]
-                ],
-
+                'books' => $books->map(function ($book) {
+                    return [
+                        'title' => $book->title,
+                        'image' => getImagePathFromDirectory($book->image, 'Books'), // Adjust function as needed
+                        'description' => $book->description
+                    ];
+                }),
                 // Section 7: Final Content
                 'section7' => [
                     'title' => $sectionseven->title ?? 'Default Title',
