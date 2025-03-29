@@ -41,14 +41,15 @@ class DashboardController extends Controller
 
          $bestSellingConsultations = DB::table('orders')
          ->select(
-             'consultaion.title_en', // Use the correct column name
-             'orders.consultaion_id',
+             'consultaion.id',
+             'consultaion.title_en',
+             'consultaion.title_ar',
              DB::raw('COUNT(*) as total_sold'),
              DB::raw('SUM(orders.total_price) as total_revenue')
          )
          ->join('consultaion', 'orders.consultaion_id', '=', 'consultaion.id')
          ->whereNotNull('orders.consultaion_id')
-         ->groupBy('orders.consultaion_id', 'consultaion.title_ar')
+         ->groupBy('consultaion.id', 'consultaion.title_en', 'consultaion.title_ar')
          ->orderByDesc('total_sold')
          ->limit(3)
          ->get();
