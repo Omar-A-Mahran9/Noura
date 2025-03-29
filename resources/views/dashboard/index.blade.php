@@ -88,5 +88,58 @@
 
             </div>
         </div>
+
+        <div class="row g-5 g-xl-8 mt-5">
+            <!-- Best Selling Books -->
+            <div class="col-xl-4">
+                <div class="card card-xl-stretch mb-xl-8">
+                    <div class="card-body p-4 text-center">
+                        <h4 class="fw-bolder">{{ __('Book Best Sellers') }}</h4>
+                        <ul class="list-group">
+                            @foreach ($bestSellingBooks as $book)
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Book ID: {{ $book->book_id }}
+                                    <span class="badge bg-primary rounded-pill">{{ $book->total_sold }} Sold</span>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Best Selling Courses -->
+            <div class="col-xl-4">
+                <div class="card card-xl-stretch mb-xl-8">
+                    <div class="card-body p-4 text-center">
+                        <h4 class="fw-bolder">{{ __('Courses Best Sellers') }}</h4>
+                        <ul class="list-group">
+                            @foreach ($bestSellingCourses as $course)
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Course ID: {{ $course->course_id }}
+                                    <span class="badge bg-success rounded-pill">{{ $course->total_sold }} Sold</span>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Best Selling Consultations -->
+            <div class="col-xl-4">
+                <div class="card card-xl-stretch mb-xl-8">
+                    <div class="card-body p-4 text-center">
+                        <h4 class="fw-bolder">{{ __('Consultation Best Sellers') }}</h4>
+                        <ul class="list-group">
+                            @foreach ($bestSellingConsultations as $consultation)
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Consultation ID: {{ $consultation->consultaion_id }}
+                                    <span class="badge bg-warning rounded-pill">{{ $consultation->total_sold }} Sold</span>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     @endcan
 @endsection
