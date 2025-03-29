@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\ArticlesController;
 use App\Http\Controllers\Dashboard\BookController;
+use App\Http\Controllers\Dashboard\BookOrderController;
 use App\Http\Controllers\Dashboard\ConsultaionController;
 use App\Http\Controllers\Dashboard\CourseController;
 use App\Http\Controllers\Dashboard\GroupsController;
@@ -62,7 +63,10 @@ Route::group([ 'prefix' => 'dashboard' , 'namespace' => 'Dashboard', 'as' => 'da
         ]);
     });
     Route::resource('books', 'BookController');
-    Route::resource('books_orders', 'BookOrderController');
+
+    Route::get('/books_orders', [BookOrderController::class, 'order'])
+    ->name('books_orders.index');
+
     Route::resource('group_chat', 'GroupsController');
     Route::delete('/messages/{id}', [GroupsController::class, 'destroymessage'])
     ->name('destroymessage');

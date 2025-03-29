@@ -3,83 +3,50 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class BookOrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function order(Request $request)
     {
-        //
+           $this->authorize('view_orders');
+
+        if ($request->ajax())
+        {
+                $data = getModelData(model: new Order(),relations: ['vendor' => ['id', 'name','phone']], andsFilters: [['type', '=', 'book']]);
+
+
+            return response()->json($data);
+        }
+
+        return view('dashboard.orders.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function order_show($id)
     {
-        //
-    }
+        $this->authorize('view_orders'); // Authorization check
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        // Fetch order with all related data
+        $order = Order::with([
+            'vendor:id,name,phone',
+            'book:id,title_ar,title_en',
+            'course:id,name_ar,name_en',
+            'consultation:id,title_ar,title_en',
+            'consultaionType:id,name_ar,name_en',
+            'consultaionSchedual:id,time,date',
+            'quiz:id,name_ar,name_en',
+            'quiz.questions.answers', // Include questions and answers
+        ])->findOrFail($id);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        // Fetch vendor answers related to this quiz and client
+        $vendorAnswers = $order->quiz
+        ? VendorAnswers::where('quiz_id', $order->quiz->id)
+            ->where('vendor_id', $order->vendor_id)
+            ->get()
+        : collect(); // Return an empty collection if no quiz is found
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return view('dashboard.orders.show', compact('order', 'vendorAnswers'));
     }
 }
