@@ -32,21 +32,41 @@ class BookOrderController extends Controller
             'vendor:id,name,phone',
             'book:id,title_ar,title_en',
             'course:id,name_ar,name_en',
-            'consultation:id,title_ar,title_en',
-            'consultaionType:id,name_ar,name_en',
-            'consultaionSchedual:id,time,date',
-            'quiz:id,name_ar,name_en',
-            'quiz.questions.answers', // Include questions and answers
         ])->findOrFail($id);
 
-        // Fetch vendor answers related to this quiz and client
-        $vendorAnswers = $order->quiz
-        ? VendorAnswers::where('quiz_id', $order->quiz->id)
-            ->where('vendor_id', $order->vendor_id)
-            ->get()
-        : collect(); // Return an empty collection if no quiz is found
 
+        return view('dashboard.orders.show', compact('order' ));
+    }
 
-        return view('dashboard.orders.show', compact('order', 'vendorAnswers'));
+    public function destroy(Request $request, $id)
+    {
+        $this->authorize('delete_articles');
+
+        // Find the consultation with its schedules
+        $consultaion = Consultaion::with('consultaionScheduals')->findOrFail($id);
+
+        try {
+            \DB::transaction(function () use ($consultaion) {
+                // Delete related schedules first (if needed)
+                $consultaion->consultaionScheduals()->delete();
+
+                // Delete consultation
+                $consultaion->delete();
+
+                // Delete image
+                deleteImage($consultaion->main_image, 'Consultation');
+            });
+
+            // Return JSON response if AJAX request
+            if ($request->ajax()) {
+                return response()->json(['success' => true, 'message' => 'Consultation deleted successfully']);
+            }
+
+         } catch (\Exception $e) {
+            if ($request->ajax()) {
+                return response()->json(['success' => false, 'message' => 'Error deleting consultation', 'error' => $e->getMessage()], 500);
+            }
+
+         }
     }
 }

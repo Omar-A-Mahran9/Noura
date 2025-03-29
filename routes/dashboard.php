@@ -67,6 +67,10 @@ Route::group([ 'prefix' => 'dashboard' , 'namespace' => 'Dashboard', 'as' => 'da
     Route::get('/books_orders', [BookOrderController::class, 'order'])
     ->name('books_orders.index');
 
+    Route::get('/books_orders/{id}', [BookOrderController::class, 'order_show'])
+    ->name('books_orders.show');
+
+
     Route::resource('group_chat', 'GroupsController');
     Route::delete('/messages/{id}', [GroupsController::class, 'destroymessage'])
     ->name('destroymessage');
