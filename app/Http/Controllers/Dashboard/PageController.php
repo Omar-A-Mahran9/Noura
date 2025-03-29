@@ -22,7 +22,7 @@ class PageController extends Controller
     public function update(UpdatePageRequest $request, $id)
     {
          $page = Page::with('sections.items')->findOrFail($id);
-        $data = $request->validated();
+         $data = $request->validated();
 
         // Get existing sections indexed by ID
         $existingSections = $page->sections->keyBy('id');
@@ -48,11 +48,9 @@ class PageController extends Controller
                  }
 
                 $section->update($sectionDetails);
-
                 // Get existing items indexed by ID
                 $existingItems = $section->items->keyBy('id');
-                dd($existingItems);
-
+ 
                 foreach ($sectionData['items'] ?? [] as $itemIndex => $itemData) {
                     if (isset($itemData['id']) && isset($existingItems[$itemData['id']])) {
                         $item = $existingItems[$itemData['id']];

@@ -32,7 +32,7 @@ class UpdatePageRequest extends FormRequest
             'sections.*.image' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:2048'], // 2MB max
 
             'sections.*.items' => ['nullable', 'array'],
-            'sections.*.items.*.id' => ['nullable', 'exists:items,id'],
+            'sections.*.items.*.id' => ['nullable', 'exists:section_items,id'],
             'sections.*.items.*.title' => ['required', 'string', 'max:255'],
             'sections.*.items.*.description' => ['nullable', 'string'],
             'sections.*.items.*.image' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:2048'], // 2MB max
