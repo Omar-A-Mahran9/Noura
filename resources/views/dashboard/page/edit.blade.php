@@ -124,15 +124,15 @@
                 <div class="form-footer">
 
                     <!-- begin :: Submit btn -->
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary" id="submit-btn">
 
                         <span class="indicator-label">{{ __('Update Page') }}</span>
 
-                        {{-- <!-- begin :: Indicator -->
+                        <!-- begin :: Indicator -->
                         <span class="indicator-progress">{{ __('Please wait ...') }}
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                         </span>
-                        <!-- end   :: Indicator --> --}}
+                        <!-- end   :: Indicator -->
 
                     </button>
                     <!-- end   :: Submit btn -->

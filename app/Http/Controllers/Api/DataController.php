@@ -95,6 +95,7 @@ class DataController extends Controller
         $sectionthree = $page->sections->where('id',2)->first();
         $sectionfour = $page->sections->where('id',3)->first();
         $sectionfive = $page->sections->where('id',4)->first();
+        $sectionsex = $page->sections->where('id',5)->first();
 
          return response()->json([
             'success' => true,
@@ -164,18 +165,13 @@ class DataController extends Controller
                 ],
 
                 // Section 5: Another General Section
-                'section5' => [
-                    [
-                        'image' => asset('images/section5_1.jpg'),
-                        'title' => 'Meditation & Focus',
-                        'description' => 'The role of meditation in improving mental clarity.'
-                    ],
-                    [
-                        'image' => asset('images/section5_2.jpg'),
-                        'title' => 'Time Management',
-                        'description' => 'Master the art of managing time effectively.'
-                    ]
-                ],
+                'section5' => $sectionsex->items->map(function ($item) {
+                    return [
+                        'image' => getImagePathFromDirectory($item->image ?? '', 'Items'),
+                        'title' => $item->title ?? 'Default Item Title',
+                        'description' => $item->description ?? 'Default Item Description'
+                    ];
+                }),
 
                 // Section 6: Special Topic
                 'section6' => [
