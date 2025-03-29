@@ -118,6 +118,16 @@
                                     <td class="fw-bolder text-end">{{ $order->quantity?? 'N/A' }}
                                     </td>
                                 </tr>
+
+                                <tr>
+                                    <td class="text-muted">
+                                        <div class="d-flex align-items-center">
+                                            <span><i class="fa fa-store mx-2"></i></span> {{ __('Type of book') }}
+                                        </div>
+                                    </td>
+                                    <td class="fw-bolder text-end">{{ $order->type_of_book?? 'N/A' }}
+                                    </td>
+                                </tr>
                                 {{-- <!-- Book -->
                                 <tr>
                                     <td class="text-muted">

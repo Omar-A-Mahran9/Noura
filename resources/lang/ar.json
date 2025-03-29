@@ -4,6 +4,7 @@
     "quizzes": "الاختبارات",
     "Edit an consultaion": "تعديل الاستشارة",
     "Edit an consultation": "تعديل الاستشارة",
+    "Type of book": "نوع الكتاب",
 
     "Enter the quiz title": "ادخل عنوان الاختبار",
     "Open Quiz": "فتح الاختبار",
@@ -27,7 +28,7 @@
     "Consultation Schedule": "معاد الاستشارة",
     "Answer Question Order": "اجابات أسئلة الطلب",
     "Book": "الكتاب",
-    "َQuantity": "الكمية",
+    "Quantity": "الكمية",
 
     "Groups list": "قائمة المجموعات",
     "Add new group": "اضافة مجموعة جديدة",
