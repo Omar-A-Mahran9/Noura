@@ -103,11 +103,20 @@
                                 <tr>
                                     <td class="text-muted">
                                         <div class="d-flex align-items-center">
-                                            <span><i class="fa fa-store mx-2"></i></span> {{ __('Vendor') }}
+                                            <span><i class="fa fa-store mx-2"></i></span> {{ __('Book') }}
                                         </div>
                                     </td>
-                                    <td class="fw-bolder text-end">{{ $order->vendor->name ?? 'N/A' }}
-                                        ({{ $order->vendor->phone ?? 'N/A' }})</td>
+                                    <td class="fw-bolder text-end">{{ $order->book->title ?? 'N/A' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted">
+                                        <div class="d-flex align-items-center">
+                                            <span><i class="fa fa-store mx-2"></i></span> {{ __('Quantity') }}
+                                        </div>
+                                    </td>
+                                    <td class="fw-bolder text-end">{{ $order->quantity?? 'N/A' }}
+                                    </td>
                                 </tr>
                                 {{-- <!-- Book -->
                                 <tr>
@@ -187,7 +196,7 @@
         </div>
         <!--end::Order summary-->
 
-      
+
     </div>
     <!--end::Order details page-->
 @endsection
