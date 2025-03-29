@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Page;
 use Illuminate\Http\Request;
 
 class DataController extends Controller
@@ -89,50 +90,54 @@ class DataController extends Controller
 
     public function home_page()
     {
-        return response()->json([
+        $page = Page::where('title', 'home')->with('sections.items')->first();
+        $sectionOne = $page->sections->first();
+        $sectiontwo = $page->sections->where('id',2)->first();
+
+         return response()->json([
             'success' => true,
             'message' => 'Home page details fetched successfully!',
             'data' => [
                 // Section 1: Main Introduction
-                'section1' => [
-                    'title' => 'Welcome to Our Platform',
-                    'description' => 'Discover a new way to enhance your mindset and personal growth.',
-                    'image' => asset('images/home_intro.jpg') // Change the path
+            'section1' => [
+                    'title' => $sectionOne->title ?? 'Default Title',
+                    'description' => $sectionOne->description ?? 'Default description',
+                    'image' => getImagePathFromDirectory($sectionOne->image, 'Sections'),
                 ],
 
-                // Section 2: Events per Day
-       'section2' => [
-    '2025-03-08' => [
-        [
-            'image' => asset('images/event_friday.jpg'),
-            'title' => 'Special Workshop on Mindset',
-            'time' => '10:00 AM - 12:00 PM'
-        ],
-        [
-            'image' => asset('images/event_friday2.jpg'),
-            'title' => 'Networking Session',
-            'time' => '1:00 PM - 3:00 PM'
-        ]
-    ],
-    '2025-03-09' => [
-        [
-            'image' => asset('images/event_friday.jpg'),
-            'title' => 'Special Workshop on Mindset',
-            'time' => '10:00 AM - 12:00 PM'
-        ],
-        [
-            'image' => asset('images/event_friday2.jpg'),
-            'title' => 'Networking Session',
-            'time' => '1:00 PM - 3:00 PM'
-        ]
-    ]
-],
+                            // Section 2: Events per Day
+                'section2' => [
+                    '2025-03-08' => [
+                    [
+                        'image' => asset('images/event_friday.jpg'),
+                        'title' => 'Special Workshop on Mindset',
+                        'time' => '10:00 AM - 12:00 PM'
+                    ],
+                    [
+                        'image' => asset('images/event_friday2.jpg'),
+                        'title' => 'Networking Session',
+                        'time' => '1:00 PM - 3:00 PM'
+                    ]
+                    ],
+                        '2025-03-09' => [
+                    [
+                        'image' => asset('images/event_friday.jpg'),
+                        'title' => 'Special Workshop on Mindset',
+                        'time' => '10:00 AM - 12:00 PM'
+                    ],
+                    [
+                        'image' => asset('images/event_friday2.jpg'),
+                        'title' => 'Networking Session',
+                        'time' => '1:00 PM - 3:00 PM'
+                    ]
+                            ]
+                    ],
 
 
                 // Section 3: Why Mindset is Important
-                'section3' => [
-                    'title' => 'Why Mindset is Important?',
-                    'description' => 'Your mindset determines your success. Learn how to shift your perspective for a better future.',
+            'section3' => [
+                'title' => $sectiontwo->title ?? 'Default Title',
+                'description' => $sectiontwo->description ?? 'Default description',
                     'details' => [
                         [
                             'image' => asset('images/mindset1.jpg'),
