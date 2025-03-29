@@ -30,6 +30,7 @@ Route::group([ 'prefix' => 'dashboard' , 'namespace' => 'Dashboard', 'as' => 'da
     Route::resource('consultation_time', 'ConsultaionController');
     Route::resource('consultation_work', 'ConsultationWorkController');
 
+    Route::resource('page', 'PageController');
 
     Route::resource('categories', 'CategoriesController');
     Route::resource('coursecategories', 'CourseCategoriesController');

@@ -20,6 +20,8 @@ class RoleSeeder extends Seeder
         $categories = [
             'employees',
             'orders',
+            'page',
+
             'group_chat',
             'consultation_work',
 

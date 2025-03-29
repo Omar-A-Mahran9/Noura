@@ -64,8 +64,25 @@
                     </div>
                     <hr>
                 @endfor
+                <!-- begin :: Form footer -->
+                <div class="form-footer">
 
-                <button type="submit" class="btn btn-primary">{{ __('Update Consultation Work') }}</button>
+                    <!-- begin :: Submit btn -->
+                    <button type="submit" class="btn btn-primary" id="submit-btn">
+
+                        <span class="indicator-label">{{ __('Update Consultation Work') }}</span>
+
+                        <!-- begin :: Indicator -->
+                        <span class="indicator-progress">{{ __('Please wait ...') }}
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                        <!-- end   :: Indicator -->
+
+                    </button>
+                    <!-- end   :: Submit btn -->
+
+                </div>
+                <!-- end   :: Form footer -->
             </form>
         </div>
     </div>

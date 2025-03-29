@@ -56,6 +56,24 @@
                         </a>
                     </div>
                 @endcan
+
+                @php
+                    $page = \App\Models\Page::first();
+                @endphp
+
+                @can(['view_page'])
+                    <div class="menu-item">
+                        <a class="menu-link {{ isTabActive('page') }}"
+                            href="{{ $page ? route('dashboard.page.edit', $page->id) : '#' }}" data-bs-toggle="tooltip"
+                            data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                            <span class="menu-icon">
+                                <i class="fa fa-home"></i>
+                            </span>
+                            <span class="menu-title"> {{ __('Home Page') }}</span>
+                        </a>
+                    </div>
+                @endcan
+
                 @canany(['view_courses', 'view_courses_order', 'view_course_category'])
                     <div class="menu-item">
                         <div class="menu-content pt-8 pb-0">
@@ -115,7 +133,8 @@
                 @can('view_books')
                     <div class="menu-item">
                         <a class="menu-link {{ isTabActive('books') }}" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                            href="{{ route('dashboard.books.index') }}" data-bs-dismiss="click" data-bs-placement="right">
+                            href="{{ route('dashboard.books.index') }}" data-bs-dismiss="click"
+                            data-bs-placement="right">
                             <span class="menu-icon">
                                 <i class="fa fa-book"></i>
                             </span>
