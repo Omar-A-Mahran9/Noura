@@ -98,7 +98,7 @@
                         <ul class="list-group">
                             @foreach ($bestSellingBooks as $book)
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    {{ __('Book') }}: {{ $book->name }}
+                                    {{ __('Book') }}: {{ $book->name_ar }}
                                     <span class="badge bg-primary rounded-pill">{{ $book->total_sold }}
                                         {{ __('Sold') }}</span>
                                 </li>
