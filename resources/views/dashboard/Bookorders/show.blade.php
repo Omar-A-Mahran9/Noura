@@ -103,7 +103,7 @@
                                 <tr>
                                     <td class="text-muted">
                                         <div class="d-flex align-items-center">
-                                            <span><i class="fa fa-store mx-2"></i></span> {{ __('Book') }}
+                                            <span><i class="fa fa-book mx-2"></i></span> {{ __('Book') }}
                                         </div>
                                     </td>
                                     <td class="fw-bolder text-end">{{ $order->book->title ?? 'N/A' }}
