@@ -59,7 +59,7 @@
                                 <div class="d-flex flex-stack flex-grow-1 card-p">
                                     <div class="d-flex flex-column me-2">
                                         <a href="#"
-                                            class="text-dark text-hover-primary fw-bolder fs-3">{{ __('All Orders') }}</a>
+                                            class="text-dark text-hover-primary fw-bolder fs-3">{{ __('All books') }}</a>
                                     </div>
                                 </div>
                                 <div class="card-rounded-bottom text-center p-4">
@@ -74,7 +74,7 @@
                                 <div class="d-flex flex-stack flex-grow-1 card-p">
                                     <div class="d-flex flex-column me-2">
                                         <a href="#"
-                                            class="text-dark text-hover-primary fw-bolder fs-3">{{ __('All Vendors') }}</a>
+                                            class="text-dark text-hover-primary fw-bolder fs-3">{{ __('All courses') }}</a>
                                     </div>
                                 </div>
                                 <div class="card-rounded-bottom text-center p-4">
