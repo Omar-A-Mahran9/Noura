@@ -21,7 +21,7 @@ class ConsultationWork extends Model
 
         public function steps()
         {
-            return $this->hasMany(Step::class, 'consultation_work_id'); // Adjust the foreign key if needed
+            return $this->hasMany(ConsultationWorkStep::class, 'consultation_work_id'); // Adjust the foreign key if needed
         }
 
 }

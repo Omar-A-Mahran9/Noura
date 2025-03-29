@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\UpdateConsultationWorkRequest;
 use App\Models\ConsultationWork;
+use App\Models\ConsultationWorkStep;
 use Illuminate\Http\Request;
 
 class ConsultationWorkController extends Controller
@@ -18,56 +20,56 @@ class ConsultationWorkController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(UpdateConsultationWorkRequest $request, $id)
     {
-        $consultationWork = ConsultationWork::findOrFail($id);
-
-        // Validate the request
-        $data=    $request->validate([
-            'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'steps.*.name' => 'required|string|max:255',
-            'steps.*.description' => 'nullable|string',
-            'steps.*.image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
+        $consultationWork = ConsultationWork::with('steps')->findOrFail($id);
+        $data = $request->validated();
 
         // Handle main image upload
         if ($request->hasFile('main_image')) {
-            // Delete old main image
-            deleteImage($consultationWork->main_image, 'consultation_work');
-
-            // Upload new image using helper function
-            $data['main_image'] = uploadImage($request->file('main_image'), 'consultation_work');
+            deleteImage($consultationWork->main_image, 'consultation_work'); // Delete old image
+            $data['main_image'] = uploadImage($request->file('main_image'), 'consultation_work'); // Upload new image
         }
 
-        // Process steps data
-        $stepsData = [];
+        // Update Consultation Work
+        $consultationWork->update([
+            'main_image' => $data['main_image'] ?? $consultationWork->main_image,
+        ]);
+        $existingSteps = $consultationWork->steps->keyBy('id'); // Store existing steps by ID
+
+        // Process steps
         foreach ($request->steps as $index => $step) {
+ 
+            $stepId = $step['id'] ?? null; // Get the ID if exists
+
             $stepData = [
+                'consultation_work_id' => $consultationWork->id,
                 'name' => $step['name'],
                 'description' => $step['description'] ?? null,
             ];
 
             // Handle step image upload
             if ($request->hasFile("steps.$index.image")) {
-                // Delete old step image
-                deleteImage($consultationWork->steps[$index]['image'] ?? null, 'steps');
-
-                // Upload new image using helper function
                 $stepData['image'] = uploadImage($request->file("steps.$index.image"), 'steps');
-            } else {
-                // Keep old image if not changed
-                $stepData['image'] = $consultationWork->steps[$index]['image'] ?? null;
             }
 
-            $stepsData[] = $stepData;
-        }
-dd($data);
-        // Update consultation work record
-        $consultationWork->update($data + ['steps' => $stepsData]);
+            if ($stepId && isset($existingSteps[$stepId])) {
+                // Update existing step
+                $existingStep = $existingSteps[$stepId];
 
-        return redirect()->route('dashboard.consultation_work.index')->with('success', 'Consultation Work updated successfully.');
+                if (isset($stepData['image'])) {
+                    deleteImage($existingStep->image, 'steps'); // Delete old image if new image is uploaded
+                }
+
+                $existingStep->update($stepData);
+            } else {
+                // Create new step if no valid ID is found
+                ConsultationWorkStep::create($stepData);
+            }
+        }
     }
+
+
 
     public function destroy($id)
     {

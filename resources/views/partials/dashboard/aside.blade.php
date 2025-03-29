@@ -214,12 +214,16 @@
                         </a>
                     </div>
                 @endcan --}}
+                @php
+                    $firstConsultationWork = \App\Models\ConsultationWork::first();
+                @endphp
 
                 @can(['view_consultation_work'])
                     <div class="menu-item">
                         <a class="menu-link {{ isTabActive('consultation_work') }}"
-                            href="{{ route('dashboard.consultation_work.edit', 1) }}" data-bs-toggle="tooltip"
-                            data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                            href="{{ $firstConsultationWork ? route('dashboard.consultation_work.edit', $firstConsultationWork->id) : '#' }}"
+                            data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click"
+                            data-bs-placement="right">
                             <span class="menu-icon">
                                 <i class="fa-regular fa-eye"></i> </span>
                             <span class="menu-title"> {{ __('consultatio work') }}</span>
