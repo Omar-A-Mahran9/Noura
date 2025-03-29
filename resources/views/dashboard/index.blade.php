@@ -98,8 +98,9 @@
                         <ul class="list-group">
                             @foreach ($bestSellingBooks as $book)
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Book ID: {{ $book->name }}
-                                    <span class="badge bg-primary rounded-pill">{{ $book->total_sold }} Sold</span>
+                                    {{ __('Book') }}: {{ $book->name }}
+                                    <span class="badge bg-primary rounded-pill">{{ $book->total_sold }}
+                                        {{ __('Sold') }}</span>
                                 </li>
                             @endforeach
                         </ul>
@@ -116,7 +117,8 @@
                             @foreach ($bestSellingCourses as $course)
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Course ID: {{ $course->course_id }}
-                                    <span class="badge bg-success rounded-pill">{{ $course->total_sold }} Sold</span>
+                                    <span class="badge bg-success rounded-pill">{{ $course->total_sold }}
+                                        {{ __('Sold') }}</span>
                                 </li>
                             @endforeach
                         </ul>
@@ -131,7 +133,7 @@
                         <h4 class="fw-bolder">{{ __('Consultation Best Sellers') }}</h4>
                         <ul class="list-group my-2">
                             @foreach ($bestSellingConsultations as $consultation)
-                                 <li class="list-group-item d-flex justify-content-between align-items-center  py-5">
+                                <li class="list-group-item d-flex justify-content-between align-items-center  py-5">
                                     {{ __('Consultation') }} : {{ $consultation->consultaion_type_name }}
                                     <span class="badge bg-warning rounded-pill">{{ $consultation->total_sold }}
                                         {{ __('Sold') }}</span>
