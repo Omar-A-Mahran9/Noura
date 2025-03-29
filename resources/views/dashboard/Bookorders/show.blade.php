@@ -125,30 +125,10 @@
                                             <span><i class="fa fa-store mx-2"></i></span> {{ __('Type of book') }}
                                         </div>
                                     </td>
-                                    <td class="fw-bolder text-end">{{ $order->type_of_book?? 'N/A' }}
+                                    <td class="fw-bolder text-end">{{ __($order->type_of_book)?? 'N/A' }}
                                     </td>
                                 </tr>
-                                {{-- <!-- Book -->
-                                <tr>
-                                    <td class="text-muted">
-                                        <div class="d-flex align-items-center">
-                                            <span><i class="fa fa-book mx-2"></i></span> {{ __('Book') }}
-                                        </div>
-                                    </td>
-                                    <td class="fw-bolder text-end">{{ $order->book->title_ar ?? 'N/A' }} /
-                                        {{ $order->book->title_en ?? 'N/A' }}</td>
-                                </tr>
-                                <!-- Course -->
-                                <tr>
-                                    <td class="text-muted">
-                                        <div class="d-flex align-items-center">
-                                            <span><i class="fa fa-graduation-cap mx-2"></i></span> {{ __('Course') }}
-                                        </div>
-                                    </td>
-                                    <td class="fw-bolder text-end">{{ $order->course->name_ar ?? 'N/A' }} /
-                                        {{ $order->course->name_en ?? 'N/A' }}</td>
-                                </tr> --}}
-
+                                
                             </tbody>
                         </table>
                         <!--end::Table-->
