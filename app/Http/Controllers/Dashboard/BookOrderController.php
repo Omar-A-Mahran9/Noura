@@ -35,7 +35,7 @@ class BookOrderController extends Controller
         ])->findOrFail($id);
 
 
-        return view('dashboard.orders.show', compact('order' ));
+        return view('dashboard.Bookorders.show', compact('order' ));
     }
 
     public function destroy(Request $request, $id)
