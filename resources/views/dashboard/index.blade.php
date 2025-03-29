@@ -23,7 +23,7 @@
                 <!--begin::Primary button-->
                 <a href="/" target="_blank" class="btn btn-sm btn-primary"><i class="bi bi-globe fs-6"></i>
                     {{ __('website') }} </a>
-    
+
             </div>
             <!--end::Actions-->
 
@@ -34,7 +34,7 @@
 
     <!--begin::Entry-->
     @can('view_reports')
-        {{-- <div class="d-flex flex-column-fluid" >
+     <div class="d-flex flex-column-fluid" >
         <!--begin::Container-->
         <div class="container">
             <!--begin::Dashboard-->
@@ -47,11 +47,10 @@
                         <div class="card-body d-flex flex-column p-0">
                             <div class="d-flex flex-stack flex-grow-1 card-p">
                                 <div class="d-flex flex-column me-2">
-                                    <a href="#" class="text-dark text-hover-primary fw-bolder fs-3">{{ __("All Cars") }}</a>
+                                    <a href="#" class="text-dark text-hover-primary fw-bolder fs-3">{{ __("All Orders") }}</a>
                                 </div>
                                 <span class="symbol symbol-50px">
-                                    <span class="symbol-label fs-5 fw-bolder bg-light-primary text-primary">{{ array_sum($carsMonthlyRate['data']) }}</span>
-                                </span>
+                                 </span>
                             </div>
                             <div class="card-rounded-bottom" id="cars_chart" data-kt-chart-color="primary" style="height: 150px"></div>
                         </div>
@@ -69,8 +68,7 @@
                                     <a href="#" class="text-dark text-hover-primary fw-bolder fs-3">{{ __("All Orders") }}</a>
                                 </div>
                                 <span class="symbol symbol-50px">
-                                    <span class="symbol-label fs-5 fw-bolder bg-light-primary text-primary">{{ array_sum($ordersMonthlyRate['data']) }}</span>
-                                </span>
+                                 </span>
                             </div>
                             <div class="card-rounded-bottom" id="orders_chart" data-kt-chart-color="primary" style="height: 150px"></div>
                         </div>
@@ -78,7 +76,7 @@
                     </div>
                     <!--end::Statistics Widget 3-->
                 </div>
-                {{-- <div class="col-xl-4">
+              <div class="col-xl-4">
                     <!--begin::Statistics Widget 3-->
                     <div class="card card-xl-stretch mb-xl-8">
                         <!--begin::Body-->
@@ -88,8 +86,7 @@
                                     <a href="#" class="text-dark text-hover-primary fw-bolder fs-3">{{ __("All Vendors") }}</a>
                                 </div>
                                 <span class="symbol symbol-50px">
-                                    <span class="symbol-label fs-5 fw-bolder bg-light-primary text-primary">{{ array_sum($clientsMonthlyRate['data']) }}</span>
-                                </span>
+                                 </span>
                             </div>
                             <div class="card-rounded-bottom" id="clients_chart" data-kt-chart-color="primary" style="height: 150px"></div>
                         </div>
@@ -152,7 +149,7 @@
             <!--end::Dashboard-->
         </div>
         <!--end::Container-->
-    </div> --}}
+    </div>
     @endcan
     <!--end::Entry-->
 

@@ -9,147 +9,65 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-
     private static array $takenColors    = [];
     private static int   $lastColorIndex = 0;
 
     public function index()
     {
-        // $carsMonthlyRate = $this->getMonthlyRate('cars');
-        // $ordersMonthlyRate = $this->getMonthlyRate('orders');
-        // // $clientsMonthlyRate = $this->getMonthlyRate('vendors');
-
-        // $ordersTypesPercentage = Order::select('type')->get()->groupBy('type')->map(function ($orders) {
-
-        //     $type = $orders[0]['type'];
-
-        //     return
-        //     [
-        //         'label' => __(str_replace('_', ' ', $type)),
-        //         'data' => count($orders),
-        //         'color' => $this->getUniqueColor(),
-        //     ];
-
-        // })->values()->toArray();
-
-        // $carBrandsPercentage = Car::select('brand_id')->get()->groupBy('brand_id')->map(function ($cars) {
-
-        //     return
-        //         [
-        //             'label' => $cars[0]['brand']['name'],
-        //             'data' => count($cars),
-        //             'color' => $this->getUniqueColor(),
-        //         ];
-        // })->values();
-
-        // $carOrdersBrandsPercentage = Order::with('car:id,brand_id')->whereNotNull('car_id')->select('car_id')->get()->groupBy('car.brand_id')->map(function ($orders) {
-
-        //     return
-        //         [
-        //             'label' => $orders[0]['car']['brand']['name'] ,
-        //             'data' => count($orders),
-        //             'color' => $this->getUniqueColor(),
-        //         ];
-
-        // })->values();
-
-
-        // if ( count($ordersTypesPercentage) > 1)
-        //     $this->swapArrayElements($ordersTypesPercentage , 0);
-
-        // return view('dashboard.index', compact('carsMonthlyRate', 'ordersMonthlyRate', 'ordersTypesPercentage','carBrandsPercentage','carOrdersBrandsPercentage'));
-        return view('dashboard.index');
-
-    }
-
-    public function getMonthlyRate($tableName, $filters = [])
-    {
-
-        $array = array();
-
-        for ($i = 1; $i <= 12; $i++) {
-            $MonthCount = DB::table($tableName)->select('id')->where($filters)->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', $i)->where('deleted_at', NULL)->count();
-
-            array_push($array, $MonthCount);
-        }
-
-        return [
-            'data' => $array,
-            'min' => min($array),
-            'max' => max($array) * 1.15,
-        ];
-    }
-
-    public function getUniqueColor()
-    {
-        $colorIndex = DashboardController::$lastColorIndex++;
-
-        $colors = [
-            '#fe4a49' , '#2ab7ca' , '#fed766' , '#e6e6ea' , '#f6abb6' ,
-            '#011f4b' , '#6497b1' , '#005b96' , '#851e3e' , '#251e3e' ,
-            '#dec3c3' , '#4a4e4d' , '#f6cd61' , '#fe8a71' , '#0e9aa7' ,
-            '#63ace5' , '#4b86b4' , '#009688' , '#ee4035' , '#f37736' ,
-            '#fdf498' , '#7bc043' , '#0392cf' , '#283655' , ' #aaaaaa' ,
-            '#c99789' , '#ff6f69' , '#ffa700' , '#008744' , '#f37735' ,
-            '#4b3832' , '#854442' , '#fff4e6' , '#3c2f2f' , '#be9b7b' ,
-            '#8d5524' , '#bfd6f6' , '#cecbcb' , '#e3c9c9' , '#3d1e6d' ,
-            '#edc951' , '#eb6841' , '#cc2a36' , '#76b4bd' , '#d11141'
+        // Dummy data for monthly rates
+        $carsMonthlyRate = [
+            'January' => 10, 'February' => 15, 'March' => 20,
+            'April' => 18, 'May' => 25, 'June' => 30,
         ];
 
+        $ordersMonthlyRate = [
+            'January' => 8, 'February' => 12, 'March' => 16,
+            'April' => 14, 'May' => 22, 'June' => 28,
+        ];
 
-        if ( in_array( $colors[$colorIndex] , DashboardController::$takenColors) &&  count( DashboardController::$takenColors ) != count($colors) )
-        {
-
-            $this->getUniqueColor();
-
-        }else
-        {
-            array_push( DashboardController::$takenColors , $colors[$colorIndex] );
-
-            return $colors[$colorIndex];
-        }
-    }
-
-    public function swapArrayElements(&$ordersTypesPercentage , $startIndex)
-    {
-        $temp                                       = $ordersTypesPercentage[$startIndex];
-        $ordersTypesPercentage[$startIndex]         = $ordersTypesPercentage[ $startIndex + 1 ];
-        $ordersTypesPercentage[ $startIndex + 1 ]   = $temp;
-    }
-
-    public function openCalculator()
-    {
-        $banks = Bank::with('sectors')->get();
-        // dd($banks);
-        return view('dashboard.calculator',compact('banks'));
-    }
-
-    public function calculateInstallment(Request $request)
-    {
-
-        // dd($request->all());
-
-        $this->validateCalculatorRequest();
-
-        // dd($this->calculateInstallments($request));
-        $monthlyInstallment =  $this->calculateInstallments($request);
-        dd($monthlyInstallment);
-        return response($monthlyInstallment);
-
-    }
-
-    public function validateCalculatorRequest()
-    {
-        request()->validate([
-            "car_id" => "required",
-            "bank_id" => "required",
-            "sector_id" => "required",
-            "administrative_fees" => "required",
-            "salary" => "required",
-            "first_installment" => "required",
-            "last_installment" => "required",
-            "insurance_percentage" => "required",
-            "installment" => "required"
+        // Dummy orders type percentage data
+        $ordersTypesPercentage = collect([
+            ['label' => 'New Order', 'data' => 40, 'color' => '#FF5733'],
+            ['label' => 'Processing', 'data' => 30, 'color' => '#33FF57'],
+            ['label' => 'Completed', 'data' => 50, 'color' => '#3357FF'],
         ]);
+
+        // Dummy car brands percentage data
+        $carBrandsPercentage = collect([
+            ['label' => 'Toyota', 'data' => 25, 'color' => '#FFA07A'],
+            ['label' => 'Ford', 'data' => 30, 'color' => '#20B2AA'],
+            ['label' => 'Honda', 'data' => 35, 'color' => '#9370DB'],
+        ]);
+
+        // Dummy car orders brands percentage data
+        $carOrdersBrandsPercentage = collect([
+            ['label' => 'Toyota', 'data' => 15, 'color' => '#DC143C'],
+            ['label' => 'Ford', 'data' => 22, 'color' => '#228B22'],
+            ['label' => 'Honda', 'data' => 18, 'color' => '#8B0000'],
+        ]);
+
+        // Simulate the swap array elements function
+        if (count($ordersTypesPercentage) > 1) {
+            $ordersTypesPercentage = $this->swapArrayElements($ordersTypesPercentage->toArray(), 0);
+        }
+
+        return view('dashboard.index', compact(
+            'carsMonthlyRate',
+            'ordersMonthlyRate',
+            'ordersTypesPercentage',
+            'carBrandsPercentage',
+            'carOrdersBrandsPercentage'
+        ));
+    }
+
+    // Simulated swap function
+    private function swapArrayElements(array $array, int $index)
+    {
+        if ($index < count($array) - 1) {
+            $temp = $array[$index];
+            $array[$index] = $array[$index + 1];
+            $array[$index + 1] = $temp;
+        }
+        return collect($array);
     }
 }
