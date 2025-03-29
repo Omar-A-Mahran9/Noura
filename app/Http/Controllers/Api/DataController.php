@@ -96,7 +96,7 @@ class DataController extends Controller
         $sectionfour = $page->sections->where('id',3)->first();
         $sectionfive = $page->sections->where('id',4)->first();
         $sectionsex = $page->sections->where('id',5)->first();
-        $sectionseven = $page->sections->where('id',6)->first();
+        $sectionseven = $page->sections->where('id',7)->first();
 
          return response()->json([
             'success' => true,
