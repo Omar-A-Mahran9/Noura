@@ -4,14 +4,15 @@
     <div class="card">
         <div class="card-body">
 
-            <form action="{{ route('dashboard.page.update', $page->id) }}" method="post" class="form" id="submitted-form">
+            <form action="{{ route('dashboard.page.update', $page->id) }}" method="post" class="form" id="submitted-form"
+                data-redirection-url="{{ route('dashboard.page.edit', $page->id) }}">
                 @csrf
                 @method('PUT')
 
                 <div class="mb-4">
                     <label for="title_inp" class="form-label fw-bold">{{ __('Page Title') }}</label>
                     <input type="text" id="title_inp" class="form-control" name="title"
-                        value="{{ old('title', $page->title) }}">
+                        value="{{ old('title', $page->title) }}" disabled>
                     <p class="invalid-feedback" id="title"></p>
 
                 </div>
@@ -20,6 +21,8 @@
                 <h3 class="fw-bold text-center mb-5 mt-6" style="font-weight: bold">{{ __('Sections') }}</h3>
 
                 @foreach ($page->sections as $index => $section)
+                    <input type="hidden" class="form-control" name="sections[{{ $index }}][id]"
+                        value="{{ old("sections.$index.id", $section->id ?? '') }}">
                     <div class="mb-4 border p-3 rounded">
                         <h5 class="fw-bold">{{ __('Section') }} {{ $index + 1 }}</h5>
                         <div class="row mb-10">
@@ -37,7 +40,8 @@
                                     </div>
                                 </div>
 
-                                <label for="sections[{{ $index }}][title]_inp" class="form-label">{{ __('Section Title') }}</label>
+                                <label for="sections[{{ $index }}][title]_inp"
+                                    class="form-label">{{ __('Section Title') }}</label>
                                 <input type="text" id="sections[{{ $index }}][title]_inp" class="form-control"
                                     name="sections[{{ $index }}][title]"
                                     value="{{ old("sections.$index.title", $section->title ?? '') }}">
@@ -51,12 +55,17 @@
                                     {{ old("sections.$index.description", $section->description ?? '') }}
                                 </textarea>
                             </div>
+
+
                         </div>
                         @if (!empty($section->items) && count($section->items) > 0)
                             <hr>
                             <h3 class="fw-bold mt-3 text-primary">{{ __('Items') }}</h3>
                             <div class="row">
                                 @foreach ($section->items as $itemIndex => $item)
+                                    <input type="hidden" class="form-control"
+                                        name="sections[{{ $index }}][items][{{ $itemIndex }}][id]"
+                                        value="{{ old("sections.$index.items.$itemIndex.id", $item->id ?? '') }}">
                                     <div class="col-md-6">
                                         <div class="card shadow-sm p-3 mb-4">
                                             <div class="card-body">
@@ -111,15 +120,15 @@
                 <div class="form-footer">
 
                     <!-- begin :: Submit btn -->
-                    <button type="submit" class="btn btn-primary" id="submit-btn">
+                    <button type="submit" class="btn btn-primary">
 
                         <span class="indicator-label">{{ __('Update Page') }}</span>
 
-                        <!-- begin :: Indicator -->
+                        {{-- <!-- begin :: Indicator -->
                         <span class="indicator-progress">{{ __('Please wait ...') }}
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                         </span>
-                        <!-- end   :: Indicator -->
+                        <!-- end   :: Indicator --> --}}
 
                     </button>
                     <!-- end   :: Submit btn -->

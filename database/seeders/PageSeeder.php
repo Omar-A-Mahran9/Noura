@@ -11,8 +11,8 @@ class PageSeeder extends Seeder
     {
         // First Page: Home Page (Update if exists)
         $page1 = Page::updateOrCreate(
-            ['title' => 'Home Page'],
-            ['title' => 'Home Page']
+            ['title' => 'about'],
+            ['title' => 'about']
         );
 
         $section1 = $page1->sections()->updateOrCreate(
@@ -131,8 +131,8 @@ class PageSeeder extends Seeder
 
         // Second Page: Contact Page (Update if exists)
         $page2 = Page::updateOrCreate(
-            ['title' => 'About Page'],
-            ['title' => 'About Page']
+            ['title' => 'home'],
+            ['title' => 'home']
         );
 
         $section7 = $page2->sections()->updateOrCreate(
@@ -143,7 +143,7 @@ class PageSeeder extends Seeder
             ]
         );
 
-        $section8 = $page1->sections()->updateOrCreate(
+        $section8 = $page2->sections()->updateOrCreate(
             ['title' => 'لماذا تعتبر الصحة العقلية مهمة'],
             [
                 'description' => 'لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد، وكان لوريمإيبسوم هو الصناعة.',

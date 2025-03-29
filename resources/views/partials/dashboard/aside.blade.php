@@ -58,21 +58,38 @@
                 @endcan
 
                 @php
-                    $page = \App\Models\Page::first();
+                    $homePage = \App\Models\Page::where('title', 'home')->first();
+                    $aboutPage = \App\Models\Page::where('title', 'about')->first();
                 @endphp
 
                 @can(['view_page'])
                     <div class="menu-item">
                         <a class="menu-link {{ isTabActive('page') }}"
-                            href="{{ $page ? route('dashboard.page.edit', $page->id) : '#' }}" data-bs-toggle="tooltip"
-                            data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                            href="{{ $homePage ? route('dashboard.page.edit', $homePage->id) : '#' }}"
+                            data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click"
+                            data-bs-placement="right">
                             <span class="menu-icon">
                                 <i class="fa fa-home"></i>
                             </span>
-                            <span class="menu-title"> {{ __('Home Page') }}</span>
+                            <span class="menu-title">{{ __('Home Page') }}</span>
                         </a>
                     </div>
                 @endcan
+
+                @can(['view_page'])
+                    <div class="menu-item">
+                        <a class="menu-link {{ isTabActive('page') }}"
+                            href="{{ $aboutPage ? route('dashboard.page.edit', $aboutPage->id) : '#' }}"
+                            data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click"
+                            data-bs-placement="right">
+                            <span class="menu-icon">
+                                <i class="fa fa-info-circle"></i>
+                            </span>
+                            <span class="menu-title">{{ __('About Page') }}</span>
+                        </a>
+                    </div>
+                @endcan
+
 
                 @canany(['view_courses', 'view_courses_order', 'view_course_category'])
                     <div class="menu-item">

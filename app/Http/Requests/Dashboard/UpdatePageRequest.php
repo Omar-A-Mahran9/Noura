@@ -23,10 +23,10 @@ class UpdatePageRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title' => ['required', 'string', 'max:255'],
+         return [
+
             'sections' => ['required', 'array'],
-            'sections.*.id' => ['nullable', 'exists:sections,id'],
+            'sections.*.id' => ['nullable', 'exists:sections_page,id'],
             'sections.*.title' => ['required', 'string', 'max:255'],
             'sections.*.description' => ['nullable', 'string'],
             'sections.*.image' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:2048'], // 2MB max

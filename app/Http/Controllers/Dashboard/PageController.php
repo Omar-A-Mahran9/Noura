@@ -21,75 +21,60 @@ class PageController extends Controller
 
     public function update(UpdatePageRequest $request, $id)
     {
-        $page = Page::with('sections.items')->findOrFail($id);
-
+         $page = Page::with('sections.items')->findOrFail($id);
         $data = $request->validated();
-        // Update page details
-        $page->update([
-            'title' => $data['title']
-        ]);
 
-        // Process Sections
+        // Get existing sections indexed by ID
         $existingSections = $page->sections->keyBy('id');
+        foreach ($data['sections'] as $sectionIndex => $sectionData) {
 
-        foreach ($request->sections as $sectionIndex => $sectionData) {
-            $sectionId = $sectionData['id'] ?? null;
+            if (isset($sectionData['id']) && isset($existingSections[$sectionData['id']])) {
 
-            $sectionDetails = [
-                'page_id' => $page->id,
-                'title' => $sectionData['title'],
-                'description' => $sectionData['description'] ?? null,
-            ];
+                $section = $existingSections[$sectionData['id']];
 
-            // Handle Section Image Upload
-            if (!empty($sectionId) && $request->hasFile("sections.$sectionIndex.image")) {
-                $existingSection = $existingSections[$sectionId] ?? null;
-                if ($existingSection && $existingSection->image) {
-                    deleteImage($existingSection->image, 'sections'); // Delete old image
-                }
-                $sectionDetails['image'] = uploadImage($request->file("sections.$sectionIndex.image"), 'sections');
-            }
-
-            if ($sectionId && isset($existingSections[$sectionId])) {
-                // Update existing section
-                $existingSections[$sectionId]->update($sectionDetails);
-                $section = $existingSections[$sectionId];
-            } else {
-                // Create new section
-                $section = SectionPage::create($sectionDetails);
-            }
-
-            // Process Section Items
-            $existingItems = $section->items->keyBy('id');
-
-            foreach ($sectionData['items'] ?? [] as $itemIndex => $itemData) {
-                $itemId = $itemData['id'] ?? null;
-
-                $itemDetails = [
-                    'section_id' => $section->id,
-                    'title' => $itemData['title'],
-                    'description' => $itemData['description'] ?? null,
+                // Update section details
+                $sectionDetails = [
+                    'title' => $sectionData['title'],
+                    'description' => $sectionData['description'] ?? null,
                 ];
 
-                // Handle Item Image Upload
-                if (!empty($itemId) && $request->hasFile("sections.$sectionIndex.items.$itemIndex.image")) {
-                    $existingItem = $existingItems[$itemId] ?? null;
-                    if ($existingItem && $existingItem->image) {
-                        deleteImage($existingItem->image, 'items'); // Delete old image
-                    }
-                    $itemDetails['image'] = uploadImage($request->file("sections.$sectionIndex.items.$itemIndex.image"), 'items');
-                }
+                // Handle Section Image Upload
+                if ($request->hasFile("sections.$sectionIndex.image")) {
 
-                if ($itemId && isset($existingItems[$itemId])) {
-                    // Update existing item
-                    $existingItems[$itemId]->update($itemDetails);
-                } else {
-                    // Create new item
-                    SectionItem::create($itemDetails);
+                    if ($section->image) {
+                        deleteImage($section->image, 'sections'); // Delete old image
+                    }
+                    $sectionDetails['image'] = uploadImage($request->file("sections.$sectionIndex.image"), 'sections');
+                 }
+
+                $section->update($sectionDetails);
+
+                // Get existing items indexed by ID
+                $existingItems = $section->items->keyBy('id');
+                dd($existingItems);
+
+                foreach ($sectionData['items'] ?? [] as $itemIndex => $itemData) {
+                    if (isset($itemData['id']) && isset($existingItems[$itemData['id']])) {
+                        $item = $existingItems[$itemData['id']];
+                        // Update item details
+                        $itemDetails = [
+                            'title' => $itemData['title'],
+                            'description' => $itemData['description'] ?? null,
+                        ];
+
+                        // Handle Item Image Upload
+                        if ($request->hasFile("sections.$sectionIndex.items.$itemIndex.image")) {
+                            if ($item->image) {
+                                deleteImage($item->image, 'items'); // Delete old image
+                            }
+                            $itemDetails['image'] = uploadImage($request->file("sections.$sectionIndex.items.$itemIndex.image"), 'items');
+                        }
+
+                        $item->update($itemDetails);
+                    }
                 }
             }
         }
 
-     }
-
-}
+           }
+    }
