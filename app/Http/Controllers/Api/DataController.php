@@ -92,7 +92,9 @@ class DataController extends Controller
     {
         $page = Page::where('title', 'home')->with('sections.items')->first();
         $sectionOne = $page->sections->first();
-        $sectiontwo = $page->sections->where('id',2)->first();
+        $sectionthree = $page->sections->where('id',2)->first();
+        $sectionfour = $page->sections->where('id',3)->first();
+        $sectionfive = $page->sections->where('id',4)->first();
 
          return response()->json([
             'success' => true,
@@ -136,9 +138,9 @@ class DataController extends Controller
 
                 // Section 3: Why Mindset is Important
             'section3' => [
-                    'title' => $sectiontwo->title ?? 'Default Title',
-                    'description' => $sectiontwo->description ?? 'Default description',
-                    'details' => $sectiontwo->items->map(function ($item) {
+                    'title' => $sectionthree->title ?? 'Default Title',
+                    'description' => $sectionthree->description ?? 'Default description',
+                    'details' => $sectionthree->items->map(function ($item) {
                         return [
                             'image' => getImagePathFromDirectory($item->image ?? '', 'Items'),
                             'title' => $item->title ?? 'Default Item Title',
@@ -150,15 +152,15 @@ class DataController extends Controller
                 // Section 4: General Content Section
                 'section4' => [
                     [
-                        'image' => asset('images/section4_1.jpg'),
-                        'title' => 'Self-Improvement Tips',
-                        'description' => 'Daily habits to enhance personal growth.'
+                        'image' => getImagePathFromDirectory($sectionfour->image, 'Sections'),
+                        'title' => $sectionfour->title ?? 'Default Title',
+                        'description' => $sectionfour->description ?? 'Default description',
                     ],
                     [
-                        'image' => asset('images/section4_2.jpg'),
-                        'title' => 'Building Resilience',
-                        'description' => 'How to handle failures and keep moving forward.'
-                    ]
+                        'image' => getImagePathFromDirectory($sectionfive->image, 'Sections'),
+                        'title' => $sectionfive->title ?? 'Default Title',
+                        'description' => $sectionfive->description ?? 'Default description',
+                        ]
                 ],
 
                 // Section 5: Another General Section
