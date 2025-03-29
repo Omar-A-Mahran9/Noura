@@ -95,10 +95,10 @@
                 <div class="card card-xl-stretch mb-xl-8">
                     <div class="card-body p-4 text-center">
                         <h4 class="fw-bolder">{{ __('Book Best Sellers') }}</h4>
-                        <ul class="list-group">
+                        <ul class="list-group  my-2">
                             @foreach ($bestSellingBooks as $book)
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    {{ __('Book') }}: {{ $book->title_ar }}
+                                <li class="list-group-item d-flex justify-content-between align-items-center  py-5">
+                                    {{ $book->title_ar }}
                                     <span class="badge bg-primary rounded-pill">{{ $book->total_sold }}
                                         {{ __('Sold') }}</span>
                                 </li>
@@ -113,9 +113,9 @@
                 <div class="card card-xl-stretch mb-xl-8">
                     <div class="card-body p-4 text-center">
                         <h4 class="fw-bolder">{{ __('Courses Best Sellers') }}</h4>
-                        <ul class="list-group">
+                        <ul class="list-group  my-2">
                             @foreach ($bestSellingCourses as $course)
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <li class="list-group-item d-flex justify-content-between align-items-center  py-5">
                                     Course ID: {{ $course->course_id }}
                                     <span class="badge bg-success rounded-pill">{{ $course->total_sold }}
                                         {{ __('Sold') }}</span>
