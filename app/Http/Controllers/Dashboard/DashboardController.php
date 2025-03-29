@@ -48,7 +48,7 @@ class DashboardController extends Controller
          )
          ->join('consultaion', 'orders.consultaion_id', '=', 'consultaion.id')
          ->whereNotNull('orders.consultaion_id')
-         ->groupBy('orders.consultaion_id', 'consultaion.title_en')
+         ->groupBy('orders.consultaion_id', 'consultaion.title_ar')
          ->orderByDesc('total_sold')
          ->limit(3)
          ->get();

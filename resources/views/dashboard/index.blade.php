@@ -133,7 +133,7 @@
                             @foreach ($bestSellingConsultations as $consultation)
                                 @dd($consultation)
                                 <li class="list-group-item d-flex justify-content-between align-items-center  py-5">
-                                    Consultation ID: {{ $consultation->consultaion_id }}
+                                    {{ __('Consultation') }} : {{ $consultation->title_ar }}
                                     <span class="badge bg-warning rounded-pill">{{ $consultation->total_sold }}
                                         {{ __('Sold') }}</span>
                                     <span class="badge bg-warning rounded-pill">{{ $consultation->total_revenue }}
