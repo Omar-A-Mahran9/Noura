@@ -25,8 +25,8 @@ class DashboardController extends Controller
          $bestSellingBooks = DB::table('orders')
          ->select(
              'books.id',
-             'books.name_en',
-             'books.name_ar',
+             'books.title_en', // Correct column name
+             'books.title_ar', // Correct column name
              DB::raw('COUNT(*) as total_sold'),
              DB::raw('SUM(orders.total_price) as total_revenue')
          )
