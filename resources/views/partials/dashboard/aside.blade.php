@@ -215,6 +215,18 @@
                     </div>
                 @endcan --}}
 
+                @can(['view_consultation_work'])
+                    <div class="menu-item">
+                        <a class="menu-link {{ isTabActive('consultation_work') }}"
+                            href="{{ route('dashboard.consultation_work.edit', 1) }}" data-bs-toggle="tooltip"
+                            data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                            <span class="menu-icon">
+                                <i class="fa-regular fa-eye"></i> </span>
+                            <span class="menu-title"> {{ __('consultatio work') }}</span>
+                        </a>
+                    </div>
+                @endcan
+
                 @can(['view_consultation_time'])
                     <div class="menu-item">
                         <a class="menu-link {{ isTabActive('view_consultation_time') }}"
@@ -228,18 +240,18 @@
                     </div>
                 @endcan
                 @can(['view_consultation_time'])
-                <div class="menu-item">
-                    <a class="menu-link {{ isTabActive('Courses_Order') }}"
-                        href="{{ route('dashboard.consultation_order.index') }}" data-bs-toggle="tooltip"
-                        data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-                        <span class="menu-icon">
-                            <i class="fa fa-shopping-cart"></i> </span>
-                        <span class="menu-title"> {{ __('Consultation Order') }}</span>
-                    </a>
-                </div>
-            @endcan
+                    <div class="menu-item">
+                        <a class="menu-link {{ isTabActive('Courses_Order') }}"
+                            href="{{ route('dashboard.consultation_order.index') }}" data-bs-toggle="tooltip"
+                            data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                            <span class="menu-icon">
+                                <i class="fa fa-shopping-cart"></i> </span>
+                            <span class="menu-title"> {{ __('Consultation Order') }}</span>
+                        </a>
+                    </div>
+                @endcan
 
-           {{-- @can(['view_consultation'])
+                {{-- @can(['view_consultation'])
                     <div class="menu-item">
                         <a class="menu-link {{ isTabActive('consultation') }}"
                             href="{{ route('dashboard.consultation.index') }}" data-bs-toggle="tooltip"
@@ -252,7 +264,7 @@
                     </div>
                 @endcan --}}
 
-              {{-- @can(['view_quizzes'])
+                {{-- @can(['view_quizzes'])
                     <div class="menu-item">
                         <a class="menu-link {{ isTabActive('quizzes') }}" href="{{ route('dashboard.quizzes.index') }}"
                             data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click"

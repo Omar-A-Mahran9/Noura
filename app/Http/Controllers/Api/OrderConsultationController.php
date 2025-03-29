@@ -18,6 +18,7 @@ class OrderConsultationController extends Controller
     public function store(Request $request)
     {
          $request->validate([
+            
             'date' => 'required|date_format:Y-m-d', // Validates YYYY-MM-DD format
             'time' => 'required|date_format:H:i:s', // Validates HH:MM:SS format
             'consultaion_type_id' => 'required|exists:consultaion_type,id',
@@ -51,7 +52,7 @@ class OrderConsultationController extends Controller
                     }
                 }
             ],
-        'answers.*.value' => [
+            'answers.*.value' => [
             'nullable',
             function ($attribute, $value, $fail) {
                 if (is_array($value)) {
@@ -159,7 +160,7 @@ class OrderConsultationController extends Controller
 
     }
 
-    
+
     /**
      * Remove the specified resource from storage.
      *

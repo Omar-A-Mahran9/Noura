@@ -21,6 +21,7 @@ class RoleSeeder extends Seeder
             'employees',
             'orders',
             'group_chat',
+            'consultation_work',
 
             'courses',
             'courses_order',

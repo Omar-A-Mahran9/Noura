@@ -28,6 +28,7 @@ Route::group([ 'prefix' => 'dashboard' , 'namespace' => 'Dashboard', 'as' => 'da
     /** resources routes **/
     Route::resource('consultationtype', 'ConsultaionTypeController');
     Route::resource('consultation_time', 'ConsultaionController');
+    Route::resource('consultation_work', 'ConsultationWorkController');
 
 
     Route::resource('categories', 'CategoriesController');

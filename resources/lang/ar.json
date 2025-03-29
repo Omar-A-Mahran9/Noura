@@ -613,7 +613,23 @@
     "Update Role": "تعديل الدور",
     "OR": "أو",
     "Edit group": "تعديل المجموعة",
+    "consultatio work": "كيف تعمل الاستشارة",
+    "Main Image": "الصورة الرئيسية",
+    "Steps": "الخطوات",
 
+    "Step 1 Image": "صورة الخطوة الأولى",
+    "Step 1 Name": "عنوان الخطوة الأولى",
+    "Step 1 Description": "وصف الخطوة الأولى",
+
+    "Step 2 Image": "صورة الخطوة الثانية",
+    "Step 2 Name": "عنوان الخطوة الثانية",
+    "Step 2 Description": "وصف الخطوة الثانية",
+
+    "Step 3 Image": "صورة الخطوة الثالثة",
+    "Step 3 Name": "عنوان الخطوة الثالثة",
+    "Step 3 Description": "وصف الخطوة الثالثة",
+
+    "Update Consultation Work": "تحديث الاستشارة",
     "Purchase order": "طلب شراء",
     "Edit a city": "تعديل مدينة",
     "Edit a vendor": "تعديل عميل",

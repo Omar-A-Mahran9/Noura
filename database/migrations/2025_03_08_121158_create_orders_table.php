@@ -52,6 +52,8 @@ class CreateOrdersTable extends Migration
             $table->foreignId('vendor_id')->constrained('vendors')->onDelete('cascade');
 
             $table->enum('type', ['book', 'course', 'consultation'])->nullable(); // New column for type
+            $table->enum('type_of_book', ['hard_copy', 'E-book'])->nullable(); // New column for type
+            $table->integer('quantity')->nullable();
             $table->decimal('total_price', 10, 2);
             $table->enum('payment_status', ['pending', 'paid', 'failed'])->default('pending');
             $table->enum('payment_method', ['visa', 'mastercard', 'mada'])->nullable();

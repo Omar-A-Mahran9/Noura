@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\BookOrderController;
 use App\Http\Controllers\Api\OrderConsultationController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Dashboard\ConsultaionController;
@@ -80,7 +81,7 @@ Route::group(['middleware' => ['json.response']], function () {
 
         Route::post('/make-order', [OrderController::class, 'store']);
         Route::post('/consultation-orders', [OrderConsultationController::class, 'store']);
-        Route::post('/Book-order', [OrderConsultationController::class, 'store']);
+        Route::post('/Book-order', [BookOrderController::class, 'store']);
 
     });
 
