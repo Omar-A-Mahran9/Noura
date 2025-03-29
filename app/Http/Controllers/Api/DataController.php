@@ -194,12 +194,12 @@ class DataController extends Controller
                     ]
                 ],
 
- 
+
 
                 'books' => $books->map(function ($book) {
                     return [
                         'title' => $book->title,
-                        'image' => getImagePathFromDirectory($book->image, 'Books'), // Adjust function as needed
+                        'image' => getImagePathFromDirectory($book->image, 'Books.images'), // Adjust function as needed
                         'description' => $book->description
                     ];
                 }),
