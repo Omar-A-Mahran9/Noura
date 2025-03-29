@@ -96,6 +96,7 @@ class DataController extends Controller
         $sectionfour = $page->sections->where('id',3)->first();
         $sectionfive = $page->sections->where('id',4)->first();
         $sectionsex = $page->sections->where('id',5)->first();
+        $sectionseven = $page->sections->where('id',6)->first();
 
          return response()->json([
             'success' => true,
@@ -109,7 +110,7 @@ class DataController extends Controller
                 ],
 
                             // Section 2: Events per Day
-                'section2' => [
+                'events' => [
                     '2025-03-08' => [
                     [
                         'image' => asset('images/event_friday.jpg'),
@@ -207,10 +208,10 @@ class DataController extends Controller
 
                 // Section 7: Final Content
                 'section7' => [
-                    'image' => asset('images/section7.jpg'),
-                    'title' => 'Your Journey Starts Here',
-                    'description' => 'Embrace a new way of thinking and transform your life today.'
-                ]
+                    'title' => $sectionseven->title ?? 'Default Title',
+                    'description' => $sectionseven->description ?? 'Default description',
+                    'image' => getImagePathFromDirectory($sectionseven->image, 'Sections'),
+                ],
             ]
         ], 200);
     }
