@@ -136,20 +136,15 @@ class DataController extends Controller
 
                 // Section 3: Why Mindset is Important
             'section3' => [
-                'title' => $sectiontwo->title ?? 'Default Title',
-                'description' => $sectiontwo->description ?? 'Default description',
-                    'details' => [
-                        [
-                            'image' => asset('images/mindset1.jpg'),
-                            'title' => 'Growth Mindset',
-                            'description' => 'Develop a growth-oriented approach to challenges and opportunities.'
-                        ],
-                        [
-                            'image' => asset('images/mindset2.jpg'),
-                            'title' => 'Positive Thinking',
-                            'description' => 'Learn how to stay optimistic and motivated in difficult times.'
-                        ]
-                    ]
+                    'title' => $sectiontwo->title ?? 'Default Title',
+                    'description' => $sectiontwo->description ?? 'Default description',
+                    'details' => $sectiontwo->items->map(function ($item) {
+                        return [
+                            'image' => getImagePathFromDirectory($item->image ?? '', 'Sections'),
+                            'title' => $item->title ?? 'Default Item Title',
+                            'description' => $item->description ?? 'Default Item Description'
+                        ];
+                    })
                 ],
 
                 // Section 4: General Content Section
