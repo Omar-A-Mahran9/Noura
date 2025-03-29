@@ -132,8 +132,8 @@
                         <ul class="list-group">
                             @foreach ($bestSellingConsultations as $consultation)
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Consultation ID: {{ $consultation->consultaion_id }}
-                                    <span class="badge bg-warning rounded-pill">{{ $consultation->total_sold }} Sold</span>
+                                    Consultation ID: {{ $consultation }}
+                                    <span class="badge bg-warning rounded-pill">{{ $consultation->total_sold }} {{__('Sold')}}</span>
                                 </li>
                             @endforeach
                         </ul>
