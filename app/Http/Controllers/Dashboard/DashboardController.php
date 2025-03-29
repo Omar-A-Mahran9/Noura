@@ -23,9 +23,16 @@ class DashboardController extends Controller
          $totalcourses = Course::count(); // Ensure this is defined
 
          $bestSellingBooks = DB::table('orders')
-         ->select('book_id', DB::raw('COUNT(*) as total_sold'), DB::raw('SUM(total_price) as total_revenue'))
-         ->whereNotNull('book_id')
-         ->groupBy('book_id')
+         ->select(
+             'books.id',
+             'books.name_en',
+             'books.name_ar',
+             DB::raw('COUNT(*) as total_sold'),
+             DB::raw('SUM(orders.total_price) as total_revenue')
+         )
+         ->join('books', 'orders.book_id', '=', 'books.id')
+         ->whereNotNull('orders.book_id')
+         ->groupBy('books.id', 'books.title_en', 'books.title_ar')
          ->orderByDesc('total_sold')
          ->limit(3)
          ->get();
@@ -39,7 +46,7 @@ class DashboardController extends Controller
          ->limit(3)
          ->get();
 
-         
+
          $bestSellingConsultations = DB::table('orders')
          ->select(
              'consultaion.id',
