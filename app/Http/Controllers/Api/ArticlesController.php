@@ -35,7 +35,8 @@ public function index(Request $request)
     $authorFilter = $request->query('author_id'); // Filter by author ID
 
     // Query articles with comments and vendors
-    $query = Articles::with('comments', 'comments.vendor');
+    $query = Articles::with('comments', 'comments.vendor')
+    ->where('publish', 1); // Only fetch published articles
 
     // Apply date filter if provided
     if ($dateFilter) {
@@ -90,8 +91,9 @@ public function index(Request $request)
     {
         // Retrieve the single article with its related comments and vendor data
         $article = Articles::where('id', $id)
-            ->with('comments', 'comments.vendor')
-            ->first();
+        ->where('publish', 1) // Ensure article is published
+        ->with('comments', 'comments.vendor')
+        ->first();
 
         // If the article does not exist, return a 404 response
         if (!$article) {
