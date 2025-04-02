@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Consultaion;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
