@@ -46,6 +46,12 @@
                 <!-- begin :: Card header -->
                 <div class="card-header d-flex align-items-center">
                     <h3 class="fw-bolder text-dark">{{ __('Add new article') }}</h3>
+                    <div class="form-check form-switch form-check-custom form-check-solid mb-2">
+                        <label class="fs-5 fw-bold">{{ __('publish') }}</label>
+                        <input class="form-check-input mx-2" style="height: 18px;width:36px;" type="checkbox" name="publish"
+                            id="publish" />
+                        <label class="form-check-label" for="publish"></label>
+                    </div>
                 </div>
                 <!-- end   :: Card header -->
 
@@ -131,7 +137,7 @@
                         <div class="col-md-6 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Description in arabic') }}</label>
-                            <textarea class="form-control" rows="4" name="description_ar" id="meta_tag_description_ar_inp"></textarea>
+                            <textarea id="tinymce_description_ar" name="description_ar" class="tinymce"></textarea>
                             <p class="text-danger invalid-feedback" id="description_ar"></p>
 
 
@@ -142,7 +148,7 @@
                         <div class="col-md-6 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Description in english') }}</label>
-                            <textarea class="form-control" rows="4" name="description_en" id="meta_tag_description_en_inp"></textarea>
+                            <textarea id="tinymce_description_en" name="description_en" class="tinymce"></textarea>
                             <p class="text-danger invalid-feedback" id="description_en"></p>
 
                         </div>
@@ -181,4 +187,14 @@
     </div>
 @endsection
 @push('scripts')
+    <script src="{{ asset('dashboard-assets/plugins/custom/tinymce/tinymce.bundle.js') }}"></script>
+
+    <script>
+        $(document).ready(() => {
+
+            initTinyMc();
+
+
+        })
+    </script>
 @endpush

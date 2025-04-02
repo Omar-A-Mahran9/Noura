@@ -246,7 +246,20 @@ public function myGroups()
     ], 200);
 }
 
+public function myConsultation(Request $request)
+{
+    $vendorId = Auth::id(); // Get the logged-in vendor's ID
 
+    $orders = Order::where('vendor_id', $vendorId)
+        ->with(['consultation']) // Eager load related models
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    return response()->json([
+        'success' => true,
+        'orders' => OrderResource::collection($orders)
+    ], 200);
+}
 
 
 }

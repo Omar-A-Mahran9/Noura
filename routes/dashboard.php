@@ -63,6 +63,11 @@ Route::group([ 'prefix' => 'dashboard' , 'namespace' => 'Dashboard', 'as' => 'da
         ]);
     });
     Route::resource('books', 'BookController');
+    Route::get('/zoom-signature/{meetingId}', 'ZoomController@generateSignature');
+    
+    Route::get('/zoom-meeting', function () {
+        return view('dashboard.zoom_meeting.index');
+    })->name('zoom.meeting');
 
     Route::get('/books_orders', [BookOrderController::class, 'order'])
     ->name('books_orders.index');

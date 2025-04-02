@@ -44,6 +44,13 @@
                 <!-- begin :: Card header -->
                 <div class="card-header d-flex align-items-center">
                     <h3 class="fw-bolder text-dark">{{ __('article') . ' : ' . $article->title }}</h3>
+                    <div class="form-check form-switch form-check-custom form-check-solid mb-2">
+                        <label class="fs-5 fw-bold">{{ __('publish') }}</label>
+                        <!-- Set the checkbox state based on the 'publish' field -->
+                        <input class="form-check-input mx-2" style="height: 18px;width:36px;" type="checkbox" name="publish"
+                            id="publish" value="1" {{ $article->publish ? 'checked' : '' }}  disabled/>
+                        <label class="form-check-label" for="publish"></label>
+                    </div>
                 </div>
                 <!-- end   :: Card header -->
                 <!-- begin :: Inputs wrapper -->
@@ -172,7 +179,7 @@
                 <thead>
                     <tr class="text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                         <th>#</th>
-                         <th>{{ __('name') }}</th>
+                        <th>{{ __('name') }}</th>
                         <th>{{ __('comment') }}</th>
                         <th>{{ __('created date') }}</th>
                         <th class="min-w-100px">{{ __('actions') }}</th>
@@ -193,9 +200,9 @@
     <!-- end   :: Datatable card -->
 @endsection
 @push('scripts')
-<script>
-    let articleId="{{ $article->id }}"
-</script>
+    <script>
+        let articleId = "{{ $article->id }}"
+    </script>
     <script src="{{ asset('js/dashboard/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/dashboard/datatables/comments.js') }}"></script>
 @endpush

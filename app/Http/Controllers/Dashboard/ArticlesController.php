@@ -42,12 +42,7 @@ class ArticlesController extends Controller
         return view('dashboard.articles.create',compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
      public function store(StoreArticlesRequest $request)
      {
          // Ensure proper authorization
@@ -56,7 +51,8 @@ class ArticlesController extends Controller
          // Get validated data and exclude category_id
          $data = $request->validated();
          unset($data['category_id']); // Remove category_id from $data
-            $data['publish']=1;
+         $data['publish'] = $request->has('publish') ? 1 : 0;
+
          // Check and upload the image if it's present
          if ($request->file('main_image')) {
              $data['main_image'] = uploadImage($request->file('main_image'), "articles");
@@ -109,7 +105,7 @@ class ArticlesController extends Controller
         // Get validated data from the request
         $data = $request->validated();
         unset($data['category_id']); // Remove category_id from $data
-        // Check if the 'main_image' file is provided and update the image
+        $data['publish'] = $request->has('publish') ? 1 : 0;
         if ($request->hasFile('main_image')) {
             // Delete the existing image first if it exists
             deleteImage($article->main_image, 'articles');
@@ -128,7 +124,7 @@ class ArticlesController extends Controller
         }
 
         // Optionally, return a success response or redirect
-     }
+    }
 
 
 
