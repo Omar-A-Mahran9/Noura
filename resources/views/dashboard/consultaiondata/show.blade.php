@@ -219,6 +219,13 @@
                                                             id="time_list_{{ $index }}_available"></p>
                                                     </div>
 
+                                                    <!-- Zoom Meeting Management Button -->
+                                                    <div class="col-md-2 mt-5">
+                                                        <a href="{{ $schedule->zoom_start_url }}" class="btn btn-primary"
+                                                            target="_blank">
+                                                            {{ __('Open Zoom Admin') }}
+                                                        </a>
+                                                    </div>
 
                                                 </div>
                                             </div>
@@ -249,7 +256,7 @@
                 <div class="form-footer">
 
                     <!-- begin :: Submit btn -->
-                    <a href="{{ route('dashboard.consultaiondata.index') }}" class="btn btn-primary">
+                    <a href="{{ route('dashboard.consultation_time.index') }}" class="btn btn-primary">
                         <span class="indicator-label">{{ __('Back') }}</span>
                     </a>
                     <!-- end   :: Submit btn -->

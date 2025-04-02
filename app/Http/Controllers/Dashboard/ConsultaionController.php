@@ -10,6 +10,7 @@ use App\Models\ConsultaionType;
 use App\Models\Order;
 use App\Models\VendorAnswers;
 use Illuminate\Http\Request;
+use MacsiDigital\Zoom\Facades\Zoom;
 
 class ConsultaionController extends Controller
 {
@@ -41,52 +42,70 @@ class ConsultaionController extends Controller
     }
 
 
+
     public function store(StoreConsultationRequest $request)
     {
+        // Get the validated data
+        $data = $request->validated();
 
-         // Get the validated data
-         $data = $request->validated();
-          // Handle the main image upload
-         if ($request->file('main_image')) {
-             $data['main_image'] = uploadImage($request->file('main_image'), "Consultation");
-         }
-
-
-      $consultaionData = [
-        'title_ar' => $data['title_ar'],
-        'title_en' => $data['title_en'],
-        'description_ar' => $data['description_ar'],
-        'description_en' => $data['description_en'],
-         'main_image' =>  $data['main_image'],
-         'price' =>  $data['price'],
-        'consultaion_type_id'=> $data['consultaion_type_id'],
-       ];
-
-      $consultaion=Consultaion::create($consultaionData);
-
-     $consultaiontimes = $request->time_list ?? []; // Retrieve the sections list from the request
-      if (is_array($consultaiontimes) && count($consultaiontimes) > 0) {
-        foreach ($consultaiontimes as $consultaiontime) {
-             // Check if 'available' is set and valid
-             $available = isset($consultaiontime['available']) &&
-             is_array($consultaiontime['available']) &&
-             count($consultaiontime['available']) > 0 &&
-             $consultaiontime['available'][0] === 'true' ? 1 : 0;
-
-            // Build the section data
-            $sectionData = [
-                'consultaion_id' => $consultaion->id,
-                'date' => $consultaiontime['date'],
-                'time' => $consultaiontime['time'],
-                'available' => $available,
-            ];
-
-            // Create the section record
-            $section = ConsultaionSchedual::create($sectionData);
+        // Handle the main image upload
+        if ($request->file('main_image')) {
+            $data['main_image'] = uploadImage($request->file('main_image'), "Consultation");
         }
-      }
 
+        // Create consultation record
+        $consultaion = Consultaion::create([
+            'title_ar' => $data['title_ar'],
+            'title_en' => $data['title_en'],
+            'description_ar' => $data['description_ar'],
+            'description_en' => $data['description_en'],
+            'main_image' =>  $data['main_image'],
+            'price' =>  $data['price'],
+            'consultaion_type_id' => $data['consultaion_type_id'],
+        ]);
+
+        // Handle consultation schedule times
+        $consultaiontimes = $request->time_list ?? [];
+        $zoomMeetings = [];
+
+        if (is_array($consultaiontimes) && count($consultaiontimes) > 0) {
+            foreach ($consultaiontimes as $consultaiontime) {
+                $available = isset($consultaiontime['available']) &&
+                is_array($consultaiontime['available']) &&
+                count($consultaiontime['available']) > 0 &&
+                $consultaiontime['available'][0] === 'true' ? 1 : 0;
+
+                // Create Zoom meeting for this schedule
+                $meetingData = [
+                    'topic'      => "Consultation: " . $consultaion->title_en,
+                    'start_time' => $consultaiontime['date'] . 'T' . $consultaiontime['time'],
+                    'duration'   => 60, // Default 60 minutes
+                    'agenda'     => "Scheduled consultation session",
+                ];
+
+                $meeting = $this->createMeeting($meetingData);
+
+                // Create consultation schedule with Zoom details
+                $section = ConsultaionSchedual::create([
+                    'consultaion_id' => $consultaion->id,
+                    'date' => $consultaiontime['date'],
+                    'time' => $consultaiontime['time'],
+                    'available' => $available,
+                    'zoom_meeting_id' => $meeting->id,
+                    'zoom_join_url' => $meeting->join_url,
+                    'zoom_start_url' => $meeting->start_url,
+                ]);
+
+                $zoomMeetings[] = [
+                    'meeting_id' => $meeting->id,
+                    'join_url' => $meeting->join_url,
+                    'start_url' => $meeting->start_url,
+                ];
+            }
+        }
+ 
     }
+
 
     public function update(Request $request,$id)
     {
@@ -236,5 +255,29 @@ class ConsultaionController extends Controller
 
          }
     }
+
+
+    public function createMeeting($data)
+    {
+        $user = Zoom::user()->first();
+
+        $meeting = $user->meetings()->create([
+            'topic'      => $data['topic'],
+            'type'       => 2, // Scheduled Meeting
+            'start_time' => $data['start_time'],
+            'duration'   => $data['duration'], // in minutes
+            'timezone'   => 'UTC',
+            'agenda'     => $data['agenda'],
+            'settings'   => [
+                'host_video' => true,
+                'participant_video' => true,
+                'mute_upon_entry' => true,
+                'waiting_room' => true,
+            ]
+        ]);
+
+        return $meeting;
+    }
+
 
 }
