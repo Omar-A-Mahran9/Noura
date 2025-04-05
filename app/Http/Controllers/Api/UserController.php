@@ -260,19 +260,24 @@ public function myConsultation(Request $request)
             return null;
         }
 
+        $scheduledDateTime = null;
+
+        if ($order->consultaionSchedual) {
+            $scheduledDateTime = Carbon::parse($order->consultaionSchedual->date . ' ' . $order->consultaionSchedual->time);
+        }
+
         return [
             'title' => $order->consultaionType->name,
             'type' => $order->consultaionType->name,
             'price' => $order->consultation->price,
+            'status' => $scheduledDateTime && $scheduledDateTime->isPast()
+                ? 'consultation ended'
+                : 'consultation scheduled',
             'schedule' => $order->consultaionSchedual ? [
                 'date' => $order->consultaionSchedual->date,
-                'time' => Carbon::parse($order->consultaionSchedual->time)->format('g:i A'), // 👈 formats to 6:15 AM
+                'time' => Carbon::parse($order->consultaionSchedual->time)->format('g:i A'),
                 'zoom_join_url' => $order->consultaionSchedual->zoom_join_url,
-
             ] : null,
-            // 'consultation_type' => $order->consultaionType ? [
-            //     'type' => $order->consultaionType->name,
-            // ] : null,
         ];
     })->filter()->values();
 
