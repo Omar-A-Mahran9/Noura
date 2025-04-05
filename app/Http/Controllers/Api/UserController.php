@@ -202,7 +202,8 @@ public function myBooks(Request $request)
         'books' => $orders->map(fn($order) => [
             'id' => $order->book->id,
             'title' => $order->book->title,
-            'image' => $order->book->image, // Assuming there is an image column
+            'image' => getImagePathFromDirectory($order->book->image, 'Books/images')
+            , // Assuming there is an image column
             'description' => $order->book->description,
             'price' => $order->book->price,
             'order_id' => $order->id,
