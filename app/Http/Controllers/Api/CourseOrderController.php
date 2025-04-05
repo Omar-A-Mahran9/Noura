@@ -19,7 +19,7 @@ class CourseOrderController extends Controller
 
         ]);
 
-        $course=Course::find($data['book_id']);
+        $course=Course::find($data['course_id']);
         $order = Order::create([
             'vendor_id' => Auth::user()->id,
             'course_id' =>$data['course_id'],
