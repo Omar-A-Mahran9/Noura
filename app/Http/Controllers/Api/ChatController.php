@@ -23,15 +23,12 @@ class ChatController extends Controller
         // Find the chat group
         $chatGroup = ChatGroup::findOrFail($group_id);
 
-        // Get the vendor
-        $vendor = Vendor::findOrFail($vendor_id);
-
         // Check if the vendor is already in the group
         if ($chatGroup->vendors()->where('vendor_id', $vendor_id)->exists()) {
             return response()->json(['message' => 'You are already in this group'], 400);
         }
 
-        // Attach vendor to group
+        // Attach vendor to the group
         $chatGroup->vendors()->attach($vendor_id);
 
         return $this->success(
@@ -39,22 +36,23 @@ class ChatController extends Controller
             data: [
                 'group_id' => $chatGroup->id,
                 'group_title' => $chatGroup->name_en, // or name_ar if needed
-                'vendor_id' => $vendor->id,
-                'vendor_name' => $vendor->name
+                'vendor_id' => $vendor_id,
+                'vendor_name' => auth()->user()->name, // Use auth()->user() to get vendor's name
             ]
         );
     }
 
 
+
     public function groups()
     {
-        $vendorId = auth()->id(); // Get the authenticated user's ID
+        $vendorId = auth()->id(); // Get the authenticated vendor's ID
 
-        // Fetch groups where the authenticated user is not a vendor in the group
+        // Get all chat groups where the authenticated vendor has not joined yet
         $groups = ChatGroup::whereDoesntHave('vendors', function ($query) use ($vendorId) {
-            $query->where('vendors.id', $vendorId);
+            $query->where('vendors.id', $vendorId); // Check if vendor is in the group
         })
-        ->get();
+        ->paginate(10); // Using pagination instead of get()
 
         return GroupResource::collection($groups);
     }
