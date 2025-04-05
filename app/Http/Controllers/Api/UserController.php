@@ -271,8 +271,8 @@ public function myConsultation(Request $request)
             'type' => $order->consultaionType->name,
             'price' => $order->consultation->price,
             'status' => $scheduledDateTime && $scheduledDateTime->isPast()
-                ? 'consultation ended'
-                : 'consultation scheduled',
+                ? __('consultation ended')
+                : __('consultation scheduled'),
             'schedule' => $order->consultaionSchedual ? [
                 'date' => $order->consultaionSchedual->date,
                 'time' => Carbon::parse($order->consultaionSchedual->time)->format('g:i A'),
