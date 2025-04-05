@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\BookOrderController;
+use App\Http\Controllers\Api\CourseOrderController;
 use App\Http\Controllers\Api\OrderConsultationController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Dashboard\ConsultaionController;
@@ -75,7 +76,7 @@ Route::group(['middleware' => ['json.response']], function () {
         Route::post('/change-password', 'Api\UserController@changPassword');
         Route::post('/profile_image', 'Api\UserController@updateProfileImage');
         Route::get('/my-order', 'Api\UserController@myOrder');
-        
+
         Route::get('/my-consultation', 'Api\UserController@myConsultation');
 
         Route::get('/my-course', 'Api\UserController@myCourse');
@@ -85,6 +86,7 @@ Route::group(['middleware' => ['json.response']], function () {
         Route::post('/make-order', [OrderController::class, 'store']);
         Route::post('/consultation-orders', [OrderConsultationController::class, 'store']);
         Route::post('/Book-order', [BookOrderController::class, 'store']);
+        Route::post('/Course-order', [CourseOrderController::class, 'store']);
 
     });
 
