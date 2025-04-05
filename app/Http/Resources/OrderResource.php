@@ -23,18 +23,24 @@ class OrderResource extends JsonResource
             'created_at' => $this->created_at->toDateTimeString(),
 
             'book' => $this->book ? [
+                'id' => $this->book->id,
+
                 'title' => $this->book->title,
                 'description' => $this->book->description,
                 'price' => $this->book->price,
             ] : null,
 
             'course' => $this->course ? [
+                'id' => $this->course->id,
+
                 'name' => $this->course->name,
                 'description' => $this->course->description,
                 'price' => $this->course->price,
             ] : null,
 
            'consultation' => $this->consultation ? [
+            'id' => $this->consultaionType->id,
+
             'title' => $this->consultaionType->name,
             'description' => $this->consultaionType->name,
             'price' => $this->consultation->price,
