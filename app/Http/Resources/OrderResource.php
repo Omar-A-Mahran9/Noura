@@ -35,16 +35,16 @@ class OrderResource extends JsonResource
             ] : null,
 
            'consultation' => $this->consultation ? [
-            'title' => $this->consultation->title,
-            'description' => $this->consultation->description,
+            'title' => $this->consultaionType->name,
+            'description' => $this->consultaionType->name,
             'price' => $this->consultation->price,
-            'schedule' => $this->consultation->schedule ? [
-                'start_date' => $this->consultation->schedule->start_date,
-                'end_date' => $this->consultation->schedule->end_date,
-            ] : null,
-            'consultation_type' => $this->consultation->type ? [
-                'type' => $this->consultation->type->name,
-            ] : null,
+            // 'schedule' => $this->consultation->schedule ? [
+            //     'start_date' => $this->consultation->schedule->start_date,
+            //     'end_date' => $this->consultation->schedule->end_date,
+            // ] : null,
+            // 'consultation_type' => $this->consultation->type ? [
+            //     'type' => $this->consultation->type->name,
+            // ] : null,
         ] : null,
         ];    }
 }
