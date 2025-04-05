@@ -59,7 +59,6 @@ class ChatController extends Controller
         return response()->json(['message' => 'You are not part of this group'], 400);
     }
 
-
     public function groups()
     {
         $vendorId = auth()->id(); // Get the authenticated vendor's ID
@@ -68,13 +67,10 @@ class ChatController extends Controller
         $groups = ChatGroup::whereDoesntHave('vendors', function ($query) use ($vendorId) {
             $query->where('vendors.id', $vendorId); // Check if vendor is in the group
         })
-        ->paginate(10); // Using pagination instead of get()
-
-        return $this->successWithPaginationResource(
-            message: 'Available chat groups',
-            data: GroupResource::collection($groups)
-        );
+        ->toSql(); // Dump raw SQL query to check
+        dd($groups);
     }
+
 
 
 

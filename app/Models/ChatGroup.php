@@ -18,8 +18,9 @@ class ChatGroup extends Model
 
     public function vendors()
     {
-        return $this->belongsToMany(Vendor::class, 'chat_group_vendor', 'chat_group_id', 'vendor_id');
+        return $this->belongsToMany(Vendor::class, 'chat_group_vendor');
     }
+
 
     public function messages()
     {
