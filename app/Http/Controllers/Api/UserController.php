@@ -267,11 +267,11 @@ public function myConsultation(Request $request)
             'title' => $consultation->title,
             'description' => $consultation->description,
             'price' => $consultation->price,
-            'schedule' => $consultation->schedule ? [
-                'start_date' => $consultation->schedule->start_date,
-                'end_date' => $consultation->schedule->end_date,
+            'schedule' => $consultation->consultaionScheduals ? [
+                'start_date' => $consultation->consultaionScheduals->start_date,
+                'end_date' => $consultation->consultaionScheduals->end_date,
             ] : null,
-            'consultation_type' => $consultation->type ? [
+            'consultation_type' => $consultation->consultaionType ? [
                 'type' => $consultation->type->name,
             ] : null,
         ];
