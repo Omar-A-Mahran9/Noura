@@ -43,7 +43,6 @@ class ChatController extends Controller
     }
 
 
-
     public function groups()
     {
         $vendorId = auth()->id(); // Get the authenticated vendor's ID
@@ -54,8 +53,12 @@ class ChatController extends Controller
         })
         ->paginate(10); // Using pagination instead of get()
 
-        return $this->successWithPaginationResource(GroupResource::collection($groups));
+        return $this->successWithPaginationResource(
+            message: 'Available chat groups',
+            data: GroupResource::collection($groups),
+         );
     }
+
 
 
     public function group($id)
