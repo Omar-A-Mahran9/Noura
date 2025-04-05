@@ -251,7 +251,7 @@ public function myConsultation(Request $request)
     $vendorId = Auth::id(); // Get the logged-in vendor's ID
 
     $orders = Order::where('vendor_id', $vendorId)
-        ->with(['consultation.schedule', 'consultation.type']) // Eager load nested relations
+        ->with(['consultation.consultaionScheduals', 'consultation.consultaionType']) // Eager load nested relations
         ->orderBy('created_at', 'desc')
         ->get();
 
