@@ -246,51 +246,39 @@ public function myGroups()
     ], 200);
 }
 
-public function myConsultation(Request $request)
-{
-    $vendorId = Auth::id(); // Get the logged-in vendor's ID
+$ordersQuery = Order::where('vendor_id', $vendorId)
+    ->whereHas('consultation') // ⬅️ only include orders with consultation
+    ->with(['consultation', 'consultaionSchedual', 'consultaionType'])
+    ->orderBy('created_at', 'desc');
 
-    // Paginate orders, 5 per page
-    $orders = Order::where('vendor_id', $vendorId)
-        ->with(['consultation', 'consultaionSchedual', 'consultaionType'])
-        ->orderBy('created_at', 'desc')
-        ->paginate(5); // 👈 Add pagination
+$orders = $ordersQuery->paginate(5);
 
-    // Transform the paginated items
-    $consultations = $orders->getCollection()->map(function ($order) {
-        if (!$order->consultation) {
-            return null;
-        }
+$consultations = $orders->getCollection()->map(function ($order) {
+    $scheduledDateTime = null;
 
-        $scheduledDateTime = null;
+    if ($order->consultaionSchedual) {
+        $scheduledDateTime = Carbon::parse($order->consultaionSchedual->date . ' ' . $order->consultaionSchedual->time);
+    }
 
-        if ($order->consultaionSchedual) {
-            $scheduledDateTime = Carbon::parse($order->consultaionSchedual->date . ' ' . $order->consultaionSchedual->time);
-        }
+    return [
+        'title' => $order->consultaionType->name,
+        'type' => $order->consultaionType->name,
+        'price' => $order->consultation->price,
+        'status' => $scheduledDateTime && $scheduledDateTime->isPast()
+            ? __('consultation ended')
+            : __('consultation scheduled'),
+        'schedule' => $order->consultaionSchedual ? [
+            'date' => $order->consultaionSchedual->date,
+            'time' => Carbon::parse($order->consultaionSchedual->time)->format('g:i A'),
+            'zoom_join_url' => $order->consultaionSchedual->zoom_join_url,
+        ] : null,
+    ];
+});
 
-        return [
-            'title' => $order->consultaionType->name,
-            'type' => $order->consultaionType->name,
-            'price' => $order->consultation->price,
-            'status' => $scheduledDateTime && $scheduledDateTime->isPast()
-                ? __('consultation ended')
-                : __('consultation scheduled'),
-            'schedule' => $order->consultaionSchedual ? [
-                'date' => $order->consultaionSchedual->date,
-                'time' => Carbon::parse($order->consultaionSchedual->time)->format('g:i A'),
-                'zoom_join_url' => $order->consultaionSchedual->zoom_join_url,
-            ] : null,
-        ];
-    })->filter()->values();
-
-// Replace the original items with the transformed ones
 $orders->setCollection($consultations);
 
-// Return with your custom success response
 return $this->successWithPagination(message: 'My consultations', data: $orders);
 
-
-}
 
 
 }
