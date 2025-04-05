@@ -137,10 +137,9 @@ class ChatController extends Controller
             ->paginate(10); // Paginate 10 messages per page
 
         // Return paginated data using successWithPagination
-        return $this->successWithPagination(
+        return $this->successWithPaginationResource(
             message: "Messages fetched successfully",
             data: MessageResource::collection($messages), // Wrap in resource collection
-            paginator: $messages
         );
     }
 
