@@ -246,39 +246,50 @@ public function myGroups()
     ], 200);
 }
 
-$ordersQuery = Order::where('vendor_id', $vendorId)
-    ->whereHas('consultation') // ⬅️ only include orders with consultation
-    ->with(['consultation', 'consultaionSchedual', 'consultaionType'])
-    ->orderBy('created_at', 'desc');
+public function myConsultation(Request $request)
+{
+    $vendorId = Auth::id(); // Get the logged-in vendor's ID
 
-$orders = $ordersQuery->paginate(5);
+    // Query orders that have consultations
+    $ordersQuery = Order::where('vendor_id', $vendorId)
+        ->whereHas('consultation') // Ensure consultation exists
+        ->with(['consultation', 'consultaionSchedual', 'consultaionType'])
+        ->orderBy('created_at', 'desc');
 
-$consultations = $orders->getCollection()->map(function ($order) {
-    $scheduledDateTime = null;
+    // Paginate results
+    $orders = $ordersQuery->paginate(5); // 👈 5 per page
 
-    if ($order->consultaionSchedual) {
-        $scheduledDateTime = Carbon::parse($order->consultaionSchedual->date . ' ' . $order->consultaionSchedual->time);
-    }
+    // Transform paginated items
+    $consultations = $orders->getCollection()->map(function ($order) {
+        $scheduledDateTime = null;
 
-    return [
-        'title' => $order->consultaionType->name,
-        'type' => $order->consultaionType->name,
-        'price' => $order->consultation->price,
-        'status' => $scheduledDateTime && $scheduledDateTime->isPast()
-            ? __('consultation ended')
-            : __('consultation scheduled'),
-        'schedule' => $order->consultaionSchedual ? [
-            'date' => $order->consultaionSchedual->date,
-            'time' => Carbon::parse($order->consultaionSchedual->time)->format('g:i A'),
-            'zoom_join_url' => $order->consultaionSchedual->zoom_join_url,
-        ] : null,
-    ];
-});
+        if ($order->consultaionSchedual) {
+            $scheduledDateTime = Carbon::parse(
+                $order->consultaionSchedual->date . ' ' . $order->consultaionSchedual->time
+            );
+        }
 
-$orders->setCollection($consultations);
+        return [
+            'title' => $order->consultaionType->name ?? '',
+            'type' => $order->consultaionType->name ?? '',
+            'price' => $order->consultation->price,
+            'status' => $scheduledDateTime && $scheduledDateTime->isPast()
+                ? __('consultation ended')
+                : __('consultation scheduled'),
+            'schedule' => $order->consultaionSchedual ? [
+                'date' => $order->consultaionSchedual->date,
+                'time' => Carbon::parse($order->consultaionSchedual->time)->format('g:i A'),
+                'zoom_join_url' => $order->consultaionSchedual->zoom_join_url,
+            ] : null,
+        ];
+    });
 
-return $this->successWithPagination(message: 'My consultations', data: $orders);
+    // Replace paginated items with transformed items
+    $orders->setCollection($consultations);
 
+    // Return with pagination response
+    return $this->successWithPagination(message: 'My consultations', data: $orders);
+}
 
 
 }
