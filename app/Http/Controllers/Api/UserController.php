@@ -236,15 +236,8 @@ public function myGroups()
                 'title' => $group->name,
                 'image' => getImagePathFromDirectory($group->image, 'Groups'),
                 'created_at' => $group->created_at->toDateTimeString(),
-                'vendors' => $group->vendors->map(function ($vendor) {
-                    return [
-                        'id' => $vendor->id,
-                        'name' => $vendor->name,
-                        'image' => getImagePathFromDirectory($vendor->image, 'ProfileImages'),
-                        'last_seen' => $vendor->last_seen,
-                        'status' => Carbon::parse($vendor->last_seen)->diffInMinutes(now()) < 5 ? 'online' : 'offline',
-                    ];
-                }),
+                'count_vendors' => $group->vendors()->count(), // Get the count of vendors in the group
+
             ];
         })
     ], 200);
