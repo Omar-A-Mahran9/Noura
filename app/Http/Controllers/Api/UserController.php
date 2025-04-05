@@ -283,13 +283,13 @@ public function myConsultation(Request $request)
         ];
     })->filter()->values();
 
-    // Replace the original items with transformed consultations
-    $orders->setCollection($consultations);
+// Replace the original items with the transformed ones
+$orders->setCollection($consultations);
 
-    return response()->json([
-        'success' => true,
-        'consultations' => $orders, // includes pagination meta
-    ]);
+// Return with your custom success response
+return $this->successWithPagination(message: 'My consultations', data: $orders);
+
+
 }
 
 
