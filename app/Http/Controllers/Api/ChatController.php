@@ -41,6 +41,23 @@ class ChatController extends Controller
             ]
         );
     }
+    public function leaveGroup($group_id)
+    {
+        $vendor_id = auth()->id(); // Get the authenticated vendor's ID
+
+        // Find the chat group
+        $chatGroup = ChatGroup::findOrFail($group_id);
+
+        // Check if the vendor is part of the group
+        if ($chatGroup->vendors()->where('vendor_id', $vendor_id)->exists()) {
+            // Detach vendor from the chat group
+            $chatGroup->vendors()->detach($vendor_id);
+
+            return response()->json(['message' => 'Left the group successfully'], 200);
+        }
+
+        return response()->json(['message' => 'You are not part of this group'], 400);
+    }
 
 
     public function groups()
