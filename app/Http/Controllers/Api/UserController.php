@@ -231,12 +231,16 @@ public function myGroups()
     return response()->json([
         'success' => true,
         'groups' => $groups->map(function ($group) {
+            $onlineVendorsCount = $group->vendors->filter(function ($vendor) {
+                return Carbon::parse($vendor->last_seen)->diffInMinutes(now()) < 5; // Check if the vendor is online
+            })->count(); // Get the count of online vendors
+
             return [
                 'id' => $group->id,
                 'title' => $group->name,
                 'image' => getImagePathFromDirectory($group->image, 'Groups'),
                 'created_at' => $group->created_at->toDateTimeString(),
-                'count_vendors' => $group->vendors()->count(), // Get the count of vendors in the group
+                'online_vendors' => $onlineVendorsCount, // Count of online vendors
 
             ];
         })
