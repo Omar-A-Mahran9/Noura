@@ -151,10 +151,9 @@ class UserController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return response()->json([
-            'success' => true,
-            'orders' => OrderResource::collection($orders)
-        ], 200);
+
+        return $this->successWithPaginationResource(message: 'My consultations', data: OrderResource::collection($orders));
+
     }
 
     public function myCourse(Request $request)
