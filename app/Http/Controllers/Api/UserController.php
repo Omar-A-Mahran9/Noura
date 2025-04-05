@@ -251,31 +251,30 @@ public function myConsultation(Request $request)
     $vendorId = Auth::id(); // Get the logged-in vendor's ID
 
     $orders = Order::where('vendor_id', $vendorId)
-        ->with(['consultation.consultaionScheduals', 'consultation.consultaionType']) // Eager load nested relations
+        ->with(['consultation', 'consultaionSchedual', 'consultaionType']) // Load directly related models
         ->orderBy('created_at', 'desc')
         ->get();
 
-    // Transform the orders to extract consultation details
     $consultations = $orders->map(function ($order) {
-        $consultation = $order->consultation;
-
-        if (!$consultation) {
+        if (!$order->consultation) {
             return null;
         }
 
         return [
-            'title' => $consultation->title,
-            'description' => $consultation->description,
-            'price' => $consultation->price,
-            'schedule' => $consultation->consultaionScheduals ? [
-                'start_date' => $consultation->consultaionScheduals->start_date,
-                'end_date' => $consultation->consultaionScheduals->end_date,
+            'title' => $order->consultation->title,
+            'description' => $order->consultation->description,
+            'price' => $order->consultation->price,
+            'schedule' => $order->consultaionSchedual ? [
+                'date' => $order->consultaionSchedual->date,
+                'time' => $order->consultaionSchedual->time,
+                'zoom_join_url' => $order->consultaionSchedual->zoom_join_url,
+
             ] : null,
-            'consultation_type' => $consultation->consultaionType ? [
-                'type' => $consultation->type->name,
+            'consultation_type' => $order->consultaionType ? [
+                'type' => $order->consultaionType->name,
             ] : null,
         ];
-    })->filter()->values(); // Remove nulls and reset keys
+    })->filter()->values();
 
     return response()->json([
         'success' => true,
