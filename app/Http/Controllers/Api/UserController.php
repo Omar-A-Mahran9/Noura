@@ -204,12 +204,7 @@ public function myBooks(Request $request)
             'title' => $order->book->title,
             'image' => getImagePathFromDirectory($order->book->image, 'Books/images')
             , // Assuming there is an image column
-            'description' => $order->book->description,
-            'price' => $order->book->price,
-            'order_id' => $order->id,
-            'payment_status' => $order->payment_status,
-            'payment_method' => $order->payment_method,
-            'created_at' => $order->created_at->toDateTimeString(),
+          
         ])
     ], 200);
 }
