@@ -54,7 +54,7 @@ class ChatController extends Controller
         })
         ->paginate(10); // Using pagination instead of get()
 
-        return GroupResource::collection($groups);
+        return $this->successWithPaginationResource(GroupResource::collection($groups));
     }
 
 
