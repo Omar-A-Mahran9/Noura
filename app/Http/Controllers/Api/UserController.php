@@ -233,7 +233,9 @@ public function myGroups()
         'groups' => $groups->map(function ($group) {
             return [
                 'id' => $group->id,
-                'title' => $group->name_en,
+                'title' => $group->name,
+                'image' => getImagePathFromDirectory($group->image, 'groups'),
+
                 'created_at' => $group->created_at->toDateTimeString(),
                 'vendors' => $group->vendors->map(function ($vendor) {
                     return [
