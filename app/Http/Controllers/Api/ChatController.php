@@ -64,11 +64,18 @@ class ChatController extends Controller
         $vendorId = auth()->id(); // Get the authenticated vendor's ID
 
         // Get all chat groups where the authenticated vendor has NOT joined yet
-        $groups = ChatGroup::whereDoesntHave('vendors', function ($query) use ($vendorId) {
-            $query->where('vendors.id', $vendorId); // Check if vendor is in the group
+        $groups = ChatGroup::whereNotIn('id', function ($query) use ($vendorId) {
+            // Subquery to fetch groups where the vendor is already part of the group
+            $query->select('chat_group_id')
+                  ->from('chat_group_vendor')
+                  ->where('vendor_id', $vendorId);
         })
-        ->toSql(); // Dump raw SQL query to check
-        dd($groups);
+        ->paginate(10); // Using pagination instead of get()
+
+        return $this->successWithPaginationResource(
+            message: 'Available chat groups',
+            data: GroupResource::collection($groups)
+        );
     }
 
 
