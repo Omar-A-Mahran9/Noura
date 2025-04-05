@@ -64,7 +64,7 @@ class ChatController extends Controller
     {
         $vendorId = auth()->id(); // Get the authenticated vendor's ID
 
-        // Get all chat groups where the authenticated vendor has not joined yet
+        // Get all chat groups where the authenticated vendor has NOT joined yet
         $groups = ChatGroup::whereDoesntHave('vendors', function ($query) use ($vendorId) {
             $query->where('vendors.id', $vendorId); // Check if vendor is in the group
         })
@@ -72,8 +72,8 @@ class ChatController extends Controller
 
         return $this->successWithPaginationResource(
             message: 'Available chat groups',
-            data: GroupResource::collection($groups),
-         );
+            data: GroupResource::collection($groups)
+        );
     }
 
 
