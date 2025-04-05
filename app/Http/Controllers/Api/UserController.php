@@ -262,7 +262,7 @@ public function myConsultation(Request $request)
 
         return [
             'title' => $order->consultation->title,
-            'description' => $order->consultation->description,
+            'type' => $order->consultaionType->name,
             'price' => $order->consultation->price,
             'schedule' => $order->consultaionSchedual ? [
                 'date' => $order->consultaionSchedual->date,
@@ -270,9 +270,9 @@ public function myConsultation(Request $request)
                 'zoom_join_url' => $order->consultaionSchedual->zoom_join_url,
 
             ] : null,
-            'consultation_type' => $order->consultaionType ? [
-                'type' => $order->consultaionType->name,
-            ] : null,
+            // 'consultation_type' => $order->consultaionType ? [
+            //     'type' => $order->consultaionType->name,
+            // ] : null,
         ];
     })->filter()->values();
 
