@@ -266,7 +266,7 @@ public function myConsultation(Request $request)
             'price' => $order->consultation->price,
             'schedule' => $order->consultaionSchedual ? [
                 'date' => $order->consultaionSchedual->date,
-                'time' => $order->consultaionSchedual->time,
+                'time' => Carbon::parse($order->consultaionSchedual->time)->format('g:i A'), // 👈 formats to 6:15 AM
                 'zoom_join_url' => $order->consultaionSchedual->zoom_join_url,
 
             ] : null,
