@@ -126,20 +126,24 @@ class ChatController extends Controller
 
 
     // Fetch messages for a group
-    public function getMessages($groupId)
+    public function getMessages(Request $request, $groupId)
     {
-        $chatGroup = ChatGroup::findOrFail($groupId);
+        $vendorId = auth()->id(); // Get the authenticated vendor's ID
 
-        $messages = Message::where('chat_group_id', $chatGroup->id)
+        // Fetch messages with pagination (10 messages per page)
+        $messages = Message::where('chat_group_id', $groupId)
             ->with(['vendor:id,name,image', 'receivers:id,name,image'])
             ->orderBy('created_at', 'asc')
-            ->get();
+            ->paginate(10); // Paginate 10 messages per page
 
-        return $this->success(
+        // Return paginated data using successWithPagination
+        return $this->successWithPagination(
             message: "Messages fetched successfully",
-            data: MessageResource::collection($messages) // Wrap in resource collection
+            data: MessageResource::collection($messages), // Wrap in resource collection
+            paginator: $messages
         );
     }
+
 
      // Mark messages as read
     public function markAsRead($message_id)
