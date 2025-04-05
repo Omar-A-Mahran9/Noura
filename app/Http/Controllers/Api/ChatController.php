@@ -59,6 +59,7 @@ class ChatController extends Controller
         return response()->json(['message' => 'You are not part of this group'], 400);
     }
 
+
     public function groups()
     {
         $vendorId = auth()->id(); // Get the authenticated vendor's ID
@@ -77,7 +78,6 @@ class ChatController extends Controller
             data: GroupResource::collection($groups)
         );
     }
-
 
 
 
