@@ -250,12 +250,14 @@ public function myConsultation(Request $request)
 {
     $vendorId = Auth::id(); // Get the logged-in vendor's ID
 
+    // Paginate orders, 5 per page
     $orders = Order::where('vendor_id', $vendorId)
-        ->with(['consultation', 'consultaionSchedual', 'consultaionType']) // Load directly related models
+        ->with(['consultation', 'consultaionSchedual', 'consultaionType'])
         ->orderBy('created_at', 'desc')
-        ->get();
+        ->paginate(5); // 👈 Add pagination
 
-    $consultations = $orders->map(function ($order) {
+    // Transform the paginated items
+    $consultations = $orders->getCollection()->map(function ($order) {
         if (!$order->consultation) {
             return null;
         }
@@ -281,12 +283,14 @@ public function myConsultation(Request $request)
         ];
     })->filter()->values();
 
+    // Replace the original items with transformed consultations
+    $orders->setCollection($consultations);
+
     return response()->json([
         'success' => true,
-        'consultations' => $consultations,
-    ], 200);
+        'consultations' => $orders, // includes pagination meta
+    ]);
 }
-
 
 
 }
