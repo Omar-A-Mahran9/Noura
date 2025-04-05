@@ -214,34 +214,32 @@ public function myBooks(Request $request)
     );
 }
 
-
 public function myGroups()
 {
     $vendorId = auth()->id(); // Get the authenticated vendor's ID
 
-    // Fetch chat groups where the vendor is associated
     $groups = ChatGroup::whereHas('vendors', function ($query) use ($vendorId) {
         $query->where('vendors.id', $vendorId);
     })
     ->with(['vendors' => function ($query) {
-        $query->select('id', 'name', 'image', 'last_seen'); // Select only necessary fields
+        // Specify the table to avoid ambiguity
+        $query->select('vendors.id', 'vendors.name', 'vendors.image', 'vendors.last_seen');
     }])
     ->orderBy('created_at', 'desc')
     ->get();
 
-    // Map the groups to the required structure
     return response()->json([
         'success' => true,
         'groups' => $groups->map(function ($group) {
             return [
                 'id' => $group->id,
-                'title' => $group->name_en, // You might want to check if `name_en` is the correct field
+                'title' => $group->name_en,
                 'created_at' => $group->created_at->toDateTimeString(),
                 'vendors' => $group->vendors->map(function ($vendor) {
                     return [
                         'id' => $vendor->id,
                         'name' => $vendor->name,
-                        'image' => getImagePathFromDirectory($vendor->image, 'Vendors'), // Assuming the function exists for image path
+                        'image' => getImagePathFromDirectory($vendor->image, 'Vendors'),
                         'last_seen' => $vendor->last_seen,
                         'status' => Carbon::parse($vendor->last_seen)->diffInMinutes(now()) < 5 ? 'online' : 'offline',
                     ];
