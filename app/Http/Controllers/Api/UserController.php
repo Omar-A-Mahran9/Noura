@@ -190,24 +190,30 @@ public function myBooks(Request $request)
 {
     $vendorId = Auth::id(); // Get the logged-in vendor's ID
 
-    // Fetch only orders that contain a book
+    // Fetch only orders that contain a book, paginated (5 per page)
     $orders = Order::where('vendor_id', $vendorId)
         ->whereNotNull('book_id') // Only include orders that have a book
         ->with('book') // Eager load the book data
         ->orderBy('created_at', 'desc')
-        ->get();
+        ->paginate(6); // Paginate orders, 5 per page
 
-    return response()->json([
-        'success' => true,
-        'books' => $orders->map(fn($order) => [
-            'id' => $order->book->id,
-            'title' => $order->book->title,
-            'image' => getImagePathFromDirectory($order->book->image, 'Books/images')
-            , // Assuming there is an image column
-          
-        ])
-    ], 200);
+    // Transform the paginated orders
+    $books = $orders->getCollection()->map(fn($order) => [
+        'id' => $order->book->id,
+        'title' => $order->book->title,
+        'image' => getImagePathFromDirectory($order->book->image, 'books/images'), // Assuming there is an image column
+    ])->values(); // Ensure the collection is indexed correctly after mapping
+
+    // Replace the original collection with the transformed one
+    $orders->setCollection($books);
+
+    // Return the paginated response using your custom successWithPagination method
+    return $this->successWithPagination(
+        message: 'My books',
+        data: $orders
+    );
 }
+
 
 
 public function myGroups()
