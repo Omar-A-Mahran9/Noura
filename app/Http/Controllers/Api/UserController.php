@@ -146,15 +146,18 @@ class UserController extends Controller
     {
         $vendorId = Auth::id(); // Get the logged-in vendor's ID
 
+        // Paginate the orders, 5 per page
         $orders = Order::where('vendor_id', $vendorId)
             ->with(['book', 'course', 'consultation']) // Eager load related models
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(5); // 👈 paginate instead of get()
 
+        // Wrap paginated result in a resource collection
+        $orderResource = OrderResource::collection($orders);
 
-        return $this->successWithPaginationResource(message: 'My consultations', data: OrderResource::collection($orders));
-
+        return $this->successWithPaginationResource(message: 'My orders', data: $orderResource);
     }
+
 
     public function myCourse(Request $request)
 {
