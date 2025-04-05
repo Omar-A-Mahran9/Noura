@@ -48,9 +48,17 @@ class ChatController extends Controller
 
     public function groups()
     {
-        $groups = ChatGroup::all();
+        $vendorId = auth()->id(); // Get the authenticated user's ID
+
+        // Fetch groups where the authenticated user is not a vendor in the group
+        $groups = ChatGroup::whereDoesntHave('vendors', function ($query) use ($vendorId) {
+            $query->where('vendors.id', $vendorId);
+        })
+        ->get();
+
         return GroupResource::collection($groups);
     }
+
 
     public function group($id)
     {
@@ -126,23 +134,20 @@ class ChatController extends Controller
 
 
     // Fetch messages for a group
-    public function getMessages(Request $request, $groupId)
+    public function getMessages($groupId)
     {
-        $vendorId = auth()->id(); // Get the authenticated vendor's ID
+        $chatGroup = ChatGroup::findOrFail($groupId);
 
-        // Fetch messages with pagination (10 messages per page)
-        $messages = Message::where('chat_group_id', $groupId)
+        $messages = Message::where('chat_group_id', $chatGroup->id)
             ->with(['vendor:id,name,image', 'receivers:id,name,image'])
             ->orderBy('created_at', 'asc')
-            ->paginate(10); // Paginate 10 messages per page
+            ->get();
 
-        // Return paginated data using successWithPagination
-        return $this->successWithPaginationResource(
+        return $this->success(
             message: "Messages fetched successfully",
-            data: MessageResource::collection($messages), // Wrap in resource collection
+            data: MessageResource::collection($messages) // Wrap in resource collection
         );
     }
-
 
      // Mark messages as read
     public function markAsRead($message_id)
