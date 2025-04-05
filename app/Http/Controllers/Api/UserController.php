@@ -261,7 +261,7 @@ public function myConsultation(Request $request)
         }
 
         return [
-            'title' => $order->consultation->title,
+            'title' => $order->consultaionType->name,
             'type' => $order->consultaionType->name,
             'price' => $order->consultation->price,
             'schedule' => $order->consultaionSchedual ? [
