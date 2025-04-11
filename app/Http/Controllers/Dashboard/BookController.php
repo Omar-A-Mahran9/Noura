@@ -41,12 +41,7 @@ class BookController extends Controller
         return view('dashboard.books.create',compact('employees','courses'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function store(StoreBooksRequest $request)
     {
 
@@ -108,7 +103,7 @@ class BookController extends Controller
          return view('dashboard.books.show',compact('book'));
      }
 
- 
+
     public function edit(Book $book)
     {
         $this->authorize('update_books');

@@ -232,13 +232,12 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const userTypeSelect = $('#type'); // Select2 element
-            const descriptionRow = document.getElementById('description-row'); // The entire row
+            const descriptionRow = document.getElementById('description-row'); // The row to show/hide
 
             userTypeSelect.on('change', function() {
                 const selectedType = userTypeSelect.val(); // Get selected value
 
-                // Show or hide the row based on the selected value
-                if (selectedType === 'author') {
+                if (selectedType === 'author' || selectedType === 'specialist') {
                     descriptionRow.classList.remove('d-none'); // Show the row
                 } else {
                     descriptionRow.classList.add('d-none'); // Hide the row

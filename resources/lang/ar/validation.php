@@ -159,6 +159,7 @@ return [
         'show_video_material' => 'محاضرات مسجلة للقسم',
         'show_attachment_material' => 'الملفات للقسم',
         'type_material' => 'نوع الملف',
+        'day_date' => 'تاريخ الدورة',
 
         'type_video' => 'نوع الفيديو',
         'section_id_video' => 'القسم',

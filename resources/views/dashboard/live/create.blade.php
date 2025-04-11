@@ -46,6 +46,12 @@
                 <!-- begin :: Card header -->
                 <div class="card-header d-flex align-items-center">
                     <h3 class="fw-bolder text-dark">{{ __('Add new live') }}</h3>
+                    <div class="form-check form-switch form-check-custom form-check-solid mb-2">
+                        <label class="fs-5 fw-bold">{{ __('publish') }}</label>
+                        <input class="form-check-input mx-2" style="height: 18px;width:36px;" type="checkbox" name="publish"
+                            id="publish" />
+                        <label class="form-check-label" for="publish"></label>
+                    </div>
                 </div>
                 <!-- end   :: Card header -->
 
@@ -73,7 +79,7 @@
                         <!-- end   :: Column -->
 
                     </div>
-          
+
                     <div class="row mb-8">
 
                         <!-- begin :: Column -->
@@ -144,7 +150,7 @@
                         <div class="col-md-6 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Description in arabic') }}</label>
-                            <textarea class="form-control" rows="4" name="description_ar" id="meta_tag_description_ar_inp"></textarea>
+                            <textarea for="description_ar" class="form-control" rows="4" name="description_ar"></textarea>
                             <p class="text-danger invalid-feedback" id="description_ar"></p>
 
 
@@ -155,7 +161,7 @@
                         <div class="col-md-6 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Description in english') }}</label>
-                            <textarea class="form-control" rows="4" name="description_en" id="meta_tag_description_en_inp"></textarea>
+                            <textarea class="form-control" rows="4" name="description_en"></textarea>
                             <p class="text-danger invalid-feedback" id="description_en"></p>
 
                         </div>
@@ -167,7 +173,7 @@
                     <div class="row mb-10">
                         <div class="col-md-3 fv-row">
                             <label class="fs-5 fw-bold mb-2" for="day_date">{{ __('Day Date') }}</label>
-                            <input type="date" name="day_date" id="day_date"
+                            <input type="date" name="day_date"
                                 class="form-control form-control-solid border-gray-300 border-1 filter-datatable-inp me-4"
                                 placeholder="{{ __('Choose the date') }}" data-filter-index="6" />
                             <p class="invalid-feedback" id="day_date"></p>

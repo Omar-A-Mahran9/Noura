@@ -72,14 +72,5 @@ class DashboardController extends Controller
 
 
 
-    // Simulated swap function
-    private function swapArrayElements(array $array, int $index)
-    {
-        if ($index < count($array) - 1) {
-            $temp = $array[$index];
-            $array[$index] = $array[$index + 1];
-            $array[$index + 1] = $temp;
-        }
-        return collect($array);
-    }
+  
 }

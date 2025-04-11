@@ -5,33 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Live extends Model
+class LiveComment extends Model
 {
     use HasFactory;
+    protected $table = 'live_comments';
+    protected $appends = [ 'description'];
+
     protected $guarded = [];
-    protected $appends = ['title','description'];
     protected $casts   = [
         'created_at' => 'date:Y-m-d',
         'updated_at' => 'date:Y-m-d'
     ];
 
-    public function getTitleAttribute()
+    public function vendor()
     {
-        return $this->attributes['title_' . getLocale()];
+        return $this->belongsTo(Vendor::class); // Ensure you have a Vendor model
     }
 
     public function getDescriptionAttribute()
     {
         return $this->attributes['description_' . getLocale()];
     }
-
-    public function comments()
-    {
-        return $this->hasMany(LiveComment::class, 'book_id');
-    }
-    public function specilist()
-    {
-        return $this->belongsTo(Employee::class, 'assign_to');
-    }
-
 }

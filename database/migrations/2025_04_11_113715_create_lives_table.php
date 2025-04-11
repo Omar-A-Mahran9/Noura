@@ -22,9 +22,10 @@ class CreateLivesTable extends Migration
             $table->longText('description_ar');
             $table->longText('description_en');
             $table->date('day_date')->nullable();
+            $table->string('video_url')->nullable(); // Path to preview video
 
-            $table->time('start_time')->nullable();
-            $table->time('end_time')->nullable();
+            $table->time('from')->nullable();
+            $table->time('to')->nullable();
             $table->integer('duration_minutes')->nullable();
 
             $table->unsignedBigInteger('assign_to')->nullable();
@@ -35,7 +36,7 @@ class CreateLivesTable extends Migration
             $table->string('zoom_join_url', 500)->nullable(); // Increase length for URLs
             $table->string('zoom_start_url', 500)->nullable(); // Increase length for URLs            $table->string('preview_video')->nullable();
 
-            $table->boolean('is_active')->default(true);
+            $table->boolean('publish')->default(true);
              $table->timestamps();
         });
     }

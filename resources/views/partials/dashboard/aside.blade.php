@@ -149,7 +149,7 @@
 
                 @can(['view_live'])
                     <div class="menu-item">
-                        <a class="menu-link {{ isTabActive('courses') }}" href="{{ route('dashboard.lives.index') }}"
+                        <a class="menu-link {{ isTabActive('lives') }}" href="{{ route('dashboard.lives.index') }}"
                             data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click"
                             data-bs-placement="right">
                             <span class="menu-icon">
