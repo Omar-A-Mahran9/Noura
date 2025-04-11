@@ -40,6 +40,10 @@ Route::group([ 'prefix' => 'dashboard' , 'namespace' => 'Dashboard', 'as' => 'da
     Route::resource('courses','CourseController');
     Route::resource('Courses_Order','CourseController');
 
+
+    Route::resource('lives','LiveController');
+
+
     Route::post('course-validate/{course?}','CourseController@validateStep');
 
     Route::prefix('courses')->group(function () {
@@ -64,7 +68,7 @@ Route::group([ 'prefix' => 'dashboard' , 'namespace' => 'Dashboard', 'as' => 'da
     });
     Route::resource('books', 'BookController');
     Route::get('/zoom-signature/{meetingId}', 'ZoomController@generateSignature');
-    
+
     Route::get('/zoom-meeting', function () {
         return view('dashboard.zoom_meeting.index');
     })->name('zoom.meeting');

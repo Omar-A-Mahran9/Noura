@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Enums\CoursesStatus;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Course;
 use App\Models\CourseCategories;
 use App\Models\CourseImage;

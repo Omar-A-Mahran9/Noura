@@ -352,38 +352,4 @@ if ( !function_exists('getModelData') ) {
 }
 
 
-/** favourite functions **/
-
-if(!function_exists('getFavouriteCars')){
-
-    function getFavouriteCars() : array
-    {
-        return session()->get('favourite_cars_id') ?? [];
-    }
-
-}
-
-if(!function_exists('addToFavourite')){
-
-    function addToFavourite($carId)
-    {
-        if ( ! in_array($carId , getFavouriteCars()) ) {
-            session()->push('favourite_cars_id' , $carId) ;
-            session()->save();
-        }
-    }
-
-}
-
-
-if(!function_exists('removeFromFavourite')){
-
-    function removeFromFavourite($carId)
-    {
-        $favouriteCars = array_filter( getFavouriteCars() , fn( $id ) => $id != $carId );
-        session()->put('favourite_cars_id' , $favouriteCars) ;
-        session()->save();
-    }
-
-}
-
+ 

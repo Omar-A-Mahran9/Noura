@@ -20,7 +20,7 @@ class CategoriesController extends Controller
     {
          $this->authorize('view_categories');
         if ( $request->ajax() ) {
- 
+
             $brands = getModelData( model: new Category() , searchingColumns: ['name_ar', 'name_en'] );
 
             return response()->json($brands);
@@ -36,7 +36,7 @@ class CategoriesController extends Controller
     public function create()
     {
         $this->authorize('create_categories');
- 
+
         return view('dashboard.categories.create');
     }
 
@@ -48,7 +48,7 @@ class CategoriesController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        
+
         $this->authorize('create_categories');
         $data = $request->validated();
         Category::create($data);
@@ -74,7 +74,7 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
- 
+
 
     public function edit(Category $category)
     {
@@ -102,7 +102,7 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
- 
+
     public function destroy(Request $request,Category $category)
     {
 
@@ -113,7 +113,7 @@ class CategoriesController extends Controller
         {
             if($category->articles()->count() > 0)
                 throw ValidationException::withMessages([
-                    'category' => __("This category is assigned to cars and can't be deleted")
+                    'category' => __("This category is assigned to another and can't be deleted")
                 ]);
 
             $category->delete();

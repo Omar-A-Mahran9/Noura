@@ -138,6 +138,42 @@
                 @endcan
 
 
+                @canany(['view_live', 'view_live_order', 'view_live_category'])
+                    <div class="menu-item">
+                        <div class="menu-content pt-8 pb-0">
+                            <span class="menu-section text-muted text-uppercase fs-8 ls-1">{{ __('lives') }}</span>
+                        </div>
+                    </div>
+                @endcanany
+
+
+                @can(['view_live'])
+                    <div class="menu-item">
+                        <a class="menu-link {{ isTabActive('courses') }}" href="{{ route('dashboard.lives.index') }}"
+                            data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click"
+                            data-bs-placement="right">
+                            <span class="menu-icon">
+                                <i class="fa fa-tv"></i>
+                            </span>
+                            <span class="menu-title"> {{ __('lives') }}</span>
+                        </a>
+                    </div>
+                @endcan
+
+                {{-- @can(['view_lives'])
+                    <div class="menu-item">
+                        <a class="menu-link {{ isTabActive('Courses_Order') }}"
+                            href="{{ route('dashboard.Courses_Order.index') }}" data-bs-toggle="tooltip"
+                            data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                            <span class="menu-icon">
+                                <i class="fa fa-shopping-cart"></i> </span>
+                            <span class="menu-title"> {{ __('Courses Order') }}</span>
+                        </a>
+                    </div>
+                @endcan
+ --}}
+
+
 
                 @canany(['view_books', 'view_books_orders'])
                     <div class="menu-item">

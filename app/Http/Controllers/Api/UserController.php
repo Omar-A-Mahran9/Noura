@@ -2,36 +2,23 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Enums\CarStatus;
-use App\Models\Car;
-use App\Models\Brand;
+
 use Illuminate\Http\Request;
-use App\Http\Resources\CarResourse;
-use App\Http\Controllers\Controller;
+ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\Site\UpdateUserController;
-use App\Http\Resources\Api\UserResource;
+ use App\Http\Resources\Api\UserResource;
 use App\Http\Resources\OrderResource;
-use App\Models\CarImage;
-use App\Models\CarModel;
+
 use App\Models\ChatGroup;
-use App\Models\Favorite;
-use App\Models\Order;
-use App\Models\OrderNotification;
-use App\Models\SettingOrderStatus;
+ use App\Models\Order;
+
 use App\Models\Vendor;
 use App\Rules\NotNumbersOnly;
 use App\Rules\PasswordValidate;
 use Carbon\Carbon;
 use DB;
-use GrahamCampbell\ResultType\Success;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rule as ValidationRule;
-use Illuminate\Support\Facades\Config;
-
-use function PHPUnit\Framework\isEmpty;
-
+ use Illuminate\Validation\Rule;
 class UserController extends Controller
 {
 

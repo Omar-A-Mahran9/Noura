@@ -23,7 +23,7 @@ class CourseCategoriesController extends Controller
     {
          $this->authorize('view_course_category');
         if ( $request->ajax() ) {
- 
+
             $brands = getModelData( model: new CourseCategories() , searchingColumns: ['name_ar', 'name_en'] );
 
             return response()->json($brands);
@@ -39,7 +39,7 @@ class CourseCategoriesController extends Controller
     public function create()
     {
         $this->authorize('create_course_category');
- 
+
         return view('dashboard.coursecategory.create');
     }
 
@@ -51,7 +51,7 @@ class CourseCategoriesController extends Controller
      */
     public function store(StoreSubCategoryRequest $request)
     {
-        
+
         $this->authorize('create_course_category');
         $data = $request->validated();
         CourseCategories::create($data);
@@ -77,7 +77,7 @@ class CourseCategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
- 
+
 
     public function edit(CourseCategories $category)
     {
@@ -85,7 +85,7 @@ class CourseCategoriesController extends Controller
 
         return view('dashboard.coursecategory.edit',compact('category' ));
     }
- 
+
     public function update(UpdateSubCategoryRequest $request, CourseCategories $category)
     {
         $this->authorize('update_course_category');
@@ -93,8 +93,8 @@ class CourseCategoriesController extends Controller
         $category->update($data);
     }
 
- 
- 
+
+
     public function destroy(Request $request,CourseCategories $category)
     {
 
@@ -105,7 +105,7 @@ class CourseCategoriesController extends Controller
         {
             if($category->articles()->count() > 0)
                 throw ValidationException::withMessages([
-                    'category' => __("This category is assigned to cars and can't be deleted")
+                    'category' => __("This category is assigned to another and can't be deleted")
                 ]);
 
             $category->delete();

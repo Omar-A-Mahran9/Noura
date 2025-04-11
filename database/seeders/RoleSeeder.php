@@ -27,6 +27,7 @@ class RoleSeeder extends Seeder
             'vendors',
 
             'courses',
+            'live',
             'courses_order',
             'course_category',
             'quizzes',
