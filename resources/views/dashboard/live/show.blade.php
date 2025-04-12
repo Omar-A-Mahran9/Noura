@@ -29,6 +29,13 @@
 
                 <div class="card-header d-flex align-items-center">
                     <h3 class="fw-bolder text-dark">{{ __('show live') }}</h3>
+
+                    <div class="col-md-2 mt-5">
+                        <a href="{{ $live->zoom_start_url }}" class="btn btn-primary" target="_blank">
+                            {{ __('Open Zoom Admin') }}
+                        </a>
+                    </div>
+
                     <div class="form-check form-switch form-check-custom form-check-solid mb-2">
                         <label class="fs-5 fw-bold">{{ __('publish') }}</label>
                         <input class="form-check-input mx-2" style="height: 18px;width:36px;" type="checkbox" name="publish"
