@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\ArticalComment;
+use App\Models\LiveComment;
 use Illuminate\Http\Request;
 
 class CommentsController extends Controller
@@ -31,14 +32,30 @@ class CommentsController extends Controller
 
         return view('dashboard.articles.show');
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+
+    public function indexcommentlives(Request $request)
     {
-        //
+        // Debugging: Check if article_id is received
+        if ($request->ajax()) {
+            $this->authorize('view_lives');
+
+            // Ensure article_id is provided
+            if (!$request->has('live_id')) {
+                return response()->json(['error' => 'live ID is required'], 400);
+            }
+
+            // Fetch comments filtered by article_id
+            $data = getModelData(
+                model: new LiveComment(),
+                andsFilters: [['live_id', '=', $request->live_id]], // Apply filter
+                relations: ['vendor' => ['id', 'name']]
+            );
+
+            return response()->json($data);
+        }
+
+        return view('dashboard.lives.show');
     }
 
     /**

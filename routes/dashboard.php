@@ -42,6 +42,7 @@ Route::group([ 'prefix' => 'dashboard' , 'namespace' => 'Dashboard', 'as' => 'da
 
 
     Route::resource('lives','LiveController');
+    Route::resource('comments_live', 'CommentsLiveController');
 
 
     Route::post('course-validate/{course?}','CourseController@validateStep');

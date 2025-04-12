@@ -31,8 +31,7 @@ class CreateLivesTable extends Migration
             $table->unsignedBigInteger('assign_to')->nullable();
             $table->foreign('assign_to')->references('id')->on('employees')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->longText('agenda')->nullable();
-            $table->string('zoom_meeting_id', 255)->nullable();
+             $table->string('zoom_meeting_id', 255)->nullable();
             $table->string('zoom_join_url', 500)->nullable(); // Increase length for URLs
             $table->string('zoom_start_url', 500)->nullable(); // Increase length for URLs            $table->string('preview_video')->nullable();
 

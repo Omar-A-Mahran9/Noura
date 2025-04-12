@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateBooksRequest extends FormRequest
 {
-    /**
+    /**UpdateLivesRequest
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -25,7 +25,7 @@ class UpdateBooksRequest extends FormRequest
     public function rules()
     {
         $book = request()->route('book');
- 
+
         return [
             'title_ar'    => ['required' , 'string' , 'max:255' , 'unique:books,title_ar,'.$book->id,new NotNumbersOnly()],
             'title_en'    => ['required' , 'string' , 'max:255' , 'unique:books,title_en,'.$book->id,new NotNumbersOnly()],
