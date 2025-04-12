@@ -27,7 +27,7 @@ class Live extends Model
 
     public function comments()
     {
-        return $this->hasMany(LiveComment::class, 'book_id');
+        return $this->hasMany(LiveComment::class, 'live_id');
     }
     public function specilist()
     {

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\BookOrderController;
 use App\Http\Controllers\Api\CourseOrderController;
+use App\Http\Controllers\Api\liveController;
 use App\Http\Controllers\Api\OrderConsultationController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Dashboard\ConsultaionController;
@@ -56,11 +57,17 @@ Route::group(['middleware' => ['json.response']], function () {
     Route::get('/books', 'Api\BooksController@index');
     Route::get('/books/{id}', 'Api\BooksController@single');
 
+
+    Route::get('/lives', 'Api\liveController@index');
+    Route::get('/lives/{id}', 'Api\liveController@single');
+
      // Authenticated vendor routes
      Route::group(['middleware' => 'auth:vendor'], function () {
 
         Route::post('/blogs/createComment', 'Api\ArticlesController@createCommentes');
         Route::post('/books/createComment', 'Api\BooksController@createCommentes');
+        Route::post('/lives/createComment', 'Api\liveController@createCommentes');
+
         Route::get('/course/lectures/{id}', 'Api\CourseController@lectures');
         Route::get('/course/lecture/{video_id}/navigation', 'Api\CourseController@getNextAndPreviousVideo');
         Route::post('/join_to_group/{id}', 'Api\ChatController@joinToGroup');
@@ -78,6 +85,7 @@ Route::group(['middleware' => ['json.response']], function () {
         Route::get('/my-order', 'Api\UserController@myOrder');
 
         Route::get('/my-consultation', 'Api\UserController@myConsultation');
+        Route::get('/my-live', 'Api\UserController@myLive');
 
         Route::get('/my-course', 'Api\UserController@myCourse');
         Route::get('/my-book', 'Api\UserController@myBooks');
@@ -86,6 +94,8 @@ Route::group(['middleware' => ['json.response']], function () {
         Route::post('/make-order', [OrderController::class, 'store']);
         Route::post('/consultation-orders', [OrderConsultationController::class, 'store']);
         Route::post('/Book-order', [BookOrderController::class, 'store']);
+        Route::post('/Live-order', [liveController::class, 'store']);
+
         Route::post('/Course-order', [CourseOrderController::class, 'store']);
 
     });

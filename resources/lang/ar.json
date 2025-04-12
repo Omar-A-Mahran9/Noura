@@ -7,6 +7,9 @@
     "Type of book": "نوع الكتاب",
     "lives": "دورات حية",
     "Edit live": "تعديل الدورة الحية",
+    "Live Event Title": "عنوان الدورة",
+    "Live Date": "تاريخ الدورة",
+    "Live Time": "وقت الدورة",
 
     "Add new live": "اضافة دورة حية جديدة",
     "assign to specilist": "تعيين لمحاضر",
@@ -32,6 +35,8 @@
     "Question Is main": "سؤال رئيسي",
     "Chat Groups": "المحادثات الجماعية",
     "Groups": "المجموعات",
+    "lives Order": "طلبات الدورات الحية",
+
     "Invalid credentials": "البيانات المدخلة غير صحيحة",
     "Consultation Order": "طلبات الاستشارات",
     "Consultation Schedule": "معاد الاستشارة",
@@ -467,6 +472,8 @@
     "Edit a bank": "تعديل بنك",
     "Bank data": "بيانات البنك",
     "bank": "بنك",
+    "show live": "عرض الدورة",
+
     "Add a Role": "اضافة دور",
     "Role name": "اسم الدور",
     "Employees list": "قائمة الموظفين",

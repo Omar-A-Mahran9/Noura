@@ -160,18 +160,19 @@
                     </div>
                 @endcan
 
-                {{-- @can(['view_lives'])
-                    <div class="menu-item">
-                        <a class="menu-link {{ isTabActive('Courses_Order') }}"
-                            href="{{ route('dashboard.Courses_Order.index') }}" data-bs-toggle="tooltip"
-                            data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-                            <span class="menu-icon">
-                                <i class="fa fa-shopping-cart"></i> </span>
-                            <span class="menu-title"> {{ __('Courses Order') }}</span>
-                        </a>
-                    </div>
+
+
+                @can('view_live')
+                <div class="menu-item">
+                    <a class="menu-link {{ isTabActive('lives_orders') }}" data-bs-toggle="tooltip"
+                        data-bs-trigger="hover" href="{{ route('dashboard.lives_orders.index') }}"
+                        data-bs-dismiss="click" data-bs-placement="right">
+                        <span class="menu-icon">
+                            <i class="fa fa-shopping-cart"></i> </span>
+                        <span class="menu-title"> {{ __('lives Order') }}</span>
+                    </a>
+                </div>
                 @endcan
- --}}
 
 
 

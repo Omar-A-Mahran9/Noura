@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\BookOrderController;
 use App\Http\Controllers\Dashboard\ConsultaionController;
 use App\Http\Controllers\Dashboard\CourseController;
 use App\Http\Controllers\Dashboard\GroupsController;
+use App\Http\Controllers\Dashboard\LiveOrderController;
 use BeyondCode\LaravelWebSockets\Facades\WebSocketsRouter;
 use BeyondCode\LaravelWebSockets\WebSockets\WebSocketHandler;
 use Illuminate\Support\Facades\Route;
@@ -80,6 +81,12 @@ Route::group([ 'prefix' => 'dashboard' , 'namespace' => 'Dashboard', 'as' => 'da
     Route::get('/books_orders/{id}', [BookOrderController::class, 'order_show'])
     ->name('books_orders.show');
 
+
+    Route::get('/lives_orders', [LiveOrderController::class, 'order'])
+    ->name('lives_orders.index');
+
+    Route::get('/lives_orders/{id}', [LiveOrderController::class, 'order_show'])
+    ->name('lives_orders.show');
 
     Route::resource('group_chat', 'GroupsController');
     Route::delete('/messages/{id}', [GroupsController::class, 'destroymessage'])

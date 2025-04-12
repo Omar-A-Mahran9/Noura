@@ -25,6 +25,11 @@ class Order extends Model
         return $this->belongsTo(Course::class);
     }
 
+    public function live()
+    {
+        return $this->belongsTo(Live::class);
+    }
+
     public function consultation()
     {
         return $this->belongsTo(Consultaion::class, 'consultaion_id');
@@ -49,5 +54,5 @@ class Order extends Model
     {
         return $this->belongsTo(Quiz::class);
     }
- 
+
 }

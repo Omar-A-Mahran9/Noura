@@ -21,6 +21,11 @@ class CreateOrdersTable extends Migration
                 ->references('id')
                 ->on('books')->onDelete('cascade');
 
+                $table->unsignedBigInteger('live_id')->nullable();
+                $table->foreign('live_id')
+                    ->references('id')
+                    ->on('lives')->onDelete('cascade');
+
             $table->unsignedBigInteger('course_id')->nullable();
             $table->foreign('course_id')
                 ->references('id')
@@ -51,7 +56,7 @@ class CreateOrdersTable extends Migration
 
             $table->foreignId('vendor_id')->constrained('vendors')->onDelete('cascade');
 
-            $table->enum('type', ['book', 'course', 'consultation'])->nullable(); // New column for type
+            $table->enum('type', ['book', 'course', 'consultation','live'])->nullable(); // New column for type
             $table->enum('type_of_book', ['hard_copy', 'E-book'])->nullable(); // New column for type
             $table->integer('quantity')->nullable();
             $table->decimal('total_price', 10, 2);

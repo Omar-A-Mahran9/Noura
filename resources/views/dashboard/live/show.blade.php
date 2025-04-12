@@ -13,7 +13,7 @@
                 </h1>
                 <span class="h-20px border-gray-300 border-start mx-4"></span>
                 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
-                    <li class="breadcrumb-item text-muted">{{ __('Edit live') }}</li>
+                    <li class="breadcrumb-item text-muted">{{ __('show live') }}</li>
                 </ul>
             </div>
         </div>
@@ -28,7 +28,7 @@
                 @method('PUT')
 
                 <div class="card-header d-flex align-items-center">
-                    <h3 class="fw-bolder text-dark">{{ __('Edit live') }}</h3>
+                    <h3 class="fw-bolder text-dark">{{ __('show live') }}</h3>
                     <div class="form-check form-switch form-check-custom form-check-solid mb-2">
                         <label class="fs-5 fw-bold">{{ __('publish') }}</label>
                         <input class="form-check-input mx-2" style="height: 18px;width:36px;" type="checkbox" name="publish"

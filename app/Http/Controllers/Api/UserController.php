@@ -281,4 +281,49 @@ public function myConsultation(Request $request)
 }
 
 
+public function myLive(Request $request)
+{
+    $vendorId = Auth::id(); // Get the logged-in vendor's ID
+
+    // Query orders that have consultations
+    $ordersQuery = Order::where('vendor_id', $vendorId)
+        ->whereHas('consultation') // Ensure consultation exists
+        ->with(['consultation', 'consultaionSchedual', 'consultaionType'])
+        ->orderBy('created_at', 'desc');
+
+    // Paginate results
+    $orders = $ordersQuery->paginate(5); // 👈 5 per page
+
+    // Transform paginated items
+    $consultations = $orders->getCollection()->map(function ($order) {
+        $scheduledDateTime = null;
+
+        if ($order->consultaionSchedual) {
+            $scheduledDateTime = Carbon::parse(
+                $order->consultaionSchedual->date . ' ' . $order->consultaionSchedual->time
+            );
+        }
+
+        return [
+            'title' => $order->consultaionType->name ?? '',
+            'type' => $order->consultaionType->name ?? '',
+            'price' => $order->consultation->price,
+            'status' => $scheduledDateTime && $scheduledDateTime->isPast()
+                ? __('consultation ended')
+                : __('consultation scheduled'),
+            'schedule' => $order->consultaionSchedual ? [
+                'date' => $order->consultaionSchedual->date,
+                'time' => Carbon::parse($order->consultaionSchedual->time)->format('g:i A'),
+                'zoom_join_url' => $order->consultaionSchedual->zoom_join_url,
+            ] : null,
+        ];
+    });
+
+    // Replace paginated items with transformed items
+    $orders->setCollection($consultations);
+
+    // Return with pagination response
+    return $this->successWithPagination(message: 'My consultations', data: $orders);
+}
+
 }
