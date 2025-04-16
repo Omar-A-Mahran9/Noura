@@ -116,7 +116,7 @@
                         <ul class="list-group  my-2">
                             @foreach ($bestSellingCourses as $course)
                                 <li class="list-group-item d-flex justify-content-between align-items-center  py-5">
-                                  {{ $course->name_ar }}
+                                  {{ $course->name }}
                                     <span class="badge bg-success rounded-pill">{{ $course->total_sold }}
                                         {{ __('Sold') }}</span>
                                 </li>

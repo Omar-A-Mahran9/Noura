@@ -41,7 +41,7 @@ class DashboardController extends Controller
          $bestSellingCourses = DB::table('orders')
          ->select('course_id', DB::raw('COUNT(*) as total_sold'), DB::raw('SUM(total_price) as total_revenue'))
          ->whereNotNull('course_id')
-         ->groupBy('course_id')
+         ->groupBy('course_id','course.name_ar', 'course.name_en')
          ->orderByDesc('total_sold')
          ->limit(3)
          ->get();
@@ -72,5 +72,5 @@ class DashboardController extends Controller
 
 
 
-  
+
 }
