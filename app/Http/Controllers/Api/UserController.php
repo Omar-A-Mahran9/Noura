@@ -296,8 +296,10 @@ public function myLive(Request $request)
         'id' => $order->live->id, // Access the live event's ID
         'title' => $order->live->title_ar, // Example: Get Arabic title, change to title_en if needed
         'description' => $order->live->description, // Example: Get Arabic title, change to title_en if needed
+         'zoom_join_url' => $order->live->zoom_join_url,
+
         'price' => $order->live->price, // Example: Get Arabic title, change to title_en if needed
-        'image' => getImagePathFromDirectory($order->live->main_image, 'lives'), // Assuming the live event has a main image
+        'image' => getImagePathFromDirectory($order->live->main_image, 'Lives'), // Assuming the live event has a main image
         'date' => \Carbon\Carbon::parse($order->live->day_date)->format('Y-m-d'), // Format the live event's date
         'time' => \Carbon\Carbon::parse($order->live->from)->format('H:i A') . ' - ' . \Carbon\Carbon::parse($order->live->to)->format('H:i A'), // Format live event time range
     ])->values(); // Ensure the collection is indexed correctly after mapping
