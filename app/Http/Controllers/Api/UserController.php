@@ -337,7 +337,7 @@ $data=[
     ],
 ];
 
-return $this->success($data);
+return $this->success(data:$data);
 }
 
 }
