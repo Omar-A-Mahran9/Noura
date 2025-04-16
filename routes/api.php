@@ -86,6 +86,7 @@ Route::group(['middleware' => ['json.response']], function () {
 
         Route::get('/my-consultation', 'Api\UserController@myConsultation');
         Route::get('/my-live', 'Api\UserController@myLive');
+        Route::get('/how_book_consultation', 'Api\UserController@how_book_consultation');
 
         Route::get('/my-course', 'Api\UserController@myCourse');
         Route::get('/my-book', 'Api\UserController@myBooks');

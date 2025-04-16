@@ -314,5 +314,30 @@ public function myLive(Request $request)
     );
 }
 
+public function how_book_consultation()
+{
+$data=[
+    [
+        'title' => 'Consultation',
+        'image' => getImagePathFromDirectory('test', 'Groups'),
+        'description_ar' => 'Consultation description',
+
+    ],
+    [
+        'title' => 'Consultation',
+        'image' => getImagePathFromDirectory('test', 'Groups'),
+        'description_ar' => 'Consultation description',
+
+    ],
+    [
+        'title' => 'Consultation',
+        'image' => getImagePathFromDirectory('test', 'Groups'),
+        'description_ar' => 'Consultation description',
+
+    ],
+];
+
+return $this->success($data);
+}
 
 }
