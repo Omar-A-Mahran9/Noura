@@ -16,7 +16,11 @@ class CreateLivesTable extends Migration
         Schema::create('lives', function (Blueprint $table) {
             $table->id();
             $table->string('main_image');
-            $table->double('price');
+             $table->integer('discount_price')->nullable();
+            $table->boolean('have_discount')->default(false);
+            $table->double('price')->default(0);
+            $table->boolean('is_free')->default(false);
+
             $table->string('title_ar');
             $table->string('title_en');
             $table->longText('description_ar');

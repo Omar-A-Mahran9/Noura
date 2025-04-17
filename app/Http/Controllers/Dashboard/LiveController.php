@@ -52,6 +52,9 @@ class LiveController extends Controller
         $data['from'] = $request->input('from'); // format: HH:MM
         $data['to'] = $request->input('to');
         $data['publish'] = $request->has('publish') ? 1 : 0;
+        // Set is_free flag based on price
+        $data['is_free'] = $data['price'] == 0 ? 1 : 0;
+        $data['have_discount'] = $data['have_discount'] == 'on' ? 1 : 0;
 
         // Calculate duration in minutes if both times are set
         if ($data['from'] && $data['to']) {

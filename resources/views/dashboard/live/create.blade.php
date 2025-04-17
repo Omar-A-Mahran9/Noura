@@ -83,7 +83,7 @@
                     <div class="row mb-8">
 
                         <!-- begin :: Column -->
-                        <div class="col-md-3 fv-row">
+                        <div class="col-md-6 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Title in arabic') }}</label>
                             <div class="form-floating">
@@ -94,7 +94,7 @@
                             <p class="invalid-feedback" id="title_ar"></p>
                         </div>
                         <!-- begin :: Column -->
-                        <div class="col-md-3 fv-row">
+                        <div class="col-md-6 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Title in english') }}</label>
                             <div class="form-floating">
@@ -107,7 +107,11 @@
 
                         </div>
 
-                        <div class="col-md-3 fv-row">
+                    </div>
+                    <!-- begin :: Column -->
+                    <div class="row mb-8">
+
+                        <div class="col-md-4 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Price') }}</label>
                             <div class="form-floating">
@@ -120,7 +124,23 @@
 
                         </div>
                         <!-- begin :: Column -->
-                        <div class="col-md-3 fv-row">
+                        <div class="col-md-4 fv-row">
+
+                            <div class="form-check form-switch form-check-custom form-check-solid mb-2">
+                                <label class="fs-5 fw-bold">{{ __('Discount price') }}</label>
+                                <input class="form-check-input mx-2" style="height: 18px;width:36px;" type="checkbox"
+                                    name="have_discount" id="discount-price-switch" />
+                                <label class="form-check-label" for="discount-price-switch"></label>
+                            </div>
+
+                            <div class="form-floating">
+                                <input type="number" min="1" class="form-control" id="discount_price_inp"
+                                    name="discount_price" disabled placeholder="example" />
+                                <label for="discount_price_inp">{{ __('Enter the discount price') }}</label>
+                            </div>
+                            <p class="invalid-feedback" id="discount_price"></p>
+                        </div>
+                        <div class="col-md-4 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('assign to specilist') }}</label>
                             <div class="form-floating">
@@ -141,7 +161,11 @@
                         </div>
                         <!-- end   :: Column -->
 
+
                     </div>
+                    <!-- end   :: Column -->
+
+
 
                     <!-- begin :: Row -->
                     <div class="row mb-10">
@@ -245,33 +269,67 @@
 @endsection
 @push('scripts')
     <script>
-        const fileInput = document.getElementById('image_path_inp');
-        const imagePreview = document.getElementById('image_preview');
+        // Image preview on file selection
+        // const fileInput = document.getElementById('image_path_inp');
+        // const imagePreview = document.getElementById('image_preview');
 
-        fileInput.addEventListener('change', function() {
-            imagePreview.innerHTML = ''; // Clear previous previews
-            const files = fileInput.files;
-            if (files.length > 0) {
-                Array.from(files).forEach(file => {
-                    if (file.type.startsWith('image/')) { // Check if file is an image
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            // Create an image element
-                            const img = document.createElement('img');
-                            img.src = e.target.result;
-                            img.style.width = '100px';
-                            img.style.height = '100px';
-                            img.style.objectFit = 'cover'; // Maintain aspect ratio and fill the box
-                            img.style.border = '1px solid #ddd';
-                            img.style.borderRadius = '5px';
+        // fileInput.addEventListener('change', function() {
+        //     imagePreview.innerHTML = '';
+        //     const files = fileInput.files;
+        //     if (files.length > 0) {
+        //         Array.from(files).forEach(file => {
+        //             if (file.type.startsWith('image/')) {
+        //                 const reader = new FileReader();
+        //                 reader.onload = function(e) {
+        //                     const img = document.createElement('img');
+        //                     img.src = e.target.result;
+        //                     img.style.width = '100px';
+        //                     img.style.height = '100px';
+        //                     img.style.objectFit = 'cover';
+        //                     img.style.border = '1px solid #ddd';
+        //                     img.style.borderRadius = '5px';
+        //                     img.style.marginRight = '8px';
+        //                     imagePreview.appendChild(img);
+        //                 };
+        //                 reader.readAsDataURL(file);
+        //             }
+        //         });
+        //     }
+        // });
 
-                            // Append the image to the preview container
-                            imagePreview.appendChild(img);
-                        };
-                        reader.readAsDataURL(file); // Read the file as a data URL
-                    }
-                });
-            }
+        // Discount input toggle and validation
+        let priceInp = $("#price_inp");
+        let discountInp = $("#discount_price_inp");
+
+        $(document).ready(() => {
+            // Enable/disable discount input based on switch
+            $("#discount-price-switch").change(function() {
+                discountInp.prop("disabled", !$(this).prop("checked"));
+                if (!$(this).prop("checked")) {
+                    discountInp.val('');
+                }
+            });
+
+            // Validate discount price in real-time
+            discountInp.on("input", function() {
+                let discountValue = parseFloat($(this).val());
+                let priceValue = parseFloat(priceInp.val());
+
+                if (isNaN(discountValue) || isNaN(priceValue)) return;
+
+                if (discountValue >= priceValue) {
+                    $(this).val('');
+                    warningAlert("{{ __('Discount price must be smaller than the price') }}");
+                }
+            });
+
+            // Auto-disable discount if price is 0
+            priceInp.on("input", function() {
+                let priceValue = parseFloat($(this).val());
+                if (priceValue === 0) {
+                    $("#discount-price-switch").prop("checked", false).trigger("change");
+                }
+            });
         });
     </script>
 @endpush
