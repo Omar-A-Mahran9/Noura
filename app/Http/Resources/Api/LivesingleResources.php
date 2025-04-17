@@ -35,7 +35,7 @@ class LivesingleResources extends JsonResource
             'publish' => $this->publish,
 
             'created_at' => $this->created_at->format('Y-m-d'),
-            'book_consultation'=>    [
+            'book_consultation'=>    [[
                 'title' => 'Consultation',
                 'image' => getImagePathFromDirectory('test', 'Groups'),
                 'description_ar' => 'Consultation description',
@@ -52,7 +52,7 @@ class LivesingleResources extends JsonResource
                 'image' => getImagePathFromDirectory('test', 'Groups'),
                 'description_ar' => 'Consultation description',
 
-            ],
+            ]],
 
             // Assigned specialist (employee)
             'specialist' => $this->specilist ? [
