@@ -54,8 +54,8 @@ class LiveController extends Controller
         $data['publish'] = $request->has('publish') ? 1 : 0;
         // Set is_free flag based on price
         $data['is_free'] = $data['price'] == 0 ? 1 : 0;
-        if($data['have_discount']){
-            $data['have_discount'] = $request->has('have_discount') ? 1 : 0;
+        if($request->has('have_discount')){
+        $data['have_discount'] = $data['have_discount'] == 'on' ? 1 : 0;
 
         }
 
