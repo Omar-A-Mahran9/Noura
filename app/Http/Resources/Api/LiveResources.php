@@ -21,6 +21,7 @@ class LiveResources extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'price' => $this->price,
+            'price_after_discount' => $this->price,
             'is_free' => true,
             'have_discount' => true,
             'discount_percentge' => true,
@@ -39,47 +40,6 @@ class LiveResources extends JsonResource
             'publish' => $this->publish,
 
             'created_at' => $this->created_at->format('Y-m-d'),
-
-
-            // Assigned specialist (employee)
-            'specialist' => $this->specilist ? [
-                'id' => $this->specilist->id,
-                'name' => $this->specilist->name,
-                'description' => $this->specilist->description,
-                'image' => getImagePathFromDirectory($this->specilist->image, 'employees'),
-            ] : null,
-
-            // If comments are implemented for lives too (optional)
-            'comments_count' => $this->comments?->count() ?? 0,
-
-          // Paginate comments
-          'comments' => $this->comments()->paginate(5)->through(function ($comment) {
-            return [
-                'id' => $comment->id,
-                'live_id' => $comment->live_id,
-                'rate' => $comment->rate,
-                'vendor_id' => $comment->vendor_id,
-                'description' => $comment->description,
-                'vendor' => [
-                    'id' => $comment->vendor->id,
-                    'name' => $comment->vendor->name,
-                    'image' => getImagePathFromDirectory($comment->vendor->image, 'vendors'),
-                ],
-                'created_at' => $comment->created_at->format('Y-m-d'),
-            ];
-        }),
-
-            // Optional rating stats if you have them
-            'rate_count' => $this->comments?->count() ?? 0,
-
-            'rate_percentage' => collect([1, 2, 3, 4, 5])->map(function ($rate) {
-                $totalComments = $this->comments?->count() ?? 0;
-                $rateCount = $this->comments?->where('rate', $rate)->count() ?? 0;
-                return [
-                    'rate' => $rate,
-                    'percentage' => $totalComments > 0 ? round(($rateCount / $totalComments) * 100, 2) : 0
-                ];
-            }),
 
         ];
     }
