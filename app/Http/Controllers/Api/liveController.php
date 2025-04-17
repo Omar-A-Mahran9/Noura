@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\LiveResources;
+use App\Http\Resources\Api\LivesingleResources;
 use App\Models\Live;
 use App\Models\LiveComment;
 use App\Models\Order;
@@ -64,7 +65,7 @@ class liveController extends Controller
                 ] );
             }
 
-            return $this->success('live', new LiveResources($live));
+            return $this->success('live', new LivesingleResources($live));
         }
 
         public function createCommentes(Request $request)

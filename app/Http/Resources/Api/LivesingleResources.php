@@ -5,7 +5,7 @@ namespace App\Http\Resources\Api;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Str;
 
-class LiveResources extends JsonResource
+class LivesingleResources extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -21,10 +21,6 @@ class LiveResources extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'price' => $this->price,
-            'is_free' => true,
-            'have_discount' => true,
-            'discount_percentge' => true,
-            'status'=>"new",
             'day_date' => $this->day_date ? $this->day_date : null,
             'from' => $this->from ? \Carbon\Carbon::createFromFormat('H:i:s', $this->from)->format('h:i A') : null,
             'to'   => $this->to ? \Carbon\Carbon::createFromFormat('H:i:s', $this->to)->format('h:i A') : null,
