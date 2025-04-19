@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Live extends Model
+class Agenda extends Model
 {
     use HasFactory;
     protected $guarded = [];
@@ -24,19 +24,8 @@ class Live extends Model
     {
         return $this->attributes['description_' . getLocale()];
     }
-
-    public function comments()
+    public function lives()
     {
-        return $this->hasMany(LiveComment::class, 'live_id');
+        return $this->belongsTo(Live::class); // Ensure you have a Vendor model
     }
-    public function specilist()
-    {
-        return $this->belongsTo(Employee::class, 'assign_to');
-    }
-
-    public function agenda()
-    {
-        return $this->hasMany(Agenda::class); // Ensure you have a Vendor model
-    }
-
 }

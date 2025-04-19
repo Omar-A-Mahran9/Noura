@@ -34,6 +34,8 @@ class LivesingleResources extends JsonResource
             'duration_minutes' => $this->duration_minutes,
             'publish' => $this->publish,
 
+
+
             'created_at' => $this->created_at->format('Y-m-d'),
             'book_consultation'=>    [[
                 'title' => 'Consultation',
@@ -53,6 +55,14 @@ class LivesingleResources extends JsonResource
                 'description_ar' => 'Consultation description',
 
             ]],
+                'agenda' => $this->agenda->map(function ($item) {
+                    return [
+                        'title' => $item['title'] ?? '',
+                        'description' => $item['description'] ?? '',
+                        'start_time' => isset($item['start_time']) ? date('H:i', strtotime($item['start_time'])) : '',
+                        'end_time' => isset($item['end_time']) ? date('H:i', strtotime($item['end_time'])) : '',
+                    ];
+                }),
 
             // Assigned specialist (employee)
             'specialist' => $this->specilist ? [
