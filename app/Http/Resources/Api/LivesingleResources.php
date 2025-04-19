@@ -74,37 +74,37 @@ class LivesingleResources extends JsonResource
                 'image' => getImagePathFromDirectory($this->specilist->image, 'employees'),
             ] : null,
 
-            // If comments are implemented for lives too (optional)
-            'comments_count' => $this->comments?->count() ?? 0,
+        //     // If comments are implemented for lives too (optional)
+        //     'comments_count' => $this->comments?->count() ?? 0,
 
-          // Paginate comments
-          'comments' => $this->comments()->paginate(5)->through(function ($comment) {
-            return [
-                'id' => $comment->id,
-                'live_id' => $comment->live_id,
-                'rate' => $comment->rate,
-                'vendor_id' => $comment->vendor_id,
-                'description' => $comment->description,
-                'vendor' => [
-                    'id' => $comment->vendor->id,
-                    'name' => $comment->vendor->name,
-                    'image' => getImagePathFromDirectory($comment->vendor->image, 'vendors'),
-                ],
-                'created_at' => $comment->created_at->format('Y-m-d'),
-            ];
-        }),
+        //   // Paginate comments
+        //   'comments' => $this->comments()->paginate(5)->through(function ($comment) {
+        //     return [
+        //         'id' => $comment->id,
+        //         'live_id' => $comment->live_id,
+        //         'rate' => $comment->rate,
+        //         'vendor_id' => $comment->vendor_id,
+        //         'description' => $comment->description,
+        //         'vendor' => [
+        //             'id' => $comment->vendor->id,
+        //             'name' => $comment->vendor->name,
+        //             'image' => getImagePathFromDirectory($comment->vendor->image, 'vendors'),
+        //         ],
+        //         'created_at' => $comment->created_at->format('Y-m-d'),
+        //     ];
+        // }),
 
-            // Optional rating stats if you have them
-            'rate_count' => $this->comments?->count() ?? 0,
+        //     // Optional rating stats if you have them
+        //     'rate_count' => $this->comments?->count() ?? 0,
 
-            'rate_percentage' => collect([1, 2, 3, 4, 5])->map(function ($rate) {
-                $totalComments = $this->comments?->count() ?? 0;
-                $rateCount = $this->comments?->where('rate', $rate)->count() ?? 0;
-                return [
-                    'rate' => $rate,
-                    'percentage' => $totalComments > 0 ? round(($rateCount / $totalComments) * 100, 2) : 0
-                ];
-            }),
+        //     'rate_percentage' => collect([1, 2, 3, 4, 5])->map(function ($rate) {
+        //         $totalComments = $this->comments?->count() ?? 0;
+        //         $rateCount = $this->comments?->where('rate', $rate)->count() ?? 0;
+        //         return [
+        //             'rate' => $rate,
+        //             'percentage' => $totalComments > 0 ? round(($rateCount / $totalComments) * 100, 2) : 0
+        //         ];
+        //     }),
 
         ];
     }

@@ -128,13 +128,31 @@ class liveController extends Controller
 
        public function comments($live_id)
        {
-           // Fetch paginated comments for the given article ID
+           // Fetch paginated comments for the given live ID
            $comments = LiveComment::where('live_id', $live_id)->paginate(3);
 
-           // Transform the data to include only required fields
+           // Total comments count
+           $totalCommentsCount = LiveComment::where('live_id', $live_id)->count();
+
+           // Calculate average rate (if there are comments)
+           $averageRate = $totalCommentsCount > 0
+               ? round(LiveComment::where('live_id', $live_id)->avg('rate'), 2)
+               : 0;
+
+           // Rate count breakdown (percentage per rating)
+           $ratePercentages = collect([1, 2, 3, 4, 5])->map(function ($rate) use ($live_id, $totalCommentsCount) {
+               $rateCount = LiveComment::where('live_id', $live_id)->where('rate', $rate)->count();
+               return [
+                   'rate' => $rate,
+                   'percentage' => $totalCommentsCount > 0 ? round(($rateCount / $totalCommentsCount) * 100, 2) : 0
+               ];
+           });
+
+           // Transform the paginated comments
            $transformedComments = $comments->through(function ($comment) {
                return [
                    'id' => $comment->id,
+                   'rate' => $comment->rate,
                    'description' => $comment->description,
                    'client' => $comment->vendor->name,
                    'client_image' => getImagePathFromDirectory($comment->vendor->image, 'ProfileImages'),
@@ -142,7 +160,17 @@ class liveController extends Controller
                ];
            });
 
-           return $this->successWithPagination('Comments retrieved successfully', $transformedComments);
+           // Prepare final response data
+           $responseData = [
+               'comments_count' => $totalCommentsCount,
+               'average_rate' => $averageRate,
+               'comments' => $transformedComments,
+               'rate_count' => $totalCommentsCount,
+               'rate_percentage' => $ratePercentages,
+           ];
+
+           return $this->successWithPagination('Comments retrieved successfully', $responseData, $comments);
        }
+
 
 }
