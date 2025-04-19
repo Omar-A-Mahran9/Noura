@@ -168,7 +168,7 @@ class liveController extends Controller
                'rate_percentage' => $ratePercentages,
            ];
 
-
+           return $this->success(data:$responseData);
            return $this->successWithPagination('Comments retrieved successfully', $comments);
        }
 
