@@ -126,10 +126,10 @@ class liveController extends Controller
            return $this->success(data:$order);
        }
 
-       public function comments($article_id)
+       public function comments($live_id)
        {
            // Fetch paginated comments for the given article ID
-           $comments = LiveComment::where('article_id', $article_id)->paginate(3);
+           $comments = LiveComment::where('live_id', $live_id)->paginate(3);
 
            // Transform the data to include only required fields
            $transformedComments = $comments->through(function ($comment) {

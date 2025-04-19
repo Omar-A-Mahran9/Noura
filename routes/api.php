@@ -60,7 +60,7 @@ Route::group(['middleware' => ['json.response']], function () {
 
     Route::get('/lives', 'Api\liveController@index');
     Route::get('/lives/{id}', 'Api\liveController@single');
-    Route::get('/comments/{article_id}', 'Api\liveController@comments');
+    Route::get('/lives/comments/{live_id}', 'Api\liveController@comments');
 
      // Authenticated vendor routes
      Route::group(['middleware' => 'auth:vendor'], function () {
