@@ -24,8 +24,8 @@ class CreateAgendaTable extends Migration
             $table->string('title_en');
             $table->longText('description_ar')->nullable();
             $table->longText('description_en')->nullable();
-            $table->timestamp('start_time')->nullable();
-            $table->timestamp('end_time')->nullable();
+            $table->time('start_time')->nullable();
+            $table->time('end_time')->nullable();
             $table->timestamps();
         });
     }
