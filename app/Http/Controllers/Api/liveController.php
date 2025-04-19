@@ -131,31 +131,16 @@ class liveController extends Controller
            // Fetch paginated comments for the given live ID
            $comments = LiveComment::where('live_id', $live_id)->paginate(5);
 
-           // Total comments count
-           $totalCommentsCount = LiveComment::where('live_id', $live_id)->count();
 
 
-
-           // Transform the paginated comments
-           $transformedComments = $comments->through(function ($comment) {
-               return [
-                   'id' => $comment->id,
-                   'rate' => $comment->rate,
-                   'description' => $comment->description,
-                   'client' => $comment->vendor->name,
-                   'client_image' => getImagePathFromDirectory($comment->vendor->image, 'ProfileImages'),
-                   'created_at' => $comment->created_at->format('Y-m-d'),
-               ];
-           });
-
-           // Prepare final response data
-           $responseData = [
-               'comments_count' => $totalCommentsCount,
-            //    'average_rate' => $averageRate,
-               'comments' => $transformedComments,
-               'rate_count' => $totalCommentsCount,
-            //    'rate_percentage' => $ratePercentages,
-           ];
+        //    // Prepare final response data
+        //    $responseData = [
+        //        'comments_count' => $totalCommentsCount,
+        //        'average_rate' => $averageRate,
+        //        'comments' => $transformedComments,
+        //        'rate_count' => $totalCommentsCount,
+        //        'rate_percentage' => $ratePercentages,
+        //    ];
 
            return $this->successWithPagination('Comments retrieved successfully', $responseData, $comments);
        }
