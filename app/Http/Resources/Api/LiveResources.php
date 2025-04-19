@@ -31,8 +31,16 @@ class LiveResources extends JsonResource
             'discount_percentge' => $discountPercentage,
 
             'day_date' => $this->day_date ?? null,
-            'from' => $this->from ? \Carbon\Carbon::createFromFormat('H:i:s', $this->from)->format('h:i A') : null,
-            'to'   => $this->to ? \Carbon\Carbon::createFromFormat('H:i:s', $this->to)->format('h:i A') : null,
+   'from' => $this->from
+    ? \Carbon\Carbon::createFromFormat('H:i:s', $this->from)->format('h:i') .
+      ( \Carbon\Carbon::createFromFormat('H:i:s', $this->from)->format('A') === 'AM' ? ' صباحًا' : ' مساءً')
+    : null,
+
+'to' => $this->to
+    ? \Carbon\Carbon::createFromFormat('H:i:s', $this->to)->format('h:i') .
+      ( \Carbon\Carbon::createFromFormat('H:i:s', $this->to)->format('A') === 'AM' ? ' صباحًا' : ' مساءً')
+    : null,
+
             'previwe_video' => $this->video_url,
 
             'live_start_durin' => $this->from && $this->to
