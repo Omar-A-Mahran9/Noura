@@ -29,6 +29,7 @@ class LiveResources extends JsonResource
             'is_free' => $isFree,
             'have_discount' => $haveDiscount,
             'discount_percentge' => $discountPercentage,
+            'zoom_join_url' => $this->zoom_join_url,
 
             'day_date' => $this->day_date ?? null,
    'from' => $this->from

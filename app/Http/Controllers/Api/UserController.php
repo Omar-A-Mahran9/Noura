@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
  use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\LiveResources;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
  use App\Http\Resources\Api\UserResource;
@@ -291,28 +292,19 @@ public function myLive(Request $request)
         ->orderBy('created_at', 'desc')
         ->paginate(6); // Paginate orders, 6 per page
 
-    // Transform the paginated orders to include live event details
-    $lives = $orders->getCollection()->map(fn($order) => [
-        'id' => $order->live->id, // Access the live event's ID
-        'title' => $order->live->title_ar, // Example: Get Arabic title, change to title_en if needed
-        'description' => $order->live->description, // Example: Get Arabic title, change to title_en if needed
-         'zoom_join_url' => $order->live->zoom_join_url,
+    // Extract the lives collection from orders
+    $lives = $orders->getCollection()->pluck('live')->values();
 
-        'price' => $order->live->price, // Example: Get Arabic title, change to title_en if needed
-        'image' => getImagePathFromDirectory($order->live->main_image, 'Lives'), // Assuming the live event has a main image
-        'date' => \Carbon\Carbon::parse($order->live->day_date)->format('Y-m-d'), // Format the live event's date
-        'time' => \Carbon\Carbon::parse($order->live->from)->format('H:i A') . ' - ' . \Carbon\Carbon::parse($order->live->to)->format('H:i A'), // Format live event time range
-    ])->values(); // Ensure the collection is indexed correctly after mapping
-
-    // Replace the original collection with the transformed one
+    // Replace the orders collection with lives
     $orders->setCollection($lives);
 
-    // Return the paginated response using your custom successWithPagination method
+    // Return the paginated response using your custom successWithPagination method and LiveResources
     return $this->successWithPagination(
         message: 'My live events',
-        data: $orders
+        data: LiveResources::collection($orders)
     );
 }
+
 
 public function how_book_consultation()
 {

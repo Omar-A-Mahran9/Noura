@@ -48,8 +48,6 @@ class liveController extends Controller
 
             return $this->successWithPagination('lives', LiveResources::collection($lives));
 
-
-
         }
 
         public function single($id)
