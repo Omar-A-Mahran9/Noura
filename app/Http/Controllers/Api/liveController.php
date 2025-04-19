@@ -128,22 +128,28 @@ class liveController extends Controller
 
        public function comments($live_id)
        {
-           // Fetch paginated comments for the given live ID
-           $comments = LiveComment::where('live_id', $live_id)->paginate(5);
+           // Fetch the live instance with comments and vendors eagerly loaded
+           $commentsQuery = LiveComment::with('vendor')->where('live_id', $live_id);
+
+           // Paginate comments
+           $comments = $commentsQuery->paginate(5);
 
            // Total comments count
-           $totalCommentsCount = LiveComment::where('live_id', $live_id)->count();
+           $totalCommentsCount = $commentsQuery->count();
+
            // Calculate average rate (if there are comments)
            $averageRate = $totalCommentsCount > 0
-               ? round(LiveComment::where('live_id', $live_id)->avg('rate'), 2)
+               ? round($commentsQuery->avg('rate'), 2)
                : 0;
 
            // Rate count breakdown (percentage per rating)
-           $ratePercentages = collect([1, 2, 3, 4, 5])->map(function ($rate) use ($live_id, $totalCommentsCount) {
-               $rateCount = LiveComment::where('live_id', $live_id)->where('rate', $rate)->count();
+           $ratePercentages = collect([1, 2, 3, 4, 5])->map(function ($rate) use ($commentsQuery, $totalCommentsCount) {
+               $rateCount = (clone $commentsQuery)->where('rate', $rate)->count();
                return [
                    'rate' => $rate,
-                   'percentage' => $totalCommentsCount > 0 ? round(($rateCount / $totalCommentsCount) * 100, 2) : 0
+                   'percentage' => $totalCommentsCount > 0
+                       ? round(($rateCount / $totalCommentsCount) * 100, 2)
+                       : 0
                ];
            });
 
@@ -168,9 +174,10 @@ class liveController extends Controller
                'rate_percentage' => $ratePercentages,
            ];
 
-           return $this->success(data:$responseData);
-           return $this->successWithPagination('Comments retrieved successfully', $comments);
+           // Return final result — removed second return (this one is sufficient)
+           return $this->success(data: $responseData);
        }
+
 
 
 }
