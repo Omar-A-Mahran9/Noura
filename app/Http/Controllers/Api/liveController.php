@@ -158,7 +158,6 @@ class liveController extends Controller
                    'created_at' => $comment->created_at->format('Y-m-d'),
                ];
            });
-           dd($transformedComments);
 
            // Prepare final response data
            $responseData = [
@@ -169,7 +168,8 @@ class liveController extends Controller
                'rate_percentage' => $ratePercentages,
            ];
 
-           return $this->successWithPagination('Comments retrieved successfully', $responseData, $comments);
+
+           return $this->successWithPagination('Comments retrieved successfully', $comments);
        }
 
 
