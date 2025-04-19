@@ -59,8 +59,9 @@ class LivesingleResources extends JsonResource
                     return [
                         'title' => $item['title'] ?? '',
                         'description' => $item['description'] ?? '',
-                        'start_time' => isset($item['start_time']) ? date('H:i', strtotime($item['start_time'])) : '',
-                        'end_time' => isset($item['end_time']) ? date('H:i', strtotime($item['end_time'])) : '',
+                        'start_time' => isset($item['start_time']) ? date('h:i A', strtotime($item['start_time'])) : '',
+                        'end_time' => isset($item['end_time']) ? date('h:i A', strtotime($item['end_time'])) : '',
+
                     ];
                 }),
 
