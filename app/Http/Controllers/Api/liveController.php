@@ -137,7 +137,6 @@ class liveController extends Controller
            $averageRate = $totalCommentsCount > 0
                ? round(LiveComment::where('live_id', $live_id)->avg('rate'), 2)
                : 0;
-               dd($averageRate);
 
            // Rate count breakdown (percentage per rating)
            $ratePercentages = collect([1, 2, 3, 4, 5])->map(function ($rate) use ($live_id, $totalCommentsCount) {
@@ -147,6 +146,7 @@ class liveController extends Controller
                    'percentage' => $totalCommentsCount > 0 ? round(($rateCount / $totalCommentsCount) * 100, 2) : 0
                ];
            });
+           dd($ratePercentages);
 
            // Transform the paginated comments
            $transformedComments = $comments->through(function ($comment) {
