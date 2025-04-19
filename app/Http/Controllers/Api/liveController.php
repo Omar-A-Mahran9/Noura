@@ -146,7 +146,6 @@ class liveController extends Controller
                    'percentage' => $totalCommentsCount > 0 ? round(($rateCount / $totalCommentsCount) * 100, 2) : 0
                ];
            });
-           dd($ratePercentages);
 
            // Transform the paginated comments
            $transformedComments = $comments->through(function ($comment) {
@@ -159,6 +158,7 @@ class liveController extends Controller
                    'created_at' => $comment->created_at->format('Y-m-d'),
                ];
            });
+           dd($transformedComments);
 
            // Prepare final response data
            $responseData = [
