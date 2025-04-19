@@ -133,11 +133,11 @@ class liveController extends Controller
 
            // Total comments count
            $totalCommentsCount = LiveComment::where('live_id', $live_id)->count();
-dd($totalCommentsCount);
            // Calculate average rate (if there are comments)
            $averageRate = $totalCommentsCount > 0
                ? round(LiveComment::where('live_id', $live_id)->avg('rate'), 2)
                : 0;
+               dd($averageRate);
 
            // Rate count breakdown (percentage per rating)
            $ratePercentages = collect([1, 2, 3, 4, 5])->map(function ($rate) use ($live_id, $totalCommentsCount) {
