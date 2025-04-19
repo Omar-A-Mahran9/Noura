@@ -41,7 +41,7 @@ Route::group(['middleware' => ['json.response']], function () {
     // Blog Routes
     Route::get('/blogs', 'Api\ArticlesController@index');
     Route::get('/authors', 'Api\ArticlesController@authors');
-    Route::get('/comments/{article_id}', 'Api\ArticlesController@com2ments');
+    Route::get('/comments/{article_id}', 'Api\ArticlesController@comments');
 
     Route::get('/blogs/{id}', 'Api\ArticlesController@single');
 
@@ -60,6 +60,7 @@ Route::group(['middleware' => ['json.response']], function () {
 
     Route::get('/lives', 'Api\liveController@index');
     Route::get('/lives/{id}', 'Api\liveController@single');
+    Route::get('/comments/{article_id}', 'Api\liveController@comments');
 
      // Authenticated vendor routes
      Route::group(['middleware' => 'auth:vendor'], function () {

@@ -126,6 +126,23 @@ class liveController extends Controller
            return $this->success(data:$order);
        }
 
+       public function comments($article_id)
+       {
+           // Fetch paginated comments for the given article ID
+           $comments = LiveComment::where('article_id', $article_id)->paginate(3);
 
+           // Transform the data to include only required fields
+           $transformedComments = $comments->through(function ($comment) {
+               return [
+                   'id' => $comment->id,
+                   'description' => $comment->description,
+                   'client' => $comment->vendor->name,
+                   'client_image' => getImagePathFromDirectory($comment->vendor->image, 'ProfileImages'),
+                   'created_at' => $comment->created_at->format('Y-m-d'),
+               ];
+           });
+
+           return $this->successWithPagination('Comments retrieved successfully', $transformedComments);
+       }
 
 }
