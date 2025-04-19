@@ -129,7 +129,7 @@ class liveController extends Controller
        public function comments($live_id)
        {
            // Fetch paginated comments for the given live ID
-           $comments = LiveComment::where('live_id', $live_id)->paginate(3);
+           $comments = LiveComment::where('live_id', $live_id)->paginate(5);
 
            // Total comments count
            $totalCommentsCount = LiveComment::where('live_id', $live_id)->count();
