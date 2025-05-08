@@ -8,6 +8,7 @@ use App\Http\Resources\Api\ConsultationResources;
 use App\Http\Resources\ConsultationResources as ResourcesConsultationResources;
 use App\Models\Book;
 use App\Models\BookComment;
+use App\Models\BookNote;
 use App\Models\Consultaion;
 use App\Models\ConsultaionSchedual;
 use Auth;
@@ -121,5 +122,51 @@ class BooksController extends Controller
        return $this->successWithPagination('Comments retrieved successfully', $transformedComments);
    }
 
+   public function notes($book_id)
+   {
+       // Fetch paginated book notes for the given book ID
+       $notes = BookNote::with('vendor') // eager load vendor if relationship exists
+           ->where('book_id', $book_id)
+           ->paginate(10);
+
+       // Transform the data
+       $transformed = $notes->through(function ($note) {
+           return [
+               'id' => $note->id,
+               'main_text' => $note->text,
+               'note' => $note->note,
+               'question' => $note->question,
+               'answer' => $note->answer,
+               'is_answer' => $note->is_answer,
+
+               'created_at' => $note->created_at->format('Y-m-d'),
+           ];
+       });
+
+       return $this->successWithPagination('Notes retrieved successfully', $transformed);
+   }
+
+
+   public function noteStore(Request $request)
+{
+    $validated = $request->validate([
+        'book_id' => 'required|exists:books,id',
+        'page' => 'required|integer',
+        'text' => 'required|string',
+        'note' => 'required_without:question|string|nullable',
+        'question' => 'required_without:note|string|nullable',
+    ]);
+
+    $note = BookNote::create($validated);
+
+    return $this->success('Book note created successfully', [
+        'id' => $note->id,
+        'page' => $note->page,
+        'note' => $note->note,
+        'text' => $note->text,
+        'question' => $note->question,
+        'created_at' => $note->created_at->format('Y-m-d'),
+    ]);
+}
 
 }
