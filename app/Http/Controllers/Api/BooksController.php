@@ -13,7 +13,7 @@ use App\Models\ConsultaionSchedual;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request  ;
- 
+
 class BooksController extends Controller
 {
 
@@ -28,7 +28,7 @@ class BooksController extends Controller
         ->latest() // Orders by 'created_at' in descending order
         ->get();
 
-    
+
         // Return the response using the success response format
         return $this->success(data:[
             'Best_Seller' => BookResources::collection($Best_Seller),
@@ -36,7 +36,7 @@ class BooksController extends Controller
             'books' => BookResources::collection($books),
         ]);
     }
-    
+
 
     public function single($id)
     {
@@ -44,16 +44,16 @@ class BooksController extends Controller
         $book = Book::where('id', $id)
             // ->with('comments', 'comments.vendor')
             ->first();
-        
+
         // If the article does not exist, return a 404 response
         if (!$book) {
             return $this->failure("Bookk not found");
-        
+
         }
-    
+
         // Use the singular ArticleResource to transform the single article
         $data = BookResources::make($book); // Use make() to transform a single resource
-        
+
         // Return the transformed article data
         return $this->success(
             message: "Single Book",
@@ -68,7 +68,7 @@ class BooksController extends Controller
             'comment' => 'required|string|max:500',
             'rate' => 'required|numeric|min:1|max:5', // Correct rule for numeric validation
         ]);
-        
+
        if(Auth::guard('vendor')->user()){
            if(Auth::guard('vendor')->user()->status != 2){
            if(Auth::guard('vendor')->user()->status==1){
@@ -98,5 +98,28 @@ class BooksController extends Controller
 
    }
    }
-    
+
+
+   public function comments($book_id)
+   {
+       // Fetch paginated comments for the given article ID
+       $comments = BookComment::where('book_id', $book_id)->paginate(3);
+
+       // Transform the data to include only required fields
+       $transformedComments = $comments->through(function ($comment) {
+           return [
+               'id' => $comment->id,
+               'description' => $comment->description,
+               'rate' => $comment->rate ?? null,
+
+               'client' => $comment->vendor->name,
+               'client_image' => getImagePathFromDirectory($comment->vendor->image, 'ProfileImages'),
+               'created_at' => $comment->created_at->format('Y-m-d'),
+           ];
+       });
+
+       return $this->successWithPagination('Comments retrieved successfully', $transformedComments);
+   }
+
+
 }

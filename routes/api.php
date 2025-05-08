@@ -56,6 +56,7 @@ Route::group(['middleware' => ['json.response']], function () {
 
     Route::get('/books', 'Api\BooksController@index');
     Route::get('/books/{id}', 'Api\BooksController@single');
+    Route::get('/books/comments/{book_id}', 'Api\BooksController@comments');
 
 
     Route::get('/lives', 'Api\liveController@index');
