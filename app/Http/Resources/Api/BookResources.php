@@ -17,14 +17,14 @@ class BookResources extends JsonResource
     {
         return [
             'id' => $this->id,
-            'image' => getImagePathFromDirectory($this->main_image, 'books'),
+            'image' => getImagePathFromDirectory($this->main_image, 'Books'),
             'title' => $this->title,
             'rate' => $this->rate,
             'short_description' => Str::limit($this->description, 35),
             'fully_description' => $this->description,
             'created_at' => $this->created_at->format('Y-m-d'),
             'images' => $this->bookImages->map(function ($image) {
-                return getImagePathFromDirectory($image->image, 'books/images');
+                return getImagePathFromDirectory($image->image, 'Books/images');
             }),
             'pdf' => getImagePathFromDirectory($this->pdf_path, 'Books/pdf'),
             // Map the related comments if available
