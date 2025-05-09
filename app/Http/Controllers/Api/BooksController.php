@@ -134,6 +134,8 @@ class BooksController extends Controller
            return [
                'id' => $note->id,
                'main_text' => $note->text,
+               'page' => $note->page,
+
                'note' => $note->note,
                'created_at' => $note->created_at->format('Y-m-d'),
            ];
@@ -156,6 +158,8 @@ class BooksController extends Controller
                'id' => $note->id,
                'main_text' => $note->text,
                'question' => $note->question,
+               'page' => $note->page,
+
                'answer' => $note->answer,
                'is_answer' => $note->is_answer,
                'created_at' => $note->created_at->format('Y-m-d'),
@@ -182,6 +186,8 @@ class BooksController extends Controller
         'id' => $note->id,
         'page' => $note->page,
         'note' => $note->note,
+        'page' => $note->page,
+
         'text' => $note->text,
         'created_at' => $note->created_at->format('Y-m-d'),
     ]);
@@ -203,6 +209,8 @@ public function QuestionStore(Request $request)
         'id' => $note->id,
         'page' => $note->page,
         'text' => $note->text,
+        'page' => $note->page,
+
         'question' => $note->question,
         'created_at' => $note->created_at->format('Y-m-d'),
     ]);
