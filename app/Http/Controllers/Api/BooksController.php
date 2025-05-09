@@ -144,26 +144,26 @@ class BooksController extends Controller
 
    public function Questions($book_id)
    {
-       // Fetch paginated book notes for the given book ID
+       // Fetch all book notes for the given book ID
        $notes = BookNote::with('vendor') // eager load vendor if relationship exists
            ->where('book_id', $book_id)
-           ->paginate(10);
+           ->get();
 
        // Transform the data
-       $transformed = $notes->through(function ($note) {
+       $transformed = $notes->map(function ($note) {
            return [
                'id' => $note->id,
                'main_text' => $note->text,
                'question' => $note->question,
                'answer' => $note->answer,
                'is_answer' => $note->is_answer,
-
                'created_at' => $note->created_at->format('Y-m-d'),
            ];
        });
 
-       return $this->successWithPagination('question retrieved successfully', $transformed);
+       return $this->success('question retrieved successfully', $transformed);
    }
+
 
 
    public function noteStore(Request $request)
