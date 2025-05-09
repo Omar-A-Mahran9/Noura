@@ -33,7 +33,7 @@ class BookResources extends JsonResource
                 'name' => $this->author->name,
                 'description' => $this->author->description,
 
-                'image' => getImagePathFromDirectory($this->author->image, 'authors'),
+                'image' => getImagePathFromDirectory($this->author->image, 'Authors'),
             ],
             'comments_count' => $this->comments->count(), // Count of comments
 
