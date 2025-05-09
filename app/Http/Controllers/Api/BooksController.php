@@ -135,6 +135,25 @@ class BooksController extends Controller
                'id' => $note->id,
                'main_text' => $note->text,
                'note' => $note->note,
+               'created_at' => $note->created_at->format('Y-m-d'),
+           ];
+       });
+
+       return $this->successWithPagination('Notes retrieved successfully', $transformed);
+   }
+
+   public function Questions($book_id)
+   {
+       // Fetch paginated book notes for the given book ID
+       $notes = BookNote::with('vendor') // eager load vendor if relationship exists
+           ->where('book_id', $book_id)
+           ->paginate(10);
+
+       // Transform the data
+       $transformed = $notes->through(function ($note) {
+           return [
+               'id' => $note->id,
+               'main_text' => $note->text,
                'question' => $note->question,
                'answer' => $note->answer,
                'is_answer' => $note->is_answer,
@@ -143,7 +162,7 @@ class BooksController extends Controller
            ];
        });
 
-       return $this->successWithPagination('Notes retrieved successfully', $transformed);
+       return $this->successWithPagination('question retrieved successfully', $transformed);
    }
 
 
@@ -154,7 +173,6 @@ class BooksController extends Controller
         'page' => 'required|integer',
         'text' => 'required|string',
         'note' => 'required_without:question|string|nullable',
-        'question' => 'required_without:note|string|nullable',
     ]);
 
     $note = BookNote::create($validated);
@@ -163,6 +181,26 @@ class BooksController extends Controller
         'id' => $note->id,
         'page' => $note->page,
         'note' => $note->note,
+        'text' => $note->text,
+        'created_at' => $note->created_at->format('Y-m-d'),
+    ]);
+}
+
+
+public function QuestionStore(Request $request)
+{
+    $validated = $request->validate([
+        'book_id' => 'required|exists:books,id',
+        'page' => 'required|integer',
+        'text' => 'required|string',
+        'question' => 'required',
+    ]);
+
+    $note = BookNote::create($validated);
+
+    return $this->success('Book note created successfully', [
+        'id' => $note->id,
+        'page' => $note->page,
         'text' => $note->text,
         'question' => $note->question,
         'created_at' => $note->created_at->format('Y-m-d'),

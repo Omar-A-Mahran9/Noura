@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBookNotesTable extends Migration
+class CreateNotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,12 @@ class CreateBookNotesTable extends Migration
      */
     public function up()
     {
-        Schema::create('book_notes', function (Blueprint $table) {
+        Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->integer('page');
-            $table->text('text')->nullable();
-            $table->text('note')->nullable();
-            $table->text('question')->nullable();
-            $table->text('answer')->nullable();
-            $table->boolean('is_answer')->default(false);
-
             $table->unsignedBigInteger('vendor_id')->nullable();
             $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');;
-
-            $table->foreignId('book_id')->constrained('books')->onDelete('cascade')->null;
+            $table->string('title');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -37,6 +30,6 @@ class CreateBookNotesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('book_notes');
+        Schema::dropIfExists('notes');
     }
 }
