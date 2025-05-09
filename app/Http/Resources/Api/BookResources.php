@@ -17,15 +17,17 @@ class BookResources extends JsonResource
     {
         return [
             'id' => $this->id,
-            'image' => getImagePathFromDirectory($this->main_image, 'books'), 
-            'title' => $this->title, 
-            'rate' => $this->rate, 
+            'image' => getImagePathFromDirectory($this->main_image, 'books'),
+            'title' => $this->title,
+            'rate' => $this->rate,
             'short_description' => Str::limit($this->description, 35),
             'fully_description' => $this->description,
             'created_at' => $this->created_at->format('Y-m-d'),
             'images' => $this->bookImages->map(function ($image) {
                 return getImagePathFromDirectory($image->image, 'books/images');
-            }),            // Map the related comments if available
+            }),
+            'pdf' => getImagePathFromDirectory($this->pdf_path, 'books/pdf'),
+            // Map the related comments if available
             'author' => [
                 'id' => $this->author->id,
                 'name' => $this->author->name,
@@ -45,7 +47,7 @@ class BookResources extends JsonResource
                     'vendor' => [
                         'id' => $comment->vendor->id, // Ensure the vendor has 'id' property
                         'name' => $comment->vendor->name, // Assuming you have a 'name' field in the vendor
-                        'image' =>  getImagePathFromDirectory($comment->vendor->image, 'Vendors'), 
+                        'image' =>  getImagePathFromDirectory($comment->vendor->image, 'Vendors'),
 
                     ],
                     'created_at' => $comment->created_at->format('Y-m-d'),
@@ -64,6 +66,6 @@ class BookResources extends JsonResource
 
             'related_courses'=>'',
 
-            ];      
+            ];
     }
 }
