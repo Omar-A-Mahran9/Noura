@@ -124,13 +124,13 @@ class BooksController extends Controller
 
    public function notes($book_id)
    {
-       // Fetch paginated book notes for the given book ID
-       $notes = BookNote::with('vendor') // eager load vendor if relationship exists
+       // Fetch all book notes for the given book ID
+       $notes = BookNote::with('vendor')
            ->where('book_id', $book_id)
-           ->paginate(10);
+           ->get();
 
        // Transform the data
-       $transformed = $notes->through(function ($note) {
+       $transformed = $notes->map(function ($note) {
            return [
                'id' => $note->id,
                'main_text' => $note->text,
@@ -139,8 +139,9 @@ class BooksController extends Controller
            ];
        });
 
-       return $this->successWithPagination('Notes retrieved successfully', $transformed);
+       return $this->success('Notes retrieved successfully', $transformed);
    }
+
 
    public function Questions($book_id)
    {
