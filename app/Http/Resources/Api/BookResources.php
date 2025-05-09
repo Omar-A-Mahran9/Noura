@@ -26,7 +26,7 @@ class BookResources extends JsonResource
             'images' => $this->bookImages->map(function ($image) {
                 return getImagePathFromDirectory($image->image, 'books/images');
             }),
-            'pdf' => getImagePathFromDirectory($this->pdf_path, 'Books/PDF'),
+            'pdf' => getImagePathFromDirectory($this->pdf_path, 'Books/pdf'),
             // Map the related comments if available
             'author' => [
                 'id' => $this->author->id,
