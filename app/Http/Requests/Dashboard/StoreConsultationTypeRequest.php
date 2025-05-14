@@ -14,7 +14,7 @@ class StoreConsultationTypeRequest extends FormRequest
      */
     public function authorize()
     {
-    
+
         return abilities()->contains('create_consultation_type');
      }
 
@@ -28,7 +28,7 @@ class StoreConsultationTypeRequest extends FormRequest
         return [
             'name_ar' => ['required','string',new NotNumbersOnly()],
             'name_en'         =>['required','string',new NotNumbersOnly()],
- 
+
         ];
     }
 }

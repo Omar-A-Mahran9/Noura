@@ -39,20 +39,11 @@ let KTDatatable = (function () {
                 { data: "id" },
                 { data: "page" },
                 { data: "text" },
-                { data: "book.name" },
+                { data: "book.title" },
                 { data: "created_at" },
                 { data: null },
             ],
             columnDefs: [
-                {
-                    targets: 1,
-                    render: function (data, type, row) {
-                        return `<img style="height:50px;width:50px;border-radius:4px" src="${getImagePathFromDirectory(
-                            data,
-                            "Books"
-                        )}" class="me-3" >`;
-                    },
-                },
                 {
                     targets: -1,
                     data: null,

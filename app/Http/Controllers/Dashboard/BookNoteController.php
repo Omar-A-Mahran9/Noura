@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\StoreBooksNoteRequest;
 use App\Http\Requests\Dashboard\StoreBooksRequest;
 use App\Http\Requests\Dashboard\UpdateBooksRequest;
 use App\Models\Book;
@@ -10,6 +11,7 @@ use App\Models\BookImage;
 use App\Models\BookNote;
 use App\Models\Course;
 use App\Models\Employee;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 
 class BookNoteController extends Controller
@@ -20,7 +22,7 @@ class BookNoteController extends Controller
 
         if ($request->ajax())
         {
-            $data = getModelData(model: new BookNote(),relations: ['Books' => ['id', 'title']]);
+            $data = getModelData(model: new BookNote(),relations: ['book' => ['id', 'title_ar','title_en', 'description_ar','description_en']]);
 
              return response()->json($data);
         }
@@ -35,56 +37,36 @@ class BookNoteController extends Controller
      */
     public function create()
     {
-        $this->authorize('create_books');
-        $employees = Employee::where('type','author')->get(); // Assuming you want to fetch all employees
-        $courses=Course::select('id','name_' . getLocale())->get();
+        $this->authorize('create_books_notes');
 
-        return view('dashboard.books.create',compact('employees','courses'));
+        $books = Book::select('id', 'title_en')->get();
+        $vendors = Vendor::select('id', 'name')->get(); // ← Add this line
+
+        return view('dashboard.booksnotes.create', compact('books', 'vendors'));
     }
 
+public function store(StoreBooksNoteRequest $request)
+{
+    $this->authorize('create_books_notes');
 
-    public function store(StoreBooksRequest $request)
-    {
+    $data = $request->validated();
 
-        // Authorize the user to create books
-        $this->authorize('create_books');
+    $note = [
+        'book_id'   => $data['book_id'],
+        'vendor_id' => $data['vendor_id'],
+        'page'      => $data['page'],
+        'text'      => $data['text'],
+        'note'      => $data['note'] ?? null,
+        'question'  => $data['question'] ?? null,
+        'answer'    => $data['answer'] ?? null,
+        'is_answer' => !empty($data['answer']),
+    ];
 
-        // Get the validated data
-        $data = $request->validated();
-        unset($data['images']);
-        unset($data['courses_ids']); // Remove category_id from $data
+    BookNote::create($note);
 
-        // Handle the main image upload
-        if ($request->file('main_image')) {
-            $data['main_image'] = uploadImage($request->file('main_image'), "books");
-        }
-        if ($request->file('pdf_path')) {
-            $data['pdf_path'] = uploadImage($request->file('pdf_path'), "books/pdf/");
-        }
-
-        // Create the book record
-        $book = Book::create($data);
-        if ($book) {
-            // Sync the categories from the request data
-            // Ensure category_id is passed as an array
-            $book->courses()->sync($request->courses_ids);
-        }
-        // Handle additional images (more_images)
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $file) {
-                // Upload each image
-                $imagePath = uploadImage($file, "books/images");
-
-                // Create a BookImage record
-                BookImage::create([
-                    'book_id' => $book->id,  // Associate image with the created book
-                    'image' => $imagePath,    // Store the image path
-                ]);
-            }
-        }
-
-
-    }
+    return redirect()->route('dashboard.books_notes.index')
+        ->with('success', __('Book note added successfully.'));
+}
 
     public function removeImage($id)
     {

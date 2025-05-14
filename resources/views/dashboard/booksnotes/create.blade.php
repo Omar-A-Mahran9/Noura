@@ -34,210 +34,130 @@
         </div>
 
     </div>
-    <!-- end   :: Subheader -->
 
     <div class="card">
         <!-- begin :: Card body -->
         <div class="card-body p-0">
-            <!-- begin :: Form -->
-            <form action="{{ route('dashboard.books.store') }}" class="form" method="post" id="submitted-form"
-                data-redirection-url="{{ route('dashboard.books.index') }}">
+
+            <form action="{{ route('dashboard.books_notes.store') }}" class="form" method="post" id="submitted-form"
+                data-redirection-url="{{ route('dashboard.books_notes.index') }}">
                 @csrf
                 <!-- begin :: Card header -->
                 <div class="card-header d-flex align-items-center">
-                    <h3 class="fw-bolder text-dark">{{ __('Add new book') }}</h3>
+                    <h3 class="fw-bolder text-dark mb-0">{{ __('Add new book note') }}</h3>
+
+                    <div class="form-check form-switch ms-auto pe-5">
+                        <input class="form-check-input " type="checkbox" id="toggle_type" name="type_toggle">
+                        <label class="form-check-label ms-2" for="toggle_type">
+                            {{ __('Switch to Q&A') }}
+                        </label>
+                    </div>
                 </div>
+                <!-- end   :: Card header -->
+
                 <!-- end   :: Card header -->
 
                 <!-- begin :: Inputs wrapper -->
                 <div class="inputs-wrapper">
 
-                    <div class="row mb-10">
 
-                        <!-- begin :: Column -->
-                        <div class="col-md-12 fv-row d-flex justify-content-evenly">
-
-                            <div class="d-flex flex-column align-items-center">
-                                <!-- begin :: Upload image component -->
-                                <label class="text-center fw-bold mb-4">{{ __('Image') }}</label>
-                                <div>
-                                    <x-dashboard.upload-image-inp name="main_image" :image="null" :directory="null"
-                                        placeholder="default.jpg" type="editable"></x-dashboard.upload-image-inp>
-                                </div>
-                                <p class="invalid-feedback" id="main_image"></p>
-                                <!-- end   :: Upload image component -->
-                            </div>
-
-
-                        </div>
-                        <!-- end   :: Column -->
-
-                    </div>
-                    <!-- end   :: Row -->
-                    {{-- <div class="row mb-10">
-                        <div class="col-md-4 fv-row">
-
-                            <label class="fs-5 fw-bold mb-2">{{ __('Courses') }}</label>
-                            <select class="form-select" data-control="select2" name="courses_ids[]" multiple
-                                id="category-sp" data-placeholder="{{ __('Choose the course') }}"
-                                data-dir="{{ isArabic() ? 'rtl' : 'ltr' }}">
-                                @if (isset($courses))
-                                    @foreach ($courses as $corses)
-                                        <option value="{{ $course->id }}"> {{ $course->name }}
-                                        </option>
-                                    @endforeach
-                                @endif
-                            </select>
-                            <p class="invalid-feedback" id="courses_ids"></p>
-                        </div>
-                    </div> --}}
                     <!-- begin :: Row -->
                     <div class="row mb-8">
 
-                        <!-- begin :: Column -->
-                        <div class="col-md-3 fv-row">
-
-                            <label class="fs-5 fw-bold mb-2">{{ __('Title in arabic') }}</label>
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="title_ar_inp" name="title_ar"
-                                    placeholder="example" />
-                                <label for="title_ar_inp">{{ __('Enter the book title') }}</label>
+                        <div class="row mb-4">
+                            <div class="col-md-4 fv-row">
+                                <label class="fs-5 fw-bold mb-2">{{ __('page number') }}</label>
+                                <div class="form-floating">
+                                    <input type="number" class="form-control" name="page" id="page_inp"
+                                        placeholder="e.g. 12">
+                                    <label for="page_inp">{{ __('Enter the page nunmber') }}</label>
+                                </div>
+                                <p class="invalid-feedback" id="page"></p>
                             </div>
-                            <p class="invalid-feedback" id="title_ar"></p>
-                        </div>
-                        <!-- begin :: Column -->
-                        <div class="col-md-3 fv-row">
 
-                            <label class="fs-5 fw-bold mb-2">{{ __('Title in english') }}</label>
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="title_en_inp" name="title_en"
-                                    placeholder="example" />
-                                <label for="title_en_inp">{{ __('Enter the book title') }}</label>
-                            </div>
-                            <p class="invalid-feedback" id="title_en"></p>
-
-
-                        </div>
-
-                        <div class="col-md-3 fv-row">
-
-                            <label class="fs-5 fw-bold mb-2">{{ __('Price') }}</label>
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="price_inp" name="price"
-                                    placeholder="example" />
-                                <label for="price_inp">{{ __('Enter the book price') }}</label>
-                            </div>
-                            <p class="invalid-feedback" id="price"></p>
-
-
-                        </div>
-                        <!-- begin :: Column -->
-                        <div class="col-md-3 fv-row">
-
-                            <label class="fs-5 fw-bold mb-2">{{ __('assign to author') }}</label>
-                            <div class="form-floating">
-                                <select class="form-select" data-control="select2" name="assign_to" id="employee-sp"
-                                    data-placeholder="{{ __('assign to author') }}"
-                                    data-dir="{{ isArabic() ? 'rtl' : 'ltr' }}">
-                                    <option value="" selected></option>
-                                    @foreach ($employees as $employee)
-                                        <option value="{{ $employee->id }}">
-                                            {{ $employee->name }}
-                                        </option>
+                            <div class="col-md-4 fv-row">
+                                <label class="fs-5 fw-bold mb-2">{{ __('Book') }}</label>
+                                <select name="book_id" class="form-select" data-control="select2">
+                                    <option value="">{{ __('Select book') }}</option>
+                                    @foreach ($books as $book)
+                                        <option value="{{ $book->id }}">{{ $book->title_en }}</option>
                                     @endforeach
                                 </select>
+                                <p class="invalid-feedback" id="book_id"></p>
                             </div>
-                            <p class="invalid-feedback" id="assign_to"></p>
 
-
-                        </div>
-                        <!-- end   :: Column -->
-
-                    </div>
-
-                    <!-- begin :: Row -->
-                    <div class="row mb-10">
-
-                        <!-- begin :: Column -->
-                        <div class="col-md-6 fv-row">
-
-                            <label class="fs-5 fw-bold mb-2">{{ __('Description in arabic') }}</label>
-                            <textarea class="form-control" rows="4" name="description_ar" id="meta_tag_description_ar_inp"></textarea>
-                            <p class="text-danger invalid-feedback" id="description_ar"></p>
-
-
-                        </div>
-                        <!-- end   :: Column -->
-
-                        <!-- begin :: Column -->
-                        <div class="col-md-6 fv-row">
-
-                            <label class="fs-5 fw-bold mb-2">{{ __('Description in english') }}</label>
-                            <textarea class="form-control" rows="4" name="description_en" id="meta_tag_description_en_inp"></textarea>
-                            <p class="text-danger invalid-feedback" id="description_en"></p>
-
-                        </div>
-                        <!-- end   :: Column -->
-
-                    </div>
-
-
-                    <div class="row mb-10">
-
-                        <div class="col-md-4 fv-row">
-
-                            <label class="form-label">{{ __('book') }}</label>
-                            <input placeholder="example" type="file" class="form-control" name="pdf_path"
-                                id="pdf_path_inp">
-
-                            <p class="invalid-feedback" id="pdf_path"></p>
-
-                        </div>
-                        <div class="col-md-4 fv-row">
-
-                            <label class="fs-5 fw-bold mb-2">{{ __('stock') }}</label>
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="stock_inp" name="stock"
-                                    placeholder="example" />
-                                <label for="stock_inp">{{ __('Enter the stock') }}</label>
+                            <div class="col-md-4 fv-row">
+                                <label class="fs-5 fw-bold mb-2">{{ __('Vendor') }}</label>
+                                <select name="vendor_id" class="form-select" data-control="select2">
+                                    <option value="">{{ __('Select vendor') }}</option>
+                                    @foreach ($vendors as $vendor)
+                                        <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
+                                    @endforeach
+                                </select>
+                                <p class="invalid-feedback" id="vendor_id"></p>
                             </div>
-                            <p class="invalid-feedback" id="stock"></p>
+
+                        </div>
+
+
+                        <div class="row mb-4">
+
+
+                            <div class="col-md-6 fv-row">
+                                <label class="fs-5 fw-bold mb-2">{{ __('text part') }}</label>
+                                <textarea name="text" id="text_inp" rows="3" class="form-control" placeholder="{{ __('Enter the text') }}"></textarea>
+                                <p class="invalid-feedback" id="text"></p>
+                            </div>
+
+                            <div class="col-md-6 fv-row" id="note_section">
+                                <label class="fs-5 fw-bold mb-2">{{ __('Note') }}</label>
+                                <textarea name="note" id="note_inp" rows="3" class="form-control" placeholder="{{ __('Enter the note') }}"></textarea>
+                                <p class="invalid-feedback" id="note"></p>
+                            </div>
 
 
                         </div>
-                        <div class="col-md-4 fv-row">
-                            <label class="form-label">{{ __('more images') }}</label>
-                            <input multiple type="file" class="form-control" name="images[]" id="image_path_inp">
-                            <p class="invalid-feedback" id="images"></p>
-                            <div id="image_preview" style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
+
+                        <div class="row mb-4 d-none" id="qa_section">
+                            <div class="col-md-6 fv-row">
+                                <label class="fs-5 fw-bold mb-2">{{ __('Question') }}</label>
+                                <textarea name="question" id="question_inp" rows="3" class="form-control"
+                                    placeholder="{{ __('Enter the question') }}"></textarea>
+                                <p class="invalid-feedback" id="question"></p>
+                            </div>
+
+                            <div class="col-md-6 fv-row">
+                                <label class="fs-5 fw-bold mb-2">{{ __('Answer') }}</label>
+                                <textarea name="answer" id="answer_inp" rows="3" class="form-control"
+                                    placeholder="{{ __('Enter the answer') }}"></textarea>
+                                <p class="invalid-feedback" id="answer"></p>
                             </div>
                         </div>
 
+
+
                     </div>
-                    <!-- End   :: Col -->
+                    <!-- end   :: Inputs wrapper -->
 
-                </div>
-                <!-- end   :: Inputs wrapper -->
+                    <!-- begin :: Form footer -->
+                    <div class="form-footer">
 
-                <!-- begin :: Form footer -->
-                <div class="form-footer">
+                        <!-- begin :: Submit btn -->
+                        <button type="submit" class="btn btn-primary" id="submit-btn">
 
-                    <!-- begin :: Submit btn -->
-                    <button type="submit" class="btn btn-primary" id="submit-btn">
+                            <span class="indicator-label">{{ __('Save') }}</span>
 
-                        <span class="indicator-label">{{ __('Save') }}</span>
+                            <!-- begin :: Indicator -->
+                            <span class="indicator-progress">{{ __('Please wait ...') }}
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                            <!-- end   :: Indicator -->
 
-                        <!-- begin :: Indicator -->
-                        <span class="indicator-progress">{{ __('Please wait ...') }}
-                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                        </span>
-                        <!-- end   :: Indicator -->
+                        </button>
+                        <!-- end   :: Submit btn -->
 
-                    </button>
-                    <!-- end   :: Submit btn -->
-
-                </div>
-                <!-- end   :: Form footer -->
+                    </div>
+                    <!-- end   :: Form footer -->
             </form>
             <!-- end   :: Form -->
         </div>
@@ -246,33 +166,20 @@
 @endsection
 @push('scripts')
     <script>
-        const fileInput = document.getElementById('image_path_inp');
-        const imagePreview = document.getElementById('image_preview');
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.getElementById('toggle_type');
+            const noteSection = document.getElementById('note_section');
+            const qaSection = document.getElementById('qa_section');
 
-        fileInput.addEventListener('change', function() {
-            imagePreview.innerHTML = ''; // Clear previous previews
-            const files = fileInput.files;
-            if (files.length > 0) {
-                Array.from(files).forEach(file => {
-                    if (file.type.startsWith('image/')) { // Check if file is an image
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            // Create an image element
-                            const img = document.createElement('img');
-                            img.src = e.target.result;
-                            img.style.width = '100px';
-                            img.style.height = '100px';
-                            img.style.objectFit = 'cover'; // Maintain aspect ratio and fill the box
-                            img.style.border = '1px solid #ddd';
-                            img.style.borderRadius = '5px';
-
-                            // Append the image to the preview container
-                            imagePreview.appendChild(img);
-                        };
-                        reader.readAsDataURL(file); // Read the file as a data URL
-                    }
-                });
-            }
+            toggle.addEventListener('change', function() {
+                if (this.checked) {
+                    noteSection.classList.add('d-none');
+                    qaSection.classList.remove('d-none');
+                } else {
+                    noteSection.classList.remove('d-none');
+                    qaSection.classList.add('d-none');
+                }
+            });
         });
     </script>
 @endpush

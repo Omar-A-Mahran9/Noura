@@ -14,7 +14,7 @@
                 class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
 
                 <!-- begin :: Title -->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">{{ __('books') }}</h1>
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">{{ __('books notes') }}</h1>
                 <!-- end   :: Title -->
 
                 <!-- begin :: Separator -->
@@ -25,7 +25,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                     <!-- begin :: Item -->
                     <li class="breadcrumb-item text-muted">
-                        {{ __('books list') }}
+                        {{ __('books notes list') }}
                     </li>
                     <!-- end   :: Item -->
                 </ul>
@@ -63,14 +63,14 @@
                 <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
 
                     <!-- begin :: Add Button -->
-                    <a href="{{ route('dashboard.books.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
+                    <a href="{{ route('dashboard.books_notes.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
                         title="">
 
                         <span class="svg-icon svg-icon-2">
                             <i class="fa fa-plus fa-lg"></i>
                         </span>
 
-                        {{ __('Add new book') }}
+                        {{ __('Add new book note') }}
 
                     </a>
                     <!-- end   :: Add Button -->
@@ -89,9 +89,9 @@
                 <thead>
                     <tr class="text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                         <th>#</th>
-                        <th>{{ __('image') }}</th>
-                        <th>{{ __('name') }}</th>
-                        <th>{{ __('price') }}</th>
+                        <th>{{ __('page number') }}</th>
+                        <th>{{ __('text part') }}</th>
+                        <th>{{ __('book') }}</th>
                         <th>{{ __('created date') }}</th>
                         <th class="min-w-100px">{{ __('actions') }}</th>
                     </tr>
