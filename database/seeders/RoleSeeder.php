@@ -36,6 +36,7 @@ class RoleSeeder extends Seeder
             'videos_materials',
             'attachment_materials',
             'books',
+            'books_notes',
             'books_orders',
             'articles',
             'roles',

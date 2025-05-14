@@ -163,15 +163,15 @@
 
 
                 @can('view_live')
-                <div class="menu-item">
-                    <a class="menu-link {{ isTabActive('lives_orders') }}" data-bs-toggle="tooltip"
-                        data-bs-trigger="hover" href="{{ route('dashboard.lives_orders.index') }}"
-                        data-bs-dismiss="click" data-bs-placement="right">
-                        <span class="menu-icon">
-                            <i class="fa fa-shopping-cart"></i> </span>
-                        <span class="menu-title"> {{ __('lives Order') }}</span>
-                    </a>
-                </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ isTabActive('lives_orders') }}" data-bs-toggle="tooltip"
+                            data-bs-trigger="hover" href="{{ route('dashboard.lives_orders.index') }}"
+                            data-bs-dismiss="click" data-bs-placement="right">
+                            <span class="menu-icon">
+                                <i class="fa fa-shopping-cart"></i> </span>
+                            <span class="menu-title"> {{ __('lives Order') }}</span>
+                        </a>
+                    </div>
                 @endcan
 
 
@@ -193,6 +193,19 @@
                                 <i class="fa fa-book"></i>
                             </span>
                             <span class="menu-title"> {{ __('Books') }}</span>
+                        </a>
+                    </div>
+                @endcan
+
+                @can('view_books_notes')
+                    <div class="menu-item">
+                        <a class="menu-link {{ isTabActive('books_notes') }}" data-bs-toggle="tooltip"
+                            data-bs-trigger="hover" href="{{ route('dashboard.books_notes.index') }}"
+                            data-bs-dismiss="click" data-bs-placement="right">
+                            <span class="menu-icon">
+                                <i class="fa fa-sticky-note"></i>
+                            </span>
+                            <span class="menu-title"> {{ __('Books Notes') }}</span>
                         </a>
                     </div>
                 @endcan

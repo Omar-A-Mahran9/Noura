@@ -20,5 +20,9 @@ class BookNote extends Model
     {
         return $this->belongsTo(Vendor::class); // Ensure you have a Vendor model
     }
+        public function book()
+        {
+            return $this->belongsTo(Book::class);
+        }
 
    }

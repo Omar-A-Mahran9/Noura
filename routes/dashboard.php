@@ -69,6 +69,8 @@ Route::group([ 'prefix' => 'dashboard' , 'namespace' => 'Dashboard', 'as' => 'da
         ]);
     });
     Route::resource('books', 'BookController');
+    Route::resource('books_notes', 'BookNoteController');
+
     Route::get('/zoom-signature/{meetingId}', 'ZoomController@generateSignature');
 
     Route::get('/zoom-meeting', function () {
