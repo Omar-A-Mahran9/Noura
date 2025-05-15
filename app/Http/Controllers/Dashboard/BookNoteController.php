@@ -26,7 +26,7 @@ class BookNoteController extends Controller
                 $data = getModelData(
                     model: new BookNote(),
                     andsFilters: [
-                        ['note', '!=', null]
+                        ['question', '!=', null]
                     ],
                     relations: [
                         'book' => ['id', 'title_ar', 'title_en', 'description_ar', 'description_en']
