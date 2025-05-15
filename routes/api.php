@@ -56,11 +56,6 @@ Route::group(['middleware' => ['json.response']], function () {
 
     Route::get('/books', 'Api\BooksController@index');
     Route::get('/books/{id}', 'Api\BooksController@single');
-    Route::get('/books/comments/{book_id}', 'Api\BooksController@comments');
-    Route::get('/books/notes/{book_id}', 'Api\BooksController@notes');
-    Route::post('/books/notes', 'Api\BooksController@noteStore');
-    Route::get('/books/question/{book_id}', 'Api\BooksController@Questions');
-    Route::post('/books/question', 'Api\BooksController@QuestionStore');
 
 
     Route::get('/lives', 'Api\liveController@index');
@@ -105,7 +100,16 @@ Route::group(['middleware' => ['json.response']], function () {
 
         Route::post('/Course-order', [CourseOrderController::class, 'store']);
 
+
+    Route::get('/books/notes/{book_id}', 'Api\BooksController@notes');
+    Route::get('/books/question/{book_id}', 'Api\BooksController@Questions');
+
+    Route::post('/books/notes', 'Api\BooksController@noteStore');
+    Route::post('/books/question', 'Api\BooksController@QuestionStore');
+
+
     });
+    Route::get('/books/comments/{book_id}', 'Api\BooksController@comments');
 
     Route::get('/available_groups', 'Api\ChatController@groups');
 

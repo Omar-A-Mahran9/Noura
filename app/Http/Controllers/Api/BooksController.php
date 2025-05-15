@@ -126,7 +126,7 @@ class BooksController extends Controller
    {
        // Fetch all book notes for the given book ID
        $notes = BookNote::with('vendor')
-           ->where('book_id', $book_id)
+           ->where('book_id', $book_id)->where('vendor_id',Auth::guard('vendor')->user()->id)
            ->get();
 
        // Transform the data
@@ -148,8 +148,12 @@ class BooksController extends Controller
    public function Questions($book_id)
    {
        // Fetch all book notes for the given book ID
-       $notes = BookNote::with('vendor') // eager load vendor if relationship exists
-           ->where('book_id', $book_id)
+       $notes =  BookNote::with('vendor')
+           ->where('book_id', $book_id)->where('vendor_id',Auth::guard('vendor')->user()->id)
+           ->get();
+
+            BookNote::with('vendor')
+           ->where('book_id', $book_id)->where('vendor_id',Auth::guard('vendor')->user()->id)
            ->get();
 
        // Transform the data
@@ -187,7 +191,7 @@ class BooksController extends Controller
         'page' => $note->page,
         'note' => $note->note,
         'page' => $note->page,
-
+        'vendor_id' => Auth::guard('vendor')->user()->id,
         'text' => $note->text,
         'created_at' => $note->created_at->format('Y-m-d'),
     ]);
@@ -210,7 +214,7 @@ public function QuestionStore(Request $request)
         'page' => $note->page,
         'text' => $note->text,
         'page' => $note->page,
-
+        'vendor_id' => Auth::guard('vendor')->user()->id,
         'question' => $note->question,
         'created_at' => $note->created_at->format('Y-m-d'),
     ]);
