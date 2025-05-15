@@ -183,6 +183,7 @@ class BooksController extends Controller
         'text' => 'required|string',
         'note' => 'required_without:question|string|nullable',
     ]);
+$validated['vendor_id']= Auth::guard('vendor')->user()->id;
 
     $note = BookNote::create($validated);
 
@@ -191,7 +192,6 @@ class BooksController extends Controller
         'page' => $note->page,
         'note' => $note->note,
         'page' => $note->page,
-        'vendor_id' => 22,
         'text' => $note->text,
         'created_at' => $note->created_at->format('Y-m-d'),
     ]);
@@ -206,6 +206,7 @@ public function QuestionStore(Request $request)
         'text' => 'required|string',
         'question' => 'required',
     ]);
+$validated['vendor_id']= Auth::guard('vendor')->user()->id;
 
     $note = BookNote::create($validated);
 
@@ -214,8 +215,7 @@ public function QuestionStore(Request $request)
         'page' => $note->page,
         'text' => $note->text,
         'page' => $note->page,
-        'vendor_id' => Auth::guard('vendor')->user()->id,
-        'question' => $note->question,
+         'question' => $note->question,
         'created_at' => $note->created_at->format('Y-m-d'),
     ]);
 }
