@@ -83,17 +83,7 @@ let KTDatatable = (function () {
                                 </div>
                                 <!--end::Menu item-->
 
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="/dashboard/books_notes/${
-                                        row.id
-                                    }" class="menu-link px-3 d-flex justify-content-between" >
-                                       <span> ${__("Show")} </span>
-                                       <span>  <i class="fa fa-eye text-black-50"></i> </span>
-                                    </a>
-
-                                </div>
-                                <!--end::Menu item-->
+                           
 
                                 <!--begin::Menu item-->
                                     ${deleteBtn}

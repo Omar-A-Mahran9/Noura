@@ -28,9 +28,8 @@ class StoreBooksNoteRequest extends FormRequest
         'vendor_id' => 'required|exists:vendors,id',
         'page'      => 'required|integer|min:1',
         'text'      => 'required|string',
-
-        'note'      => 'nullable|string',
-        'question'  => 'nullable|string',
+        'note'      => 'required_without:question|nullable|string',
+        'question'  => 'required_without:note|nullable|string',
         'answer'    => 'nullable|string',
         ];
     }
