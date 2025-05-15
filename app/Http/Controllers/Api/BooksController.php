@@ -177,6 +177,7 @@ class BooksController extends Controller
 
    public function noteStore(Request $request)
 {
+    dd( Auth::guard('vendor')->user()->id);
     $validated = $request->validate([
         'book_id' => 'required|exists:books,id',
         'page' => 'required|integer',
