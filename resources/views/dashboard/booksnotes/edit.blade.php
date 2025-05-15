@@ -110,7 +110,7 @@
                             <div class="col-md-6 fv-row">
                                 <label class="fs-5 fw-bold mb-2">{{ __('answer') }}</label>
                                 <textarea name="answer" id="answer_inp" rows="3" class="form-control"
-                                    placeholder="{{ __('Enter the answer') }}"disabled readonly>{{ old('answer', $note->answer) }}</textarea>
+                                    placeholder="{{ __('Enter the answer') }}">{{ old('answer', $note->answer) }}</textarea>
                                 <p class="invalid-feedback" id="answer"></p>
                             </div>
                         </div>
