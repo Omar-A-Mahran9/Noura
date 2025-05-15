@@ -23,7 +23,9 @@ class BookNoteController extends Controller
 
         if ($request->ajax())
         {
-            $data = getModelData(model: new BookNote(),relations: ['book' => ['id', 'title_ar','title_en', 'description_ar','description_en']]);
+            $data = getModelData(model: new BookNote(),where: [
+        ['note', '!=', null],
+            ],relations: ['book' => ['id', 'title_ar','title_en', 'description_ar','description_en']]);
 
              return response()->json($data);
         }
@@ -91,7 +93,7 @@ public function store(StoreBooksNoteRequest $request)
 
 
 
-  
+
 
     public function edit($id)
     {
