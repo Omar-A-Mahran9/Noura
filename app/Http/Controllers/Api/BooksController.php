@@ -191,7 +191,7 @@ class BooksController extends Controller
         'page' => $note->page,
         'note' => $note->note,
         'page' => $note->page,
-        'vendor_id' => Auth::guard('vendor')->user()->id,
+        'vendor_id' => 22,
         'text' => $note->text,
         'created_at' => $note->created_at->format('Y-m-d'),
     ]);
