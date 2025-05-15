@@ -17,21 +17,28 @@ use Illuminate\Http\Request;
 
 class BookNoteController extends Controller
 {
-    public function index(Request $request)
-    {
-        $this->authorize('view_books_notes');
-
-        if ($request->ajax())
+        public function index(Request $request)
         {
-            $data = getModelData(model: new BookNote(),where: [
-        ['note', '!=', null],
-            ],relations: ['book' => ['id', 'title_ar','title_en', 'description_ar','description_en']]);
+            $this->authorize('view_books_notes');
 
-             return response()->json($data);
+            if ($request->ajax())
+            {
+                $data = getModelData(
+                    model: new BookNote(),
+                    andsFilters: [
+                        ['note', '!=', null]
+                    ],
+                    relations: [
+                        'book' => ['id', 'title_ar', 'title_en', 'description_ar', 'description_en']
+                    ]
+                );
+
+                return response()->json($data);
+            }
+
+            return view('dashboard.booksnotes.index');
         }
 
-        return view('dashboard.booksnotes.index');
-    }
 
     /**
      * Show the form for creating a new resource.
