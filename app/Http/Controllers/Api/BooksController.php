@@ -125,9 +125,12 @@ class BooksController extends Controller
    public function notes($book_id)
    {
        // Fetch all book notes for the given book ID
-       $notes = BookNote::with('vendor')
-           ->where('book_id', $book_id)->where('vendor_id',Auth::guard('vendor')->user()->id)
-           ->get();
+      $notes = BookNote::with('vendor')
+    ->where('book_id', $book_id)
+    ->where('vendor_id', Auth::guard('vendor')->user()->id)
+    ->whereNotNull('note')
+    ->get();
+
 
        // Transform the data
        $transformed = $notes->map(function ($note) {
@@ -148,13 +151,13 @@ class BooksController extends Controller
    public function Questions($book_id)
    {
        // Fetch all book notes for the given book ID
-       $notes =  BookNote::with('vendor')
-           ->where('book_id', $book_id)->where('vendor_id',Auth::guard('vendor')->user()->id)
-           ->get();
+   $notes = BookNote::with('vendor')
+    ->where('book_id', $book_id)
+    ->where('vendor_id', Auth::guard('vendor')->user()->id)
+    ->whereNotNull('question')
+    ->get();
 
-            BookNote::with('vendor')
-           ->where('book_id', $book_id)->where('vendor_id',Auth::guard('vendor')->user()->id)
-           ->get();
+        //
 
        // Transform the data
        $transformed = $notes->map(function ($note) {
