@@ -21,10 +21,9 @@ jobs:
         run: |
           sudo rsync -a --delete ./ /var/www/nora-backend-prod/
 
-      # - name: Replace env file
-      #   run: |
-      #     sudo rm -rf /var/www/nora-backend-prod/.env
-      #     sudo mv /var/www/nora-backend-prod/.env /var/www/picka-dev/.env
+      - name: Replace env file
+        run: |
+          sudo mv /var/www/nora-backend-prod/.env.example /var/www/picka-dev/.env
 
       - name: Composer install and set permissions
         run: |
