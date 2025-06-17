@@ -1,0 +1,32 @@
+name: Build and Deploy backend prod
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  
+jobs:
+  deploy:
+    name: Deploy to nora-prod server
+    runs-on: Nora-Prod
+    # labels:
+    #   - nojom-app 
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Copy app files to new server
+        run: |
+          sudo rsync -a --delete ./ /var/www/nora-backend-prod/
+
+      # - name: Replace env file
+      #   run: |
+      #     sudo rm -rf /var/www/nora-backend-prod/.env
+      #     sudo mv /var/www/nora-backend-prod/.env /var/www/picka-dev/.env
+
+      - name: Composer install and set permissions
+        run: |
+          sudo bash -c "cd /var/www/nora-backend-prod && composer update --with-all-dependencies --working-dir=/var/www/nora-backend-prod/"
+          sudo chown -R www-data:www-data /var/www/nora-backend-prod
