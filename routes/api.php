@@ -29,6 +29,7 @@ Route::group(['middleware' => ['json.response']], function () {
     Route::get('/about_noura', 'Api\DataController@about_nura');
     Route::get('/home_page', 'Api\DataController@home_page');
 
+    Route::post('/register_social', 'Api\Auth\AuthController@register');
 
     Route::post('/register', 'Api\Auth\AuthController@register');
     Route::post('/login', 'Api\Auth\AuthController@login');
