@@ -13,6 +13,7 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
+        // roles table
         Schema::create('roles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name_ar');
@@ -21,6 +22,7 @@ class CreateRolesTable extends Migration
             $table->timestamps();
         });
 
+        // abilities table
         Schema::create('abilities', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
@@ -30,11 +32,11 @@ class CreateRolesTable extends Migration
             $table->timestamps();
         });
 
+        // ability_role pivot table
         Schema::create('ability_role', function (Blueprint $table) {
-            $table->primary(['role_id', 'ability_id']);
             $table->unsignedBigInteger('role_id');
             $table->unsignedBigInteger('ability_id');
-
+            $table->primary(['role_id', 'ability_id']);
 
             $table->foreign('role_id')
                 ->references('id')
@@ -50,11 +52,11 @@ class CreateRolesTable extends Migration
             $table->timestamps();
         });
 
+        // employee_role pivot table
         Schema::create('employee_role', function (Blueprint $table) {
-            $table->primary(['role_id', 'employee_id']);
             $table->unsignedBigInteger('role_id');
             $table->unsignedBigInteger('employee_id');
-
+            $table->primary(['role_id', 'employee_id']);
 
             $table->foreign('role_id')
                 ->references('id')
@@ -65,6 +67,7 @@ class CreateRolesTable extends Migration
                 ->references('id')
                 ->on('employees')
                 ->onDelete('cascade');
+
             $table->softDeletes();
             $table->timestamps();
         });
@@ -77,6 +80,10 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
+        // Drop tables in reverse order to avoid foreign key constraint issues
+        Schema::dropIfExists('employee_role');
+        Schema::dropIfExists('ability_role');
+        Schema::dropIfExists('abilities');
         Schema::dropIfExists('roles');
     }
 }
