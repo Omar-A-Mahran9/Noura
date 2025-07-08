@@ -27,5 +27,5 @@ jobs:
 
       - name: Composer install and set permissions
         run: |
-          sudo bash -c "cd /var/www/nora-backend-prod && composer install  --working-dir=/var/www/nora-backend-prod/"
+          sudo bash -c "cd /var/www/nora-backend-prod && composer install  --working-dir=/var/www/nora-backend-prod/ && php artisan key:generate"
           sudo chown -R www-data:www-data /var/www/nora-backend-prod
