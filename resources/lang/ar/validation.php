@@ -279,7 +279,7 @@ return [
         'terms_and_conditions_en' => 'الشروط والاحكام بالانجليزية',
         'terms_and_conditions_ar' => 'الشروط والاحكام بالعربية',
         'show_in_home_page' => 'عرض في الصفحة الرئيسية',
-
+        'type'=>'نوع',
 
         'about_us_video_url' => 'كود الفيديو',
         'purchase_order_text_in_home_page_ar' => 'نص قسم طلب شراء في الصفحة الرئيسية بالعربية',

@@ -30386,18 +30386,26 @@ a:hover {
     .menu-link:hover:not(.disabled):not(.active):not(.here) {
     transition: color 0.2s ease, background-color 0.2s ease;
     background-color: rgba(245, 248, 250, 0.8);
+        color: #000 !important; /* Make text black */
+
 }
 .menu-here-bg .menu-item.here > .menu-link {
     transition: color 0.2s ease, background-color 0.2s ease;
     background-color: rgba(245, 248, 250, 0.8);
+            color: #000 !important; /* Make text black */
+
 }
 .menu-show-bg .menu-item.show > .menu-link {
     transition: color 0.2s ease, background-color 0.2s ease;
     background-color: rgba(245, 248, 250, 0.8);
+            color: #000 !important; /* Make text black */
+
 }
 .menu-active-bg .menu-item .menu-link.active {
     transition: color 0.2s ease, background-color 0.2s ease;
     background-color: rgba(245, 248, 250, 0.8);
+            color: #000 !important; /* Make text black */
+
 }
 .menu-state-bg
     .menu-item.hover:not(.here)
@@ -30407,18 +30415,26 @@ a:hover {
     .menu-link:hover:not(.disabled):not(.active):not(.here) {
     transition: color 0.2s ease, background-color 0.2s ease;
     background-color: rgba(245, 248, 250, 0.8);
+            color: #000 !important; /* Make text black */
+
 }
 .menu-state-bg .menu-item.here > .menu-link {
     transition: color 0.2s ease, background-color 0.2s ease;
     background-color: rgba(245, 248, 250, 0.8);
+            color: #000 !important; /* Make text black */
+
 }
 .menu-state-bg .menu-item.show > .menu-link {
     transition: color 0.2s ease, background-color 0.2s ease;
     background-color: rgba(245, 248, 250, 0.8);
+            color: #000 !important; /* Make text black */
+
 }
 .menu-state-bg .menu-item .menu-link.active {
     transition: color 0.2s ease, background-color 0.2s ease;
-    background-color: rgba(245, 248, 250, 0.8);
+
+            color: #000 !important; /* Make text black */
+
 }
 .menu-hover-primary
     .menu-item.hover:not(.here)

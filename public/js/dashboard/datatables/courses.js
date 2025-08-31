@@ -39,7 +39,7 @@ let KTDatatable = (function () {
                 { data: "images" },
                 { data: "name_" + locale },
                 { data: "price" },
-                { data: "from" },
+                { data: "instructor.name" },
 
                 { data: "from" },
                 { data: "to" },

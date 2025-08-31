@@ -517,17 +517,17 @@
 
                                                                     <div class="col-md-3">
                                                                         <label
-                                                                            class="form-label">{{ __('Description in arabic') }}</label>
+                                                                            class="form-label">{{ __('result in arabic') }}</label>
                                                                         <textarea class="form-control mb-2 mb-md-0" name="description_ar"
-                                                                            placeholder="{{ __('Enter description in arabic') }}" rows="3"></textarea>
+                                                                            placeholder="{{ __('Enter result in arabic') }}" rows="3"></textarea>
                                                                         <p class="invalid-feedback"
                                                                             id="outcome_list_0_description_ar"></p>
                                                                     </div>
                                                                     <div class="col-md-3">
                                                                         <label
-                                                                            class="form-label">{{ __('Description in english') }}</label>
+                                                                            class="form-label">{{ __('result in english') }}</label>
                                                                         <textarea class="form-control mb-2 mb-md-0" name="description_en"
-                                                                            placeholder="{{ __('Enter description in english') }}" rows="3"></textarea>
+                                                                            placeholder="{{ __('Enter result in english') }}" rows="3"></textarea>
                                                                         <p class="invalid-feedback"
                                                                             id="outcome_list_0_description_en"></p>
                                                                     </div>

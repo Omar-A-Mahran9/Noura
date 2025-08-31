@@ -89,6 +89,10 @@ public function categories()
 {
     return $this->belongsToMany(CourseCategories::class, 'course_category', 'course_id', 'coursecategories_id');
 }
+public function instructor()
+{
+    return $this->belongsTo(Employee::class, 'assign_to', 'id');
+}
 
 public function relatedCourses()
 {

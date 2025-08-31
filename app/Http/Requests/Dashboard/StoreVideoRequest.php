@@ -28,7 +28,11 @@ class StoreVideoRequest extends FormRequest
             'name_en'         => 'required|string|max:255' ,
             'course_id'       => 'required',
             'section_id'       => 'required',
-            'video_path'         => 'required|url' ,
+'video_path' => [
+    'required',
+    'url',
+    'regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/'
+],
             'type'         => 'required' ,
         ];
     }

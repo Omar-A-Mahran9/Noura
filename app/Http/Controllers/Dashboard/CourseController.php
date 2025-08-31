@@ -23,7 +23,9 @@ class CourseController extends Controller
 
         if ( $request->ajax() ) {
 
-            $courses = getModelData(new Course());
+            $courses = getModelData(new Course(), relations: [
+                        'instructor' => ['id', 'name','description_ar','description_en']
+                    ]);
 
             return  response()->json($courses);
         }
@@ -285,7 +287,7 @@ class CourseController extends Controller
             $price         = $request['price'] ?? 0;
             $request->validate([
                 'name_ar' => ['required' , 'string','max:255'],
-                'images' => 'mimes:webp,png,jpg|max:2048', // validate image type and size
+                'images' => 'required' ,'mimes:webp,png,jpg|max:2048', // validate image type and size
                 'moreimages'    => ['array'], // Ensure it is an array
                 'moreimages.*'  => ['mimes:jpeg,png,jpg,webp,svg', 'max:2048'], // Validate each file
                 'name_en' => ['required' , 'string','max:255'],
@@ -294,8 +296,10 @@ class CourseController extends Controller
                  'discount_price' => 'required_with:have_discount|nullable|numeric|not_in:0|lt:' . $price,
                  'discount_duration_days_counts' => 'required_with:have_discount|nullable|numeric',
                  'assign_to' => ['required'],
-                 'from' => ['required','date'],
-                 'to' => ['required','date'],
+                 'from' => ['required', 'date', 'before:to'],
+                 'to'   => ['required', 'date', 'after:from'],
+                'status' => ['required'],
+
                  'category_ids'     => ['required', 'array'], // Ensures it's an array
                  'category_ids.*'   => ['exists:coursecategories,id'], // Ensures each selected ID exists in the `categories` table
             ]);

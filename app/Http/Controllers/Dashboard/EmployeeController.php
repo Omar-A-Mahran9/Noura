@@ -88,17 +88,19 @@ class EmployeeController extends Controller
         }
     }
 
-    public function updateProfile(Request $request){
+public function updateProfile(Request $request)
+{
+    $data = $request->validate([
+        'name'  => ['required', 'string', 'max:255'],
+        'phone' => ['required', 'numeric', 'unique:employees,phone,' . auth()->id()],
+        'email' => ['required', 'string', 'email:rfc,dns', 'unique:employees,email,' . auth()->id()],
+    ]);
 
-        $data = $request->validate([
-            'name'     => ['required', 'string', 'max:255'],
-            'phone'    => ['required','numeric','unique:employees,id,' . auth()->id()],
-            'email'    => ['required','string', "email:rfc,dns",'unique:employees,id,' . auth()->id() ],
-        ]);
-        $data['phone'] = convertArabicNumbers($data['phone']);
-        auth()->user()->update($data);
+    $data['phone'] = convertArabicNumbers($data['phone']);
 
-    }
+    auth()->user()->update($data);
+}
+
     public function updatePassword(Request $request){
 
         $data = $request->validate([

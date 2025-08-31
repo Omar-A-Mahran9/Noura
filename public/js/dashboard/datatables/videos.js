@@ -113,7 +113,7 @@ let KTDatatable = (function () {
                                 <div class="menu-item px-3">
                                     <a href="#" class="menu-link px-3 d-flex justify-content-between delete-row" data-row-id="${
                                         row.id
-                                    }" data-type="${__("course")}">
+                                    }" data-type="${__("videos")}">
                                        <span> ${__("Delete")} </span>
                                        <span>  <i class="fa fa-trash text-danger"></i> </span>
                                     </a>
@@ -165,7 +165,7 @@ let KTDatatable = (function () {
                                 "content"
                             ),
                         },
-                        url: "/dashboard/videos/" + rowId,
+                        url: "/dashboard/courses/videos/" + rowId,
                         success: () => {
                             successAlert(
                                 `You have deleted the ${type} successfully!`
