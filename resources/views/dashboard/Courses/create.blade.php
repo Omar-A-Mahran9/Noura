@@ -276,7 +276,7 @@
                                                 <label class="fs-5 fw-bold mb-2"
                                                     for="from_inp">{{ __('Date from') }}</label>
                                                 <input type='date' name="from" id="from_inp"
-                                                    class="form-control form-control-solid   datepicker border-gray-300 border-1 filter-datatable-inp me-4"
+                                                    class="form-control form-control-solid     border-gray-300 border-1 filter-datatable-inp me-4"
                                                     placeholder="{{ __('Choose the date') }}" data-filter-index="6" />
                                                 <p class="invalid-feedback" id="from"></p>
                                             </div>

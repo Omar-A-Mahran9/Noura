@@ -120,6 +120,12 @@
                         <th>{{ __('image') }}</th>
                         <th>{{ getLocale() == 'ar' ? __('arabic name') : __('english name') }}</th>
                         <th>{{ __('price') }}</th>
+                        <th>{{ __('instructor') }}</th>
+
+                        <th>{{ __('started at') }}</th>
+                        <th>{{ __('ended at') }}</th>
+
+
                         <th class="min-w-100px">{{ __('actions') }}</th>
                     </tr>
                 </thead>

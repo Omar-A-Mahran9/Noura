@@ -39,6 +39,11 @@ let KTDatatable = (function () {
                 { data: "images" },
                 { data: "name_" + locale },
                 { data: "price" },
+                { data: "from" },
+
+                { data: "from" },
+                { data: "to" },
+
                 { data: null },
             ],
             columnDefs: [
@@ -87,7 +92,7 @@ let KTDatatable = (function () {
                                 </div>
                                 <!--end::Menu item-->
 
-           
+
 
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">

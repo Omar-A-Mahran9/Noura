@@ -57,15 +57,11 @@ class CourseCategoriesController extends Controller
         CourseCategories::create($data);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(CourseCategories $category)
+
+    public function show(  $id)
     {
          $this->authorize('show_course_category');
+        $category=CourseCategories::find($id);
 
         return view('dashboard.coursecategory.show',compact('category' ));
 
@@ -87,8 +83,9 @@ class CourseCategoriesController extends Controller
         return view('dashboard.coursecategory.edit',compact('category' ));
     }
 
-    public function update(UpdateSubCategoryRequest $request, CourseCategories $category)
+    public function update(UpdateSubCategoryRequest $request, $id)
     {
+      $category=   CourseCategories::find($id);
         $this->authorize('update_course_category');
         $data = $request->validated();
         $category->update($data);

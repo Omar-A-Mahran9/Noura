@@ -186,7 +186,7 @@ return [
         'sub_model_id' => 'الموديل الفرعي',
         'year' => 'العام',
         'card_description_ar' => 'وصف قصير بالعربية',
-        'card_description_en' => 'وصف قصير بالأنجليزية',
+        'card_description_en' => 'وصف قصير بالانجليزية',
         'description_ar' => 'الوصف بالعربية',
         'description_en' => 'الوصف بالانجليزية',
         'video_url' => 'رابط الفيديو',
