@@ -70,13 +70,35 @@
                         <!-- end   :: Column -->
 
                         <!-- begin :: Column -->
-                        <div class="col-md-6 fv-row">
+                        {{-- <div class="col-md-6 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Phone') }}</label>
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="phone_inp" name="phone"
                                     value="{{ $employee['phone'] }}" readonly />
                                 <label for="phone_inp">{{ __('Enter the phone') }}</label>
+                            </div>
+                            <p class="invalid-feedback" id="phone"></p>
+
+
+                        </div> --}}
+
+                        <div class="col-md-6 fv-row">
+
+                            <label class="fs-5 fw-bold mb-2">{{ __('Phone') }}</label>
+                            {{-- <div class="form-floating">
+                                <input type="text" class="form-control" id="phone_inp" name="phone"
+                                    placeholder="example" />
+                                <label for="phone_inp">{{ __('Enter the phone') }}</label>
+
+
+                            </div>   --}}
+                            <div class="input-group   mb-5">
+
+                                <input type="tel" name="phone" id="phone_inp" value="{{ $employee['phone'] }}"
+                                    class="form-control form-control-lg  " readonly
+                                    placeholder="{{ __('Enter the phone') }}" />
+                                <span class="input-group-text">+966</span>
                             </div>
                             <p class="invalid-feedback" id="phone"></p>
 

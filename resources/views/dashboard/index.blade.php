@@ -4,7 +4,7 @@
         <div class="container-fluid d-flex flex-stack">
             <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">{{ __('Dashboard') }}</h1>
             <div class="d-flex align-items-center gap-2 gap-lg-3">
-                <a href="/" target="_blank" class="btn btn-sm btn-primary">
+                <a href="https://dev.noraalsufairy.com/" target="_blank" class="btn btn-sm btn-primary">
                     <i class="bi bi-globe fs-6"></i> {{ __('website') }}
                 </a>
             </div>
@@ -116,7 +116,7 @@
                         <ul class="list-group  my-2">
                             @foreach ($bestSellingCourses as $course)
                                 <li class="list-group-item d-flex justify-content-between align-items-center  py-5">
-                                  {{ $course->name_ar }}
+                                    {{ $course->name_ar }}
                                     <span class="badge bg-success rounded-pill">{{ $course->total_sold }}
                                         {{ __('Sold') }}</span>
                                 </li>

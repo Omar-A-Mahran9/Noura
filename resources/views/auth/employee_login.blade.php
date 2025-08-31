@@ -11,7 +11,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
 
     <!--begin::Fonts-->
     @if (isArabic())
@@ -89,9 +88,12 @@
                                 <input class="form-control form-control-lg form-control-solid" type="password"
                                     name="password" autocomplete="off" id="password-field" />
                                 <a onclick="showHidePass( 'password-field' , $(this) )" style="cursor: pointer">
-                                    <span class="fa fa-fw fa-eye fa-md toggle-password"
+                                    <span class="fa fa-fw  fa-eye-slash fa-md toggle-password"
                                         @if (isArabic()) style="margin-right:-30px" @else style="margin-left:-30px" @endif></span>
                                 </a>
+
+
+
                             </div>
                             <p class="invalid-feedback" id="password"></p>
                             <!--end::Input-->

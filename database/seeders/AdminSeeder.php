@@ -19,13 +19,13 @@ class AdminSeeder extends Seeder
             'name' => 'OmarSupport',
             'email' => 'omar.a.m.mahran@gmail.com',
             'password' => 'nora123',
-            'phone' => '966522334455',
+            'phone' => '522334455',
         ]);
         Employee::create([
             'name' => 'nora Live',
             'email' => 'nora@gmail.com',
             'password' => 'nora123',
-            'phone' => '966511223344',
+            'phone' => '511223344',
         ]);
     }
 }

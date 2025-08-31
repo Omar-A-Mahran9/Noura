@@ -19,8 +19,10 @@ class CourseCategories extends Model
     {
         return $this->attributes['name_'. getLocale()];
     }
- 
-    
+public function courses()
+{
+    return $this->belongsToMany(Course::class, 'course_category', 'coursecategories_id','course_id');
+}
 
 
 }

@@ -14,7 +14,7 @@
         </a>
         <!--end::Logo-->
         <!--begin::Aside toggler-->
-        <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle"
+        {{-- <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle"
             data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
             data-kt-toggle-name="aside-minimize">
             <!--begin::Svg Icon | path: icons/duotune/arrows/arr079.svg-->
@@ -31,7 +31,7 @@
             </span>
             <!--end::Svg Icon-->
         </div>
-        <!--end::Aside toggler-->
+        <!--end::Aside toggler--> --}}
     </div>
     <!--end::Brand-->
     <!--begin::Aside menu-->

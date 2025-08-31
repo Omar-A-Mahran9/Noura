@@ -60,8 +60,7 @@ class EmployeeController extends Controller
     {
         $this->authorize('create_employees');
         $data = $request->validated();
-         // $data['password'] = $request['phone'];
-        $data['phone'] = convertArabicNumbers($data['phone']);
+        // $data['phone'] = convertArabicNumbers($data['phone']);
         $employee = Employee::create($data);
         $rolesAndDefaultOne = array_merge( $request['roles'] , [ "2" ] );
         $employee->roles()->attach( $rolesAndDefaultOne );
@@ -69,10 +68,10 @@ class EmployeeController extends Controller
 
     public function update(UpdateEmployeeRequest $request , Employee $employee)
     {
- 
+
         $this->authorize('update_employees');
         $data = $request->validated();
-        $data['phone'] = convertArabicNumbers($data['phone']);
+        // $data['phone'] = convertArabicNumbers($data['phone']);
         $employee->update($data);
         $rolesAndDefaultOne = array_merge( $request['roles'] , [ "2" ] );
         $employee->roles()->sync( $rolesAndDefaultOne );

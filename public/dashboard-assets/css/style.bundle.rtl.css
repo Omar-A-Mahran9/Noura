@@ -7451,7 +7451,7 @@ fieldset:disabled .btn {
 }
 
 .border-white {
-    border-color: #ffffff !important;
+    border-color: #000000 !important;
 }
 
 .border-light {
@@ -7459,7 +7459,7 @@ fieldset:disabled .btn {
 }
 
 .border-primary {
-    border-color: #ffffff !important;
+    border-color: #000000 !important;
 }
 
 .border-secondary {
@@ -31122,12 +31122,12 @@ fieldset:disabled .btn {
 }
 .bg-hover-white:hover {
     --bg-color: 255, 255, 255;
-    background-color: #ffffff !important;
+    background-color: #000000 !important;
 }
 
 .bg-active-white.active {
     --bg-color: 255, 255, 255;
-    background-color: #ffffff !important;
+    background-color: #000000 !important;
 }
 
 .bg-state-white {
@@ -31136,7 +31136,7 @@ fieldset:disabled .btn {
 .bg-state-white.active,
 .bg-state-white:hover {
     --bg-color: 255, 255, 255;
-    background-color: #ffffff !important;
+    background-color: #000000 !important;
 }
 
 .bg-light {
@@ -31202,12 +31202,12 @@ fieldset:disabled .btn {
 }
 .bg-hover-primary:hover {
     --bg-color: 0, 158, 247;
-    background-color: #ffffff !important;
+    background-color: #000000 !important;
 }
 
 .bg-active-primary.active {
     --bg-color: 0, 158, 247;
-    background-color: #ffffff !important;
+    background-color: #000000 !important;
 }
 
 .bg-state-primary {
@@ -31216,7 +31216,7 @@ fieldset:disabled .btn {
 .bg-state-primary.active,
 .bg-state-primary:hover {
     --bg-color: 0, 158, 247;
-    background-color: #ffffff !important;
+    background-color: #000000 !important;
 }
 
 .bg-secondary {
@@ -31698,7 +31698,7 @@ fieldset:disabled .btn {
 
 .bg-body {
     --bg-color: 255, 255, 255;
-    background-color: #ffffff !important;
+    background-color: #000000 !important;
 }
 
 .bg-lighten {
@@ -31943,11 +31943,11 @@ fieldset:disabled .btn {
 }
 
 .border-hover-white:hover {
-    border-color: #ffffff !important;
+    border-color: #000000 !important;
 }
 
 .border-active-white.active {
-    border-color: #ffffff !important;
+    border-color: #000000 !important;
 }
 
 .border-hover-light:hover {
@@ -31959,11 +31959,11 @@ fieldset:disabled .btn {
 }
 
 .border-hover-primary:hover {
-    border-color: #ffffff !important;
+    border-color: #000000 !important;
 }
 
 .border-active-primary.active {
-    border-color: #ffffff !important;
+    border-color: #000000 !important;
 }
 
 .border-hover-secondary:hover {
@@ -32064,7 +32064,7 @@ fieldset:disabled .btn {
 }
 
 .border-body {
-    border-color: #ffffff !important;
+    border-color: #000000 !important;
 }
 
 .rounded-top-0 {
@@ -32293,7 +32293,7 @@ fieldset:disabled .btn {
 }
 
 .text-white {
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 
 .text-inverse-white {
@@ -32308,11 +32308,11 @@ fieldset:disabled .btn {
 }
 .text-hover-white:hover {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-white:hover i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-white:hover .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -32355,15 +32355,15 @@ fieldset:disabled .btn {
 }
 .text-active-white.active {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-active-white.active i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-active-white.active .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
-    fill: #ffffff;
+    fill: #000000;
 }
 .text-active-white.active .svg-icon svg:hover [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -32395,11 +32395,11 @@ fieldset:disabled .btn {
 }
 
 .text-primary {
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 
 .text-inverse-primary {
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 
 .text-light-primary {
@@ -32414,11 +32414,11 @@ fieldset:disabled .btn {
 }
 .text-hover-primary:hover {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-primary:hover i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-primary:hover .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -32436,11 +32436,11 @@ fieldset:disabled .btn {
 }
 .text-hover-inverse-primary:hover {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-primary:hover i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-primary:hover .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -32483,11 +32483,11 @@ fieldset:disabled .btn {
 }
 .text-active-inverse-primary.active {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-primary.active i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-primary.active
     .svg-icon
@@ -32721,7 +32721,7 @@ fieldset:disabled .btn {
 }
 
 .text-inverse-success {
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 
 .text-light-success {
@@ -32758,11 +32758,11 @@ fieldset:disabled .btn {
 }
 .text-hover-inverse-success:hover {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-success:hover i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-success:hover .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -32805,11 +32805,11 @@ fieldset:disabled .btn {
 }
 .text-active-inverse-success.active {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-success.active i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-success.active
     .svg-icon
@@ -32830,7 +32830,7 @@ fieldset:disabled .btn {
 }
 
 .text-inverse-info {
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 
 .text-light-info {
@@ -32867,11 +32867,11 @@ fieldset:disabled .btn {
 }
 .text-hover-inverse-info:hover {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-info:hover i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-info:hover .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -32914,11 +32914,11 @@ fieldset:disabled .btn {
 }
 .text-active-inverse-info.active {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-info.active i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-info.active .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -32936,7 +32936,7 @@ fieldset:disabled .btn {
 }
 
 .text-inverse-warning {
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 
 .text-light-warning {
@@ -32973,11 +32973,11 @@ fieldset:disabled .btn {
 }
 .text-hover-inverse-warning:hover {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-warning:hover i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-warning:hover .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -33020,11 +33020,11 @@ fieldset:disabled .btn {
 }
 .text-active-inverse-warning.active {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-warning.active i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-warning.active
     .svg-icon
@@ -33045,7 +33045,7 @@ fieldset:disabled .btn {
 }
 
 .text-inverse-danger {
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 
 .text-light-danger {
@@ -33082,11 +33082,11 @@ fieldset:disabled .btn {
 }
 .text-hover-inverse-danger:hover {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-danger:hover i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-danger:hover .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -33129,11 +33129,11 @@ fieldset:disabled .btn {
 }
 .text-active-inverse-danger.active {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-danger.active i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-danger.active .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -33151,7 +33151,7 @@ fieldset:disabled .btn {
 }
 
 .text-inverse-dark {
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 
 .text-light-dark {
@@ -33188,11 +33188,11 @@ fieldset:disabled .btn {
 }
 .text-hover-inverse-dark:hover {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-dark:hover i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-dark:hover .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -33235,11 +33235,11 @@ fieldset:disabled .btn {
 }
 .text-active-inverse-dark.active {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-dark.active i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-dark.active .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -34281,7 +34281,7 @@ a:hover {
 }
 .separator.separator-content.border-white::before,
 .separator.separator-content.border-white::after {
-    border-color: #ffffff !important;
+    border-color: #000000 !important;
 }
 .separator.separator-content.border-light::before,
 .separator.separator-content.border-light::after {
@@ -34289,7 +34289,7 @@ a:hover {
 }
 .separator.separator-content.border-primary::before,
 .separator.separator-content.border-primary::after {
-    border-color: #ffffff !important;
+    border-color: #000000 !important;
 }
 .separator.separator-content.border-secondary::before,
 .separator.separator-content.border-secondary::after {
@@ -39692,7 +39692,7 @@ a:hover {
 .show > .btn.btn-active-white {
     color: #7e8299;
     border-color: #ffffff;
-    background-color: #ffffff !important;
+    background-color: #000000 !important;
 }
 .btn-check:checked + .btn.btn-active-white i,
 .btn-check:active + .btn.btn-active-white i,
@@ -40198,7 +40198,7 @@ a:hover {
 .show > .btn.btn-active-primary {
     color: #ffffff;
     border-color: #ffffff;
-    background-color: #ffffff !important;
+    background-color: #000000 !important;
 }
 .btn-check:checked + .btn.btn-active-primary i,
 .btn-check:active + .btn.btn-active-primary i,
@@ -40388,7 +40388,7 @@ a:hover {
     color: #ffffff;
 }
 .btn.btn-active-light-primary.btn-outline:not(.btn-outline-default) {
-    border-color: #ffffff !important;
+    border-color: #000000 !important;
 }
 
 .btn.btn-secondary {
@@ -55963,7 +55963,7 @@ label.rating-label:hover
 }
 .stepper.stepper-pills .stepper-item .stepper-icon .stepper-number {
     font-weight: 600;
-    color: #ffffff !important;
+    color: #000000 !important;
     font-size: 1.25rem;
 }
 .stepper.stepper-pills .stepper-item .stepper-label {
@@ -55992,7 +55992,7 @@ label.rating-label:hover
     display: none;
 }
 .stepper.stepper-pills .stepper-item.current .stepper-icon .stepper-number {
-    color: #ffffff !important;
+    color: #000000 !important;
     font-size: 1.35rem;
 }
 .stepper.stepper-pills .stepper-item.current .stepper-label .stepper-title {
@@ -56011,7 +56011,7 @@ label.rating-label:hover
     .stepper-icon
     .stepper-check,
 .stepper.stepper-pills .stepper-item.completed .stepper-icon .stepper-check {
-    color: #ffffff !important;
+    color: #000000 !important;
     display: inline-block;
 }
 .stepper.stepper-pills
@@ -58708,8 +58708,8 @@ body {
     color: #b5b5c3;
 }
 .daterangepicker .drp-calendar td.active {
-    background-color: #ffffff !important;
-    color: #ffffff !important;
+    background-color: #000000 !important;
+    color: #000000 !important;
     border-radius: 0.475rem;
 }
 .daterangepicker .drp-calendar td.active.start-date {
@@ -58726,7 +58726,7 @@ body {
 .daterangepicker .drp-calendar td.today,
 .daterangepicker .drp-calendar td.today.active {
     background: #315740 !important;
-    color: #ffffff !important;
+    color: #000000 !important;
     border-radius: 0.475rem;
 }
 .daterangepicker
@@ -59312,7 +59312,7 @@ span.flatpickr-weekday {
     border-radius: 0.475rem !important;
 }
 .ck-content.ck-focused {
-    border-color: #ffffff !important;
+    border-color: #000000 !important;
     box-shadow: none !important;
 }
 
@@ -59334,7 +59334,7 @@ span.flatpickr-weekday {
     border-color: transparent !important;
 }
 .ck-body .ck-balloon-panel .ck-content.ck-focused {
-    border-color: #ffffff !important;
+    border-color: #000000 !important;
 }
 .ck-body .ck-balloon-panel.ck-toolbar-container,
 .ck-body .ck-balloon-panel .ck-toolbar {
@@ -59543,7 +59543,7 @@ table.dataTable > tbody > tr.child span.dtr-data {
     position: absolute;
     z-index: 2;
     background-size: 40%;
-    background-color: #ffffff !important;
+    background-color: #000000 !important;
     box-shadow: 0 0.1rem 1rem 0.25rem rgba(0, 0, 0, 0.05);
     border-radius: 100%;
     top: -0.825rem;
@@ -60200,7 +60200,7 @@ body.swal2-height-auto {
     border-bottom: 0 !important;
 }
 .apexcharts-xaxistooltip.apexcharts-theme-light:after {
-    border-bottom-color: #ffffff !important;
+    border-bottom-color: #000000 !important;
 }
 
 .card-rounded-bottom .apexcharts-canvas svg {

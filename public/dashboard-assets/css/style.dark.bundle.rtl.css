@@ -32973,11 +32973,11 @@ fieldset:disabled .btn {
 }
 .text-hover-inverse-warning:hover {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-warning:hover i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-warning:hover .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -33082,11 +33082,11 @@ fieldset:disabled .btn {
 }
 .text-hover-inverse-danger:hover {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-danger:hover i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-danger:hover .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -33166,15 +33166,15 @@ fieldset:disabled .btn {
 }
 .text-hover-dark:hover {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-dark:hover i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-dark:hover .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
-    fill: #ffffff;
+    fill: #000000;
 }
 .text-hover-dark:hover .svg-icon svg:hover [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -33696,11 +33696,11 @@ fieldset:disabled .btn {
 }
 .text-hover-gray-900:hover {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-gray-900:hover i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-gray-900:hover .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;

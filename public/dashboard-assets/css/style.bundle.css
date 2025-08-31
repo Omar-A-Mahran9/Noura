@@ -4881,7 +4881,7 @@ fieldset:disabled .btn {
 }
 .page-link:hover {
     z-index: 2;
-    color: #ffffff;
+    color: #000000;
     text-decoration: none;
     background-color: #315740;
     border-color: transparent;
@@ -24740,11 +24740,11 @@ fieldset:disabled .btn {
 }
 .bg-hover-primary:hover {
     --bg-color: 0, 158, 247;
-    background-color: #ffffff !important;
+    background-color: #000000 !important;
 }
 .bg-active-primary.active {
     --bg-color: 0, 158, 247;
-    background-color: #ffffff !important;
+    background-color: #000000 !important;
 }
 .bg-state-primary {
     cursor: pointer;
@@ -24752,7 +24752,7 @@ fieldset:disabled .btn {
 .bg-state-primary.active,
 .bg-state-primary:hover {
     --bg-color: 0, 158, 247;
-    background-color: #ffffff !important;
+    background-color: #000000 !important;
 }
 .bg-secondary {
     --bg-color: 228, 230, 239;
@@ -25728,15 +25728,15 @@ fieldset:disabled .btn {
 }
 .text-hover-primary:hover {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-primary:hover i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 .text-hover-primary:hover .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
-    fill: #ffffff;
+    fill: #000000;
 }
 .text-hover-primary:hover .svg-icon svg:hover [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -27344,7 +27344,7 @@ a:hover {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 9' fill='%23009EF7'%3e%3cpath fill-rule='evenodd' clip-rule='evenodd' d='M5.93537 4.57889C6.03839 4.77912 6.0191 5.0363 5.87137 5.21403L2.87153 8.82282C2.68598 9.04603 2.36951 9.06026 2.16468 8.8546C1.95985 8.64893 1.94422 8.30126 2.12977 8.07804L4.80594 4.85863L2.15586 1.93583C1.96104 1.72096 1.96165 1.37314 2.15722 1.15895C2.35279 0.944757 2.66927 0.945311 2.86409 1.16018L5.85194 4.45551C5.8859 4.49296 5.91371 4.53459 5.93537 4.57889Z'/%3e%3c/svg%3e");
 }
 .page-item:hover .page-link i {
-    color: #ffffff;
+    color: #000000;
 }
 .page-item:hover .page-link .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -30427,7 +30427,7 @@ a:hover {
     .menu-item:not(.here)
     .menu-link:hover:not(.disabled):not(.active):not(.here) {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff;
+    color: #000000;
 }
 .menu-hover-primary
     .menu-item.hover:not(.here)
@@ -32267,7 +32267,7 @@ a:hover {
     display: flex;
 }
 .anchor:hover a:hover {
-    color: #ffffff;
+    color: #000000;
     transition: all 0.2s ease;
 }
 .card {
@@ -43876,7 +43876,7 @@ code:not([class*="language-"]) {
     color: #a1a5b7;
 }
 .popover .popover-dismiss:hover i {
-    color: #ffffff;
+    color: #000000;
 }
 .popover .popover-dismiss + .popover-header {
     padding-right: 2.75rem;

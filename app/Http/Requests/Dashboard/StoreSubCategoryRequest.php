@@ -4,6 +4,7 @@ namespace App\Http\Requests\Dashboard;
 
 use App\Rules\NotNumbersOnly;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreSubCategoryRequest extends FormRequest
 {
@@ -14,7 +15,7 @@ class StoreSubCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-    
+
         return abilities()->contains('create_course_category');
      }
 
@@ -25,10 +26,19 @@ class StoreSubCategoryRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name_ar' => ['required','string',new NotNumbersOnly()],
-            'name_en'         =>['required','string',new NotNumbersOnly()],
- 
+      return [
+            'name_ar' => [
+                'required',
+                'string',
+                new NotNumbersOnly(),
+                Rule::unique('coursecategories', 'name_ar')
+            ],
+            'name_en' => [
+                'required',
+                'string',
+                new NotNumbersOnly(),
+                Rule::unique('coursecategories', 'name_en')
+            ],
         ];
     }
 }

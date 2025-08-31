@@ -43,8 +43,8 @@ class SettingController extends Controller
         $data['whatsapp'] = convertArabicNumbers($data['whatsapp']);
 
          $this->validateFiles('logo','general',$request,$data);
-        $this->validateFiles('favicon','general',$request,$data);
- 
+        // $this->validateFiles('favicon','general',$request,$data);
+
         foreach ( $data as $key => $value )
         {
             settings()->set( $key , $value);

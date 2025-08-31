@@ -75,10 +75,19 @@
                         <div class="col-md-6 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Phone') }}</label>
-                            <div class="form-floating">
+                            {{-- <div class="form-floating">
                                 <input type="text" class="form-control" id="phone_inp" name="phone"
                                     placeholder="example" />
                                 <label for="phone_inp">{{ __('Enter the phone') }}</label>
+
+
+                            </div>   --}}
+                            <div class="input-group   mb-5">
+
+                                <input type="tel" name="phone" id="phone_inp"
+                                    class="form-control form-control-lg  "
+                                    placeholder="{{ __('Enter the phone') }}" />
+                                <span class="input-group-text">+966</span>
                             </div>
                             <p class="invalid-feedback" id="phone"></p>
 

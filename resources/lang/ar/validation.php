@@ -160,7 +160,7 @@ return [
         'show_attachment_material' => 'الملفات للقسم',
         'type_material' => 'نوع الملف',
         'day_date' => 'تاريخ الدورة',
-
+'must_be_valid'=>'يجب أن يكون صحيح',
         'type_video' => 'نوع الفيديو',
         'section_id_video' => 'القسم',
         'section_id_material' => 'القسم',
@@ -243,7 +243,7 @@ return [
         'category_ids' => 'الفئات',
         'discount_duration_days_counts' => 'مدة التخفيض للكورس (بالأيام)',
 
-        'name' => 'الأسم',
+        'name' => 'الاسم',
         'address' => 'العنوان',
         'title' => 'العنوان',
         'short_description' => 'وصف مختصر',
@@ -311,7 +311,7 @@ return [
         'another_phone' => 'هاتف آخر',
         'identity_no' => 'رقم الهوية',
 
-        '' => '',
+'must_be_valid'=>'يجب أن يكون صحيح',
         '' => '',
         '' => '',
         '' => '',

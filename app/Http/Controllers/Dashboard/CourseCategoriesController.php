@@ -79,9 +79,10 @@ class CourseCategoriesController extends Controller
      */
 
 
-    public function edit(CourseCategories $category)
+    public function edit($id)
     {
         $this->authorize('update_course_category');
+        $category=CourseCategories::find($id);
 
         return view('dashboard.coursecategory.edit',compact('category' ));
     }
@@ -95,15 +96,14 @@ class CourseCategoriesController extends Controller
 
 
 
-    public function destroy(Request $request,CourseCategories $category)
+    public function destroy(Request $request, $id)
     {
-
-
+        $category=CourseCategories::find($id);
         $this->authorize('delete_course_category');
 
         if ($request->ajax())
         {
-            if($category->articles()->count() > 0)
+            if($category->courses()->count() > 0)
                 throw ValidationException::withMessages([
                     'category' => __("This category is assigned to another and can't be deleted")
                 ]);

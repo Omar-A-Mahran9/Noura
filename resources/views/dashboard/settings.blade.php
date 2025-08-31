@@ -297,7 +297,7 @@
                 <div class="fv-row row mb-15">
 
                     <!-- Begin :: Col -->
-                    <div class="col-md-3">
+                    <div class="col-md-6">
 
                         <label class="form-label">{{ __('Meta tag description in arabic') }}</label>
                         <textarea class="form-control form-control form-control" name="meta_tag_description_ar"
@@ -308,7 +308,7 @@
                     <!-- End   :: Col -->
 
                     <!-- Begin :: Col -->
-                    <div class="col-md-3">
+                    <div class="col-md-6">
 
                         <label class="form-label">{{ __('Meta tag description in english') }}</label>
                         <textarea class="form-control form-control form-control" name="meta_tag_description_en"
@@ -325,7 +325,7 @@
                 <div class="fv-row row mb-15">
 
                     <!-- Begin :: Col -->
-                    <div class="col-md-3">
+                    <div class="col-md-6">
 
                         <label class="form-label">{{ __('Meta tag keywords in arabic') }}</label>
                         <input type="text" class="" id="meta_tag_keyword_ar_inp" name="meta_tag_keyword_ar"
@@ -337,7 +337,7 @@
                     <!-- End   :: Col -->
 
                     <!-- Begin :: Col -->
-                    <div class="col-md-3">
+                    <div class="col-md-6">
 
                         <label class="form-label">{{ __('Meta tag keywords in english') }}</label>
                         <input type="text" class="" id="meta_tag_keyword_en_inp" name="meta_tag_keyword_en"
