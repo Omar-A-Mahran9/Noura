@@ -27,11 +27,7 @@ class BookController extends Controller
         return view('dashboard.books.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         $this->authorize('create_books');
@@ -41,7 +37,7 @@ class BookController extends Controller
         return view('dashboard.books.create',compact('employees','courses'));
     }
 
- 
+
     public function store(StoreBooksRequest $request)
     {
 
@@ -100,7 +96,9 @@ class BookController extends Controller
      public function show(Book $book)
      {
          $this->authorize('show_books');
-         return view('dashboard.books.show',compact('book'));
+                 $employees = Employee::where('type','author')->get(); // Assuming you want to fetch all employees
+
+         return view('dashboard.books.show',compact('book','employees'));
      }
 
 
@@ -108,17 +106,12 @@ class BookController extends Controller
     {
         $this->authorize('update_books');
         $courses=Course::select('id','name_' . getLocale())->get();
+        $employees = Employee::where('type','author')->get(); // Assuming you want to fetch all employees
 
-        return view('dashboard.books.edit',compact('book','courses'));
+        return view('dashboard.books.edit',compact('book','courses','employees'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Book  $book
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(UpdateBooksRequest $request, Book $book)
     {
 
@@ -154,12 +147,7 @@ class BookController extends Controller
                 }
 
     }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Book  $book
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Request $request,Book $book)
     {
 

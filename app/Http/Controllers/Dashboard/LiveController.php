@@ -18,7 +18,8 @@ class LiveController extends Controller
 
         if ($request->ajax())
         {
-            $data = getModelData(model: new Live());
+            $data = getModelData(model: new Live(),relations:['specilist' => ['id', 'name','description_ar','description_en']
+]);
 
              return response()->json($data);
         }

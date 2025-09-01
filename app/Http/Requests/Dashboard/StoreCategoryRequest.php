@@ -4,6 +4,7 @@ namespace App\Http\Requests\Dashboard;
 
 use App\Rules\NotNumbersOnly;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreCategoryRequest extends FormRequest
 {
@@ -25,10 +26,19 @@ class StoreCategoryRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name_ar' => ['required','string',new NotNumbersOnly()],
-            'name_en'         =>['required','string',new NotNumbersOnly()],
-
+ return [
+            'name_ar' => [
+                'required',
+                'string',
+                new NotNumbersOnly(),
+                Rule::unique('categories', 'name_ar'),
+            ],
+            'name_en' => [
+                'required',
+                'string',
+                new NotNumbersOnly(),
+                Rule::unique('categories', 'name_en'),
+            ],
         ];
     }
 }

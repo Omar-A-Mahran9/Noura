@@ -12,7 +12,7 @@
                 <!-- begin :: Title -->
                 <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1"><a
                         href="{{ route('dashboard.books.index') }}"
-                        class="text-muted text-hover-primary">{{ __('Books') }}</a></h1>
+                        class="text-muted text-hover-primary">{{ __('books notes') }}</a></h1>
                 <!-- end   :: Title -->
 
                 <!-- begin :: Separator -->
@@ -23,7 +23,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                     <!-- begin :: Item -->
                     <li class="breadcrumb-item text-muted">
-                        {{ __('Show an book') }}
+                        {{ __('Show an note') }}
                     </li>
                     <!-- end   :: Item -->
                 </ul>

@@ -92,6 +92,8 @@
                         <th>{{ __('page number') }}</th>
                         <th>{{ __('text part') }}</th>
                         <th>{{ __('book') }}</th>
+                        <th>{{ __('answer') }}</th>
+
                         <th>{{ __('created date') }}</th>
                         <th class="min-w-100px">{{ __('actions') }}</th>
                     </tr>

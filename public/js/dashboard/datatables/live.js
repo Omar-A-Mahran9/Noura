@@ -39,6 +39,8 @@ let KTDatatable = (function () {
                 { data: "id" },
                 { data: "main_image" },
                 { data: "title" },
+                { data: "specilist.name" },
+
                 { data: "price" },
                 { data: "created_at" },
                 { data: null },

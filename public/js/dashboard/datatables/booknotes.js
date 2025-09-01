@@ -40,6 +40,8 @@ let KTDatatable = (function () {
                 { data: "page" },
                 { data: "text" },
                 { data: "book.title" },
+                { data: "answer" },
+
                 { data: "created_at" },
                 { data: null },
             ],
@@ -53,7 +55,9 @@ let KTDatatable = (function () {
                         deleteBtn = `<div class="menu-item px-3">
                                                 <a href="#" class="menu-link px-3 d-flex justify-content-between delete-row" data-row-id="${
                                                     row.id
-                                                }" data-type="${__("book")}">
+                                                }" data-type="${__(
+                            "books_notes"
+                        )}">
                                                     <span> ${__(
                                                         "Delete"
                                                     )} </span>
@@ -83,7 +87,7 @@ let KTDatatable = (function () {
                                 </div>
                                 <!--end::Menu item-->
 
-                           
+
 
                                 <!--begin::Menu item-->
                                     ${deleteBtn}
@@ -140,7 +144,7 @@ let KTDatatable = (function () {
                                 "content"
                             ),
                         },
-                        url: "/dashboard/books/" + rowId,
+                        url: "/dashboard/books_notes/" + rowId,
                         success: () => {
                             setTimeout(() => {
                                 successAlert(

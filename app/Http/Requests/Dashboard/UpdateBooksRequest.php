@@ -34,7 +34,7 @@ class UpdateBooksRequest extends FormRequest
             'price' => ['required', 'string'],
             'main_image'      => 'nullable|mimes:jpeg,png,jpg,webp,svg|max:2048' ,
             'stock' => ['required', 'numeric'],
-            'pdf_path' => 'required|mimes:pdf',
+            'pdf_path' => 'nullable|mimes:pdf',
             'images'    => [ 'array'], // Ensure it is an array
             'images.*'  => ['mimes:jpeg,png,jpg,webp,svg', 'max:2048'], // Validate each file
         ];

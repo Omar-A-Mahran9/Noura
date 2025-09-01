@@ -112,15 +112,15 @@ public function store(StoreBooksNoteRequest $request)
     }
 
 
-    public function destroy(Request $request,Book $book)
+    public function destroy(Request $request,$id)
     {
+            $BookNote = BookNote::findOrFail($id);
 
-        $this->authorize('delete_books');
+        $this->authorize('delete_books_notes');
 
         if($request->ajax())
         {
-            $book->delete();
-            deleteImage($book->main_image , 'books' );
-        }
+            $BookNote->delete();
+         }
     }
 }

@@ -12,7 +12,7 @@
                 <!-- begin :: Title -->
                 <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1"><a
                         href="{{ route('dashboard.books.index') }}"
-                        class="text-muted text-hover-primary">{{ __('Books') }}</a></h1>
+                        class="text-muted text-hover-primary">{{ __('books notes') }}</a></h1>
                 <!-- end   :: Title -->
 
                 <!-- begin :: Separator -->
@@ -23,7 +23,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                     <!-- begin :: Item -->
                     <li class="breadcrumb-item text-muted">
-                        {{ __('Add new book') }}
+                        {{ __('Add new book note') }}
                     </li>
                     <!-- end   :: Item -->
                 </ul>
@@ -70,14 +70,15 @@
                                 <div class="form-floating">
                                     <input type="number" class="form-control" name="page" id="page_inp"
                                         placeholder="e.g. 12">
-                                    <label for="page_inp">{{ __('Enter the page nunmber') }}</label>
+                                    <label for="page_inp">{{ __('Enter the page number') }}</label>
                                 </div>
                                 <p class="invalid-feedback" id="page"></p>
                             </div>
 
                             <div class="col-md-4 fv-row">
                                 <label class="fs-5 fw-bold mb-2">{{ __('Book') }}</label>
-                                <select name="book_id" class="form-select" data-control="select2">
+                                <select name="book_id" class="form-select" data-control="select2"
+                                    data-dir="{{ isArabic() ? 'rtl' : 'ltr' }}">
                                     <option value="">{{ __('Select book') }}</option>
                                     @foreach ($books as $book)
                                         <option value="{{ $book->id }}">{{ $book->title_en }}</option>
@@ -88,7 +89,8 @@
 
                             <div class="col-md-4 fv-row">
                                 <label class="fs-5 fw-bold mb-2">{{ __('Vendor') }}</label>
-                                <select name="vendor_id" class="form-select" data-control="select2">
+                                <select name="vendor_id" class="form-select" data-control="select2"
+                                    data-dir="{{ isArabic() ? 'rtl' : 'ltr' }}">
                                     <option value="">{{ __('Select vendor') }}</option>
                                     @foreach ($vendors as $vendor)
                                         <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>

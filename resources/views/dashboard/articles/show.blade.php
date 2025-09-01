@@ -82,28 +82,42 @@
                     <div class="row mb-8">
 
                         <!-- begin :: Column -->
-                        <div class="col-md-6 fv-row">
+                        <div class="col-md-4 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Title in arabic') }}</label>
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="title_ar_inp" name="title_ar"
                                     placeholder="example" value="{{ $article->title_ar }}" readonly />
-                                <label for="title_ar_inp">{{ __('Enter the Articles title') }}</label>
+                                <label for="title_ar_inp">{{ __('Title in arabic') }}</label>
                             </div>
                             <p class="invalid-feedback" id="title_ar"></p>
                         </div>
                         <!-- begin :: Column -->
-                        <div class="col-md-6 fv-row">
+                        <div class="col-md-4 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Title in english') }}</label>
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="title_en_inp" name="title_en"
                                     placeholder="example" value="{{ $article->title_en }}" readonly />
-                                <label for="title_en_inp">{{ __('Enter the Articles title') }}</label>
+                                <label for="title_en_inp">{{ __('Title in english') }}</label>
                             </div>
                             <p class="invalid-feedback" id="title_en"></p>
 
 
+                        </div>
+                        <div class="col-md-4 fv-row">
+                            <label class="fs-5 fw-bold mb-2">{{ __('Category') }}</label>
+                            <select class="form-select" data-control="select2" name="category_id[]" multiple
+                                id="category-sp" data-placeholder="{{ __('Choose the category') }}"
+                                data-dir="{{ isArabic() ? 'rtl' : 'ltr' }}" disabled>
+                                @foreach ($categories as $category)
+                                    <option @if (in_array($category->id, $selectedCategoriesIds)) selected @endif
+                                        value="{{ $category['id'] }}">
+                                        {{ $category['name'] }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <p class="invalid-feedback" id="category_id"></p>
                         </div>
 
 

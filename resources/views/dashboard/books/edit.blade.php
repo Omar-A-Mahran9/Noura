@@ -78,7 +78,7 @@
                     <div class="row mb-8">
 
                         <!-- begin :: Column -->
-                        <div class="col-md-4 fv-row">
+                        <div class="col-md-3 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Title in arabic') }}</label>
                             <div class="form-floating">
@@ -89,7 +89,7 @@
                             <p class="invalid-feedback" id="title_ar"></p>
                         </div>
                         <!-- begin :: Column -->
-                        <div class="col-md-4 fv-row">
+                        <div class="col-md-3 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Title in english') }}</label>
                             <div class="form-floating">
@@ -101,7 +101,7 @@
 
 
                         </div>
-                        <div class="col-md-4 fv-row">
+                        <div class="col-md-3 fv-row">
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Price') }}</label>
                             <div class="form-floating">
@@ -113,7 +113,24 @@
 
 
                         </div>
-
+                        <!-- Assign to author -->
+                        <div class="col-md-3 fv-row">
+                            <label class="fs-5 fw-bold mb-2">{{ __('Assign to author') }}</label>
+                            <div class="form-floating">
+                                <select class="form-select" data-control="select2" name="assign_to" id="employee-sp"
+                                    data-placeholder="{{ __('Assign to author') }}"
+                                    data-dir="{{ isArabic() ? 'rtl' : 'ltr' }}">
+                                    <option value="" selected disabled>{{ __('Choose an author') }}</option>
+                                    @foreach ($employees as $employee)
+                                        <option value="{{ $employee->id }}"
+                                            {{ old('assign_to', $book->assign_to) == $employee->id ? 'selected' : '' }}>
+                                            {{ $employee->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <p class="invalid-feedback" id="assign_to"></p>
+                        </div>
                     </div>
 
 
@@ -153,8 +170,8 @@
                             @if ($book->pdf_path)
                                 <div class="mt-2">
 
-                                    <a href="{{ getImagePathFromDirectory($book->pdf_path, 'Books/pdf') }}" target="_blank"
-                                        class="btn btn-sm btn-primary">
+                                    <a href="{{ getImagePathFromDirectory($book->pdf_path, 'Books/pdf') }}"
+                                        target="_blank" class="btn btn-sm btn-primary">
                                         {{ __('View PDF') }}
                                     </a>
                                 </div>
