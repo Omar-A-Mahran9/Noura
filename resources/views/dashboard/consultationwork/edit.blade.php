@@ -56,9 +56,11 @@
 
                         <div class="d-flex flex-column">
                             <label class="form-label">{{ __("Step $i Description") }}</label>
-                            <textarea class="form-control" name="steps[{{ $i }}][description]">
-                            {{ old("steps.$i.description", $consultationWork->steps[$i - 1]['description'] ?? '') }}
-                        </textarea>
+                  
+
+                        <textarea class="form-control" name="steps[{{ $i }}][description]">
+    {{ old("steps.$i.description", $consultationWork->steps[$i - 1]['description'] ?? '') }}
+</textarea>
                             <p class="invalid-feedback" id="steps_{{ $i }}_description"></p>
                         </div>
                     </div>

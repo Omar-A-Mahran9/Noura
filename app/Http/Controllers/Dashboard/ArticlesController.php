@@ -76,7 +76,16 @@ class ArticlesController extends Controller
     public function show(Articles $article)
     {
         $this->authorize('show_articles');
-        return view('dashboard.articles.show',compact('article'));
+              // Explicitly reference 'categories.id' to avoid ambiguity
+        $categories = Category::select('categories.id', 'name_' . app()->getLocale())
+                              ->join('article_category', 'categories.id', '=', 'article_category.category_id')
+                              ->get();
+
+        // Get selected category IDs for the article
+        // Explicitly reference 'categories.id' here too
+        $selectedCategoriesIds = $article->categories()->pluck('categories.id')->toArray();
+
+        return view('dashboard.articles.show',compact('article', 'categories', 'selectedCategoriesIds'));
     }
 
     public function edit(Articles $article)

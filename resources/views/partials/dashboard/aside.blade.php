@@ -319,7 +319,7 @@
 
                 @can(['view_consultation_time'])
                     <div class="menu-item">
-                        <a class="menu-link {{ isTabActive('view_consultation_time') }}"
+                        <a class="menu-link {{ isTabActive('consultation_time') }}"
                             href="{{ route('dashboard.consultation_time.index') }}" data-bs-toggle="tooltip"
                             data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                             <span class="menu-icon">

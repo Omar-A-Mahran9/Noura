@@ -650,7 +650,7 @@
     "publish": "نشر",
     "consultation scheduled": "استشارات قادمة",
     "consultation ended": "استشارات منتهية",
-
+    "time_list.*.time ": "الوقت",
     "Group Vendors": "أعضاء المجموعة",
     "Group Messages": "رسائل المجموعة",
     "Page Title": "عنوان الصفحة",
@@ -659,6 +659,7 @@
     "text part": "المقطع النصي",
     "books notes": "ملاحظات الكتب",
     "books notes list": "قائمة الملاحظات",
+    "time_list.*.date ": "التاريخ",
     "Add new book note": "اضافة ملاحظة جديدة",
     "Enter the page number": "ادخل رقم الصفحة",
     "Enter the text": "ادخل المقطع النصي ",

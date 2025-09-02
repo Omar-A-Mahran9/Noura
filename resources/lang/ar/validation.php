@@ -214,6 +214,8 @@ return [
         'steps.*.name' => 'اسم الخطوة',
         'steps.*.description' => 'وصف الخطوة',
         'steps.*.image' => 'الصورة',
+        'time_list.*.time ' => 'الوقت',
+        'time_list.*.date ' => 'التاريخ',
 
         'meta_keywords_ar' => 'الكلمات الدلالية لمحرك البحث بالعربية',
         'meta_keywords_en' => 'الكلمات الدلالية لمحرك البحث بالانجليزية',

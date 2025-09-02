@@ -132,7 +132,7 @@
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Description in arabic') }}</label>
                             {{-- <textarea class="form-control" rows="4" name="description_ar" id="meta_tag_description_ar_inp" disabled>{{ $article->description_ar }}</textarea> --}}
-                            <textarea id="tinymce_description_ar" name="description_ar" class="tinymce">{{ $article->description_ar ?? 'Default Description' }}</textarea>
+                            <textarea id="tinymce_description_ar" name="description_ar" class="tinymce" disabled>{{ $article->description_ar ?? 'Default Description' }}</textarea>
 
                             <p class="text-danger invalid-feedback" id="description_ar"></p>
 
@@ -145,7 +145,7 @@
 
                             <label class="fs-5 fw-bold mb-2">{{ __('Description in english') }}</label>
                             {{-- <textarea class="form-control" rows="4" name="description_en" id="meta_tag_description_en_inp" disabled>{{ $article->description_en }}</textarea> --}}
-                            <textarea id="tinymce_description_ar" name="description_en" class="tinymce">{{ $article->description_en ?? 'Default Description' }}</textarea>
+                            <textarea id="tinymce_description_ar" name="description_en" class="tinymce" disabled readonly>{{ $article->description_en ?? 'Default Description' }}</textarea>
 
                             <p class="text-danger invalid-feedback" id="description_en"></p>
 
@@ -228,9 +228,13 @@
     <script>
         $(document).ready(() => {
 
-            initTinyMc(true);
+            // initTinyMc(true);
 
-
+            tinymce.init({
+                selector: 'textarea.tinymce',
+                readonly: true, // This is the key
+                // ... other TinyMCE options
+            });
         })
     </script>
 @endpush
