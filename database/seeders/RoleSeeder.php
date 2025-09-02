@@ -30,8 +30,7 @@ class RoleSeeder extends Seeder
             'live',
             'courses_order',
             'course_category',
-            'quizzes',
-            'categories',
+             'categories',
             'questions',
             'videos_materials',
             'attachment_materials',
@@ -61,11 +60,8 @@ class RoleSeeder extends Seeder
         // Indices of unused actions from the above array
         $exceptions = [
             'contact_us'            => [ 'unused_actions' => [ 1,2,4 ]       , 'extra_actions' => []          ],
-            'reports'               => [ 'unused_actions' => [ 1,2,3,4 ]                                      ],
-            'news_subscribers'      => [ 'unused_actions' => [ 1,2,3 ]                                        ],
-            'slider_dashboard'      => [ 'unused_actions' => [ 1,2,3,4 ]                                      ],
-            'recycle_bin'           => [ 'unused_actions' => [ 1,2,3 ]       , 'extra_actions' => ['restore'] ],
-        ];
+             'slider_dashboard'      => [ 'unused_actions' => [ 1,2,3,4 ]                                      ],
+         ];
 
         foreach ($categories as $category) {
             $usedActions = array_merge($actions, $exceptions[$category]['extra_actions'] ?? []);

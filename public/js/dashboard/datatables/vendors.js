@@ -39,9 +39,7 @@ let KTDatatable = (function () {
                 { data: "image" },
                 { data: "name" },
                 { data: "phone" },
-                { data: "address" },
                 { data: "status_name" },
-                { data: "type" },
                 { data: "created_at" },
                 { data: null },
             ],
@@ -71,7 +69,7 @@ let KTDatatable = (function () {
                     },
                 },
                 {
-                    targets: 6,
+                    targets: 5,
                     render: function (data, type, row) {
                         return __(data);
                     },
@@ -102,17 +100,7 @@ let KTDatatable = (function () {
                                 </div>
                                 <!--end::Menu item-->
 
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="/dashboard/vendors/${
-                                        row.id
-                                    }" class="menu-link px-3 d-flex justify-content-between" >
-                                       <span> ${__("Show")} </span>
-                                       <span>  <i class="fa fa-eye text-black-50"></i> </span>
-                                    </a>
-
-                                </div>
-                                <!--end::Menu item-->
+                                
 
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">

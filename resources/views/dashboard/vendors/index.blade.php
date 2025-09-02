@@ -88,9 +88,7 @@
                     <th>{{ __("Image") }}</th>
                     <th>{{ __("Name") }}</th>
                     <th>{{ __("Phone") }}</th>
-                    <th>{{ __("Address") }}</th>
                     <th>{{ __("Status") }}</th>
-                    <th>{{ __("Type") }}</th>
                     <th>{{ __("created date") }}</th>
                     <th class="min-w-100px">{{ __("actions") }}</th>
                 </tr>

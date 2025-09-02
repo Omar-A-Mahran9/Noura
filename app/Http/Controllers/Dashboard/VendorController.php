@@ -30,7 +30,7 @@ class VendorController extends Controller
     {
         $this->authorize('create_vendors');
 
- 
+
         return view('dashboard.vendors.create' );
     }
 
@@ -45,7 +45,7 @@ class VendorController extends Controller
     {
         $this->authorize('update_vendors');
 
- 
+
         return view('dashboard.vendors.edit',compact('vendor' ));
     }
 
@@ -54,14 +54,17 @@ class VendorController extends Controller
 
         $this->authorize('create_vendors');
 
-        $data = $request->validate([
-            'image' => ['required', 'image', 'max:4096'],
-            'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'numeric', 'unique:vendors'],
-            'another_phone' => ['nullable', 'numeric'],
-             'status' => ['required', new EnumValue(VendorStatus::class)],
-        
-        ]);
+  $data = $request->validate([
+    'image'          => ['required', 'image', 'max:4096'], // nullable in migration
+    'name'           => ['required', 'string', 'max:255'],
+    'phone'          => ['required', 'numeric', 'unique:vendors,phone'],
+    'another_phone'  => ['nullable', 'numeric'],
+     'address'        => ['nullable', 'string', 'max:255'],
+    'status'         => ['required', new EnumValue(VendorStatus::class)],
+    'identity_no'    => ['nullable', 'string', 'max:255'],
+    'google_maps_url'=> ['nullable', 'url'],
+  ]);
+
 
         $data['created_by'] = auth()->id();
 
@@ -81,15 +84,17 @@ class VendorController extends Controller
     {
         $this->authorize('update_vendors');
 
-        $data = $request->validate([
-            'image' => ['nullable', 'image', 'max:4096'],
-            'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'numeric', 'unique:vendors,phone,' . $vendor->id],
-            'another_phone' => ['nullable', 'numeric'],
+      $data = $request->validate([
+    'image'          => ['nullable', 'image', 'max:4096'], // nullable in migration
+    'name'           => ['required', 'string', 'max:255'],
+    'phone'          => ['required', 'numeric'],
+    'another_phone'  => ['nullable', 'numeric'],
+     'address'        => ['nullable', 'string', 'max:255'],
+    'status'         => ['required', new EnumValue(VendorStatus::class)],
+    'identity_no'    => ['nullable', 'string', 'max:255'],
+    'google_maps_url'=> ['nullable', 'url'],
+  ]);
 
-            'status' => ['required', new EnumValue(VendorStatus::class)],
-        
-        ]);
 
         $data['phone'] = convertArabicNumbers($data['phone']);
 

@@ -48,7 +48,7 @@
                 @method('PUT')
                 <!-- begin :: Card header -->
                 <div class="card-header d-flex align-items-center">
-                    <h3 class="fw-bolder text-dark">{{ __('Edit group') }}</h3>
+                    <h3 class="fw-bolder text-dark">{{ __('Show group') }}</h3>
                 </div>
                 <!-- end   :: Card header -->
 

@@ -25108,7 +25108,7 @@ body.swal2-height-auto {
     transition: all 0.2s ease;
 }
 .apexcharts-menu .apexcharts-menu-item:hover {
-    background-color: rgba(245, 248, 250, 0.8) !important;
+    background-color: #ffffff !important;
 }
 .apexcharts-tooltip.apexcharts-theme-light {
     border-radius: 0.475rem;

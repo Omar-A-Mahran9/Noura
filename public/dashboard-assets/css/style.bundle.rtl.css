@@ -37250,24 +37250,23 @@ a:hover {
     .menu-item:not(.here)
     .menu-link:hover:not(.disabled):not(.active):not(.here) {
     transition: color 0.2s ease, background-color 0.2s ease;
-    background-color: rgba(245, 248, 250, 0.8);
-            color: #000 !important; /* Make text black */
-
+    background-color: #ffffff;
+    color: #000 !important; /* Make text black */
 }
 
 .menu-here-bg .menu-item.here > .menu-link {
     transition: color 0.2s ease, background-color 0.2s ease;
-    background-color: rgba(245, 248, 250, 0.8);
+    background-color: #ffffff;
 }
 
 .menu-show-bg .menu-item.show > .menu-link {
     transition: color 0.2s ease, background-color 0.2s ease;
-    background-color: rgba(245, 248, 250, 0.8);
+    background-color: #ffffff;
 }
 
 .menu-active-bg .menu-item .menu-link.active {
     transition: color 0.2s ease, background-color 0.2s ease;
-    background-color: rgba(245, 248, 250, 0.8);
+    background-color: #ffffff;
 }
 
 .menu-state-bg
@@ -37277,19 +37276,19 @@ a:hover {
     .menu-item:not(.here)
     .menu-link:hover:not(.disabled):not(.active):not(.here) {
     transition: color 0.2s ease, background-color 0.2s ease;
-    background-color: rgba(245, 248, 250, 0.8);
+    background-color: #ffffff;
 }
 .menu-state-bg .menu-item.here > .menu-link {
     transition: color 0.2s ease, background-color 0.2s ease;
-    background-color: rgba(245, 248, 250, 0.8);
+    background-color: #ffffff;
 }
 .menu-state-bg .menu-item.show > .menu-link {
     transition: color 0.2s ease, background-color 0.2s ease;
-    background-color: rgba(245, 248, 250, 0.8);
+    background-color: #ffffff;
 }
 .menu-state-bg .menu-item .menu-link.active {
     transition: color 0.2s ease, background-color 0.2s ease;
-    background-color: rgba(245, 248, 250, 0.8);
+    background-color: #ffffff;
 }
 
 .menu-hover-primary
@@ -60172,7 +60171,7 @@ body.swal2-height-auto {
     transition: all 0.2s ease;
 }
 .apexcharts-menu .apexcharts-menu-item:hover {
-    background-color: rgba(245, 248, 250, 0.8) !important;
+    background-color: #ffffff !important;
 }
 
 .apexcharts-tooltip.apexcharts-theme-light {

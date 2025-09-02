@@ -70,15 +70,16 @@
                     </div>
                     <!-- end   :: Row -->
 
+
                     <!-- begin :: Row -->
                     <div class="row mb-8">
 
                         <!-- begin :: Column -->
-                        <div class="col-md-4 fv-row">
+                        <div class="col-md-3 fv-row">
                             <label class="fs-5 fw-bold mb-2">{{ __('Name') }}</label>
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="name_inp" name="name"
-                                    value="{{ $vendor->name }}" placeholder="example" />
+                                <input type="text" class="form-control" id="name_inp" value="{{ $vendor->name }}"
+                                    name="name" placeholder="example" />
                                 <label for="name_inp">{{ __('Enter the name') }}</label>
                             </div>
                             <p class="invalid-feedback" id="name"></p>
@@ -86,36 +87,43 @@
                         <!-- end   :: Column -->
 
                         <!-- begin :: Column -->
-                        <div class="col-md-4 fv-row">
+                        <div class="col-md-3 fv-row">
                             <label class="fs-5 fw-bold mb-2">{{ __('Phone') }}</label>
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="phone_inp" name="phone"
-                                    value="{{ $vendor->phone }}" placeholder="example" />
+                                <input type="text" class="form-control" id="phone_inp" value="{{ $vendor->phone }}"
+                                    name="phone" placeholder="example" />
                                 <label for="phone_inp">{{ __('Enter the phone') }}</label>
                             </div>
                             <p class="invalid-feedback" id="phone"></p>
                         </div>
                         <!-- end   :: Column -->
-  <!-- begin :: Column -->
-  <div class="col-md-4 fv-row">
-    <label class="fs-5 fw-bold mb-2">{{ __('Status') }}</label>
-    <select class="form-select" name="status" id="status-sp"
-        data-placeholder="{{ __('Choose the status') }}"
-        data-dir="{{ isArabic() ? 'rtl' : 'ltr' }}">
-        <option value=""></option>
-        @foreach (App\Enums\VendorStatus::values() as $key => $value)
-            <option value="{{ $key }}" {{ $vendor->status == $key ? 'selected' : '' }}>
-                {{ __(ucfirst($value)) }}</option>
-        @endforeach
-    </select>
-    <p class="invalid-feedback" id="status"></p>
-</div>
-<!-- end   :: Column -->
 
+                        <!-- begin :: Column -->
+                        <div class="col-md-3 fv-row">
+                            <label class="fs-5 fw-bold mb-2">{{ __('Another phone') }}</label>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="another_phone_inp" name="another_phone"
+                                    value="{{ $vendor->another_phone }}" placeholder="example" />
+                                <label for="another_phone_inp">{{ __('Enter another phone') }}</label>
+                            </div>
+                            <p class="invalid-feedback" id="another_phone"></p>
+                        </div>
+                        <!-- end   :: Column -->
+
+                        <!-- begin :: Column -->
+                        <div class="col-md-3 fv-row">
+                            <label class="fs-5 fw-bold mb-2">{{ __('Address') }}</label>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="address_inp" name="address"
+                                    value="{{ $vendor->address }}" placeholder="example" />
+                                <label for="address_inp">{{ __('Enter the address') }}</label>
+                            </div>
+                            <p class="invalid-feedback" id="address"></p>
+                        </div>
+                        <!-- end   :: Column -->
 
                     </div>
                     <!-- end   :: Row -->
- 
 
                     <!-- begin :: Row -->
                     <div class="row mb-8"
@@ -127,6 +135,81 @@
                             <label class="fs-5 fw-bold mb-2">{{ __('Rejection reason') }}</label>
                             <div class="form-floating">
                                 <textarea rows="5" class="form-control" id="rejection_reason_inp" name="rejection_reason" placeholder="example"></textarea>
+                                <label for="rejection_reason_inp">{{ __('Enter the rejection reason') }}</label>
+                            </div>
+                            <p class="invalid-feedback" id="rejection_reason"></p>
+                        </div>
+                        <!-- end   :: Column -->
+
+                    </div>
+                    <!-- end   :: Row -->
+
+                    <!-- begin :: Row -->
+                    <div class="row mb-8">
+                        <!-- begin :: Column -->
+                        <div class="col-md-4 fv-row">
+                            <label class="fs-5 fw-bold mb-2">{{ __('Status') }}</label>
+                            <select class="form-select" name="status" id="status-sp"
+                                data-placeholder="{{ __('Choose the status') }}"
+                                data-dir="{{ isArabic() ? 'rtl' : 'ltr' }}">
+                                <option value=""></option>
+                                @foreach (App\Enums\VendorStatus::values() as $key => $value)
+                                    <option value="{{ $key }}">{{ __(ucfirst($value)) }}</option>
+                                @endforeach
+                            </select>
+                            <p class="invalid-feedback" id="status"></p>
+                        </div>
+                        <!-- end   :: Column -->
+                        <!-- begin :: Column -->
+                        <div class="col-md-4 fv-row" style="display: none;" id="commercial_container">
+                            <label class="fs-5 fw-bold mb-2">{{ __('Commercial registration no') }}</label>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="commercial_registration_no_inp"
+                                    name="commercial_registration_no" value="{{ $vendor->commercial_registration_no }}" placeholder="example" />
+                                <label
+                                    for="commercial_registration_no_inp">{{ __('Enter the commercial registration no') }}</label>
+                            </div>
+                            <p class="invalid-feedback" id="commercial_registration_no"></p>
+                        </div>
+                        <!-- end   :: Column -->
+
+                        <!-- begin :: Column -->
+                        <div class="col-md-4 fv-row" id="identity_container">
+                            <label class="fs-5 fw-bold mb-2">{{ __('Identity no') }}</label>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="identity_no_inp" value="{{ $vendor->identity_no }}" name="identity_no"
+                                    placeholder="example" />
+                                <label for="identity_no_inp">{{ __('Enter the identity no') }}</label>
+                            </div>
+                            <p class="invalid-feedback" id="identity_no"></p>
+                        </div>
+                        <!-- end   :: Column -->
+
+                        <!-- begin :: Column -->
+                        <div class="col-md-4 fv-row">
+                            <label class="fs-5 fw-bold mb-2">{{ __('Google maps url') }}</label>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="google_maps_url_inp"
+                                    name="google_maps_url" value="{{ $vendor->google_maps_url }}" placeholder="example" />
+                                <label for="google_maps_url_inp">{{ __('Enter the google maps url') }}</label>
+                            </div>
+                            <p class="invalid-feedback" id="google_maps_url"></p>
+                        </div>
+                        <!-- end   :: Column -->
+
+
+                    </div>
+                    <!-- end   :: Row -->
+
+                    <!-- begin :: Row -->
+                    <div class="row mb-8" style="display: none;" id="rejection_container">
+
+                        <!-- begin :: Column -->
+                        <div class="col-12 fv-row">
+                            <label class="fs-5 fw-bold mb-2">{{ __('Rejection reason') }}</label>
+                            <div class="form-floating">
+                                <textarea rows="5" class="form-control" id="rejection_reason_inp" name="rejection_reason"
+                                    placeholder="example"></textarea>
                                 <label for="rejection_reason_inp">{{ __('Enter the rejection reason') }}</label>
                             </div>
                             <p class="invalid-feedback" id="rejection_reason"></p>

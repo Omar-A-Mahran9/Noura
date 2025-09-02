@@ -19,7 +19,7 @@ class CreateVendorsTable extends Migration
             $table->string('image')->nullable();
             $table->string('name');
             $table->string('phone')->unique();
-            $table->string('email')->unique();
+            $table->string('email')->nullable()->unique();
             $table->string('another_phone')->nullable();
             $table->string('address')->nullable();
             $table->string('status')->default(VendorStatus::pending->value)->comment('App\Enums\VendorStatus');

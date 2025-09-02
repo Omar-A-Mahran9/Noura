@@ -20,7 +20,7 @@ class RoleController extends Controller
         'consultation',
         'vendors',
         'contact_us',
-        'roles',       
+        'roles',
         'settings',
         'reports',
         'news_subscribers',
@@ -52,10 +52,10 @@ class RoleController extends Controller
 
     public function employees(Role $role,Request $request)
     {
-        $role->load('employees:id,name,email,phone,image,created_at');
+        $role->load('employees:id,name,email,phone,image,created_at,description_ar');
 
         $employeesCount = $role->employees->count();
- 
+
 
 
         $page    = $request['page']     ?? 1;

@@ -1,5 +1,7 @@
 {
     "Courses": "كورسات",
+    "courses": "كورسات",
+
     "quizzes list": "قائمة الاختبارات",
     "quizzes": "الاختبارات",
     "Edit an consultaion": "تعديل الاستشارة",
@@ -655,6 +657,13 @@
     "Group Messages": "رسائل المجموعة",
     "Page Title": "عنوان الصفحة",
     "Section": "القسم",
+    "View": "عرض",
+
+    "Google maps url": "رابط الخريطة",
+    "Enter the google maps url": "رابط الخريطة",
+
+    "No messages yet.": "لا يوجد رسائل حالياً",
+    "Show group": "عرض المجموعة",
     "page number": "رقم الصفحة",
     "text part": "المقطع النصي",
     "books notes": "ملاحظات الكتب",
@@ -699,19 +708,22 @@
     "Home Page": "الصفحة الرئيسية",
     "Section Title": "عنوان القسم",
     "Section Description": "وصف القسم",
-
+    "group chat": "مجموعة المحادثة",
     "Step 1 Image": "صورة الخطوة الأولى",
     "Step 1 Name": "عنوان الخطوة الأولى",
     "Step 1 Description": "وصف الخطوة الأولى",
+    "page": "ضفخة",
+    "live": "بث مباشر",
+    "courses order": "طلبات الكورسات",
 
     "Step 2 Image": "صورة الخطوة الثانية",
     "Step 2 Name": "عنوان الخطوة الثانية",
     "Step 2 Description": "وصف الخطوة الثانية",
-
+    "group": "المجموعات",
     "Step 3 Image": "صورة الخطوة الثالثة",
     "Step 3 Name": "عنوان الخطوة الثالثة",
     "Step 3 Description": "وصف الخطوة الثالثة",
-
+    "consultation work": "كيف تعمل الاستشارة الاستشارات",
     "Update Consultation Work": "تحديث الاستشارة",
     "Purchase order": "طلب شراء",
     "Edit a city": "تعديل مدينة",

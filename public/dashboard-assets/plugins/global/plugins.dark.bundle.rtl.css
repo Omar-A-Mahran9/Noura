@@ -31993,7 +31993,7 @@ body.swal2-height-auto {
 }
 
 .apexcharts-menu .apexcharts-menu-item:hover {
-    background-color: rgba(27, 27, 41, 0.8) !important;
+    background-color:#000000 !important;
 }
 
 .apexcharts-tooltip.apexcharts-theme-light {
