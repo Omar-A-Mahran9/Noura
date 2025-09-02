@@ -6692,7 +6692,7 @@ fieldset:disabled .btn {
     border-left: 0 !important;
 }
 .border-white {
-    border-color: #fff !important;
+    border-color: #000000 !important;
 }
 .border-light {
     border-color: #f5f8fa !important;
@@ -24671,11 +24671,11 @@ fieldset:disabled .btn {
 }
 .bg-hover-white:hover {
     --bg-color: 255, 255, 255;
-    background-color: #fff !important;
+    background-color: #000000 !important;
 }
 .bg-active-white.active {
     --bg-color: 255, 255, 255;
-    background-color: #fff !important;
+    background-color: #000000 !important;
 }
 .bg-state-white {
     cursor: pointer;
@@ -24683,7 +24683,7 @@ fieldset:disabled .btn {
 .bg-state-white.active,
 .bg-state-white:hover {
     --bg-color: 255, 255, 255;
-    background-color: #fff !important;
+    background-color: #000000 !important;
 }
 .bg-light {
     --bg-color: 245, 248, 250;
@@ -25148,7 +25148,7 @@ fieldset:disabled .btn {
 }
 .bg-body {
     --bg-color: 255, 255, 255;
-    background-color: #fff !important;
+    background-color: #000000 !important;
 }
 .bg-lighten {
     background-color: rgba(245, 248, 250, 0.5) !important;
@@ -25341,10 +25341,10 @@ fieldset:disabled .btn {
     border-color: #0e2819 !important;
 }
 .border-hover-white:hover {
-    border-color: #fff !important;
+    border-color: #000000 !important;
 }
 .border-active-white.active {
-    border-color: #fff !important;
+    border-color: #000000 !important;
 }
 .border-hover-light:hover {
     border-color: #f5f8fa !important;
@@ -25432,7 +25432,7 @@ fieldset:disabled .btn {
     border-color: transparent !important;
 }
 .border-body {
-    border-color: #fff !important;
+    border-color: #000000 !important;
 }
 .rounded-top-0 {
     border-top-left-radius: 0 !important;
@@ -25616,7 +25616,7 @@ fieldset:disabled .btn {
     box-shadow: 0 0.1rem 0.75rem 0.25rem rgba(0, 0, 0, 0.05);
 }
 .text-white {
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-inverse-white {
     color: #7e8299 !important;
@@ -25629,11 +25629,11 @@ fieldset:disabled .btn {
 }
 .text-hover-white:hover {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-hover-white:hover i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-hover-white:hover .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -25674,11 +25674,11 @@ fieldset:disabled .btn {
 }
 .text-active-white.active {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-active-white.active i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-active-white.active .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -25715,7 +25715,7 @@ fieldset:disabled .btn {
     color: #ffffff !important;
 }
 .text-inverse-primary {
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-light-primary {
     color: #315740 !important;
@@ -25749,11 +25749,11 @@ fieldset:disabled .btn {
 }
 .text-hover-inverse-primary:hover {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-primary:hover i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-primary:hover .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -25794,11 +25794,11 @@ fieldset:disabled .btn {
 }
 .text-active-inverse-primary.active {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-primary.active i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-primary.active
     .svg-icon
@@ -26018,7 +26018,7 @@ fieldset:disabled .btn {
     color: #50cd89 !important;
 }
 .text-inverse-success {
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-light-success {
     color: #e8fff3 !important;
@@ -26052,11 +26052,11 @@ fieldset:disabled .btn {
 }
 .text-hover-inverse-success:hover {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-success:hover i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-success:hover .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -26097,11 +26097,11 @@ fieldset:disabled .btn {
 }
 .text-active-inverse-success.active {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-success.active i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-success.active
     .svg-icon
@@ -26120,7 +26120,7 @@ fieldset:disabled .btn {
     color: #7239ea !important;
 }
 .text-inverse-info {
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-light-info {
     color: #f8f5ff !important;
@@ -26154,11 +26154,11 @@ fieldset:disabled .btn {
 }
 .text-hover-inverse-info:hover {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-info:hover i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-info:hover .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -26199,11 +26199,11 @@ fieldset:disabled .btn {
 }
 .text-active-inverse-info.active {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-info.active i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-info.active .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -26219,7 +26219,7 @@ fieldset:disabled .btn {
     color: #ffc700 !important;
 }
 .text-inverse-warning {
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-light-warning {
     color: #fff8dd !important;
@@ -26253,11 +26253,11 @@ fieldset:disabled .btn {
 }
 .text-hover-inverse-warning:hover {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-warning:hover i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-warning:hover .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -26298,11 +26298,11 @@ fieldset:disabled .btn {
 }
 .text-active-inverse-warning.active {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-warning.active i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-warning.active
     .svg-icon
@@ -26321,7 +26321,7 @@ fieldset:disabled .btn {
     color: #f1416c !important;
 }
 .text-inverse-danger {
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-light-danger {
     color: #fff5f8 !important;
@@ -26355,11 +26355,11 @@ fieldset:disabled .btn {
 }
 .text-hover-inverse-danger:hover {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-danger:hover i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-danger:hover .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -26400,11 +26400,11 @@ fieldset:disabled .btn {
 }
 .text-active-inverse-danger.active {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-danger.active i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-danger.active .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -26420,7 +26420,7 @@ fieldset:disabled .btn {
     color: #0e2819 !important;
 }
 .text-inverse-dark {
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-light-dark {
     color: #eff2f5 !important;
@@ -26454,11 +26454,11 @@ fieldset:disabled .btn {
 }
 .text-hover-inverse-dark:hover {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-dark:hover i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-hover-inverse-dark:hover .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -26499,11 +26499,11 @@ fieldset:disabled .btn {
 }
 .text-active-inverse-dark.active {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-dark.active i {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #fff !important;
+    color: #000000 !important;
 }
 .text-active-inverse-dark.active .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill 0.3s ease;
@@ -27464,7 +27464,7 @@ a:hover {
 }
 .separator.separator-content.border-white::after,
 .separator.separator-content.border-white::before {
-    border-color: #fff !important;
+    border-color: #000000 !important;
 }
 .separator.separator-content.border-light::after,
 .separator.separator-content.border-light::before {
@@ -30654,7 +30654,7 @@ a:hover {
     .menu-item:not(.here)
     .menu-link:hover:not(.disabled):not(.active):not(.here) {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff;
+    color: #000000;
 }
 .menu-state-primary
     .menu-item.hover:not(.here)
@@ -30742,13 +30742,13 @@ a:hover {
 }
 .menu-state-primary .menu-item.show > .menu-link {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff;
+    color: #000000;
 }
 .menu-state-primary .menu-item.show > .menu-link .menu-title {
-    color: #ffffff;
+    color: #000000;
 }
 .menu-state-primary .menu-item.show > .menu-link .menu-icon i {
-    color: #ffffff;
+    color: #000000;
 }
 .menu-state-primary
     .menu-item.show
@@ -30826,7 +30826,7 @@ a:hover {
 }
 .menu-state-primary .menu-item .menu-link.active {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff;
+    color: #000000;
 }
 .menu-state-primary .menu-item .menu-link.active .menu-title {
     color: #ffffff;
@@ -31769,7 +31769,7 @@ a:hover {
     .menu-item:not(.here)
     .menu-link:hover:not(.disabled):not(.active):not(.here) {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff;
+    color: #000000;
 }
 .menu-hover-title-primary
     .menu-item.hover:not(.here)
@@ -31809,7 +31809,7 @@ a:hover {
     .menu-item:not(.here)
     .menu-link:hover:not(.disabled):not(.active):not(.here) {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff;
+    color: #000000;
 }
 .menu-state-title-primary
     .menu-item.hover:not(.here)
@@ -32896,7 +32896,7 @@ a:hover {
 .show > .btn.btn-active-white {
     color: #7e8299;
     border-color: #fff;
-    background-color: #fff !important;
+    background-color: #000000 !important;
 }
 .btn-check:active + .btn.btn-active-white i,
 .btn-check:checked + .btn.btn-active-white i,
@@ -48744,7 +48744,7 @@ label.rating-label:hover
     display: none;
 }
 .stepper.stepper-pills .stepper-item.current .stepper-icon .stepper-number {
-    color: #fff !important;
+    color: #000000 !important;
     font-size: 1.35rem;
 }
 .stepper.stepper-pills .stepper-item.current .stepper-label .stepper-title {
@@ -49403,7 +49403,7 @@ body[data-kt-sticky-landing-header="on"] {
         height: 70px;
     }
     .landing-header .menu .menu-link.active {
-        color: #ffffff;
+        color: #000000;
         background-color: rgba(239, 242, 245, 0.4);
     }
     body[data-kt-sticky-landing-header="on"] {

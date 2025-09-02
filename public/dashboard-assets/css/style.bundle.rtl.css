@@ -37298,7 +37298,7 @@ a:hover {
     .menu-item:not(.here)
     .menu-link:hover:not(.disabled):not(.active):not(.here) {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff;
+    color: #000000;
 }
 .menu-hover-primary
     .menu-item.hover:not(.here)
@@ -37505,7 +37505,7 @@ a:hover {
     .menu-item:not(.here)
     .menu-link:hover:not(.disabled):not(.active):not(.here) {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff;
+    color: #000000;
 }
 .menu-state-primary
     .menu-item.hover:not(.here)
@@ -37589,13 +37589,13 @@ a:hover {
 }
 .menu-state-primary .menu-item.show > .menu-link {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff;
+    color: #000000;
 }
 .menu-state-primary .menu-item.show > .menu-link .menu-title {
-    color: #ffffff;
+    color: #000000;
 }
 .menu-state-primary .menu-item.show > .menu-link .menu-icon i {
-    color: #ffffff;
+    color: #000000;
 }
 .menu-state-primary
     .menu-item.show
@@ -37665,7 +37665,7 @@ a:hover {
 }
 .menu-state-primary .menu-item .menu-link.active {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff;
+    color: #000000;
 }
 .menu-state-primary .menu-item .menu-link.active .menu-title {
     color: #ffffff;
@@ -38551,7 +38551,7 @@ a:hover {
     .menu-item:not(.here)
     .menu-link:hover:not(.disabled):not(.active):not(.here) {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff;
+    color: #000000;
 }
 .menu-hover-title-primary
     .menu-item.hover:not(.here)
@@ -38595,7 +38595,7 @@ a:hover {
     .menu-item:not(.here)
     .menu-link:hover:not(.disabled):not(.active):not(.here) {
     transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff;
+    color: #000000;
 }
 .menu-state-title-primary
     .menu-item.hover:not(.here)
@@ -56684,7 +56684,7 @@ body[data-kt-sticky-landing-header="on"] {
         height: 70px;
     }
     .landing-header .menu .menu-link.active {
-        color: #ffffff;
+        color: #000000;
         background-color: rgba(239, 242, 245, 0.4);
     }
 

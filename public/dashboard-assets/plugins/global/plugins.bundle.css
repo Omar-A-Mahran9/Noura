@@ -23699,7 +23699,7 @@ i[class^="fonticon-"]:before {
 }
 .daterangepicker .drp-calendar td.active {
     background-color: #ffffff !important;
-    color: #fff !important;
+    color: #000000 !important;
     border-radius: 0.475rem;
 }
 .daterangepicker .drp-calendar td.active.start-date {
@@ -24507,7 +24507,7 @@ table.dataTable > tbody > tr.child span.dtr-data {
     position: absolute;
     z-index: 2;
     background-size: 40%;
-    background-color: #fff !important;
+    background-color: #000000 !important;
     box-shadow: 0 0.1rem 1rem 0.25rem rgba(0, 0, 0, 0.05);
     border-radius: 100%;
     top: -0.825rem;
@@ -25137,7 +25137,7 @@ body.swal2-height-auto {
     border-bottom: 0 !important;
 }
 .apexcharts-xaxistooltip.apexcharts-theme-light:after {
-    border-bottom-color: #fff !important;
+    border-bottom-color: #000000 !important;
 }
 .card-rounded-bottom .apexcharts-canvas svg {
     border-bottom-left-radius: 0.475rem;
@@ -25725,7 +25725,7 @@ body {
     .kanban-drag
     .kanban-item[data-class="light-light"] {
     background-color: rgba(245, 248, 250, 0.1);
-    color: #f5f8fa;
+    color: #000000;
     box-shadow: none;
 }
 .kanban-container
