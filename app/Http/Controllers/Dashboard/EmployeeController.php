@@ -112,7 +112,4 @@ public function updateProfile(Request $request)
 
     }
 
-}> .menu-link:not(.disabled):not(.active):not(.here), .menu-state-primary .menu-item:not(.here) .menu-link:hover:not(.disabled):not(.active):not(.here) {
-    transition: color 0.2s ease, background-color 0.2s ease;
-    color: #ffffff;
-
+}
