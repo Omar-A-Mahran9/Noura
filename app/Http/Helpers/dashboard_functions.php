@@ -43,18 +43,26 @@ if(!function_exists('abilities')){
     }
 }
 
-if(!function_exists('uploadImage')){
+if (!function_exists('uploadImage')) {
+    function uploadImage($request, $model = '')
+    {
+        // pluralize & lowercase
+        $model = Str::plural(Str::lower($model));
 
-    function uploadImage($request, $model = '' ){
-        $model        = Str::plural($model);
-        $model        = Str::ucfirst($model);
-        $path         = "/Images/".$model;
-        $originalName =  $request->getClientOriginalName(); // Get file Original Name
-        $imageName    = str_replace(' ','','Nura_' . time() . $originalName);  // Set Image name
-        $request->storeAs($path, $imageName,'public');
+        // build lowercase path
+        $path = "images/" . $model;
+
+        // generate clean file name
+        $originalName = $request->getClientOriginalName();
+        $imageName = 'Nura_' . time() . str_replace(' ', '', $originalName);
+
+        // store file in public disk
+        $request->storeAs($path, $imageName, 'public');
+
         return $imageName;
     }
 }
+
 if (!function_exists('uploadFileFromOutside')) {
     function uploadFileFromOutside($file, $model = '')
     {
@@ -352,4 +360,4 @@ if ( !function_exists('getModelData') ) {
 }
 
 
- 
+
